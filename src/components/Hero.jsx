@@ -1,6 +1,7 @@
 
 import heroVet from '../images/heroVet.jpg'
 import hero2 from '../images/hero2.webp'
+import HeroDesc from './HeroDesc'
 
 
 
@@ -8,6 +9,7 @@ function Hero() {
   return (
     <section className="hero">
     <h1 className="hero__title">Vetfolio Manager</h1>
+    <HeroDesc/>
     <section className="hero__section">
       <article className="heroArticle">
       <img src={heroVet} alt="imagen Veterinaria" className="heroArticle__img"/>
