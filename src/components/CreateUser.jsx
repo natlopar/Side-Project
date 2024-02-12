@@ -21,6 +21,7 @@ function CreateUser() {
         </label>
         <label>Indica si quieres que tus casos sean públicos en esta web</label>
         <input type="checkbox" name="" id="" />
+        <p>En caso de que no quieras publicar todos tus casos, podrás publicar alguno en el momento de crearlo </p>
     </form>
     </div>
   )
