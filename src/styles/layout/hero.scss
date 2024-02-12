@@ -1,0 +1,112 @@
+.hero {
+  color: $colorDark;
+  display: flex;
+  flex-direction: column;
+  padding: 200px 10px 100px 10px;
+  gap: 50px;
+
+  @media (min-width: 768px) {
+    padding-top: 300px;
+  }
+  &__title {
+    color: $colorDark;
+    font-family: $fontSecond;
+    font-weight: bold;
+    text-shadow: -1px 4px 5px rgba(0, 0, 0, 0.65);
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    @media (min-width: 768px) {
+      font-size: 7rem;
+    }
+    text-align: center;
+    line-height: 1.5;
+    padding: 10px;
+    border-radius: 50px;
+  }
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    color: #008080;
+    @media (min-width: 1024px) {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+}
+
+.heroArticle {
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 1024px) {
+    width: 40vw;
+  }
+  &__icon {
+    font-size: 30px;
+    color: #fefbf0;
+  }
+  &__img {
+    height: 300px;
+    object-fit: cover;
+    border: 2px solid $colorDark;
+    box-shadow: -1px 4px 5px rgba(0, 0, 0, 0.65);
+    @media (min-width: 768px) {
+      height: 400px;
+    }
+    @media (min-width: 1024px) {
+      // width: 40vw;
+    }
+
+  }
+  &__img2 {
+    height: 300px;
+    object-fit: cover;
+    border: 2px solid $colorDark;
+    box-shadow: -1px 4px 5px rgba(0, 0, 0, 0.65);
+    @media (min-width: 768px) {
+      height: 400px;
+    }
+    @media (min-width: 1024px) {
+      // width: 40vw;
+    }
+
+  }
+  &__icon {
+    color: $colorDark;
+    margin: 0 auto;
+  }
+    
+
+  
+  &__titles {
+    transform: translateY(-50%);
+    z-index: 4;
+    background-color: rgb(254, 251, 240, 0.8);
+    padding: 20px;
+    border: 2px solid $colorDark;
+    box-shadow: -1px 4px 5px rgba(0, 0, 0, 0.65);
+    &--h2 {
+      font-family: $fontSecond;
+
+      font-weight: 600;
+      font-size: 2rem;
+      text-align: center;
+      line-height: 1.5;
+      @media (min-width: 768px) {
+        font-size: 3rem;
+      }
+    }
+    &--h3 {
+      font-family: $fontSecond;
+      font-weight: normal;
+      font-size: 2rem;
+
+      text-align: center;
+      line-height: 1.5;
+      @media (min-width: 768px) {
+        font-size: 2.5rem;
+      }
+    }
+  }
+}

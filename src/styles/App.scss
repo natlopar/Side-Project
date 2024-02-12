@@ -1,0 +1,12 @@
+@import 'core/reset';
+@import 'core/variables.scss';
+@import 'layout/header.scss';
+@import 'layout/hero.scss';
+
+
+.body {
+  height: 100vh;
+  font-family: $fontMain;
+  background-color: #fefbf0;
+  color: #008080;
+}
