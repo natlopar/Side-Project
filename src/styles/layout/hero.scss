@@ -4,17 +4,17 @@
   flex-direction: column;
   padding: 200px 10px 100px 10px;
   gap: 50px;
-
+  font-family: $fontSecond;
+  height: 100%;
   @media (min-width: 768px) {
     padding-top: 300px;
   }
   &__title {
     color: $colorDark;
-    font-family: $fontSecond;
+ 
     font-weight: bold;
-    text-shadow: -1px 4px 5px rgba(0, 0, 0, 0.65);
+    text-shadow: -1px 3px 5px rgba(0, 0, 0, 0.65);
     font-size: 4rem;
-    display: flex;
     justify-content: center;
     @media (min-width: 768px) {
       font-size: 7rem;
@@ -25,10 +25,6 @@
     border-radius: 50px;
   }
   &__section {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    color: #008080;
     @media (min-width: 1024px) {
       flex-direction: row;
       justify-content: center;

@@ -12,10 +12,10 @@ import User from "./User"
 function App() {
   return (
     <div className= "body light">
-      <Header/>
+    
     
     <Routes>
-      <Route path="/" element={<Hero/>}/>
+      <Route path="/" element={<><Header/> <Hero/></>}/>
       <Route path="/newUser" element={<CreateUser/>}/>
       <Route path="/user" element={<User/>}/>
     </Routes>

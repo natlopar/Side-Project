@@ -1,0 +1,13 @@
+.desc {
+    text-align: center;
+    margin-bottom: 10px;
+    &__titles{
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+    }
+    &__subtitles{
+        font-weight: bolder;
+        font-size: 2rem;
+        text-shadow: -1px 3px 5px rgba(51, 127, 121, 0.65);
+    }
+}
