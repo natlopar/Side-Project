@@ -1,5 +1,5 @@
 .user {
-    height: 100vh;
+    height: 100%;
     color: $colorDark;
     display: flex;
     flex-direction: column;
@@ -31,15 +31,34 @@
     }
     &__form {
         color: $colorDark;
-        text-align: center;
+      font-family: $fontMain;
         display: flex;
         flex-direction: column;
-        gap: 30px;
+        gap: 10px;
         font-size: 1.5rem;
-        justify-content: center;
+ 
         @media (min-width: 768px) {
           font-size: 2.5rem;
         }
+      &--check{
+        accent-color: $colorDark;
+        label{
+          margin-left: 10px;
+        }
+      }
+      &--text{
+        font-family: $fontSecond;
+        margin-top: 20px;
+        font-size: 1.3rem;
+      }
+      &--submit {
+        font-family: $fontMain;
+        background-color: $colorDark;
+        color: $colorLight;
+        width: 150px;
+        margin: 0 auto;
+        margin-top: 20px;
+      }
     }
 
 }
