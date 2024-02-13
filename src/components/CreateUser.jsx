@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import HeaderPages from './HeaderPages';
 
 function CreateUser() {
@@ -5,10 +6,7 @@ function CreateUser() {
     <>
       <HeaderPages />
       <div className="user">
-        <h3 className="user__title">Bienvenid@!!</h3>
-        <h4 className="user__subtitle">
-          Rellena aquí tus datos para empezar a crear tu historial de casos
-        </h4>
+        
         <form className="user__form">
           <label htmlFor="" className="user__form--label">
             {' '}
@@ -49,7 +47,9 @@ function CreateUser() {
             En caso de que no quieras publicar ahora todos tus casos, podrás publicar
             cada uno más adelante {' '}
           </p>
+          <Link to={"/welcomeList"}>
           <input type="submit" value="Aceptar" className='user__form--submit'/>
+          </Link>
         </form>
       </div>
     </>
