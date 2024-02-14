@@ -7,6 +7,7 @@ import CreateUser from "./CreateUser"
 import User from "./User"
 import Welcome from "./Welcome"
 import NewCase from "./NewCase"
+import ListCases from "./ListCases"
 
 
 
@@ -22,6 +23,7 @@ function App() {
       <Route path="/user" element={<User/>}/>
       <Route path="/welcomeList" element={<Welcome/>}/>
       <Route path="/newCase" element={<NewCase/>}/>
+      <Route path="/list" element={<ListCases/>}/>
     </Routes>
     </div>
   )

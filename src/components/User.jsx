@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import HeaderPages from './HeaderPages';
 
 function User() {
@@ -22,8 +23,9 @@ function User() {
             id="password"
             className="user__form--input"
           />
-
+          <Link to={"/list"}>
           <input type="submit" value="Aceptar" className="user__form--submit" />
+          </Link>
         </form>
       </div>
     </>
