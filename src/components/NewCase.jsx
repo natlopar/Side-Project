@@ -4,8 +4,10 @@ import HeaderPages from "./HeaderPages"
 
 function NewCase() {
   return (
-    <div>
+    <>
+ 
         <HeaderPages/>
+        <div className="user">
         <div className="case">
         <form className="case__form">
             <div className="case__form--inputs">
@@ -93,7 +95,10 @@ function NewCase() {
           </Link>
         </form>
         </div>
+        
     </div>
+    </>
+
   )
 }
 

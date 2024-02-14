@@ -7,7 +7,7 @@ function ListCases() {
   return (
     <>
     <HeaderPages/> 
-    <div className="user"></div>
+    <div className="user">
     <TitleWelcome/>
     <h4 className="user__message">
     Este es tu historial de casos
@@ -37,6 +37,7 @@ function ListCases() {
 
   </ul>
   </section>
+  </div>
   <CreateCase/>
 
   </>
