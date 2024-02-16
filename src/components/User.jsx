@@ -3,7 +3,7 @@ import HeaderPages from './HeaderPages';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-function User({ handleLogin }) {
+function User({ handleLogin, isDark, setIsDark }) {
   const {
     register,
     handleSubmit,
@@ -26,7 +26,7 @@ function User({ handleLogin }) {
   };
   return (
     <>
-      <HeaderPages />
+      <HeaderPages  isDark={isDark} setIsDark={setIsDark}/>
 
       <div className="user ">
         <h3 className="user__title">Inicia sesión</h3>

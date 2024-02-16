@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderPages from './HeaderPages';
 import { useForm } from 'react-hook-form';
 
-function CreateUser({handleUser}) {
+function CreateUser({handleUser, isDark, setIsDark}) {
   const {
     register,
     handleSubmit,
@@ -32,7 +32,7 @@ function CreateUser({handleUser}) {
 
   return (
     <>
-      <HeaderPages />
+      <HeaderPages isDark={isDark} setIsDark={setIsDark}/>
       <div className="user">
         <form className="user__form" onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="" className="user__form--label">

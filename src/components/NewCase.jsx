@@ -2,11 +2,11 @@ import { Link } from "react-router-dom"
 import HeaderPages from "./HeaderPages"
 
 
-function NewCase() {
+function NewCase({isDark, setIsDark}) {
   return (
     <>
  
-        <HeaderPages/>
+        <HeaderPages isDark={isDark} setIsDark={setIsDark}/>
         <div className="user">
         <div className="case">
         <form className="case__form">

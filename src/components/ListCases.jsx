@@ -3,10 +3,10 @@ import HeaderPages from "./HeaderPages";
 import TitleWelcome from "./TitleWelcome";
 
 
-function ListCases({user}) {
+function ListCases({user, isDark, setIsDark}) {
   return (
     <>
-    <HeaderPages/> 
+    <HeaderPages isDark={isDark} setIsDark={setIsDark}/> 
     <div className="user">
     <TitleWelcome user={user}/>
     <h4 className="user__message">
