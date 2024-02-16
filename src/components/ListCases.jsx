@@ -3,12 +3,12 @@ import HeaderPages from "./HeaderPages";
 import TitleWelcome from "./TitleWelcome";
 
 
-function ListCases() {
+function ListCases({user}) {
   return (
     <>
     <HeaderPages/> 
     <div className="user">
-    <TitleWelcome/>
+    <TitleWelcome user={user}/>
     <h4 className="user__message">
     Este es tu historial de casos
   </h4>

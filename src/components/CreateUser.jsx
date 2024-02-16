@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderPages from './HeaderPages';
 import { useForm } from 'react-hook-form';
 
-function CreateUser() {
+function CreateUser({handleUser}) {
   const {
     register,
     handleSubmit,
@@ -13,6 +13,7 @@ function CreateUser() {
 
   const onSubmit = (data) => {
     console.log(data);
+    handleUser(data);
 
     navigate('/welcomeList');
   };
@@ -41,6 +42,7 @@ function CreateUser() {
           <input
             type="text"
             className="user__form--input"
+            required
             {...register('firstName', { required: true, maxLength: 20 })}
             aria-invalid={errors.firstName ? 'true' : 'false'}
           ></input>

@@ -17,10 +17,33 @@ function App() {
 
 
   const [user, setUser] = useState({});
+  const [login, setLogin] = useState({});
+  
+  const login1 = {
+    nameLogin: '',
+    password: '',
+    id: 0,
+  }
 
-const handleUser =(value)=>{
-  setUser(value);
+  const user1 = {
+    idUser: 0, 
+    firstName: 'Anacleta', 
+    lastName: 'Ariel', 
+    city: 'Paraná', 
+    country: 'Argentina', 
+    public: false,
+  }
+
+
+const handleUser =(data)=>{
+  setUser(data);
 }
+
+const handleLogin =(data)=>{
+  setLogin(data);
+  setUser(user1);//aqui vincularía el idUsuario con idLogin para cargar sus datos en List.
+}
+
 
   return (
     <div className= "body light">
@@ -28,10 +51,10 @@ const handleUser =(value)=>{
     <Routes>
       <Route path="/" element={<><Header/> <Hero/></>}/>
       <Route path="/newUser" element={<CreateUser handleUser={handleUser}/>}/>
-      <Route path="/user" element={<User/>}/>
-      <Route path="/welcomeList" element={<Welcome/>}/>
+      <Route path="/user" element={<User handleLogin={handleLogin}/>}/>
+      <Route path="/welcomeList" element={<Welcome user={user}/>}/>
       <Route path="/newCase" element={<NewCase/>}/>
-      <Route path="/list" element={<ListCases/>}/>
+      <Route path="/list" element={<ListCases user={user}/>}/>
     </Routes>
     </div>
   )

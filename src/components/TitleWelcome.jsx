@@ -1,8 +1,8 @@
 
 
-function TitleWelcome() {
+function TitleWelcome({user}) {
   return (
-    <h3 className="user__title">Bienvenid@ nombreDeUsuaria</h3>
+    <h3 className="user__title">Bienvenid@ {user.firstName}</h3>
   )
 }
 
