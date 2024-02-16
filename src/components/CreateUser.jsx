@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderPages from './HeaderPages';
 import { useForm } from 'react-hook-form';
 
-function CreateUser({handleUser}) {
+function CreateUser() {
   const {
     register,
     handleSubmit,
@@ -11,13 +11,23 @@ function CreateUser({handleUser}) {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
 
-   const handleClick =(e)=>{
- //aqui hago mis cosas del form
- navigate("/welcomeList");
-   }
+    navigate('/welcomeList');
+  };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' && event.target.value.trim() === '') {
+      event.preventDefault();
+    }
+  };
+
+  //    const handleClick =(e)=>{
+  //     e.preventDefault();
+  //  //aqui hago mis cosas del form
+  // //  navigate("/welcomeList");
+  //    }
 
   return (
     <>
@@ -109,9 +119,13 @@ function CreateUser({handleUser}) {
             En caso de que no quieras publicar ahora todos tus casos, podrás
             publicar cada uno más adelante{' '}
           </p>
-          {/* <Link to={"/welcomeList"}> */}
-          <input type="submit" value="Aceptar" className="user__form--submit" onClick={handleClick} />
-          {/* </Link> */}
+
+          <input
+            type="submit"
+            value="Aceptar"
+            className="user__form--submit"
+            onKeyDown={handleKeyDown}
+          />
         </form>
       </div>
     </>
