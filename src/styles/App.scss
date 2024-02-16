@@ -10,7 +10,22 @@
 .body {
   height: 100%;
   font-family: $fontMain;
+  // background-color: #fefbf0;
+  // color: #008080;
+}
+
+.dark {
+  color: #fefbf0;
+  background-color: #008080;
+}
+
+// .hidden {
+//   display: none;
+// }
+
+
+.light{
   background-color: #fefbf0;
   color: #008080;
 }
-
+  

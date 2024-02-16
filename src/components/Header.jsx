@@ -3,7 +3,7 @@ import logo from '../images/logo.jpeg'
 
 
 
-function Header() {
+function Header( {toggleTheme}) {
   return (
     <header className="header">
       <Link to={"/"}>
@@ -14,22 +14,23 @@ function Header() {
       />
       </Link>
       <div className="header__style">
-        {/* <div className="header__style--dark  hidden">
+        <div className="header__style--dark  hidden">
           <div className="header__style--text">
             <span>dark </span>
           </div>
           <div className="header__style--btns">
             <i className="fa-solid fa-toggle-on header__style--dark"></i>
           </div>
-        </div> */}
+        </div>
         <div className="header__style--light">
           <span className="header__style--text">light</span>
-          <i className="fa-solid fa-toggle-off header__style--light"></i>
+          <button onClick={toggleTheme}></button>
+         <i className="fa-solid fa-toggle-off header__style--light"></i>
         </div>
 
         <nav className="header__style--nav">
           <a href="" className="header__style--navIcon">
-            <i className="fa-solid fa-ellipsis-vertical"></i>
+   <i className="fa-solid fa-ellipsis-vertical"></i>
           </a>
           <ul className="header__style--menu">
            <Link to={"/user"} className='link'><li>Iniciar Sesión</li></Link> 
