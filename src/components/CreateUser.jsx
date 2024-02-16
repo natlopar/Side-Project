@@ -125,7 +125,7 @@ function CreateUser({handleUser}) {
           <input
             type="submit"
             value="Aceptar"
-            className="user__form--submit"
+            className="user__form--submit btn"
             onKeyDown={handleKeyDown}
           />
         </form>

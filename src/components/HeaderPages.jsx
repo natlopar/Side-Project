@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import logo from '../images/logo.jpeg'
+import logo from '../images/logo.jpeg';
+import { Toggle } from './Toggle';
 
 
 
-function HeaderPages() {
+function HeaderPages({isDark, setIsDark}) {
   return (
     <header className="header">
       <Link to={"/"}>
@@ -15,6 +16,7 @@ function HeaderPages() {
       </Link>
       <h1 className="header__title">Vetfolio Manager</h1>
       <div className="header__style">
+      <Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />
         {/* <div className="header__style--dark  hidden">
           <div className="header__style--text">
             <span>dark </span>
@@ -23,10 +25,10 @@ function HeaderPages() {
             <i className="fa-solid fa-toggle-on header__style--dark"></i>
           </div>
         </div> */}
-        <div className="header__style--light">
+        {/* <div className="header__style--light">
           <span className="header__style--text">light</span>
           <i className="fa-solid fa-toggle-off header__style--light"></i>
-        </div>
+        </div> */}
 
         <nav className="header__style--nav">
           <a href="" className="header__style--navIcon">

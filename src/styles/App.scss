@@ -15,17 +15,24 @@
 }
 
 .dark {
-  color: #fefbf0;
-  background-color: #008080;
+  color: $colorLight;
+  background-color: $colorDark;
+  .link {
+    color: $colorLight;
+  }
+  .btn {
+    background-color: $colorLight;
+    color: $colorDark;
+  }
 }
 
-// .hidden {
-//   display: none;
-// }
+.hidden {
+  display: none;
+}
 
 
 .light{
-  background-color: #fefbf0;
-  color: #008080;
+  background-color: $colorLight;
+  color: $colorDark;
 }
   

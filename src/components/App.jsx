@@ -16,10 +16,12 @@ import { useState, useEffect } from "react";
 
 function App() {
 
+  const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [isDark, setIsDark] = useState( localStorage.getItem('isDark') || preference);
   const [theme, setTheme] = useState(
     localStorage.getItem('theme') || 'light'
   );
-
+  const [toDark, setToDark] = useState( localStorage.getItem('toDark') || 'hidden')
   
   const [user, setUser] = useState({});
   const [login, setLogin] = useState({});
@@ -41,8 +43,11 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('theme', theme);
+    localStorage.setItem('toDark', toDark);
     document.body.className = theme;
-  }, [theme]);
+  }, [theme, toDark]);
+
+
 const handleUser =(data)=>{
   setUser(data);
 }
@@ -54,16 +59,21 @@ const handleLogin =(data)=>{
 const toggleTheme = () => {
   if (theme === 'light') {
     setTheme('dark');
+    setToDark('');
+
   } else {
     setTheme('light');
+    setToDark('hidden');
   }
 };
 
+
+
   return (
-    <div className={`body ${theme}`}>
+    <div className={`body ${isDark ? "dark" : "light"}`}>
     
     <Routes>
-      <Route path="/" element={<><Header toggleTheme={toggleTheme} /> <Hero/></>}/>
+      <Route path="/" element={<><Header toggleTheme={toggleTheme} toDark= {toDark} isDark={isDark} setIsDark={setIsDark} /> <Hero/></>}/>
       <Route path="/newUser" element={<CreateUser handleUser={handleUser}/>}/>
       <Route path="/user" element={<User handleLogin={handleLogin}/>}/>
       <Route path="/welcomeList" element={<Welcome user={user}/>}/>

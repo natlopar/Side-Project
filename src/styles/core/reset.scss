@@ -1,3 +1,4 @@
+ @import './variables.scss';
 * {
     padding: 0;
     margin: 0;
@@ -6,6 +7,6 @@
 
 :root {
     font-size: 62.5%;
-    background-color: #fefbf0;
-    color: #008080;
+    background-color: $colorLight;
+    color: $colorDark;
 }

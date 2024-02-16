@@ -11,3 +11,19 @@
         text-shadow: -1px 3px 5px rgba(51, 127, 121, 0.65);
     }
 }
+
+.pointer {
+    cursor: pointer;
+    &:hover{
+      transform: scale(1.3);
+      transition-duration: 600ms;
+    transition-timing-function: ease;
+      
+    }
+  
+  }
+  
+  .link {
+    text-decoration: none;
+    color: $colorDark;
+  }

@@ -1,16 +1,16 @@
 .user {
     height: 100vh;
-    color: $colorDark;
+  
     display: flex;
     flex-direction: column;
     padding: 200px 10px 100px 10px;
     gap: 50px;
     font-family: $fontSecond;
-    color: #008080;
+
     justify-content: center;
     align-items: center;
     &__title {
-        color: $colorDark;
+     
         font-weight: bold;
         text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.65);
         font-size: 3rem;
@@ -19,7 +19,7 @@
         }
     }
     &__subtitle {
-        color: $colorDark;
+    
         text-align: center;
         font-weight: bold;
         text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.65);
@@ -30,7 +30,7 @@
         }
     }
     &__form {
-        color: $colorDark;
+     
       font-family: $fontMain;
         display: flex;
         flex-direction: column;
@@ -58,7 +58,7 @@
         margin-top: 20px;
         font-size: 1.3rem;
       }
-      &--submit {
+      &--submit, btn {
         font-family: $fontMain;
         background-color: $colorDark;
         color: $colorLight;

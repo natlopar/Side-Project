@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.jpeg'
+import { Toggle } from './Toggle';
 
 
 
-function Header( {toggleTheme}) {
+function Header( {toggleTheme, toDark, isDark, setIsDark}) {
+
+
   return (
     <header className="header">
       <Link to={"/"}>
@@ -14,18 +17,16 @@ function Header( {toggleTheme}) {
       />
       </Link>
       <div className="header__style">
-        <div className="header__style--dark  hidden">
-          <div className="header__style--text">
-            <span>dark </span>
-          </div>
-          <div className="header__style--btns">
+        <div>
+        <Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />
+        {/* <div className={`header__style--dark ${toDark}`}>
+            <span className="header__style--text">dark </span>
             <i className="fa-solid fa-toggle-on header__style--dark"></i>
-          </div>
         </div>
-        <div className="header__style--light">
+        <div className='header__style--light'>
           <span className="header__style--text">light</span>
-          <button onClick={toggleTheme}></button>
-         <i className="fa-solid fa-toggle-off header__style--light"></i>
+          <button onClick={toggleTheme}>  <i className="fa-solid fa-toggle-off header__style--light"></i></button>
+        </div> */}
         </div>
 
         <nav className="header__style--nav">
