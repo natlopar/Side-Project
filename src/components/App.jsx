@@ -7,19 +7,27 @@ import CreateUser from "./CreateUser"
 import User from "./User"
 import Welcome from "./Welcome"
 import NewCase from "./NewCase"
-import ListCases from "./ListCases"
+import ListCases from "./ListCases";
+import { useState } from "react";
 
 
 
 
 function App() {
+
+
+  const [user, setUser] = useState({});
+
+const handleUser =(value)=>{
+  setUser(value);
+}
+
   return (
     <div className= "body light">
     
-    
     <Routes>
       <Route path="/" element={<><Header/> <Hero/></>}/>
-      <Route path="/newUser" element={<CreateUser/>}/>
+      <Route path="/newUser" element={<CreateUser handleUser={handleUser}/>}/>
       <Route path="/user" element={<User/>}/>
       <Route path="/welcomeList" element={<Welcome/>}/>
       <Route path="/newCase" element={<NewCase/>}/>
