@@ -12,5 +12,5 @@ export const Toggle = ({ handleChange, isChecked }) => {
       />
       <label htmlFor="check">Dark Mode</label>
     </div>
-  );
+  )
 };

@@ -1,6 +1,6 @@
 .case {
   height: 100vh;
-  color: $colorDark;
+
   display: flex;
   flex-direction: column;
   padding: 200px 10px 100px 10px;
@@ -11,7 +11,7 @@
   align-items: center;
   
     &__form {
-      color: $colorDark;
+
       font-family: $fontMain;
       display: flex;
       flex-direction: column;
@@ -36,7 +36,7 @@
         margin-top: 20px;
         font-size: 1.3rem;
       }
-      &--submit {
+      &--submit btn{
         font-family: $fontMain;
         background-color: $colorDark;
         color: $colorLight;

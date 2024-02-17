@@ -7,7 +7,7 @@ function NewCase({isDark, setIsDark}) {
     <>
  
         <HeaderPages isDark={isDark} setIsDark={setIsDark}/>
-        <div className="user">
+      <div className=" user">
         <div className="case">
         <form className="case__form">
             <div className="case__form--inputs">
@@ -96,7 +96,7 @@ function NewCase({isDark, setIsDark}) {
         </form>
         </div>
         
-    </div>
+   </div>
     </>
 
   )

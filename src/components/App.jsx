@@ -18,10 +18,10 @@ function App() {
 
   const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [isDark, setIsDark] = useState( localStorage.getItem('isDark') || preference);
-  const [theme, setTheme] = useState(
-    localStorage.getItem('theme') || 'light'
-  );
-  const [toDark, setToDark] = useState( localStorage.getItem('toDark') || 'hidden')
+  // const [theme, setTheme] = useState(
+  //   localStorage.getItem('theme') || 'light'
+  // );
+  // const [toDark, setToDark] = useState( localStorage.getItem('toDark') || 'hidden')
   
   const [user, setUser] = useState({});
   const [login, setLogin] = useState({});
@@ -42,10 +42,9 @@ function App() {
   }
 
   useEffect(() => {
-    localStorage.setItem('theme', theme);
-    localStorage.setItem('toDark', toDark);
-    document.body.className = theme;
-  }, [theme, toDark]);
+    localStorage.setItem('isDark', isDark);
+    document.body.className = isDark;
+  }, [isDark]);
 
 
 const handleUser =(data)=>{
@@ -56,16 +55,7 @@ const handleLogin =(data)=>{
   setLogin(data);
   setUser(user1);//aqui vincularía el idUsuario con idLogin para cargar sus datos en List.
 }
-const toggleTheme = () => {
-  if (theme === 'light') {
-    setTheme('dark');
-    setToDark('');
 
-  } else {
-    setTheme('light');
-    setToDark('hidden');
-  }
-};
 
 
 
@@ -73,12 +63,13 @@ const toggleTheme = () => {
     <div className={`body ${isDark ? "dark" : "light"}`}>
     
     <Routes>
-      <Route path="/" element={<><Header toggleTheme={toggleTheme} toDark= {toDark} isDark={isDark} setIsDark={setIsDark} /> <Hero/></>}/>
-      <Route path="/newUser" element={<CreateUser handleUser={handleUser}/>}/>
-      <Route path="/user" element={<User handleLogin={handleLogin}/>}/>
-      <Route path="/welcomeList" element={<Welcome user={user}/>}/>
-      <Route path="/newCase" element={<NewCase/>}/>
-      <Route path="/list" element={<ListCases user={user}/>}/>
+      <Route path="/" element={<><Header 
+      isDark={isDark} setIsDark={setIsDark} /> <Hero/></>}/>
+      <Route path="/newUser" element={<CreateUser handleUser={handleUser} isDark={isDark} setIsDark={setIsDark}/>}/>
+      <Route path="/user" element={<User handleLogin={handleLogin} isDark={isDark} setIsDark={setIsDark}/>}/>
+      <Route path="/welcomeList" element={<Welcome user={user} isDark={isDark} setIsDark={setIsDark} />}/>
+      <Route path="/newCase" element={<NewCase  isDark={isDark} setIsDark={setIsDark}/>} />
+      <Route path="/list" element={<ListCases user={user} isDark={isDark} setIsDark={setIsDark}/>}/>
     </Routes>
     </div>
   )

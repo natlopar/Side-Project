@@ -4,7 +4,7 @@ import { Toggle } from './Toggle';
 
 
 
-function Header( {toggleTheme, toDark, isDark, setIsDark}) {
+function Header( { isDark, setIsDark}) {
 
 
   return (
