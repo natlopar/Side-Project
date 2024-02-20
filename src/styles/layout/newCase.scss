@@ -1,9 +1,9 @@
 .case {
   height: 100vh;
 
-  display: flex;
+ display: flex;
   flex-direction: column;
-  padding: 200px 10px 100px 10px;
+  padding: 400px 10px 100px 10px;
   gap: 50px;
   font-family: $fontSecond;
 
@@ -36,13 +36,15 @@
         margin-top: 20px;
         font-size: 1.3rem;
       }
-      &--submit btn{
+      &--submit {
         font-family: $fontMain;
         background-color: $colorDark;
         color: $colorLight;
         width: 150px;
         margin: 0 auto;
         margin-top: 20px;
+        margin-bottom: 100px;
+       
       }
     }
     &__message {

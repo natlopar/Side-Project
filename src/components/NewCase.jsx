@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import HeaderPages from "./HeaderPages"
 
 
+
 function NewCase({isDark, setIsDark}) {
   return (
     <>
@@ -90,9 +91,9 @@ function NewCase({isDark, setIsDark}) {
           {/* <p className="case__form--text">
            
           </p> */}
-          <Link to={"/"}>
+          {/* <Link to={"/"}>
           <input type="submit" value="Crear" className='case__form--submit'/>
-          </Link>
+          </Link> */}
         </form>
         </div>
         

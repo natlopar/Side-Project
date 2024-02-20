@@ -13,22 +13,22 @@ function Hero() {
     <section className="hero__section">
       <article className="heroArticle">
       <img src={heroVet} alt="imagen Veterinaria" className="heroArticle__img"/>
-      <div className="heroArticle__titles">
+      <div className="heroArticle__titles btn">
         <h2 className="heroArticle__titles--h2">De Patas a Datos:</h2>
         <h3 className="heroArticle__titles--h3">
           Un Archivo Digital para Veterinarios Apasionados
         </h3>
       </div>
-      <i className="fa-solid fa-stethoscope heroArticle__icon"></i>
+      <i className="fa-solid fa-stethoscope heroArticle__icon link"></i>
       </article>
   
     <article className="heroArticle">
       <img src={hero2} alt="imagen Veterinaria" className="heroArticle__img2"/>
-      <div className="heroArticle__titles">
+      <div className="heroArticle__titles btn">
         <h2 className="heroArticle__titles--h2">Crea, Registra, Comparte:</h2>
         <h3 className="heroArticle__titles--h3">La App que Transforma Experiencias Veterinarias</h3>
       </div>
-      <i className="fa-solid fa-cloud heroArticle__icon"></i>
+      <i className="fa-solid fa-cloud heroArticle__icon link"></i>
     </article>
     
     </section>
