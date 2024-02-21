@@ -4,11 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function NewCase({isDark, setIsDark, handleCase}) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+
 
   const navigate = useNavigate();
 
@@ -24,7 +20,7 @@ function NewCase({isDark, setIsDark, handleCase}) {
         <HeaderPages isDark={isDark} setIsDark={setIsDark}/>
       <div className=" user">
         <div className="case">
-        <form className="case__form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="case__form">
             <div className="case__form--inputs">
           <label htmlFor="" >
             {' '}

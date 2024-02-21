@@ -9,6 +9,7 @@ import Welcome from "./Welcome"
 import NewCase from "./NewCase"
 import ListCases from "./ListCases";
 import { useState, useEffect } from "react";
+import NewCase2 from "./NewCase2"
 // import ls from '../services/localStorage'
 
 
@@ -25,6 +26,7 @@ function App() {
   
   const [user, setUser] = useState({});
   const [login, setLogin] = useState({});
+  const [case, setCase] = useState ({});
   
   const login1 = {
     nameLogin: '',
@@ -56,7 +58,9 @@ const handleLogin =(data)=>{
   setUser(user1);//aqui vincularía el idUsuario con idLogin para cargar sus datos en List.
 }
 
-
+const handleCase =(data)=>{
+  setCase(data);
+}
 
 
   return (
@@ -68,7 +72,8 @@ const handleLogin =(data)=>{
       <Route path="/newUser" element={<CreateUser handleUser={handleUser} isDark={isDark} setIsDark={setIsDark}/>}/>
       <Route path="/user" element={<User handleLogin={handleLogin} isDark={isDark} setIsDark={setIsDark}/>}/>
       <Route path="/welcomeList" element={<Welcome user={user} isDark={isDark} setIsDark={setIsDark} />}/>
-      <Route path="/newCase" element={<NewCase  isDark={isDark} setIsDark={setIsDark}/>} />
+      <Route path="/newCase" element={<NewCase handleCase={handleCase} isDark={isDark} setIsDark={setIsDark}/>} />
+      <Route path="/newCase2" element={<NewCase2 handleCase={handleCase} isDark={isDark} setIsDark={setIsDark}/>} />
       <Route path="/list" element={<ListCases user={user} isDark={isDark} setIsDark={setIsDark}/>}/>
     </Routes>
     </div>
