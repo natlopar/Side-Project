@@ -3,17 +3,17 @@ import HeaderPages from "./HeaderPages"
 import { useNavigate } from 'react-router-dom';
 
 
-function NewCase({isDark, setIsDark, handleCase}) {
+function NewCase({isDark, setIsDark, }) {
 
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    handleCase(data);
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  //   // handleCase(data);
 
-    navigate('/NewCase2');
-  };
+  //   navigate('/NewCase2');
+  // };
   return (
     <>
  

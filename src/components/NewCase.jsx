@@ -3,28 +3,28 @@ import HeaderPages from "./HeaderPages"
 import { useNavigate } from 'react-router-dom';
 
 
-function NewCase({isDark, setIsDark, handleCase}) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+function NewCase({isDark, setIsDark,}) {
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    handleCase(data);
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  //   handleCase(data);
 
-    navigate('/NewCase2');
-  };
+  //   navigate('/NewCase2');
+  // };
   return (
     <>
  
         <HeaderPages isDark={isDark} setIsDark={setIsDark}/>
       <div className=" user">
         <div className="case">
-        <form className="case__form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="case__form" >
             <div className="case__form--inputs">
           <label htmlFor="" >
             {' '}

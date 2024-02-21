@@ -1,6 +1,6 @@
 import "../styles/layout/toggle.scss";
 
-export const Toggle = ({ handleChange, isChecked }) => {
+export const Toggle = ({ handleChange, isDark }) => {
   return (
     <div className="toggle-container">
       <input
@@ -8,7 +8,7 @@ export const Toggle = ({ handleChange, isChecked }) => {
         id="check"
         className="toggle"
         onChange={handleChange}
-        checked={isChecked}
+        checked={isDark}
       />
       <label htmlFor="check">Dark Mode</label>
     </div>

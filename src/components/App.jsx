@@ -17,22 +17,17 @@ import NewCase2 from "./NewCase2"
 
 function App() {
 
-  const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const [isDark, setIsDark] = useState( localStorage.getItem('isDark') || preference);
-  // const [theme, setTheme] = useState(
-  //   localStorage.getItem('theme') || 'light'
-  // );
-  // const [toDark, setToDark] = useState( localStorage.getItem('toDark') || 'hidden')
-  
+  // const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [isDark, setIsDark] = useState( JSON.parse(localStorage.getItem('isDark')) || true);
   const [user, setUser] = useState({});
   const [login, setLogin] = useState({});
-  const [case, setCase] = useState ({});
+  const [cases, setCases] = useState({});
   
-  const login1 = {
-    nameLogin: '',
-    password: '',
-    id: 0,
-  }
+  // const login1 = {
+  //   nameLogin: '',
+  //   password: '',
+  //   id: 0,
+  // }
 
   const user1 = {
     idUser: 0, 
@@ -58,13 +53,13 @@ const handleLogin =(data)=>{
   setUser(user1);//aqui vincularía el idUsuario con idLogin para cargar sus datos en List.
 }
 
-const handleCase =(data)=>{
-  setCase(data);
-}
+// const handleCase =(data)=>{
+//   setCases(data);
+// }
 
 
   return (
-    <div className={`body ${isDark ? "dark" : "light"}`}>
+    <div className={`body ${isDark ? 'dark' : 'light'}`}>
     
     <Routes>
       <Route path="/" element={<><Header 
@@ -72,8 +67,8 @@ const handleCase =(data)=>{
       <Route path="/newUser" element={<CreateUser handleUser={handleUser} isDark={isDark} setIsDark={setIsDark}/>}/>
       <Route path="/user" element={<User handleLogin={handleLogin} isDark={isDark} setIsDark={setIsDark}/>}/>
       <Route path="/welcomeList" element={<Welcome user={user} isDark={isDark} setIsDark={setIsDark} />}/>
-      <Route path="/newCase" element={<NewCase handleCase={handleCase} isDark={isDark} setIsDark={setIsDark}/>} />
-      <Route path="/newCase2" element={<NewCase2 handleCase={handleCase} isDark={isDark} setIsDark={setIsDark}/>} />
+      <Route path="/newCase" element={<NewCase isDark={isDark} setIsDark={setIsDark}/>} />
+      <Route path="/newCase2" element={<NewCase2 isDark={isDark} setIsDark={setIsDark}/>} />
       <Route path="/list" element={<ListCases user={user} isDark={isDark} setIsDark={setIsDark}/>}/>
     </Routes>
     </div>
