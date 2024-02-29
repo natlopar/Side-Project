@@ -16,7 +16,7 @@ import LoginBtn from './LoginBtn'
 
 
 import apiUser from '../services/api-user';
-import apiCase from '../services/api-case';
+
 
 
 
@@ -135,7 +135,7 @@ const sendSignUpToApi =(registry) => {
       <DetailListUser token={token} setToken={setToken} idVet= {idVet} username={username} isDark={isDark} setIsDark={setIsDark}/>
     }/>
       <Route path="/newCase" element={<NewCase idVet={idVet} publicU={publicU} isDark={isDark} setIsDark={setIsDark}/>} />
-      <Route path="/publicList" element={<ListCases publicList={publicList}  isDark={isDark} setIsDark={setIsDark}/>}/>
+      <Route path="/publicList" element={<ListCases idVet={idVet} publicList={publicList}  isDark={isDark} setIsDark={setIsDark}/>}/>
     </Routes>
     </div>
   )

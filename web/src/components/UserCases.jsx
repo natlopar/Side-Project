@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/list.scss';
 import { Link } from 'react-router-dom';
 
-function UserCases({ data }) {
+function UserCases({ data , idVet}) {
   return (
     <>
       <li className="listPet cardClient borderTog btn">
@@ -29,13 +29,13 @@ function UserCases({ data }) {
           <p className="listPet__desc">{data.results}</p>
         </div>
         <div className="listPet__btn ">
-          <Link to={'/'} className="icontool link_rev btn ">
+          <Link to={'/'} className="icontool link_rev ">
             <span className="tooltip">Revisar</span>
             <span>
               <i className=" fa-solid fa-book-medical"></i>
             </span>
           </Link>
-          <Link to={'/'} className="icontool  link_rev">
+         {idVet === data.fk_Vet ? (<><Link to={'/'} className="icontool  link_rev">
             <span className="tooltip">Modificar</span>
             <span>
               {' '}
@@ -47,7 +47,7 @@ function UserCases({ data }) {
             <span>
               <i className=" fa-solid fa-trash"></i>
             </span>
-          </Link>
+          </Link> </>) : <span></span>} 
         </div>
       </li>
     </>

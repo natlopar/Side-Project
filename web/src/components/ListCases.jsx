@@ -7,7 +7,7 @@ import apiCase from '../services/api-case';
 import ls from '../services/localStorage'
 
 
-function ListCases({ isDark, setIsDark }) {
+function ListCases({ isDark, setIsDark, idVet }) {
   
   // const [userData, setUserData] = useState(null);
   const [listCases, setListCases] = useState({ patients: [] });
@@ -15,10 +15,8 @@ function ListCases({ isDark, setIsDark }) {
   useEffect(() => {
     apiCase.getPublicCases()
     .then(data => {
-      console.log(data);
       if (data.success) {
         setListCases(data); 
-        // Suponiendo que setPublicList es una función definida fuera de esta función
       } else {
         console.error('Error al obtener los datos del usuario');
       }
@@ -65,7 +63,7 @@ function ListCases({ isDark, setIsDark }) {
       <section className="sectionList">
         {listCases.patients.map((data, i) => (
           <ul key={i} className="sectionList__ul">
-            <UserCases data={data} />
+            <UserCases data={data} idVet={idVet}/>
           </ul>
         ))}
       </section>
