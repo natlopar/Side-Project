@@ -22,7 +22,7 @@ function DetailListUser({
     const fetchData = async () => {
       try {
         // Realiza una solicitud para obtener los datos del usuario enviando el token
-        const response = await fetch(`http://localhost:4000/listUser`, {
+        const response = await fetch(`https://vetfolio-manager.onrender.com/listUser`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

@@ -45,7 +45,7 @@ function NewCase({ isDark, setIsDark, publicU , idVet}) {
   const handleSubmit = async (ev) => {
     ev.preventDefault();
 
-    fetch("http://localhost:4000/newcase", {
+    fetch("https://vetfolio-manager.onrender.com/newcase", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(animal),

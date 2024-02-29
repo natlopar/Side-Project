@@ -1,7 +1,7 @@
 
 
 const getPublicCases= () => {
-  return fetch ("http://localhost:4000/getPublic")
+  return fetch ("https://vetfolio-manager.onrender.com/getPublic")
     .then(response => response.json())
     .then(data=>
           data)

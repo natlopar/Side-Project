@@ -7,7 +7,7 @@ function LogOut({ token, setToken }) {
   const handleLogOut = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:4000/logout', {
+    fetch('https://vetfolio-manager.onrender.com/logout', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
