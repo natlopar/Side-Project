@@ -187,7 +187,7 @@ server.get('/listUser', authenticateToken, async (req, res) => {
 
 });
 
-const staticServer = './web';
+const staticServer = './src/public-react';
 server.use(express.static(staticServer));
 
 //.................ENDPOINT AÑADIR UN CASO.............
