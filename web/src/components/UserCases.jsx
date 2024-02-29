@@ -28,21 +28,21 @@ function UserCases({ data }) {
           <h6 className="listPet__text bordertoLight">Diagnóstico</h6>
           <p className="listPet__desc">{data.results}</p>
         </div>
-        <div className="listPet__btn">
-          <Link to={'/'} className="icontool">
+        <div className="listPet__btn ">
+          <Link to={'/'} className="icontool link_rev btn ">
             <span className="tooltip">Revisar</span>
             <span>
               <i className=" fa-solid fa-book-medical"></i>
             </span>
           </Link>
-          <Link to={'/'} className="icontool">
+          <Link to={'/'} className="icontool  link_rev">
             <span className="tooltip">Modificar</span>
             <span>
               {' '}
               <i className="fa-solid fa-file-pen"></i>
             </span>
           </Link>
-          <Link to={'/'} className="icontool">
+          <Link to={'/'} className="icontool link_rev">
             <span className="tooltip">Eliminar</span>
             <span>
               <i className=" fa-solid fa-trash"></i>

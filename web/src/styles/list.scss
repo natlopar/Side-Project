@@ -40,7 +40,7 @@
   box-shadow: 0 6px 10px #212121;
   border-radius: 10px;
   text-align: center;
-  color: #fff;
+
   // font-family: "Poppins", sans-serif;
   box-shadow: 0px 10px 10px rgb(73, 70, 92);
   transition: all 0.5s ease;
@@ -143,7 +143,8 @@
 
 .icontool{
   position: relative;
-  background: #fff;
+  background: $colorLight;
+  color: $colorDark;
   border-radius: 50%;
   margin: 10px;
   width: 50px;
@@ -174,7 +175,7 @@
   position: absolute;
   top: 0;
   font-size: 14px;
-  background: #fff;
+  background: $colorLight;
   color:  $colorDark;
   padding: 5px 8px;
   border-radius: 5px;
