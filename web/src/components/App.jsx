@@ -132,7 +132,7 @@ const sendSignUpToApi =(registry) => {
       <Route path="/listUser" 
       element={ 
     
-      <DetailListUser token={token} setToken={setToken} idVet= {idVet} username={username} isDark={isDark} setIsDark={setIsDark}/>
+      <DetailListUser token={token} setToken={setToken} idVet={idVet} username={username} isDark={isDark} setIsDark={setIsDark}/>
     }/>
       <Route path="/newCase" element={<NewCase idVet={idVet} publicU={publicU} isDark={isDark} setIsDark={setIsDark}/>} />
       <Route path="/publicList" element={<ListCases idVet={idVet} publicList={publicList}  isDark={isDark} setIsDark={setIsDark}/>}/>

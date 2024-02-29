@@ -66,7 +66,7 @@ function DetailListUser({
       {/* <section className="sectionList"> */}
         {userData.patients.map((data, i) => (
           <ul key={i} className="sectionList__ul">
-            <UserCases data={data} />
+            <UserCases data={data} idVet={idVet} />
           </ul>
         ))}
       {/* </section> */}
