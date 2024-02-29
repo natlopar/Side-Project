@@ -1,0 +1,139 @@
+@import './variables.scss';
+.login {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 200px 10px 100px 10px;
+  gap: 50px;
+  font-family: $fontSecond;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 768px) {
+    padding: 300px 10px 100px 10px; 
+  }
+}
+.user {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 200px 10px 100px 10px;
+  gap: 50px;
+  font-family: $fontSecond;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  @media (min-width: 768px) {
+    padding: 300px 10px 100px 10px; 
+  }
+  
+  &__msg{
+    font-size: 2.5rem;
+    color: rgb(219, 230, 127);
+    text-align: center;
+    text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.65);
+  }
+  &__title {
+    font-weight: bold;
+    text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.65);
+    font-size: 3rem;
+    @media (min-width: 768px) {
+      font-size: 4rem;
+    }
+  }
+  &__subtitle {
+    text-align: center;
+    font-weight: bold;
+    text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.65);
+    font-size: 1.5rem;
+    justify-content: center;
+    @media (min-width: 768px) {
+      font-size: 2.5rem;
+    }
+  }
+  &__icon{
+    margin: 20px;
+  }
+  &__form {
+    // font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.5rem;
+
+    @media (min-width: 768px) {
+      font-size: 2.5rem;
+    }
+    &--label{
+      margin-top: 20px;
+      font-weight: 800;
+      text-align: start;
+    }
+    &--validation {
+     padding: 5px;
+      color: $colorLight;
+      width: 200px;
+      border: 2px solid #ffffff;
+      font-size: 1rem;
+      text-align: center;
+    }
+    &--input {
+      font-family: $fontSecond;
+      font-weight: 500;
+      font-size: 1.5rem;
+      height: 30px;
+      border-radius: 15px;
+      // color: $colorDark;
+      padding: 10px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      color: #555;
+      outline: none;
+      &:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.3rem rgb(133, 237, 237, 0.4);
+      }
+      @media (min-width: 768px) {
+        font-size: 2rem;
+        height: 40px;
+      }
+      // & ::placeholder {
+      //   color: white;
+      // }
+    }
+    &--check {
+      accent-color: $toggle-fg;
+      label {
+        margin-left: 10px;
+      }
+    }
+    &--text {
+      font-family: $fontSecond;
+      font-weight: lighter;
+      margin-top: 20px;
+      font-size: 1.3rem;
+      @media (min-width: 768px) {
+        font-size: 1.5rem;
+ 
+      }
+      
+    }
+    &--submit {
+      font-family: $fontSecond;
+      background-color: $colorDark;
+      color: $colorLight;
+      width: 150px;
+      margin: 0 auto;
+      margin-top: 20px;
+      font-size: 1.5rem;
+      padding: 5px;
+      @media (min-width: 768px) {
+        font-size: 2.5rem;
+      }
+    }
+  }
+  &__message {
+    font-family: $fontMain;
+    font-size: 2.5rem;
+  }
+}

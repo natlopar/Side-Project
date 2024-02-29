@@ -1,0 +1,40 @@
+@import './variables.scss';
+
+.create {
+  font-family: $fontSecond;
+  display: flex;
+  gap: 50px;
+  width: 270px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $colorLight;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: -1px 4px 5px rgba(0, 0, 0, 0.65);
+  text-align: center;
+  &__icon {
+    font-size: 3rem;
+  }
+  &__title {
+    font-size: 3rem;
+    position: relative;
+    @media (min-width: 768px) {
+    }
+  }
+  &__btn {
+    font-family: $fontSecond;
+    background-color: $colorDark;
+    color: $colorLight;
+    width: 150px;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 1.5rem;
+    padding: 5px;
+    font-weight: 300;
+    @media (min-width: 768px) {
+      font-size: 2.5rem;
+    }
+  }
+}
+

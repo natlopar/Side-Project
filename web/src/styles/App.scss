@@ -1,0 +1,70 @@
+@import './reset';
+@import './variables';
+
+.body {
+  height: 100%;
+  font-family: $fontMain;
+  // background-color: #fefbf0;
+  // color: #008080;
+}
+
+.dark {
+  color: $colorLight;
+  background-color: $colorDark;
+  .link {
+    color: $colorLight;
+  }
+  .btn {
+    color: $colorDark;
+    background-color: $colorLight;
+   
+  }
+  .borderTog{
+    border: 1px solid $colorLight;
+  }
+  .bordertoLight {
+    border-top: 1px solid $colorDark;
+  }
+  
+}
+
+.hidden {
+  display: none;
+}
+
+.light {
+  background-color: $colorLight;
+  color: $colorDark;
+}
+
+.hover {
+  border-radius: 45px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+    transition-duration: 600ms;
+    transition-timing-function: ease;
+    font-weight: bold;
+    box-shadow: 0px 0px 62px 25px rgb(133, 237, 237);
+  }
+  &:active {
+    transform: scale(1.2);
+    transition-duration: 600ms;
+    transition-timing-function: ease;
+    background-color: $colorLight;
+    color: $colorDark;
+  }
+}
+
+.link {
+  text-decoration: none;
+  color: $colorDark;
+}
+
+.borderTog{
+  border-color: 1px solid $colorLight;
+}
+
+.bordertoLight {
+  border-top: 1px solid $colorLight;
+}

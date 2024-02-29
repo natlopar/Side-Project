@@ -1,0 +1,111 @@
+@import './variables.scss';
+
+.header {
+  color: $colorDark;
+  background-color: $colorLight;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top:0;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-family: $fontMain;
+  font-weight: lighter;
+  font-size: 1rem;
+  padding:20px;
+  z-index: 5;
+  @media (min-width: 768px) {
+    padding: 80px 20px;
+    height: 15vh;
+
+  }
+  &__title {
+    font-size: 2rem;
+    @media (min-width: 768px) {
+      font-size: 3rem;
+    }
+  }
+  &__image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+
+    // box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.75);
+    @media screen and (min-width: 768px) {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  &__style {
+    display: flex;
+    flex-direction: row;
+    font-family: $fontSecond;
+    // gap: 50px;
+    @media screen and (min-width: 768px) {
+      // gap: 100px;
+    }
+    &--menu {
+      
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 1.2rem;
+      text-align: right;
+      @media screen and (min-width: 768px) {
+        padding: 30px;
+        font-size: 2rem;
+      }
+    }
+    &--dark,
+    &--light {
+      font-size: 15px;
+    }
+    &--text {
+      font-size: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      // gap: 8px;
+      padding-top: 5px;
+    }
+    &--btns {
+      display: flex;
+      flex-direction: column;
+    }
+    &--navIcon {
+      color: $colorDark;
+      font-size: 50px;
+      @media screen and (min-width: 768px) {
+        display: none;
+      }
+    }
+  }
+}
+.heartbeat {
+  animation: heartbeat 3s ease-in-out infinite both;
+}
+
+@keyframes heartbeat {
+  from {
+    transform: scale(1);
+    transform-origin: center center;
+    animation-timing-function: ease-out;
+  }
+  10% {
+    transform: scale(0.91);
+    animation-timing-function: ease-in;
+  }
+  17% {
+    transform: scale(0.98);
+    animation-timing-function: ease-out;
+  }
+  33% {
+    transform: scale(0.87);
+    animation-timing-function: ease-in;
+  }
+  45% {
+    transform: scale(1);
+    animation-timing-function: ease-out;
+  }
+}
