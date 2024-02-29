@@ -35,7 +35,7 @@ function UserCases({ data , idVet}) {
               <i className=" fa-solid fa-book-medical"></i>
             </span>
           </Link>
-         {idVet === data.fk_Vet ? (<><Link to={'/'} className="icontool  link_rev">
+         {data.fk_Vet === idVet ? (<><Link to={'/'} className="icontool  link_rev">
             <span className="tooltip">Modificar</span>
             <span>
               {' '}
@@ -50,7 +50,7 @@ function UserCases({ data , idVet}) {
           </Link> </>) : <span></span>} 
         </div>
       </li>
-    </>
+    </> 
   );
 }
 
