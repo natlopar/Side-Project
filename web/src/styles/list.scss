@@ -78,6 +78,7 @@
     color: $colorDark;
     padding: 5px;
     margin-bottom: 5px;
+    box-shadow: 0 6px 10px #212121;
 
   }
 
@@ -96,12 +97,13 @@
     text-align: center;
     font-family: $fontSecond;
     text-shadow: -4px 3px 6px rgb(0 0 0 / 47%);
-
+    color: $colorLight;
     margin: 5px 20px;
   }
   &__desc {
     text-align: center;
     font-weight: lighter;
+    color: $colorLight;
     text-shadow: -4px 3px 6px rgb(0 0 0 / 47%);
   }
 }

@@ -184,6 +184,7 @@ server.get('/listUser', authenticateToken, async (req, res) => {
     patients: cases,
   };
   res.json(response);
+
 });
 
 const staticServer = './web';
