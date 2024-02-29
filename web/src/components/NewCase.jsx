@@ -10,7 +10,7 @@ function NewCase({ isDark, setIsDark, publicU , idVet}) {
   const [message, setMessage] = useState("");
   const [animal, setAnimal] = useState({
     name: "",
-    specie: "",
+    specie: "Selecciona una especie",
     breed: "",
     birthday: "",
     clinical: "",
@@ -116,7 +116,7 @@ function NewCase({ isDark, setIsDark, publicU , idVet}) {
             onInput={handleInput}
             {...register('specie', { required: true})}
             aria-invalid={errors.specie ? 'true' : 'false'}>
-            <option  disabled defaultValue="">Selecciona una especie</option>
+            <option   value={'Selecciona una especie'} disabled>Selecciona una especie</option>
             <option value="canina">Canina</option>
             <option value="felina">Felina</option>
           </select>

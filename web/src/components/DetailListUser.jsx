@@ -22,14 +22,17 @@ function DetailListUser({
     const fetchData = async () => {
       try {
         // Realiza una solicitud para obtener los datos del usuario enviando el token
-        const response = await fetch(`https://vetfolio-manager.onrender.com/listUser`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: token,
-            id: idVet,
-          },
-        });
+        const response = await fetch(
+          `https://vetfolio-manager.onrender.com/listUser`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: token,
+              id: idVet,
+            },
+          }
+        );
         const userData = await response.json();
         if (userData.success) {
           setUserData(userData);
@@ -47,7 +50,12 @@ function DetailListUser({
     return (
       <>
         <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
-        <div className='sectionList'><i className="fa-solid fa-spinner"></i>Cargando...</div>
+        <div className="sectionList loading">
+          <span>
+            <i className="fa-solid fa-spinner"></i>
+          </span>
+          <p>Cargando...</p>
+        </div>
       </>
     );
   }
@@ -55,26 +63,27 @@ function DetailListUser({
   return (
     <>
       <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
-         <div className="logout"><LogOut token={token} setToken={setToken} /></div>
-         
-      {userData.patients.length>0 ? (  <h2 className="sectionList__title">Este es tu historial de casos</h2>) :
-        (<h2 className="sectionList__title">
+      <div className="logout">
+        <LogOut token={token} setToken={setToken} />
+      </div>
+
+      {userData.patients.length > 0 ? (
+        <h2 className="sectionList__title">Este es tu historial de casos</h2>
+      ) : (
+        <h2 className="sectionList__title">
           Todavía no tienes ningún caso registrado
         </h2>
       )}
-{/* <div className='sectionList'> */}
-      {/* <section className="sectionList"> */}
+
+      <section className="sectionList">
         {userData.patients.map((data, i) => (
           <ul key={i} className="sectionList__ul">
             <UserCases data={data} idVet={idVet} />
           </ul>
         ))}
-      {/* </section> */}
-      <div className="sectionList__create">
-        {' '}
-        <CreateCase />
-      </div>
-      {/* </div> */}
+ 
+      </section>
+      <CreateCase />
     </>
   );
 }

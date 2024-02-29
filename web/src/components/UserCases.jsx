@@ -1,16 +1,20 @@
 import React from 'react';
 import '../styles/list.scss';
 import { Link } from 'react-router-dom';
+import dog from '../images/perro perfil.jpg'
+import cat from '../images/raya.jpg'
 
 function UserCases({ data , idVet}) {
   return (
     <>
-      <li className="listPet cardClient borderTog btn">
+      <li className="listPet borderTog btn">
         <div className="listPet__title userPicture">
           {data.specie === 'canina' ? (
-            <i className="fa-solid fa-dog iconPet"></i>
+            // <i className="fa-solid fa-dog iconPet"></i>
+            <img src={dog} alt="foto perro" className='listPet__title--img' />
           ) : (
-            <i className="fa-solid fa-cat iconPet"></i>
+            // <i className="fa-solid fa-cat iconPet"></i>
+            <img src={cat} alt="foto gato" className='listPet__title--img' />
           )}
           <h5 className="listPet__title--name ">{data.name}</h5>
         </div>
