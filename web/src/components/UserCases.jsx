@@ -15,17 +15,17 @@ function UserCases({ data }) {
           <h5 className="listPet__title--name ">{data.name}</h5>
         </div>
         <div>
-          <h6 className="listPet__text nameClient bordertoLight ">Raza</h6>
+          <h6 className="listPet__text nameClient  ">Raza</h6>
           <p className="listPet__desc">{data.breed}</p>
         </div>
         <div>
-          <h6 className="listPet__text bordertoLight">Cuadro clínico</h6>
+          <h6 className="listPet__text ">Cuadro clínico</h6>
           <p className="listPet__desc">{data.clinical}</p>
         </div>
         {/* <h6></h6>
         <p className="listPet__text">{data.breed}</p> */}
         <div>
-          <h6 className="listPet__text bordertoLight">Diagnóstico</h6>
+          <h6 className="listPet__text ">Diagnóstico</h6>
           <p className="listPet__desc">{data.results}</p>
         </div>
         <div className="listPet__btn ">
