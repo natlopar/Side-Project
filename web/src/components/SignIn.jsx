@@ -5,7 +5,8 @@ import '../styles/signIn.scss';
 import { useState } from 'react';
 
 
-function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , message, loginBtn}) {
+function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , message, loginBtn, hiddenClass}) {
+
   const [registry, setRegistry] = useState({
     userName: "",
     nameVet: "",
@@ -257,7 +258,7 @@ function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , mess
       />
          
         </form>
-        <p className='user__msg'>{message}</p>
+        <p className={`${hiddenClass} user__msg`}>{message}</p>
         <div>{loginBtn}</div>
       </div>
      

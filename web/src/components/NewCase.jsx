@@ -8,6 +8,7 @@ import BtnList from './BtnList';
 function NewCase({ isDark, setIsDark, publicU , idVet}) {
   const [publicA, setPublicA] = useState (false)
   const [message, setMessage] = useState("");
+  const [hiddenClass, setHiddenClass] = useState('hidden');
   const [animal, setAnimal] = useState({
     name: "",
     specie: "Selecciona una especie",
@@ -57,9 +58,11 @@ function NewCase({ isDark, setIsDark, publicU , idVet}) {
         setMessage(
           "Caso añadido correctamente a tu historial."
         );
+        setHiddenClass('');
      
       } else {
         setMessage("No se pudo añadir tu caso. Revisa que todos los campos estén completos");
+        setHiddenClass('');
       }
     })
    
@@ -321,9 +324,6 @@ function NewCase({ isDark, setIsDark, publicU , idVet}) {
               Indica si quieres hacer público este caso.
             </label>
           </div>
-
-        
-          {/* <button className="case__form--submit">Siguiente</button> */}
             <div className="case__form--buttons">
             
           <input type="submit" value="Crear" className="case__form--submit create__btn  btn hover" />
@@ -338,7 +338,7 @@ function NewCase({ isDark, setIsDark, publicU , idVet}) {
             
         </form>
    
-        <p className='user__msg'>{message}</p>
+        <p className={`${hiddenClass} user__msg`}>{message}</p>
 
       </div>
     </>

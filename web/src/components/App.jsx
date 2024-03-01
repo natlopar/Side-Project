@@ -38,7 +38,9 @@ function App() {
   const [idVet, setIdVet] = useState(0);
   const [message, setMessage] = useState("");
   const [loginBtn, setLoginBtn] = useState ("");
-  const [publicList, setPublicList] = useState ([])
+  const [publicList, setPublicList] = useState ([]);
+  const [hiddenClass, setHiddenClass] = useState('hidden');
+
 
 
   // const login1 = {
@@ -74,6 +76,7 @@ const sendSignUpToApi =(registry) => {
   apiUser.sendSignUpToApi(registry)
   .then (response =>{
     if (response.success === true) {
+      setHiddenClass('');
       setMessage("Registro realizado correctamente. Ahora puedes iniciar sesión con tu nombre de usuario y contraseña.")
       setUsername(response.nameVet);
       setIdVet(response.id);
@@ -82,6 +85,7 @@ const sendSignUpToApi =(registry) => {
       // router.redirect('/');
     }else {
       setMessage("No te puedes registrar. Revisa tus datos.");
+      setHiddenClass('');
     }
  
   })
@@ -96,18 +100,19 @@ const sendSignUpToApi =(registry) => {
       <> 
       <Header isDark={isDark} setIsDark={setIsDark} /> 
       <HeroDesc/>
-       <Footer/>
+      
        </>}/>
-      <Route path="/signIn" element={<SignIn sendSignUpToApi= {sendSignUpToApi} publicU={publicU} setPublicU={setPublicU} isDark={isDark} setIsDark={setIsDark} loginBtn={loginBtn} message={message}/>}/>
-      <Route path="/logIn" element={<Login handleLogin={handleLogin} isDark={isDark} setIsDark={setIsDark}/>}/>
+      <Route path="/signIn" element={<SignIn sendSignUpToApi= {sendSignUpToApi} publicU={publicU} setPublicU={setPublicU} isDark={isDark} setIsDark={setIsDark} loginBtn={loginBtn} message={message} hiddenClass={hiddenClass}/>}/>
+      <Route path="/logIn" element={<Login handleLogin={handleLogin} isDark={isDark} setIsDark={setIsDark} />}/>
       <Route path="/listUser" 
       element={ 
     
       <DetailListUser token={token} setToken={setToken} idVet={idVet} username={username} isDark={isDark} setIsDark={setIsDark}/>
     }/>
-      <Route path="/newCase" element={<NewCase idVet={idVet} publicU={publicU} isDark={isDark} setIsDark={setIsDark}/>} />
+      <Route path="/newCase" element={<NewCase idVet={idVet} publicU={publicU} isDark={isDark} setIsDark={setIsDark} />}  />
       <Route path="/publicList" element={<ListCases idVet={idVet} publicList={publicList}  isDark={isDark} setIsDark={setIsDark}/>}/>
     </Routes>
+    <Footer/>
     </div>
   )
 }

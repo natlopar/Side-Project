@@ -108,8 +108,15 @@
       margin: 20px auto 100px auto;
     }
     &__message {
-      font-family: $fontMain;
-      font-size: 2.5rem;
+      border: 1px solid $colorYellow;
+      padding: 10px;
+      border-radius: 5px;
+      color: $colorDark;
+      font-size: 2rem;
+      background-color: $colorGreenBright;
+      text-align: center;
+      text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.65);
+      box-shadow: 0px 10px 10px rgb(73, 70, 92);
     }
   }
 }

@@ -27,10 +27,15 @@
   }
   
   &__msg{
-    font-size: 2.5rem;
-    color: rgb(219, 230, 127);
+    border: 1px solid $colorYellow;
+    padding: 10px;
+    border-radius: 5px;
+    color: $colorDark;
+    font-size: 2rem;
+    background-color: $colorGreenBright;
     text-align: center;
     text-shadow: -1px 2px 5px rgba(0, 0, 0, 0.65);
+    box-shadow: 0px 10px 10px rgb(73, 70, 92);
   }
   &__title {
     font-weight: bold;
@@ -123,8 +128,8 @@
       background-color: $colorDark;
       color: $colorLight;
       width: 150px;
-      margin: 0 auto;
-      margin-top: 20px;
+      margin: 20px auto;
+      box-shadow: 0px 10px 10px rgb(73, 70, 92);
       font-size: 1.5rem;
       padding: 5px;
       @media (min-width: 768px) {
@@ -135,5 +140,15 @@
   &__message {
     font-family: $fontMain;
     font-size: 2.5rem;
+    
   }
+}
+
+.formBtn{
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+
 }

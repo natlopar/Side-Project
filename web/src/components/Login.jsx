@@ -6,9 +6,10 @@ import '../styles/signIn.scss';
 import { useEffect, useState } from 'react';
 import ls from '../services/localStorage'
 
-function Login({ handleLogin, isDark, setIsDark }) {
+function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass }) {
   const [login, setLogin] = useState(ls.get('login') || { username: '', password: '' });
   const [message, setMessage] = useState('');
+ 
   const {
     register,
     formState: { errors },
@@ -36,7 +37,9 @@ function Login({ handleLogin, isDark, setIsDark }) {
       handleLogin(data.token, data.name, data.id, data.public);
       navigate(`/listUser`); //navega a la lista de este usuario registrado
     } else {
+    
       setMessage('El usuario o la contraseña no son válidos');
+      setHiddenClass('');
     }
   };
 
@@ -137,6 +140,7 @@ function Login({ handleLogin, isDark, setIsDark }) {
               Debes rellenar este campo
             </p>
           )}
+          <div className='formBtn'>
           <input
             type="submit"
             value="Aceptar"
@@ -149,7 +153,8 @@ function Login({ handleLogin, isDark, setIsDark }) {
             value="Cancelar"
             onClick={handleCancel}
           />
-          <p className="user__msg">{message}</p>
+          </div>
+          <p className={`${hiddenClass} user__msg`}>{message}</p>
         </form>
       </div>
     </>
