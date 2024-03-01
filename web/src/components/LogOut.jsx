@@ -19,6 +19,7 @@ function LogOut({ token, setToken }) {
         token = '';
         setToken('');
         ls.remove('token');
+        ls.remove('idVet');
         ls.remove('login');
         ls.remove('username');
         console.log({ data: data });

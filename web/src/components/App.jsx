@@ -99,7 +99,7 @@ const sendSignUpToApi =(registry) => {
       <Route path="/" element={
       <> 
       <Header isDark={isDark} setIsDark={setIsDark} /> 
-      <HeroDesc/>
+      <HeroDesc token={token} setToken={setToken}/>
       
        </>}/>
       <Route path="/signIn" element={<SignIn sendSignUpToApi= {sendSignUpToApi} publicU={publicU} setPublicU={setPublicU} isDark={isDark} setIsDark={setIsDark} loginBtn={loginBtn} message={message} hiddenClass={hiddenClass}/>}/>

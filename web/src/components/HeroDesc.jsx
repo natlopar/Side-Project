@@ -4,8 +4,10 @@ import dog from '../images/perro.jpg';
 import cat from '../images/cat.jpg';
 import heroVet from '../images/heroVet.jpg';
 import hero2 from '../images/hero2.webp';
+import LogOut from './LogOut';
+import '../styles/logOut.scss'
 
-function HeroDesc() {
+function HeroDesc({token, setToken}) {
   return (
     <section className="hero desc">
       <h1 className="hero__title">Vetfolio Manager</h1>
@@ -66,6 +68,9 @@ function HeroDesc() {
         <Link to={'/logIn'} className="link">
         <button className="aside__subtitles hover btn">Inicia sesión</button>
         </Link>
+        <div >
+        <LogOut token={token} setToken={setToken} /></div>
+ 
       </div>
 
     </section>
