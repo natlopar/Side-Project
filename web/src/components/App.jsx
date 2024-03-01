@@ -16,6 +16,7 @@ import LoginBtn from './LoginBtn'
 
 
 import apiUser from '../services/api-user';
+import Footer from "./Footer"
 
 
 
@@ -69,36 +70,6 @@ function App() {
     setIdVet(id);
   };
 
-// const  getPublic = () => {
-//  apiCase.getPublicCases() 
-//  .then (response => 
-//   response.json())
-//   .then (data => {
-//       console.log(data)
-//       if (data.success) {
-//        return setPublicList(data);
-//       } else {
-//         return console.error('Error al obtener los datos del usuario');
-//       }
-//     })
-// }
-// const getPublic = () => {
-//   apiCase.getPublicCases()
-//     .then(data => {
-//       console.log(data);
-//       if (data.success) {
-//         setPublicList(data); // Suponiendo que setPublicList es una función definida fuera de esta función
-//       } else {
-//         console.error('Error al obtener los datos del usuario');
-//       }
-//     })
-//     .catch(error => {
-//       console.error('Error al obtener los datos:', error);
-//     });
-// };
-
-
-
 const sendSignUpToApi =(registry) => {
   apiUser.sendSignUpToApi(registry)
   .then (response =>{
@@ -116,17 +87,17 @@ const sendSignUpToApi =(registry) => {
   })
   
 }
-// const handleCase =(data)=>{
-//   setCases(data);
-// }
-
 
   return (
     <div className={`body ${isDark ? 'dark' : 'light'}`}>
     
     <Routes>
-      <Route path="/" element={<><Header 
-      isDark={isDark} setIsDark={setIsDark} /> <HeroDesc/></>}/>
+      <Route path="/" element={
+      <> 
+      <Header isDark={isDark} setIsDark={setIsDark} /> 
+      <HeroDesc/>
+       <Footer/>
+       </>}/>
       <Route path="/signIn" element={<SignIn sendSignUpToApi= {sendSignUpToApi} publicU={publicU} setPublicU={setPublicU} isDark={isDark} setIsDark={setIsDark} loginBtn={loginBtn} message={message}/>}/>
       <Route path="/logIn" element={<Login handleLogin={handleLogin} isDark={isDark} setIsDark={setIsDark}/>}/>
       <Route path="/listUser" 
