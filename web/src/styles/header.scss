@@ -46,7 +46,7 @@
       // gap: 100px;
     }
     &--menu {
-      
+      text-decoration: none;
       list-style: none;
       display: flex;
       flex-direction: column;
@@ -109,3 +109,5 @@
     animation-timing-function: ease-out;
   }
 }
+
+

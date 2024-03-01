@@ -7,6 +7,7 @@ import CreateCase from './CreateCase';
 import LogOut from './LogOut';
 import '../styles/list.scss';
 import Welcome from './Welcome';
+import Filters from './Filters';
 
 function DetailListUser({
   token,
@@ -68,7 +69,10 @@ function DetailListUser({
       </div>
 
       {userData.patients.length > 0 ? (
-        <h2 className="sectionList__title">Este es tu historial de casos</h2>
+        <>
+          <h2 className="sectionList__title">Este es tu historial de casos</h2>
+       <Filters/>
+        </>
       ) : (
         <h2 className="sectionList__title">
           Todavía no tienes ningún caso registrado
@@ -81,7 +85,6 @@ function DetailListUser({
             <UserCases data={data} idVet={idVet} />
           </ul>
         ))}
- 
       </section>
       <CreateCase />
     </>

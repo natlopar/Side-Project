@@ -14,11 +14,9 @@ const sendSignUpToApi = (registry) =>{
   }
 
   const objToExport = {
-    // sendLoginToApi: sendLoginToApi,
+  
     sendSignUpToApi : sendSignUpToApi ,
-    // sendProfileToApi: sendProfileToApi,
-    // getProfileFromApi: getProfileFromApi,
-    // getUserMoviesFromApi: getUserMoviesFromApi
+
   };
   
 
