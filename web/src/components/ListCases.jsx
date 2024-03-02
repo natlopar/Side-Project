@@ -7,7 +7,15 @@ import apiCase from '../services/api-case';
 import LogOut from './LogOut';
 
 
-function ListCases({ isDark, setIsDark, idVet, token, setToken,  setUsername, setIdVet}) {
+function ListCases({ 
+  isDark, 
+  setIsDark, 
+  idVet, 
+  token, 
+  setToken,  
+  setUsername, 
+  setIdVet,
+  setUserData}) {
   
   // const [userData, setUserData] = useState(null);
   const [listCases, setListCases] = useState({ patients: [] });
@@ -34,7 +42,7 @@ function ListCases({ isDark, setIsDark, idVet, token, setToken,  setUsername, se
         Consulta los casos publicados por otr@s veterinari@s
       </h2>
       <div className='sectionList__logOut'>
-        <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername} /></div>
+        <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername} setUserData={setUserData}/></div>
       <section className="sectionList">
         {listCases.patients.map((data, i) => (
           <ul key={i} className="sectionList__ul">

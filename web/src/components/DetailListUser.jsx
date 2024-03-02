@@ -67,7 +67,8 @@ function DetailListUser({
     <>
       <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
       <div className="logout">
-        <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername} />
+        <LogOut token={token} setToken={setToken} 
+        setIdVet={setIdVet} setUsername={setUsername} setUserData={setUserData}/>
       </div>
 
       {userData.patients.length > 0 ? (

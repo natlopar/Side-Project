@@ -94,6 +94,7 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
             type="email"
             required
             className="user__form--input"
+            autoComplete="email"
             id="email"
           value={login.email}
           onInput={handleInput}
@@ -122,6 +123,7 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
             required
             className="user__form--input"
             name="password"
+            autoComplete="password"
             id="password"
             value={login.password}
             onInput={handleInput}
