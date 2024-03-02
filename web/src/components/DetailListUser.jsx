@@ -71,7 +71,10 @@ function DetailListUser({
       {userData.patients.length > 0 ? (
         <>
           <h2 className="sectionList__title">Este es tu historial de casos</h2>
-       <Filters/>
+          <div className='sectionList__filters'>
+          <Filters/>
+          </div>
+     
         </>
       ) : (
         <h2 className="sectionList__title">

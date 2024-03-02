@@ -21,6 +21,9 @@
     @media (min-width: 768px) {
       font-size: 4rem;
     }
+    &--icon{
+      margin: 5px;
+    }
   }
 
   &__form {
@@ -36,9 +39,10 @@
       flex-wrap: wrap;
     }
     &--buttons {
+      margin: 0 auto;
+      gap: 20px;
       display: flex;
       flex-direction: column;
-
       align-items: center;
       @media (min-width: 768px) {
         flex-direction: row;
@@ -58,7 +62,7 @@
         color: #555;
         outline: none;
         &:focus {
-          border-color: #007bff;
+          border-color: $colorGreenBright;
           box-shadow: 0 0 0 0.2rem rgb(133, 237, 237, 0.25);
         }
         @media (min-width: 768px) {
@@ -79,7 +83,20 @@
       }
     }
     &--check {
+      margin: 20px auto;
       accent-color: $toggle-fg;
+      &:focus {
+        border-color: $colorGreenBright;
+        box-shadow: 0 0 0 0.2rem rgb(133, 237, 237, 0.25);
+      }
+   
+      input{
+        width: 2rem;
+        outline: none;
+        border: 2px solid #ccc;
+        
+     
+      }
       label {
         margin-left: 10px;
       }
@@ -94,19 +111,15 @@
  
       }
     }
-    &--submit {
-      font-family: $fontSecond;
-      background-color: $colorDark;
-      color: $colorLight;
-      width: 150px;
-      // margin: 0 auto;
-      // margin-top: 20px;
-      font-size: 1.5rem;
-      padding: 5px;
-      // margin-top: 20px;
-      // margin-bottom: 100px;
-      margin: 20px auto 100px auto;
-    }
+    // &--submit {
+    //   font-family: $fontSecond;
+    //   background-color: $colorDark;
+    //   color: $colorLight;
+    //   width: 150px;
+    //   font-size: 1.5rem;
+    //   padding: 5px;
+    //   margin: 20px auto 100px auto;
+    // }
     &__message {
       border: 1px solid $colorYellow;
       padding: 10px;

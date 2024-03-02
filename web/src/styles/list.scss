@@ -129,6 +129,12 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
+  &__filters{
+    display: flex;
+   
+    justify-content: center;
+    
+  }
   &__title {
     font-size: 2rem;
     font-family: $fontSecond;

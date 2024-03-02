@@ -83,7 +83,7 @@ function NewCase({ isDark, setIsDark, publicU , idVet}) {
     <>
       <HeaderPages isDark={isDark} setIsDark={setIsDark} />
       <div className="case">
-        <h3 className="case__title">Crea tu caso</h3><i className="fa-solid fa-paw"></i>
+        <h3 className="case__title">Crea tu caso<i className="case__title--icon fa-solid fa-paw"></i></h3>
         <form className="case__form" onSubmit={handleSubmit}>
           <label htmlFor="" className="case__form--label">
             {' '}
@@ -312,7 +312,7 @@ function NewCase({ isDark, setIsDark, publicU , idVet}) {
             </p>
           )}
           <div className="case__form--check">
-          <input 
+           <input 
             type="checkbox" 
             name="public" 
             id="public"
@@ -324,17 +324,17 @@ function NewCase({ isDark, setIsDark, publicU , idVet}) {
               Indica si quieres hacer público este caso.
             </label>
           </div>
-            <div className="case__form--buttons">
+          <div className="case__form--buttons">
             
-          <input type="submit" value="Crear" className="case__form--submit create__btn  btn hover" />
-          <input
-            className="case__form--submit btn hover create__btn "
+            <input type="submit" value="Crear" className=" create__btn  btn hover" />
+            <input
+            className=" btn hover create__btn "
             type="button"
             value="Cancelar"
             onClick={handleCancel}
-          />
-         <BtnList/>
-            </div>
+            />
+           <BtnList/>
+          </div>
             
         </form>
    
