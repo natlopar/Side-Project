@@ -18,15 +18,15 @@ import apiUser from '../services/api-user';
 import Footer from './Footer';
 
 function App() {
-  const preference = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const [isDark, setIsDark] = useState(ls.set('isDark') || preference);
+  // const preference = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const [isDark, setIsDark] = useState(ls.get('isDark', ''));
   // const [newUser, setNewUser] = useState({});
 
   // const [cases, setCases] = useState({});
   const [publicU, setPublicU] = useState(false);
   const [token, setToken] = useState('');
   const [username, setUsername] = useState(ls.get('username', ''));
-  const [idVet, setIdVet] = useState(ls.get('idVet', ''));
+  const [idVet, setIdVet] = useState(ls.get('idVet', 0));
   const [message, setMessage] = useState('');
   const [loginBtn, setLoginBtn] = useState('');
   const [publicList, setPublicList] = useState([]);
@@ -53,7 +53,7 @@ function App() {
   };
 
   useEffect(() => {
-    localStorage.setItem('isDark', isDark);
+    ls.set('isDark', isDark);
     document.body.className = isDark;
   }, [isDark]);
 

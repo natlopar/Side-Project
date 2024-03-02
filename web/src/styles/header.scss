@@ -15,6 +15,7 @@
   font-size: 1rem;
   padding:20px;
   z-index: 5;
+  height: 15vh;
   @media (min-width: 768px) {
     padding: 80px 20px;
     height: 15vh;
@@ -39,7 +40,8 @@
   }
   &__title {
     font-family: $fontSecond;
-    transform: translateX(-50%);
+    position:absolute;
+    left: 30%;
     font-size: 2rem;
     color: transparent;
     @media (min-width: 768px) {
