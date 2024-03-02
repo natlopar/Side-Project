@@ -3,10 +3,23 @@ import logo from '../images/logoVET.png';
 import { Toggle } from './Toggle';
 import MenuNav from './MenuNav';
 import '../styles/header.scss';
-import DropMenu from './DropMenu';
+import { useState } from 'react';
 
 
 function Header({ isDark, setIsDark }) {
+
+const [dropMenu, setDropMenu] = useState(false);
+const [moveMenu, setMoveMenu] = useState('');
+
+
+
+const handleMenu = (e)=> {
+  e.preventDefault();
+  setMoveMenu('dropMenu');
+  setDropMenu(!dropMenu);
+
+}
+
   return (
     <header className="header dark">
       <Link to={'/'}>
@@ -18,7 +31,8 @@ function Header({ isDark, setIsDark }) {
           isDark={isDark}
           handleChange={() => setIsDark(!isDark)}
         />
-      <MenuNav />
+        <button  className={`${moveMenu} header__menu`}  onClick={handleMenu}><i className= "fa-solid fa-bars"></i></button>
+        {dropMenu ? <MenuNav /> : <div></div> }
       {/* <DropMenu/> */}
       </div>
     </header>

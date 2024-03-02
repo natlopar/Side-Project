@@ -104,6 +104,11 @@
     }
     &--check {
       accent-color: $toggle-fg;
+      input{
+        width: 2rem;
+        outline: none;
+        border: 2px solid #ccc;
+      }
       label {
         margin-left: 10px;
       }

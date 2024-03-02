@@ -1,8 +1,87 @@
+import { useParams } from 'react-router-dom';
+import '../styles/list.scss';
+import { Link } from 'react-router-dom';
+import dog from '../images/perro perfil.jpg'
+import cat from '../images/raya.jpg'
+
+function DetailUserCase({privateList}) {
+  const { id } = useParams();
+  console.log (id);
+  const data = privateList.find((one) => one.idCase === parseInt(id));
 
 
-function DetailUserCase() {
   return (
-    <div>aquí cada caso abierto para modificarlo etc y volver al listado, o Cerrar sesion</div>
+    <section className='user'>
+    <article className="listPet borderTog btn">
+        <div className="listPet__title userPicture">
+          {data.specie === 'canina' ? (
+            // <i className="fa-solid fa-dog iconPet"></i>
+            <img src={dog} alt="foto perro" className='listPet__title--img' />
+          ) : (
+            // <i className="fa-solid fa-cat iconPet"></i>
+            <img src={cat} alt="foto gato" className='listPet__title--img' />
+          )}
+          <h5 className="listPet__title--name ">{data.name}</h5>
+        </div>
+        <div>
+          <h6 className="listPet__text nameClient  ">Raza</h6>
+          <p className="listPet__desc">{data.breed}</p>
+        </div>
+        <div>
+          <h6 className="listPet__text ">Año de nacimiento</h6>
+          <p className="listPet__desc">{data.birthday}</p>
+        </div>
+        <div>
+          <h6 className="listPet__text ">Cuadro clínico</h6>
+          <p className="listPet__desc">{data.clinical}</p>
+        </div>
+        <div>
+          <h6 className="listPet__text ">Exploración</h6>
+          <p className="listPet__desc">{data.exploration}</p>
+        </div>
+        <div>
+          <h6 className="listPet__text ">Pruebas diagnósticas</h6>
+          <p className="listPet__desc">{data.tests}</p>
+        </div>
+        <div>
+          <h6 className="listPet__text ">Resultados</h6>
+          <p className="listPet__desc">{data.results}</p>
+        </div>
+        <div>
+          <h6 className="listPet__text ">Tratamiento</h6>
+          <p className="listPet__desc">{data.treatment}</p>
+        </div>
+        <div>
+          <h6 className="listPet__text ">Evolución</h6>
+          <p className="listPet__desc">{data.evolution}</p>
+        </div>
+        <div>
+          <h6 className="listPet__text ">Diagnóstico</h6>
+          <p className="listPet__desc">{data.results}</p>
+        </div>
+        <div className="listPet__btn ">
+          <Link to={'/'} className="icontool link_rev ">
+            <span className="tooltip">Revisar</span>
+            <span>
+              <i className=" fa-solid fa-book-medical"></i>
+            </span>
+          </Link>
+       <Link to={'/'} className="icontool  link_rev">
+            <span className="tooltip">Modificar</span>
+            <span>
+              {' '}
+              <i className="fa-solid fa-file-pen"></i>
+            </span>
+          </Link>
+          <Link to={'/'} className="icontool link_rev">
+            <span className="tooltip">Eliminar</span>
+            <span>
+              <i className=" fa-solid fa-trash"></i>
+            </span>
+          </Link> 
+        </div>
+      </article>
+      </section>
   )
 }
 

@@ -12,6 +12,7 @@ import ls from '../services/localStorage';
 import Login from './Login';
 import DetailListUser from './DetailListUser';
 import LoginBtn from './LoginBtn';
+import DetailUserCase from './DetailUserCase';
 
 import apiUser from '../services/api-user';
 import Footer from './Footer';
@@ -24,7 +25,6 @@ function App() {
   // const [cases, setCases] = useState({});
   const [publicU, setPublicU] = useState(false);
   const [token, setToken] = useState('');
-  const [userData, setUserData] = useState(ls.get('userData',null));
   const [username, setUsername] = useState(ls.get('username', ''));
   const [idVet, setIdVet] = useState(ls.get('idVet', ''));
   const [message, setMessage] = useState('');
@@ -32,6 +32,7 @@ function App() {
   const [publicList, setPublicList] = useState([]);
   const [hiddenClass, setHiddenClass] = useState('hidden');
   const [hiddenClassSign, setHiddenClassSign] = useState('hidden');
+  const [privateList, setPrivateList] = useState ([]);
   
   const navigate = useNavigate();
 
@@ -150,8 +151,7 @@ function App() {
               setIsDark={setIsDark}
               setUsername={setUsername}
               setIdVet = {setIdVet}
-              userData={userData}
-              setUserData={setUserData}
+              setPrivateList={setPrivateList}
            
             />
           }
@@ -179,8 +179,19 @@ function App() {
               setIdVet = {setIdVet}
          
             />
+          
           }
         />
+           <Route
+            path="/case/:id"
+            element={
+            <>
+              <Header isDark={isDark} setIsDark={setIsDark}/>
+              <DetailUserCase privateList={privateList}/> 
+   
+            </>}
+            />
+    
       </Routes>
       <Footer />
     </div>

@@ -7,7 +7,7 @@ import cat from '../images/raya.jpg'
 function UserCases({ data , idVet}) {
   return (
     <>
-      <li className="listPet borderTog btn">
+      <article className="listPet borderTog btn">
         <div className="listPet__title userPicture">
           {data.specie === 'canina' ? (
             // <i className="fa-solid fa-dog iconPet"></i>
@@ -33,27 +33,27 @@ function UserCases({ data , idVet}) {
           <p className="listPet__desc">{data.results}</p>
         </div>
         <div className="listPet__btn ">
-          <Link to={'/'} className="icontool link_rev ">
+          <div className="icontool link_rev ">
             <span className="tooltip">Revisar</span>
             <span>
               <i className=" fa-solid fa-book-medical"></i>
             </span>
-          </Link>
-         {data.fk_Vet === idVet ? (<><Link to={'/'} className="icontool  link_rev">
+          </div>
+         {data.fk_Vet === idVet ? (<><div className="icontool  link_rev">
             <span className="tooltip">Modificar</span>
             <span>
               {' '}
               <i className="fa-solid fa-file-pen"></i>
             </span>
-          </Link>
-          <Link to={'/'} className="icontool link_rev">
+          </div>
+          <div to={'/'} className="icontool link_rev">
             <span className="tooltip">Eliminar</span>
             <span>
               <i className=" fa-solid fa-trash"></i>
             </span>
-          </Link> </>) : <span></span>} 
+          </div> </>) : <span></span>} 
         </div>
-      </li>
+      </article>
     </> 
   );
 }

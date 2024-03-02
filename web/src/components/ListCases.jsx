@@ -14,8 +14,7 @@ function ListCases({
   token, 
   setToken,  
   setUsername, 
-  setIdVet,
-  setUserData}) {
+  setIdVet}) {
   
   // const [userData, setUserData] = useState(null);
   const [listCases, setListCases] = useState({ patients: [] });
@@ -42,7 +41,7 @@ function ListCases({
         Consulta los casos publicados por otr@s veterinari@s
       </h2>
       <div className='sectionList__logOut'>
-        <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername} setUserData={setUserData}/></div>
+        <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername}/></div>
       <section className="sectionList">
         {listCases.patients.map((data, i) => (
           <ul key={i} className="sectionList__ul">

@@ -7,7 +7,7 @@ import hero2 from '../images/hero2.webp';
 import LogOut from './LogOut';
 import '../styles/logOut.scss'
 
-function HeroDesc({token, setToken, setIdVet, setUsername, setUserData}) {
+function HeroDesc({token, setToken, setIdVet, setUsername}) {
   return (
     <section className="hero desc">
       <h1 className="hero__title">Vetfolio Manager</h1>
@@ -69,7 +69,7 @@ function HeroDesc({token, setToken, setIdVet, setUsername, setUserData}) {
         <button className="aside__subtitles hover btn">Inicia sesión</button>
         </Link>
         <div >
-        <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername} setUserData={setUserData}/></div>
+        <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername}/></div>
  
       </div>
 
