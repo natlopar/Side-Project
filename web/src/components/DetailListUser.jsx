@@ -16,8 +16,10 @@ function DetailListUser({
   username,
   isDark,
   setIsDark,
+  setUsername, setIdVet, userData, setUserData
+
 }) {
-  const [userData, setUserData] = useState(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,7 +67,7 @@ function DetailListUser({
     <>
       <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
       <div className="logout">
-        <LogOut token={token} setToken={setToken} />
+        <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername} />
       </div>
 
       {userData.patients.length > 0 ? (

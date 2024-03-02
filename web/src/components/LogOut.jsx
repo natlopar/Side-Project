@@ -2,11 +2,12 @@
 import { useNavigate } from 'react-router-dom';
 import ls from '../services/localStorage'
 
-function LogOut({ token, setToken }) {
+function LogOut({ token, setToken, setUsername, setIdVet}) {
   const navigate = useNavigate();
+ 
+ 
   const handleLogOut = (e) => {
     e.preventDefault();
-
     fetch('https://vetfolio-manager.onrender.com/logout', {
       method: 'PUT',
       headers: {
@@ -16,16 +17,20 @@ function LogOut({ token, setToken }) {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         token = '';
         setToken('');
+        setUsername('');
+        setIdVet('');
         ls.remove('token');
         ls.remove('idVet');
         ls.remove('login');
         ls.remove('username');
-        console.log({ data: data });
         navigate('/');
       });
   };
+
+
   return (
 
       <button className="create__btn btn hover" onClick={handleLogOut}>

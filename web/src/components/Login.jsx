@@ -6,8 +6,8 @@ import '../styles/signIn.scss';
 import { useEffect, useState } from 'react';
 import ls from '../services/localStorage'
 
-function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass }) {
-  const [login, setLogin] = useState(ls.get('login') || { username: '', password: '' });
+function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, setToken }) {
+  const [login, setLogin] = useState({ username: '', password: '' });
   const [message, setMessage] = useState('');
  
   const {
@@ -17,7 +17,7 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass }) 
 
   const handleInput = (ev) => {
     setLogin({ ...login, [ev.target.id]: ev.target.value });
-    ls.set('login', login);
+   
   };
 
   const navigate = useNavigate();
@@ -35,6 +35,9 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass }) 
     console.log(data);
     if (data.success) {
       handleLogin(data.token, data.name, data.id, data.public);
+      ls.set('idVet', data.id);
+      ls.set('username',data.name)
+      setToken(data.token);
       navigate(`/listUser`); //navega a la lista de este usuario registrado
     } else {
     
@@ -46,6 +49,7 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass }) 
   const handleCancel = (ev) => {
     ev.preventDefault();
     navigate('/');
+    setHiddenClass('hidden');
   };
 
   const handleKeyDown = (event) => {
@@ -112,7 +116,7 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass }) 
               Debes rellenar este campo
             </p>
           )}
-          <label htmlFor="password"> Contraseña </label>
+          <label htmlFor="password" className="user__form--label"> Contraseña </label>
           <input
             type="password"
             required

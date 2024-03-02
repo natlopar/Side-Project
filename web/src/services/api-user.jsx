@@ -13,10 +13,26 @@ const sendSignUpToApi = (registry) =>{
    });
   }
 
+  // const sendLogOutToApi = (token) => {
+  //   fetch('https://vetfolio-manager.onrender.com/logout', {
+  //     method: 'PUT',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': token,
+  //     }
+  //   })
+  //     .then((response) => response.json())
+  //     .then(data => {
+  //       console.log(data)
+  //       return data;
+  //    });
+     
+  // }
+
   const objToExport = {
   
     sendSignUpToApi : sendSignUpToApi ,
-
+    // sendLogOutToApi:  sendLogOutToApi
   };
   
 

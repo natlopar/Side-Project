@@ -210,9 +210,9 @@ server.put('/logout', async (req, res) =>{
   const authHeader = req.headers["authorization"];
   jwt.sign(authHeader, "", { expiresIn: 1 } , (logout, err) => {
      if (logout) {
-        res.send({msg : 'Has sido desconectado' });
+        res.json({success: true, message: 'se ha cerrado tu sesión'});
      } else {
-        res.send({msg:'Error'});
+      res.json({success: false, message: 'no se ha podido cerrar la sesión'});
      }
   });
 })

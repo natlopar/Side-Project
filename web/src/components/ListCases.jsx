@@ -4,10 +4,10 @@ import Welcome from './Welcome';
 import UserCases from './UserCases';
 import { useEffect, useState } from 'react';
 import apiCase from '../services/api-case';
-import ls from '../services/localStorage'
+import LogOut from './LogOut';
 
 
-function ListCases({ isDark, setIsDark, idVet }) {
+function ListCases({ isDark, setIsDark, idVet, token, setToken,  setUsername, setIdVet}) {
   
   // const [userData, setUserData] = useState(null);
   const [listCases, setListCases] = useState({ patients: [] });
@@ -60,6 +60,8 @@ function ListCases({ isDark, setIsDark, idVet }) {
       <h2 className="sectionList__title">
         Consulta los casos publicados por otr@s veterinari@s
       </h2>
+      <div >
+        <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername} /></div>
       <section className="sectionList">
         {listCases.patients.map((data, i) => (
           <ul key={i} className="sectionList__ul">
