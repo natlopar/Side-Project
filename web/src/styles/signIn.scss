@@ -91,12 +91,11 @@
       padding: 10px;
       border: 2px solid #ccc;
       border-radius: 5px;
-      font-size: 16px;
       color: #555;
       outline: none;
       &:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 0 0.3rem rgb(133, 237, 237, 0.4);
+        border-color: $colorGreenBright;
+        box-shadow: 0 0 0 4px rgb(0 48 73 / 10%);
       }
       @media (min-width: 768px) {
         font-size: 2rem;

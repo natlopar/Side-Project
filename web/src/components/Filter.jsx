@@ -1,10 +1,21 @@
-import React from 'react'
+import '../styles/filters.scss';
 
 function Filter() {
   return (
 <div>
+<div className="input">
+      <label htmlFor="name" className="input__label">
+        Busca por nombre:{' '}
+      </label>
+      <input
+        type="text"
+        id="name"
+        placeholder=""
+        className="input__input"
+      />
+    </div>
  
-    <div className="sectionList__group">
+    {/* <div className="sectionList__group">
 
       <svg viewBox="0 0 24 24" aria-hidden="true" className="sectionList__group--icon">
         <g>
@@ -13,7 +24,7 @@ function Filter() {
       </svg>
     
       <input id="name" className="sectionList__group--input" type="search" placeholder="Search" />
-    </div>
+    </div> */}
     </div>
   )
 }
