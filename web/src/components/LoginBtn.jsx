@@ -7,7 +7,7 @@ function LoginBtn() {
     <div>
       {' '}
       <Link to={'/logIn'} className="link">
-        <button className="desc__subtitles hover btn">Inicia sesión</button>
+        <button className="desc__subtitles user__form--submit btn hover">Inicia sesión</button>
       </Link>
     </div>
   );
