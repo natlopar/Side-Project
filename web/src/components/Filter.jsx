@@ -1,19 +1,27 @@
 import '../styles/filters.scss';
 
-function Filter() {
+function Filter({handleCasesOptions, casesOptionName}) {
+  
+  const handleChange =(e)=>{
+    e.preventDefault();
+    handleCasesOptions(e.target.value);
+  }
   return (
 
-<div className="input">
+<form className="input">
       <label htmlFor="name" className="input__label">
         Busca por nombre:{' '}
       </label>
       <input
         type="text"
         id="name"
-        placeholder=""
+        placeholder="Negu"
         className="input__input"
+        value={casesOptionName}
+        onChange={handleChange}
+    
       />
-  </div>
+  </form>
   )
 }
     {/* <div className="sectionList__group">

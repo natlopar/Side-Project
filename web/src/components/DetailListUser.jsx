@@ -20,7 +20,9 @@ function DetailListUser({
   isDark,
   setIsDark,
   setUsername, setIdVet, 
-  setPrivateList
+  setPrivateList, 
+  handleCasesOptions, 
+  casesOptionName
 
 }) {
 
@@ -94,7 +96,8 @@ function DetailListUser({
         <>
           <h2 className="sectionList__title">Este es tu historial de casos</h2>
           <div className='sectionList__filters'>
-          <Filters/>
+          <Filters     handleCasesOptions={handleCasesOptions}
+              casesOptionName={casesOptionName} />
           </div>
      
         </>

@@ -1,26 +1,24 @@
 import { useParams } from 'react-router-dom';
 import '../styles/list.scss';
 import { Link } from 'react-router-dom';
-import dog from '../images/perro perfil.jpg'
-import cat from '../images/raya.jpg'
+import dog from '../images/perro perfil.jpg';
+import cat from '../images/raya.jpg';
 import BtnList from './BtnList';
 
-function DetailUserCase({list}) {
+function DetailUserCase({ list, idVet }) {
   const { id } = useParams();
-  console.log (id);
   const data = list.find((one) => one.idCase === parseInt(id));
 
-
   return (
-    <section className='user'>
-    <article className="listPet borderTog btn">
+    <section className="user">
+      <article className="listPet borderTog btn">
         <div className="listPet__title userPicture">
           {data.specie === 'canina' ? (
             // <i className="fa-solid fa-dog iconPet"></i>
-            <img src={dog} alt="foto perro" className='listPet__title--img' />
+            <img src={dog} alt="foto perro" className="listPet__title--img" />
           ) : (
             // <i className="fa-solid fa-cat iconPet"></i>
-            <img src={cat} alt="foto gato" className='listPet__title--img' />
+            <img src={cat} alt="foto gato" className="listPet__title--img" />
           )}
           <h5 className="listPet__title--name ">{data.name}</h5>
         </div>
@@ -61,30 +59,36 @@ function DetailUserCase({list}) {
           <p className="listPet__desc">{data.results}</p>
         </div>
         <div className="listPet__btn ">
-          <Link to={'/'} className="icontool link_rev ">
-            <span className="tooltip">Revisar</span>
-            <span>
-              <i className=" fa-solid fa-book-medical"></i>
-            </span>
-          </Link>
-       <Link to={'/'} className="icontool  link_rev">
-            <span className="tooltip">Modificar</span>
-            <span>
-              {' '}
-              <i className="fa-solid fa-file-pen"></i>
-            </span>
-          </Link>
-          <Link to={'/'} className="icontool link_rev">
-            <span className="tooltip">Eliminar</span>
-            <span>
-              <i className=" fa-solid fa-trash"></i>
-            </span>
-          </Link> 
+          {data.fk_Vet === idVet ? (
+            <>
+              <Link to={'/'} className="icontool link_rev ">
+                <span className="tooltip">Revisar</span>
+                <span>
+                  <i className=" fa-solid fa-book-medical"></i>
+                </span>
+              </Link>
+              <Link to={'/'} className="icontool  link_rev">
+                <span className="tooltip">Modificar</span>
+                <span>
+                  {' '}
+                  <i className="fa-solid fa-file-pen"></i>
+                </span>
+              </Link>
+              <Link to={'/'} className="icontool link_rev">
+                <span className="tooltip">Eliminar</span>
+                <span>
+                  <i className=" fa-solid fa-trash"></i>
+                </span>
+              </Link>
+            </>
+          ) : (
+            <div></div>
+          )}
         </div>
       </article>
-      <BtnList/>
-      </section>
-  )
+     
+    </section>
+  );
 }
 
-export default DetailUserCase
+export default DetailUserCase;

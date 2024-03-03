@@ -4,6 +4,7 @@ import HeroDesc from './HeroDesc';
 import { Routes, Route } from 'react-router';
 import SignIn from './SignIn';
 import { useNavigate } from 'react-router-dom';
+import BtnList from './BtnList';
 
 import NewCase from './NewCase';
 import ListCases from './ListCases';
@@ -15,7 +16,9 @@ import LoginBtn from './LoginBtn';
 import DetailUserCase from './DetailUserCase';
 
 import apiUser from '../services/api-user';
+import apiCase from '../services/api-case'
 import Footer from './Footer';
+import BtnListPublic from './BtnListPublic';
 
 function App() {
   // const preference = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -33,6 +36,8 @@ function App() {
   const [hiddenClass, setHiddenClass] = useState('hidden');
   const [hiddenClassSign, setHiddenClassSign] = useState('hidden');
   const [privateList, setPrivateList] = useState ([]);
+  const [casesOptionName, setCasesOptionName] = useState('')
+
   
   const navigate = useNavigate();
 
@@ -52,6 +57,19 @@ function App() {
     public: false,
   };
 
+  useEffect(() => {
+    const params = {
+      name: casesOptionName, 
+    };
+    apiCase.getFilterCase(params).then(response => {
+      setPrivateList(response.patients);
+    })
+
+  }, [casesOptionName])
+
+   const handleCasesOptions = data => {
+    setCasesOptionName(data);
+   }
   useEffect(() => {
     ls.set('isDark', isDark);
     document.body.className = isDark;
@@ -152,6 +170,9 @@ function App() {
               setUsername={setUsername}
               setIdVet = {setIdVet}
               setPrivateList={setPrivateList}
+              handleCasesOptions={handleCasesOptions}
+              casesOptionName={casesOptionName}
+              privateList={privateList}
            
             />
           }
@@ -189,6 +210,7 @@ function App() {
             <>
               <Header isDark={isDark} setIsDark={setIsDark}/>
               <DetailUserCase list={privateList}/> 
+              <BtnList />
    
             </>}
             />
@@ -197,7 +219,8 @@ function App() {
             element={
             <>
               <Header isDark={isDark} setIsDark={setIsDark}/>
-              <DetailUserCase list={publicList}/>
+              <DetailUserCase list={publicList} idVet={idVet}/>
+              <BtnListPublic/>
    
             </>}
             />

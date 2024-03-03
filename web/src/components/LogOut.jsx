@@ -31,7 +31,14 @@ function LogOut({ token, setToken, setUsername, setIdVet }) {
           navigate('/');
         });
     } else {
+      setUsername('');
       navigate('/');
+      setIdVet('');
+      ls.remove('idVet');
+      ls.remove('login');
+      ls.remove('username');
+      ls.set('userData', null);
+      ls.remove('list');
       // setMessageLog('No tienes iniciada la sesión');
       // setHiddenLog('');
     }

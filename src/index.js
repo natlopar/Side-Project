@@ -234,3 +234,34 @@ server.get('/getPublic', async (req, res) => {
 
 });
 
+//---------FILTRO BÚSQUEDA.........//
+
+server.get('/case', async (req, res) => {
+  try {
+    const connection = await getConnection();
+    const name= req.query.name;
+    const sql =  "SELECT * FROM `case` WHERE name = ? ";
+    const [resultQuery] = await connection.query(sql, [name]);
+    console.log(resultQuery);
+   
+    if (!resultQuery) {
+      return res.status(404).json({
+        success: false,
+        message: 'Error en la consulta o ningún caso con esos criterios de búsqueda',
+      });
+    }
+
+    connection.end();
+
+    if (resultQuery.length === 0) {
+      return res.status(200).json({
+        success: true,
+        message: 'Ningún caso con esos criterios de búsqueda',
+      });
+    } else {
+      res.status(200).json({ success: true, patients: resultQuery });
+    }
+  } catch (error) {
+    console.error("Error al obtener datos:", error);
+  }
+});

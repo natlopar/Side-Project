@@ -26,15 +26,15 @@ setPublicList}) {
     .then(data => {
       if (data.success) {
         setListCases(data); 
-        setPublicList(data.patients)
+        setPublicList(data.patients);
       } else {
-        console.error('Error al obtener los datos del usuario');
+        console.error('Error al obtener los datos del usuario. Comprueba que estás registrados');
       }
     })
     .catch(error => {
       console.error('Error al obtener los datos:', error);
     });
-  }, []);
+  }, [listCases, setPublicList]);
 
   
   return (
