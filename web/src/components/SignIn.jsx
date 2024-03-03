@@ -3,6 +3,7 @@ import HeaderPages from './HeaderPages';
 import { useForm } from 'react-hook-form';
 import '../styles/signIn.scss';
 import { useState } from 'react';
+import Scroll from './Scroll';
 
 
 function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , message, loginBtn, hiddenClass}) {
@@ -78,6 +79,7 @@ function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , mess
 
   return (
     <>
+    <Scroll/>
       <HeaderPages isDark={isDark} setIsDark={setIsDark} />
       <div className="user">
         <h3 className="user__title">Regístrate</h3>

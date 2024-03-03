@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import apiCase from '../services/api-case';
 import LogOut from './LogOut';
 import { Link } from 'react-router-dom';
+import Scroll from './Scroll';
 
 
 function ListCases({ 
@@ -40,6 +41,7 @@ setPublicList}) {
   return (
     <>
       <Welcome isDark={isDark} setIsDark={setIsDark} />
+      <Scroll/>
       <h2 className="sectionList__title">
         Consulta los casos publicados por otr@s veterinari@s
       </h2>

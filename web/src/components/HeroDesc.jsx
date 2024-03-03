@@ -6,10 +6,12 @@ import heroVet from '../images/heroVet.jpg';
 import hero2 from '../images/hero2.webp';
 import LogOut from './LogOut';
 import '../styles/logOut.scss'
+import Scroll from './Scroll';
 
 function HeroDesc({token, setToken, setIdVet, setUsername}) {
   return (
     <section className="hero desc">
+      <Scroll/>
       <h1 className="hero__title">Vetfolio Manager</h1>
       {/* <div className="desc"> */}
       <div className="container">

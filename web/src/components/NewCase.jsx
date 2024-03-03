@@ -4,6 +4,7 @@ import { Link, useNavigate,} from 'react-router-dom';
 import '../styles/newCase.scss';
 import { useForm } from 'react-hook-form';
 import BtnList from './BtnList';
+import Scroll from './Scroll';
 
 function NewCase({ isDark, setIsDark, publicU , idVet}) {
   const [publicA, setPublicA] = useState (false)
@@ -81,6 +82,7 @@ function NewCase({ isDark, setIsDark, publicU , idVet}) {
 
   return (
     <>
+    <Scroll/>
       <HeaderPages isDark={isDark} setIsDark={setIsDark} />
       <div className="case">
         <h3 className="case__title"><i className="case__title--icon fa-solid fa-paw"></i>Crea tu caso</h3>

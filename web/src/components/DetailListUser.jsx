@@ -11,6 +11,7 @@ import Filters from './Filters';
 import ls from '../services/localStorage'
 import { Link } from 'react-router-dom';
 import LoginBtn from './LoginBtn';
+import Scroll from './Scroll';
 
 function DetailListUser({
   token,
@@ -86,6 +87,7 @@ function DetailListUser({
 
   return (
     <>
+    <Scroll/>
       <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
       <div className="logout">
         <LogOut token={token} setToken={setToken} 

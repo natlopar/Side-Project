@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/signIn.scss';
 import { useEffect, useState } from 'react';
 import ls from '../services/localStorage'
+import Scroll from './Scroll';
 
 function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, setToken }) {
   const [login, setLogin] = useState({ username: '', password: '' });
@@ -59,6 +60,7 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
   };
   return (
     <>
+    <Scroll/>
       <HeaderPages isDark={isDark} setIsDark={setIsDark} />
 
       <div className="login ">
