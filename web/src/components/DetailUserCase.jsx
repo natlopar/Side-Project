@@ -3,6 +3,7 @@ import '../styles/list.scss';
 import { Link } from 'react-router-dom';
 import dog from '../images/perro perfil.jpg'
 import cat from '../images/raya.jpg'
+import BtnList from './BtnList';
 
 function DetailUserCase({privateList}) {
   const { id } = useParams();
@@ -81,6 +82,7 @@ function DetailUserCase({privateList}) {
           </Link> 
         </div>
       </article>
+      <BtnList/>
       </section>
   )
 }
