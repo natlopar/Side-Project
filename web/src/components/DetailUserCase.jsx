@@ -5,10 +5,10 @@ import dog from '../images/perro perfil.jpg'
 import cat from '../images/raya.jpg'
 import BtnList from './BtnList';
 
-function DetailUserCase({privateList}) {
+function DetailUserCase({list}) {
   const { id } = useParams();
   console.log (id);
-  const data = privateList.find((one) => one.idCase === parseInt(id));
+  const data = list.find((one) => one.idCase === parseInt(id));
 
 
   return (

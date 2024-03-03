@@ -173,6 +173,7 @@ function App() {
             <ListCases
               idVet={idVet}
               publicList={publicList}
+              setPublicList={setPublicList}
               isDark={isDark}
               setIsDark={setIsDark}
               setUsername={setUsername}
@@ -187,7 +188,16 @@ function App() {
             element={
             <>
               <Header isDark={isDark} setIsDark={setIsDark}/>
-              <DetailUserCase privateList={privateList}/> 
+              <DetailUserCase list={privateList}/> 
+   
+            </>}
+            />
+            <Route
+            path="/publicCase/:id"
+            element={
+            <>
+              <Header isDark={isDark} setIsDark={setIsDark}/>
+              <DetailUserCase list={publicList}/>
    
             </>}
             />

@@ -27,6 +27,7 @@ function LogOut({ token, setToken, setUsername, setIdVet }) {
           ls.remove('login');
           ls.remove('username');
           ls.set('userData', null);
+          ls.remove('list');
           navigate('/');
         });
     } else {

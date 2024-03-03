@@ -5,6 +5,7 @@ import UserCases from './UserCases';
 import { useEffect, useState } from 'react';
 import apiCase from '../services/api-case';
 import LogOut from './LogOut';
+import { Link } from 'react-router-dom';
 
 
 function ListCases({ 
@@ -14,7 +15,8 @@ function ListCases({
   token, 
   setToken,  
   setUsername, 
-  setIdVet}) {
+  setIdVet,
+setPublicList}) {
   
   // const [userData, setUserData] = useState(null);
   const [listCases, setListCases] = useState({ patients: [] });
@@ -24,6 +26,7 @@ function ListCases({
     .then(data => {
       if (data.success) {
         setListCases(data); 
+        setPublicList(data.patients)
       } else {
         console.error('Error al obtener los datos del usuario');
       }
@@ -42,13 +45,15 @@ function ListCases({
       </h2>
       <div className='sectionList__logOut'>
         <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername}/></div>
-      <section className="sectionList">
-        {listCases.patients.map((data, i) => (
-          <ul key={i} className="sectionList__ul">
+      <ul className="sectionList">
+        {listCases.patients.map((data) => (
+          <li key={data.idCase} className="sectionList__ul">
+           <Link to={`/publicCase/${data.idCase}`} className='link'>
             <UserCases data={data} idVet={idVet}/>
-          </ul>
+            </Link>
+          </li>
         ))}
-      </section>
+      </ul>
     </>
   );
 }
