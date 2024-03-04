@@ -1,6 +1,6 @@
 import '../styles/filters.scss';
 
-function Contact({handleContact, contact, setContact}) {
+function Contact({handleContact, contact, setContact, msgContact}) {
 
     const handleChange =(ev) =>{
         setContact({...contact, [ev.target.id]: ev.target.value});
@@ -37,6 +37,7 @@ function Contact({handleContact, contact, setContact}) {
       />
       <input type="submit"  value='Enviar' className='create__btn btn'/>
   </form>
+  <p className='contact__msg btn'>{msgContact}</p>
   </section>
   )
 }

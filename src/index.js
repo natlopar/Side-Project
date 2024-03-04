@@ -273,11 +273,11 @@ server.post('/contact', async (req, res) => {
     const insert='INSERT INTO comments (name, comments) VALUES (?,?)';
     const [result] = await connection.query(insert, [name, comments]);
     console.log(result);
+   
+    res.json({success: true, message: 'mensaje enviado'})
     connection.end();
-    res.json({message: 'mensaje enviado'})
-
   } catch (error) {
-    res.json({message: 'el mensaje no se pudo enviar'})
+    res.json({success:false, message: 'el mensaje no se pudo enviar'})
   }
 
   });

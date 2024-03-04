@@ -16,7 +16,7 @@ import LoginBtn from './LoginBtn';
 import DetailUserCase from './DetailUserCase';
 
 import apiUser from '../services/api-user';
-import apiCase from '../services/api-case'
+import apiCase from '../services/api-case';
 import Footer from './Footer';
 import BtnListPublic from './BtnListPublic';
 import HeaderPages from './HeaderPages';
@@ -34,14 +34,14 @@ function App() {
   const [idVet, setIdVet] = useState(ls.get('idVet', 0));
   const [message, setMessage] = useState('');
   const [loginBtn, setLoginBtn] = useState('');
-  const [publicList, setPublicList] = useState(ls.get('list',[]));
+  const [publicList, setPublicList] = useState(ls.get('list', []));
   const [hiddenClass, setHiddenClass] = useState('hidden');
   const [hiddenClassSign, setHiddenClassSign] = useState('hidden');
-  const [privateList, setPrivateList] = useState ([]);
-  const [casesOptionName, setCasesOptionName] = useState('')
-  const [contact, setContact] = useState({name:'', comments: ''});
+  const [privateList, setPrivateList] = useState([]);
+  const [casesOptionName, setCasesOptionName] = useState('');
+  const [contact, setContact] = useState({ name: '', comments: '' });
+  const [msgContact, setmsgContact] = useState('');
 
-  
   const navigate = useNavigate();
 
   // const login1 = {
@@ -62,7 +62,7 @@ function App() {
 
   // useEffect(() => {
   //   const params = {
-  //     name: casesOptionName, 
+  //     name: casesOptionName,
   //   };
   //   apiCase.getFilterCase(params).then(response => {
   //     setPrivateList(response.patients);
@@ -70,9 +70,9 @@ function App() {
 
   // }, [casesOptionName])
 
-   const handleCasesOptions = data => {
+  const handleCasesOptions = (data) => {
     setCasesOptionName(data);
-   }
+  };
   useEffect(() => {
     ls.set('isDark', isDark);
     document.body.className = isDark;
@@ -103,28 +103,23 @@ function App() {
     });
   };
 
-
-const handleContact = () =>{
-  fetch("https://vetfolio-manager.onrender.com/contact", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(contact),
-  })
-
-  .then((response) =>  response.json())
-  .then(data => {
-    console.log(data)
-    return data;
-
-})
-
-}
-  
-   
-  
- 
-    
-
+  const handleContact = () => {
+    fetch('https://vetfolio-manager.onrender.com/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(contact),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setmsgContact('Comentario enviado');
+          return data;
+        } else {
+          setmsgContact('No se ha podido enviar el comentario');
+          return data;
+        }
+      });
+  };
 
   // const logOut = (token) => {
   //   apiUser.sendLogOutToApi(token).then((response)=>{
@@ -138,7 +133,7 @@ const handleContact = () =>{
   //     } else {
   //       console.log('no se ha podido cerrar sesion')
   //     }
-      
+
   //   })
   // }
 
@@ -150,8 +145,12 @@ const handleContact = () =>{
           element={
             <>
               <Header isDark={isDark} setIsDark={setIsDark} />
-              <HeroDesc token={token} setToken={setToken}   setUsername={setUsername}
-              setIdVet = {setIdVet} />
+              <HeroDesc
+                token={token}
+                setToken={setToken}
+                setUsername={setUsername}
+                setIdVet={setIdVet}
+              />
             </>
           }
         />
@@ -194,12 +193,11 @@ const handleContact = () =>{
               isDark={isDark}
               setIsDark={setIsDark}
               setUsername={setUsername}
-              setIdVet = {setIdVet}
+              setIdVet={setIdVet}
               setPrivateList={setPrivateList}
               handleCasesOptions={handleCasesOptions}
               casesOptionName={casesOptionName}
               privateList={privateList}
-           
             />
           }
         />
@@ -224,44 +222,48 @@ const handleContact = () =>{
               isDark={isDark}
               setIsDark={setIsDark}
               setUsername={setUsername}
-              setIdVet = {setIdVet}
-         
+              setIdVet={setIdVet}
             />
-          
           }
         />
-           <Route
-            path="/case/:id"
-            element={
+        <Route
+          path="/case/:id"
+          element={
             <>
-            <section className='user'>
-              <Header isDark={isDark} setIsDark={setIsDark}/>
-              <DetailUserCase list={privateList}/> 
-              <BtnList />
+              <section className="user">
+                <Header isDark={isDark} setIsDark={setIsDark} />
+                <DetailUserCase list={privateList} />
+                <BtnList />
               </section>
-   
-            </>}
-            />
-            <Route
-            path="/publicCase/:id"
-            element={
+            </>
+          }
+        />
+        <Route
+          path="/publicCase/:id"
+          element={
             <>
-            <section className='user'>
-              <Header isDark={isDark} setIsDark={setIsDark}/>
-              <DetailUserCase list={publicList} idVet={idVet}/>
-              <BtnListPublic/>
+              <section className="user">
+                <Header isDark={isDark} setIsDark={setIsDark} />
+                <DetailUserCase list={publicList} idVet={idVet} />
+                <BtnListPublic />
               </section>
-            </>}
-            />
-             <Route
-            path="/contact"
-            element={
+            </>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
             <>
-              <HeaderPages isDark={isDark} setIsDark={setIsDark}/>
-              <Contact handleContact={handleContact} contact={contact} setContact={setContact}/>
-            </>}
-            />
-    
+              <HeaderPages isDark={isDark} setIsDark={setIsDark} />
+              <Contact
+                handleContact={handleContact}
+                contact={contact}
+                setContact={setContact}
+                msgContact={msgContact}
+              />
+            </>
+          }
+        />
       </Routes>
       <Footer />
     </div>
