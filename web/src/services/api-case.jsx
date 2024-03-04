@@ -8,7 +8,6 @@ const getPublicCases= () => {
 }
 
 const getFilterCase = (params) => {
-  console.log(params);
   return fetch(`http://localhost:4000/case?name=${params.name}`)
   .then(response => response.json())
   .then(data => {

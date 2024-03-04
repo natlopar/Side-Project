@@ -2,7 +2,7 @@
 
 
 .hero {
- 
+  width: 100vw;
   display: flex;
   flex-direction: column;
   padding: 200px 10px 100px 10px;
@@ -173,6 +173,7 @@
 
 .desc {
   text-align: center;
+  width: 100vw;
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;

@@ -7,6 +7,7 @@ import apiCase from '../services/api-case';
 import LogOut from './LogOut';
 import { Link } from 'react-router-dom';
 import Scroll from './Scroll';
+import ls from '../services/localStorage'
 
 
 function ListCases({ 
@@ -28,6 +29,7 @@ setPublicList}) {
       if (data.success) {
         setListCases(data); 
         setPublicList(data.patients);
+        ls.set('public',data.patients);
       } else {
         console.error('Error al obtener los datos del usuario. Comprueba que estás registrados');
       }
@@ -35,7 +37,7 @@ setPublicList}) {
     .catch(error => {
       console.error('Error al obtener los datos:', error);
     });
-  }, [listCases, setPublicList]);
+  }, []);
 
   
   return (

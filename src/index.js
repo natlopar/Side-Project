@@ -265,3 +265,20 @@ server.get('/case', async (req, res) => {
     console.error("Error al obtener datos:", error);
   }
 });
+
+server.post('/contact', async (req, res) => {
+  try{
+    const {name, comments} = req.body;
+    const connection= await getConnection();
+    const insert='INSERT INTO comments (name, comments) VALUES (?,?)';
+    const [result] = await connection.query(insert, [name, comments]);
+    console.log(result);
+    connection.end();
+    res.json({message: 'mensaje enviado'})
+
+  } catch (error) {
+    res.json({message: 'el mensaje no se pudo enviar'})
+  }
+
+  });
+

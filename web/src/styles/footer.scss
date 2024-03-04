@@ -10,17 +10,17 @@
     color: $colorYellow;
     font-weight: bold;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    // position: fixed;
-    // bottom: 0;
-    // left: 0;
+ 
     opacity: 0.6;
     padding: 5px;
     text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.3);
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     &__text {
       font-size: 1rem;
+      text-decoration: none;
+      color:$colorYellow;
       @media (min-width: 768px) {
         font-size: 1.5rem;
         padding: 2px;

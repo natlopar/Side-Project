@@ -4,6 +4,28 @@
   display: flex;
   gap: 5px;
   align-items: center;
+  &__contact{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  
+   
+  }
+  &__textarea{
+    padding: 5px;
+    font-family: $fontSecond;
+    color: $colorDark;
+    &::placeholder {
+      padding: 2px;
+      font-family: $fontSecond;
+      color: grey;
+      @media (min-width: 768px) {
+        font-size: 1.8rem;
+      }
+    }
+  }
   &__input {
     padding: 5px;
     height: 40px;
@@ -39,4 +61,8 @@
     font-family: $fontSecond;
     font-size: 1.5rem;
   }
+}
+
+.contact {
+  height: 100vh;
 }

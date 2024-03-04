@@ -3,7 +3,7 @@ import HeaderPages from './HeaderPages';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import '../styles/signIn.scss';
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
 import ls from '../services/localStorage'
 import Scroll from './Scroll';
 
@@ -35,11 +35,11 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
     const data = await response.json();
     console.log(data);
     if (data.success) {
-      handleLogin(data.token, data.name, data.id, data.public);
+      handleLogin(data.token, data.name, data.id);
       ls.set('idVet', data.id);
       ls.set('username',data.name)
       setToken(data.token);
-      navigate(`/listUser`); //navega a la lista de este usuario registrado
+      navigate(`/listUser`); 
     } else {
     
       setMessage('El usuario o la contraseña no son válidos');

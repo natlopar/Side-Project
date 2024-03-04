@@ -11,7 +11,7 @@ function DetailUserCase({ list, idVet }) {
   const data = list.find((one) => one.idCase === parseInt(id));
 
   return (
-    <section className="user">
+    <>
       <Scroll/>
       <article className="listPet borderTog btn">
         <div className="listPet__title userPicture">
@@ -88,8 +88,8 @@ function DetailUserCase({ list, idVet }) {
           )}
         </div>
       </article>
-     
-    </section>
+      </>
+   
   );
 }
 

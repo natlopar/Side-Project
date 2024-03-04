@@ -62,8 +62,8 @@ function DetailListUser({
   if (!list) {
     return (
       <>
-    
         <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
+       <Scroll/>
         <div className="sectionList loading">
           <span>
             <i className="fa-solid fa-spinner"></i>
@@ -78,7 +78,7 @@ function DetailListUser({
   }
 
   const caseSection = list.map((data) => (
-    <li key={data.idCase} >
+    <li key={data.idCase} className="sectionList__ul">
       <Link to={`/case/${data.idCase}`} className='link'>
       <UserCases data={data} idVet={idVet} />
       </Link>
@@ -87,8 +87,9 @@ function DetailListUser({
 
   return (
     <>
-    <Scroll/>
+    
       <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
+      <Scroll/>
       <div className="logout">
         <LogOut token={token} setToken={setToken} 
         setIdVet={setIdVet} setUsername={setUsername}/>
@@ -109,9 +110,9 @@ function DetailListUser({
         </h2>
       )}
 
-      <section className="sectionList">
-        <ul className="sectionList__ul">{caseSection}</ul>
-      </section>
+      
+        <ul className="sectionList">{caseSection}</ul>
+     
       <CreateCase />
     </>
   );

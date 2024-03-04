@@ -15,7 +15,7 @@ function Filter({handleCasesOptions, casesOptionName}) {
       <input
         type="text"
         id="name"
-        placeholder="Negu"
+        placeholder=""
         className="input__input"
         value={casesOptionName}
         onChange={handleChange}

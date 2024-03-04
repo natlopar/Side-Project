@@ -19,6 +19,8 @@ import apiUser from '../services/api-user';
 import apiCase from '../services/api-case'
 import Footer from './Footer';
 import BtnListPublic from './BtnListPublic';
+import HeaderPages from './HeaderPages';
+import Contact from './Contact';
 
 function App() {
   // const preference = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -32,11 +34,12 @@ function App() {
   const [idVet, setIdVet] = useState(ls.get('idVet', 0));
   const [message, setMessage] = useState('');
   const [loginBtn, setLoginBtn] = useState('');
-  const [publicList, setPublicList] = useState([]);
+  const [publicList, setPublicList] = useState(ls.get('list',[]));
   const [hiddenClass, setHiddenClass] = useState('hidden');
   const [hiddenClassSign, setHiddenClassSign] = useState('hidden');
   const [privateList, setPrivateList] = useState ([]);
   const [casesOptionName, setCasesOptionName] = useState('')
+  const [contact, setContact] = useState({name:'', comments: ''});
 
   
   const navigate = useNavigate();
@@ -57,15 +60,15 @@ function App() {
     public: false,
   };
 
-  useEffect(() => {
-    const params = {
-      name: casesOptionName, 
-    };
-    apiCase.getFilterCase(params).then(response => {
-      setPrivateList(response.patients);
-    })
+  // useEffect(() => {
+  //   const params = {
+  //     name: casesOptionName, 
+  //   };
+  //   apiCase.getFilterCase(params).then(response => {
+  //     setPrivateList(response.patients);
+  //   })
 
-  }, [casesOptionName])
+  // }, [casesOptionName])
 
    const handleCasesOptions = data => {
     setCasesOptionName(data);
@@ -75,7 +78,7 @@ function App() {
     document.body.className = isDark;
   }, [isDark]);
 
-  const handleLogin = (token, name, id, publicU) => {
+  const handleLogin = (token, name, id) => {
     setToken(token);
     localStorage.setItem('token', token);
     setUsername(name);
@@ -99,6 +102,29 @@ function App() {
       }
     });
   };
+
+
+const handleContact = () =>{
+  fetch("https://vetfolio-manager.onrender.com/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(contact),
+  })
+
+  .then((response) =>  response.json())
+  .then(data => {
+    console.log(data)
+    return data;
+
+})
+
+}
+  
+   
+  
+ 
+    
+
 
   // const logOut = (token) => {
   //   apiUser.sendLogOutToApi(token).then((response)=>{
@@ -208,9 +234,11 @@ function App() {
             path="/case/:id"
             element={
             <>
+            <section className='user'>
               <Header isDark={isDark} setIsDark={setIsDark}/>
               <DetailUserCase list={privateList}/> 
               <BtnList />
+              </section>
    
             </>}
             />
@@ -218,10 +246,19 @@ function App() {
             path="/publicCase/:id"
             element={
             <>
+            <section className='user'>
               <Header isDark={isDark} setIsDark={setIsDark}/>
               <DetailUserCase list={publicList} idVet={idVet}/>
               <BtnListPublic/>
-   
+              </section>
+            </>}
+            />
+             <Route
+            path="/contact"
+            element={
+            <>
+              <HeaderPages isDark={isDark} setIsDark={setIsDark}/>
+              <Contact handleContact={handleContact} contact={contact} setContact={setContact}/>
             </>}
             />
     

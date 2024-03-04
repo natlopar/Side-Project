@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import HeaderPages from './HeaderPages';
-import { Link, useNavigate,} from 'react-router-dom';
+import { useNavigate,} from 'react-router-dom';
 import '../styles/newCase.scss';
 import { useForm } from 'react-hook-form';
 import BtnList from './BtnList';
 import Scroll from './Scroll';
 
-function NewCase({ isDark, setIsDark, publicU , idVet}) {
+function NewCase({ isDark, setIsDark, idVet}) {
   const [publicA, setPublicA] = useState (false)
   const [message, setMessage] = useState("");
   const [hiddenClass, setHiddenClass] = useState('hidden');
@@ -68,12 +68,7 @@ function NewCase({ isDark, setIsDark, publicU , idVet}) {
     })
    
   };
-  // const handleKeyDown = (event) => {
-  //   if (event.key === 'Enter' && event.target.value.trim() === '') {
-  //     event.preventDefault();
-  //   }
-  // };
-
+  
   const handleCancel = (ev) => {
     ev.preventDefault();
     setAnimal({});
