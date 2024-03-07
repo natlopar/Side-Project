@@ -5,7 +5,7 @@ function BtnList() {
   return (
     <div className='btnList'>
     <Link to={"/listUser"} className='link'>
-    <button className='create__btn btn hover'>Historial</button>
+    <button className='create__btn btn hover' aria-label='Historial'>Historial</button>
     </Link>
     </div>
   )

@@ -65,10 +65,10 @@ function HeroDesc({token, setToken, setIdVet, setUsername}) {
       </div>
       <div className='aside'>
         <Link to={'/signIn'} className="link">
-        <button className="aside__subtitles hover btn">Regístrate</button>
+        <button className="aside__subtitles hover btn" aria-label='Regístrate'>Regístrate</button>
         </Link>
         <Link to={'/logIn'} className="link">
-        <button className="aside__subtitles hover btn">Inicia sesión</button>
+        <button className="aside__subtitles hover btn" aria-label='Inicia sesión'>Inicia sesión</button>
         </Link>
         <div >
         <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername}/></div>

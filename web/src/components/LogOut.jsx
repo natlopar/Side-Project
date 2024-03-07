@@ -46,7 +46,7 @@ function LogOut({ token, setToken, setUsername, setIdVet }) {
 
   return (
     <>
-      <button className="create__btn btn hover" onClick={handleLogOut}>
+      <button className="create__btn btn hover" onClick={handleLogOut} aria-label='Cerrar sesión'>
         Cerrar sesión
       </button>
       <p className={`${hiddenLog}user__msg`}>{messageLog}</p>
