@@ -23,7 +23,7 @@ const handleMenu = (e)=> {
   return (
     <header className="header dark">
       <Link to={'/'}>
-        <img src={logo} alt="logo" className="header__image heartbeat" />
+        <img src={logo} alt="logo Vetfolio" className="header__image heartbeat" role="navigation" />
       </Link>
       <div className="header__style">
         <Toggle
