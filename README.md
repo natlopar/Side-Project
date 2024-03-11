@@ -36,13 +36,13 @@ Es un proyecto desarrollado con Sass y con diseño responsive:
 **Mobile**
 
 ![Vetfolio mobile](/web/src/images/mobile.png)
-![Vetfolio detail mobile](./src/images/detail.png)
+![Vetfolio detail mobile](/web/src/images/detail.png)
 
 **Tablet/Desktop**
 
-![Vetfolio tablet/desktop](./src/images/landing.png)
+![Vetfolio tablet/desktop](/web/src/images/landing.png)
 
-![Vetfolio tablet/public](./src/images/public.png)
+![Vetfolio tablet/public](/web/src/images/public.png)
 
 
 
