@@ -15,8 +15,8 @@ const server = express();
 server.use(cors());
 server.use(express.json({ limit: '25mb' }));
 
-//4. Arrancamos el servidor en el puerto 3000. escucha el puerto 3000 y consolea (linea 17)
-const serverPort = process.env.PORT || 4000;
+
+const serverPort = process.env.PORT || 3000;
 server.listen(serverPort, () => {
   console.log(`Server listening at ${serverPort}`);
 });
@@ -34,11 +34,11 @@ async function getConnection() {
   return connection;
 }
 
-// Escribimos los endpoints que queramos
+// endpoints 
 
 //funciones token
 const generateToken = (payload) => {
-  const token = jwt.sign(payload, 'secreto', { expiresIn: '1h' }); //cuando caduca el token
+  const token = jwt.sign(payload, 'secreto', { expiresIn: '1h' }); 
   return token;
 };
 
@@ -51,7 +51,7 @@ const verifyToken = (token) => {
   }
 };
 
-//middleware : verifica si con ese token tienes permiso para hacer una funcion. es una función intermedia
+//middleware : verifica si con ese token tienes permiso para hacer una funcion. 
 
 const authenticateToken = (req, res, next) => {
   const token = req.headers['authorization'];
@@ -63,7 +63,7 @@ const authenticateToken = (req, res, next) => {
   const decoded = verifyToken(token);
 
   if (!decoded) {
-    return res.status(401).json({ error: 'Token inválido' }); //si el token q me has enviado no es valido
+    return res.status(401).json({ error: 'Token inválido' });
   }
 
   req.user = decoded; //si es válido lo pone en el usuario
@@ -126,7 +126,7 @@ server.post('/signin', async (req, res) => {
 //----------------ENDPOINT PARA INCIAR SESIÓN---------------------
 
 server.post('/login', async (req, res) => {
-  //recibe el cuerpo de la solicitud, que debería contener el nombre de usuario y la contraseña.
+
   const {username, email, password} = req.body;
 
   //Buscar si el usuario existe en la bases de datos
@@ -172,19 +172,21 @@ server.post('/login', async (req, res) => {
 //.----------------------cargar los casos del usuario autenticado.......................
 
 server.get('/listUser', authenticateToken, async (req, res) => {
-  console.log(req);
-  const idVet = req.headers['id'];
-  const numberId= parseInt(idVet);
-  let sql = 'SELECT * FROM `case` WHERE fk_Vet = ?';
-  const connection = await getConnection();
-  const [cases] = await connection.query(sql, [numberId]);
-  connection.end();
-  const response = {
-    success: true,
-    patients: cases,
-  };
-  res.json(response);
-
+  try {
+    const idVet = req.headers['id'];
+    const numberId= parseInt(idVet);
+    let sql = 'SELECT * FROM `case` WHERE fk_Vet = ?';
+    const connection = await getConnection();
+    const [cases] = await connection.query(sql, [numberId]);
+    connection.end();
+    const response = {
+      success: true,
+      patients: cases,
+    };
+    res.json(response);
+  } catch (error) {
+    console.error("Error al obtener datos:", error);
+  }
 });
 
 const staticServer = './src/public-react';
@@ -221,6 +223,7 @@ server.put('/logout', async (req, res) =>{
 //............CARGAR TODOS LOS CASOS PÚBLICOS-EXPLORA-----
 
 server.get('/getPublic', async (req, res) => {
+  try{
     const connection = await getConnection();
     const sql = 'SELECT * FROM `case` WHERE public = 1';
     const [results] = await connection.query(sql);
@@ -231,6 +234,10 @@ server.get('/getPublic', async (req, res) => {
       patients: results,
     };
     res.json(response);
+  } catch (error) {
+    console.error("Error al obtener datos:", error);
+  }
+   
 
 });
 
@@ -244,15 +251,12 @@ server.get('/case', async (req, res) => {
     const [resultQuery] = await connection.query(sql, [name]);
     console.log(resultQuery);
    
-    if (!resultQuery) {
-      return res.status(404).json({
-        success: false,
-        message: 'Error en la consulta o ningún caso con esos criterios de búsqueda',
-      });
-    }
-
-    connection.end();
-
+    // if (!resultQuery) {
+    //   return res.status(404).json({
+    //     success: false,
+    //     message: 'Error en la consulta o ningún caso con esos criterios de búsqueda',
+    //   });
+    // }
     if (resultQuery.length === 0) {
       return res.status(200).json({
         success: true,
@@ -261,11 +265,17 @@ server.get('/case', async (req, res) => {
     } else {
       res.status(200).json({ success: true, patients: resultQuery });
     }
+    connection.end();
   } catch (error) {
     console.error("Error al obtener datos:", error);
+    return res.status(404).json({
+      success:false, 
+      message: 'Error al obtener datos'
+    });
   }
 });
 
+//comentarios
 server.post('/contact', async (req, res) => {
   try{
     const {name, comments} = req.body;

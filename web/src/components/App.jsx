@@ -26,8 +26,7 @@ function App() {
   // const preference = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const [isDark, setIsDark] = useState(ls.get('isDark', ''));
   // const [newUser, setNewUser] = useState({});
-
-  // const [cases, setCases] = useState({});
+  const [filterCases, setFilterCases] = useState([]);
   const [publicU, setPublicU] = useState(false);
   const [token, setToken] = useState('');
   const [username, setUsername] = useState(ls.get('username', ''));
@@ -44,31 +43,25 @@ function App() {
 
   const navigate = useNavigate();
 
-  // const login1 = {
-  //   nameLogin: '',
-  //   password: '',
-  //   id: 0,
-  // }
+  // const emptyUser = {
+  //   firstName: '',
+  //   lastName: '',
+  //   hashed_password: '',
+  //   email: '',
+  //   city: '',
+  //   country: '',
+  //   public: false,
+  // };
 
-  const emptyUser = {
-    firstName: '',
-    lastName: '',
-    hashed_password: '',
-    email: '',
-    city: '',
-    country: '',
-    public: false,
-  };
+  useEffect(() => {
+    const params = {
+      name: casesOptionName,
+    };
+    apiCase.getFilterCase(params).then(response => {
+      setFilterCases(response.patients);
+    })
 
-  // useEffect(() => {
-  //   const params = {
-  //     name: casesOptionName,
-  //   };
-  //   apiCase.getFilterCase(params).then(response => {
-  //     setPrivateList(response.patients);
-  //   })
-
-  // }, [casesOptionName])
+  }, [casesOptionName])
 
   const handleCasesOptions = (data) => {
     setCasesOptionName(data);
