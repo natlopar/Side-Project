@@ -28,7 +28,7 @@ function App() {
   // const [newUser, setNewUser] = useState({});
   const [filterCases, setFilterCases] = useState([]);
   const [publicU, setPublicU] = useState(false);
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState(ls.get('token',''));
   const [username, setUsername] = useState(ls.get('username', ''));
   const [idVet, setIdVet] = useState(ls.get('idVet', 0));
   const [message, setMessage] = useState('');
@@ -38,10 +38,13 @@ function App() {
   const [hiddenClassSign, setHiddenClassSign] = useState('hidden');
   const [privateList, setPrivateList] = useState([]);
   const [casesOptionName, setCasesOptionName] = useState('');
+  const [casesOptionBreed, setCasesOptionBreed] = useState('');
+  const [casesOptionClinic, setCasesOptionClinic] = useState('');
+
   const [contact, setContact] = useState({ name: '', comments: '' });
   const [msgContact, setmsgContact] = useState('');
+  const [list, setList] = useState([]);
 
-  const navigate = useNavigate();
 
   // const emptyUser = {
   //   firstName: '',
@@ -56,16 +59,25 @@ function App() {
   useEffect(() => {
     const params = {
       name: casesOptionName,
+      breed: casesOptionBreed,
+      clinical: casesOptionClinic,
     };
     apiCase.getFilterCase(params).then(response => {
-      setFilterCases(response.patients);
+      setList(response.patients);
     })
 
-  }, [casesOptionName])
+  }, [casesOptionName, casesOptionBreed, casesOptionClinic]);
 
-  const handleCasesOptions = (data) => {
-    setCasesOptionName(data);
+  const handleCasesOptions = data => {
+    if (data.key === 'name'){
+      setCasesOptionName(data.value);
+    } else if (data.key === 'breed') {
+      setCasesOptionBreed(data.value);
+    } else if (data.key === 'clinical'){
+      setCasesOptionClinic(data.value);
+    }
   };
+
   useEffect(() => {
     ls.set('isDark', isDark);
     document.body.className = isDark;
@@ -73,9 +85,9 @@ function App() {
 
   const handleLogin = (token, name, id) => {
     setToken(token);
-    localStorage.setItem('token', token);
+    ls.set('token', token);
     setUsername(name);
-    localStorage.setItem('username', username);
+    ls.set('username', username);
     setIdVet(id);
   };
 
@@ -190,6 +202,10 @@ function App() {
               setPrivateList={setPrivateList}
               handleCasesOptions={handleCasesOptions}
               casesOptionName={casesOptionName}
+              casesOptionBreed={casesOptionBreed}
+              casesOptionClinic={casesOptionClinic}
+              list={list}
+              setList={setList}
               privateList={privateList}
             />
           }

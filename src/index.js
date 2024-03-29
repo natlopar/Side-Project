@@ -212,7 +212,7 @@ server.put('/logout', async (req, res) =>{
   const authHeader = req.headers["authorization"];
   jwt.sign(authHeader, "", { expiresIn: 1 } , (logout, err) => {
      if (logout) {
-        res.json({success: true, message: 'se ha cerrado tu sesión'});
+      res.json({success: true, message: 'se ha cerrado tu sesión'});
      } else {
       res.json({success: false, message: 'no se ha podido cerrar la sesión'});
      }
@@ -246,16 +246,15 @@ server.get('/getPublic', async (req, res) => {
 server.get('/case', async (req, res) => {
   try {
     const connection = await getConnection();
-    const name= req.query.name;
-    const sql =  "SELECT * FROM `case` WHERE name = ? ";
-    const [resultQuery] = await connection.query(sql, [name]);
+    const {name, breed, clinical}= req.query
+    const sql = "SELECT * FROM `case` WHERE name = ? or breed = ? or clinical = ?";
+    const values = [name, breed, clinical];
+    const [resultQuery] = await connection.query(sql, values);
     console.log(resultQuery);
    
-    // if (!resultQuery) {
-    //   return res.status(404).json({
-    //     success: false,
-    //     message: 'Error en la consulta o ningún caso con esos criterios de búsqueda',
-    //   });
+    // // if (name === ''){
+    // //   const selectCase = 'SELECT * FROM `case`'
+    // // }
     // }
     if (resultQuery.length === 0) {
       return res.status(200).json({
@@ -275,7 +274,7 @@ server.get('/case', async (req, res) => {
   }
 });
 
-//comentarios
+
 server.post('/contact', async (req, res) => {
   try{
     const {name, comments} = req.body;

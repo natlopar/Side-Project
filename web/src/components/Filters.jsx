@@ -1,26 +1,29 @@
 import '../styles/filters.scss';
+// import FilterBreed from './FilterBreed';
+// import FilterClinical from './FilterClinical';
+import FilterName from './FilterName';
 
-import Filter from './Filter'
+function Filters({
+  handleCasesOptions,
+  casesOptionName,
+  casesOptionBreed,
+  casesOptionClinic,
+}) {
 
-function Filters({handleCasesOptions, casesOptionName}) {
-
-
+  const handleChange =(e)=>{
+    e.preventDefault();
+    handleCasesOptions({
+      value: e.target.value, 
+      key: e.target.id
+    });
+  }
   return (
-    <div>
-        {/* <div >         
-            <label htmlFor="name" className='sectionList__label'>Busca por nombre</label>
-                 <Filter/>
-                 
-        </div>
-
-    <label htmlFor="name" className='sectionList__label'>Busca por raza</label>
-    <div><Filter/></div>
-    <label htmlFor="name" className='sectionList__label'>Busca por diagnóstico</label> */}
-    <div><Filter handleCasesOptions={handleCasesOptions}
-              casesOptionName={casesOptionName}/></div>
-    </div>
-
-  )
+    <>
+      <FilterName handleCasesOptions={handleCasesOptions} casesOptionName={casesOptionName} handleChange={handleChange}/>
+      {/* <FilterBreed handleCasesOptions={handleCasesOptions} casesOptionBreed={casesOptionBreed}/>
+      <FilterClinical handleCasesOptions={handleCasesOptions} casesOptionClinic={casesOptionClinic}/> */}
+    </>
+  );
 }
 
-export default Filters
+export default Filters;

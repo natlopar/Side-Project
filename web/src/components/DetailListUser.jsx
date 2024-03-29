@@ -1,6 +1,5 @@
 
 import '../styles/logOut.scss';
-
 import { useEffect, useState } from 'react';
 import UserCases from './UserCases';
 import CreateCase from './CreateCase';
@@ -20,14 +19,17 @@ function DetailListUser({
   username,
   isDark,
   setIsDark,
-  setUsername, setIdVet, 
+  setUsername,
+  setIdVet, 
   setPrivateList, 
   handleCasesOptions, 
-  casesOptionName
-
+  casesOptionName,
+  list, privateList, 
+  casesOptionBreed,
+  casesOptionClinic
 }) {
 
-  const [list, setList] = useState(ls.get('list', null));
+ 
 
 
   useEffect(() => {
@@ -46,7 +48,7 @@ function DetailListUser({
         );
         const userData = await response.json();
         if (userData.success) {
-          setList(userData.patients);
+          // setList(userData.patients);
           setPrivateList(userData.patients);
           ls.set('list', userData.patients);
         } else {
@@ -57,9 +59,9 @@ function DetailListUser({
       }
     };
     fetchData();
-  }, [token, idVet]);
+  }, [token, idVet, setPrivateList]);
 
-  if (!list) {
+  if (!privateList) {
     return (
       <>
         <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
@@ -76,14 +78,20 @@ function DetailListUser({
       </>
     );
   }
+  const renderCases = (dataList) => {
+    return dataList.map(data => (
+      <li key={data.idCase} className="sectionList__ul">
+        <Link to={`/case/${data.idCase}`} className='link'>
+          <UserCases data={data} idVet={idVet} />
+        </Link>
+      </li>
+    ));
+  };
+  
+  const caseSection = list && list.length > 0 ? renderCases(list) : renderCases(privateList);
+  
+  
 
-  const caseSection = list.map((data) => (
-    <li key={data.idCase} className="sectionList__ul">
-      <Link to={`/case/${data.idCase}`} className='link'>
-      <UserCases data={data} idVet={idVet} />
-      </Link>
-    </li>
-  ))
 
   return (
     <>
@@ -95,12 +103,12 @@ function DetailListUser({
         setIdVet={setIdVet} setUsername={setUsername}/>
       </div>
 
-      {list.length > 0 ? (
+      {privateList.length > 0 ? (
         <>
           <h2 className="sectionList__title">Este es tu historial de casos</h2>
           <div className='sectionList__filters'>
-          <Filters     handleCasesOptions={handleCasesOptions}
-              casesOptionName={casesOptionName} />
+          <Filters handleCasesOptions={handleCasesOptions}
+              casesOptionName={casesOptionName} casesOptionBreed={casesOptionBreed} casesOptionClinic={casesOptionClinic} />
           </div>
      
         </>

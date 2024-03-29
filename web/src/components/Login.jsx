@@ -33,7 +33,7 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
     });
 
     const data = await response.json();
-    console.log(data);
+ 
     if (data.success) {
       handleLogin(data.token, data.name, data.id);
       ls.set('idVet', data.id);
