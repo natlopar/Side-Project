@@ -60,10 +60,13 @@ function App() {
     const params = {
       name: casesOptionName,
       breed: casesOptionBreed,
-      clinical: casesOptionClinic,
+      clinical: casesOptionClinic
     };
     apiCase.getFilterCase(params).then(response => {
-      setList(response.patients);
+      if (response.patients.length > 0){
+        setList(response.patients);
+      } 
+    
     })
 
   }, [casesOptionName, casesOptionBreed, casesOptionClinic]);
