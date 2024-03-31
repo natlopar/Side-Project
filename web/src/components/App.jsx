@@ -21,12 +21,12 @@ import Footer from './Footer';
 import BtnListPublic from './BtnListPublic';
 import HeaderPages from './HeaderPages';
 import Contact from './Contact';
+import NotFound from './NotFound';
 
 function App() {
   // const preference = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const [isDark, setIsDark] = useState(ls.get('isDark', ''));
   // const [newUser, setNewUser] = useState({});
-  const [filterCases, setFilterCases] = useState([]);
   const [publicU, setPublicU] = useState(false);
   const [token, setToken] = useState(ls.get('token',''));
   const [username, setUsername] = useState(ls.get('username', ''));
@@ -44,17 +44,38 @@ function App() {
   const [contact, setContact] = useState({ name: '', comments: '' });
   const [msgContact, setmsgContact] = useState('');
   const [list, setList] = useState([]);
+  const [filter, setFilter] = useState(false);
 
 
-  // const emptyUser = {
-  //   firstName: '',
-  //   lastName: '',
-  //   hashed_password: '',
-  //   email: '',
-  //   city: '',
-  //   country: '',
-  //   public: false,
-  // };
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `https://vetfolio-manager.onrender.com/listUser`,
+  //         {
+  //           method: 'GET',
+  //           headers: {
+  //             'Content-Type': 'application/json',
+  //             Authorization: token,
+  //             id: idVet,
+  //           },
+  //         }
+  //       );
+  //       const userData = await response.json();
+  //       if (userData.success) {
+  //         // setList(userData.patients);
+  //         setPrivateList(userData.patients);
+  //         // ls.set('list', userData.patients);
+  //       } else {
+  //         console.error('Error al obtener los datos del usuario');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error al obtener los datos del usuario:', error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [token, idVet, setPrivateList]);
 
   useEffect(() => {
     const params = {
@@ -64,12 +85,16 @@ function App() {
     };
     apiCase.getFilterCase(params).then(response => {
       if (response.patients.length > 0){
-        setList(response.patients);
-      } 
+        setPrivateList(response.patients);
+  
+      } else {
+        setFilter(true)
+      }
     
     })
 
   }, [casesOptionName, casesOptionBreed, casesOptionClinic]);
+
 
   const handleCasesOptions = data => {
     if (data.key === 'name'){
@@ -93,7 +118,23 @@ function App() {
     ls.set('username', username);
     setIdVet(id);
   };
+ 
 
+  const getPrivateCasesFromApi = 
+  useEffect(() => {
+    apiCase.getPrivateCases({token, idVet})
+    .then((data) => {
+        if (data.success) {
+          // setList(userData.patients);
+          setPrivateList(data.patients);
+          // ls.set('list', userData.patients);
+        } else {
+          console.error('Error al obtener los datos del usuario');
+        }
+    })
+  }, [])
+
+  
   const sendSignUpToApi = (registry) => {
     apiUser.sendSignUpToApi(registry).then((response) => {
       if (response.success === true) {
@@ -207,9 +248,11 @@ function App() {
               casesOptionName={casesOptionName}
               casesOptionBreed={casesOptionBreed}
               casesOptionClinic={casesOptionClinic}
-              list={list}
+              // list={list}
               setList={setList}
               privateList={privateList}
+              getPrivateCasesFromApi={getPrivateCasesFromApi}
+              filter={filter}
             />
           }
         />

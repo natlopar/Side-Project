@@ -15,8 +15,29 @@ const getFilterCase = (params) => {
   });
 };
 
+const getPrivateCases = ({token, idVet}) => {
+ return fetch(`https://vetfolio-manager.onrender.com/listUser`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+          id: idVet,
+        },
+      }
+    )
+    .then (response => response.json())
+    .then(data => {
+      return data;
+    })
+   
+};
+
+
+
 
 const objToExport = {
+getPrivateCases: getPrivateCases,
 getPublicCases: getPublicCases,
 getFilterCase: getFilterCase
 };

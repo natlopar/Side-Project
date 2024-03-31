@@ -24,44 +24,18 @@ function DetailListUser({
   setPrivateList, 
   handleCasesOptions, 
   casesOptionName,
-  list, privateList, 
+  // list,
+   privateList, 
   casesOptionBreed,
-  casesOptionClinic
+  casesOptionClinic, 
+  getPrivateCasesFromApi, 
+  filter
 }) {
 
- 
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `https://vetfolio-manager.onrender.com/listUser`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: token,
-              id: idVet,
-            },
-          }
-        );
-        const userData = await response.json();
-        if (userData.success) {
-          // setList(userData.patients);
-          setPrivateList(userData.patients);
-          // ls.set('list', userData.patients);
-        } else {
-          console.error('Error al obtener los datos del usuario');
-        }
-      } catch (error) {
-        console.error('Error al obtener los datos del usuario:', error);
-      }
-    };
-    fetchData();
-  }, [token, idVet, setPrivateList]);
 
-  if (!privateList) {
+  if (!privateList && filter === false) {
     return (
       <>
         <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
@@ -76,7 +50,23 @@ function DetailListUser({
         </div>
      
       </>
-    );
+    )
+  } else if (!privateList && filter === true) {
+    return (
+      <>
+        <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
+       <Scroll/>
+        <div className="sectionList loading">
+          <span>
+            <i className="fa-solid fa-spinner"></i>
+          </span>
+          <p>No hay casos con esa búsqueda</p>
+        
+          <LoginBtn/>
+        </div>
+     
+      </>
+    )
   }
   const renderCases = (dataList) => {
     return dataList.map(data => (
@@ -88,7 +78,8 @@ function DetailListUser({
     ));
   };
   
-  const caseSection = list && list.length > 0 ? renderCases(list) : renderCases(privateList);
+  // const caseSection = list && list.length > 0 ? renderCases(list) : renderCases(privateList);
+  const caseSection = renderCases(privateList);
   
   
 
@@ -103,7 +94,7 @@ function DetailListUser({
         setIdVet={setIdVet} setUsername={setUsername}/>
       </div>
 
-      {privateList.length > 0 ? (
+      {privateList.length > 0  ? (
         <>
           <h2 className="sectionList__title">Este es tu historial de casos</h2>
           <div className='sectionList__filters'>
