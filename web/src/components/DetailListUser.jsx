@@ -36,7 +36,7 @@ function DetailListUser({
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://vetfolio-manager.onrender.com/listUser`,
+          'https://vetfolio-manager.onrender.com/listUser',
           {
             method: 'GET',
             headers: {
