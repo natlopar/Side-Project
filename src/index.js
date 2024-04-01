@@ -246,20 +246,28 @@ server.get('/getPublic', async (req, res) => {
 server.get('/case', async (req, res) => {
   try {
     const connection = await getConnection();
-    const {name, breed, clinical}= req.query
-    const sql = "SELECT * FROM `case` WHERE name = ? or breed = ? or clinical = ?";
-    const values = [name, breed, clinical];
+    const {name, breed, clinical}= req.query;
+    let sql = "SELECT * FROM `case` WHERE 1"; 
+    const values = [];
+    if (name) {
+      sql += " AND name = ?";
+      values.push(name);
+    }
+    if (breed) {
+      sql += " AND breed LIKE ?";
+      values.push(`%${breed}%`);
+    }
+    if (clinical) {
+      sql += " AND clinical LIKE ?";
+      values.push(`%${clinical}%`);
+    }
     const [resultQuery] = await connection.query(sql, values);
-    console.log(resultQuery);
    
-    // // if (name === ''){
-    // //   const selectCase = 'SELECT * FROM `case`'
-    // // }
-    // }
     if (resultQuery.length === 0) {
       return res.status(200).json({
         success: true,
         message: 'Ningún caso con esos criterios de búsqueda',
+        patients: resultQuery
       });
     } else {
       res.status(200).json({ success: true, patients: resultQuery });
