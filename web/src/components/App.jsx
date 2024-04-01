@@ -63,7 +63,7 @@ function App() {
       clinical: casesOptionClinic,
     };
     apiCase.getFilterCase(params).then(response => {
-      setList(response.patients);
+      setPrivateList(response.patients);
     })
 
   }, [casesOptionName, casesOptionBreed, casesOptionClinic]);

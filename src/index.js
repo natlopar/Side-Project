@@ -242,24 +242,32 @@ server.get('/getPublic', async (req, res) => {
 });
 
 //---------FILTRO BÚSQUEDA.........//
-
 server.get('/case', async (req, res) => {
   try {
     const connection = await getConnection();
-    const {name, breed, clinical}= req.query
-    const sql = "SELECT * FROM `case` WHERE name = ? or breed = ? or clinical = ?";
-    const values = [name, breed, clinical];
+    const {name, breed, clinical}= req.query;
+    let sql = "SELECT * FROM `case` WHERE 1"; 
+    const values = [];
+    if (name) {
+      sql += " AND name = ?";
+      values.push(name);
+    } else if (breed) {
+      sql += " AND breed LIKE ?";
+      values.push(`%${breed}%`);
+    } else if (clinical) {
+      sql += " AND clinical LIKE ?";
+      values.push(`%${clinical}%`);
+    } else if (name === '' && breed === '' && clinical === '') {
+      sql = "SELECT * FROM `case`";
+    }
+
     const [resultQuery] = await connection.query(sql, values);
-    console.log(resultQuery);
    
-    // // if (name === ''){
-    // //   const selectCase = 'SELECT * FROM `case`'
-    // // }
-    // }
     if (resultQuery.length === 0) {
       return res.status(200).json({
         success: true,
         message: 'Ningún caso con esos criterios de búsqueda',
+        patients: resultQuery
       });
     } else {
       res.status(200).json({ success: true, patients: resultQuery });
@@ -273,6 +281,38 @@ server.get('/case', async (req, res) => {
     });
   }
 });
+
+
+// server.get('/case', async (req, res) => {
+//   try {
+//     const connection = await getConnection();
+//     const {name, breed, clinical}= req.query
+//     const sql = "SELECT * FROM `case` WHERE name = ? or breed = ? or clinical = ?";
+//     const values = [name, breed, clinical];
+//     const [resultQuery] = await connection.query(sql, values);
+//     console.log(resultQuery);
+   
+//     // // if (name === ''){
+//     // //   const selectCase = 'SELECT * FROM `case`'
+//     // // }
+//     // }
+//     if (resultQuery.length === 0) {
+//       return res.status(200).json({
+//         success: true,
+//         message: 'Ningún caso con esos criterios de búsqueda',
+//       });
+//     } else {
+//       res.status(200).json({ success: true, patients: resultQuery });
+//     }
+//     connection.end();
+//   } catch (error) {
+//     console.error("Error al obtener datos:", error);
+//     return res.status(404).json({
+//       success:false, 
+//       message: 'Error al obtener datos'
+//     });
+//   }
+// });
 
 
 server.post('/contact', async (req, res) => {
