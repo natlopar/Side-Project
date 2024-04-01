@@ -1,16 +1,5 @@
 @import './variables.scss';
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  justify-content: center;
-  align-items: flex-end;
-  text-align: center;
-  @media (min-width: 768px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-}
+
 .input {
   display: flex;
   gap: 5px;

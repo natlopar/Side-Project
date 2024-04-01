@@ -1,6 +1,6 @@
 import '../styles/filters.scss';
-import FilterBreed from './FilterBreed';
-import FilterClinical from './FilterClinical';
+// import FilterBreed from './FilterBreed';
+// import FilterClinical from './FilterClinical';
 import FilterName from './FilterName';
 
 function Filters({
@@ -18,11 +18,11 @@ function Filters({
     });
   }
   return (
-    <form className='form'>
-    <FilterName casesOptionName={casesOptionName} handleChange={handleChange}/>
-    <FilterBreed  casesOptionBreed={casesOptionBreed} handleChange={handleChange}/>
-    <FilterClinical  casesOptionClinic={casesOptionClinic} handleChange={handleChange}/>
-  </form>
+    <>
+      <FilterName handleCasesOptions={handleCasesOptions} casesOptionName={casesOptionName} handleChange={handleChange}/>
+      {/* <FilterBreed handleCasesOptions={handleCasesOptions} casesOptionBreed={casesOptionBreed}/>
+      <FilterClinical handleCasesOptions={handleCasesOptions} casesOptionClinic={casesOptionClinic}/> */}
+    </>
   );
 }
 

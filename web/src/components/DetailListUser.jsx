@@ -50,7 +50,7 @@ function DetailListUser({
         if (userData.success) {
           // setList(userData.patients);
           setPrivateList(userData.patients);
-          // ls.set('list', userData.patients);
+          ls.set('list', userData.patients);
         } else {
           console.error('Error al obtener los datos del usuario');
         }
@@ -88,8 +88,8 @@ function DetailListUser({
     ));
   };
   
-  // const caseSection = list && list.length > 0 ? renderCases(list) : renderCases(privateList);
-  const caseSection = renderCases(privateList);
+  const caseSection = list && list.length > 0 ? renderCases(list) : renderCases(privateList);
+  
   
 
 

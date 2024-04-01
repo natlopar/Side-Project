@@ -1,12 +1,12 @@
 
 
-function FilterName({ casesOptionName, handleChange}) {
+function FilterName({handleCasesOptions, casesOptionName, handleChange}) {
  
 
 
   return (
 
-<div className="input">
+<form className="input">
       <label htmlFor="name" className="input__label">
         Busca por nombre:{' '}
       </label>
@@ -18,7 +18,7 @@ function FilterName({ casesOptionName, handleChange}) {
         value={casesOptionName}
         onChange={handleChange}
       />
-  </div>
+  </form>
   )
 }
    
