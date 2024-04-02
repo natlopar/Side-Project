@@ -57,7 +57,7 @@ function App() {
       breed: casesOptionBreed,
       clinic: casesOptionClinic
     };
-    apiCase.getFilterCase(params).then(response => {
+    apiCase.getFilterCase(params, token, idVet).then(response => {
       if (response.patients.length > 0){
         return setPrivateList(response.patients);
       } else {
