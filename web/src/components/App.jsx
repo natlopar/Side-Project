@@ -39,17 +39,6 @@ function App() {
   const [msgContact, setmsgContact] = useState('');
   const [list, setList] = useState(null);
 
-
-  // const emptyUser = {
-  //   firstName: '',
-  //   lastName: '',
-  //   hashed_password: '',
-  //   email: '',
-  //   city: '',
-  //   country: '',
-  //   public: false,
-  // };
-
   useEffect(() => {
     const params = {
       name: casesOptionName,
@@ -154,6 +143,8 @@ function App() {
                 setToken={setToken}
                 setUsername={setUsername}
                 setIdVet={setIdVet}
+                setList={setList}
+                setPrivateList={setPrivateList}
               />
             </>
           }

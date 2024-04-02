@@ -8,7 +8,7 @@ import LogOut from './LogOut';
 import '../styles/logOut.scss'
 import Scroll from './Scroll';
 
-function HeroDesc({token, setToken, setIdVet, setUsername}) {
+function HeroDesc({token, setToken, setIdVet, setUsername, setList, setPrivateList}) {
   return (
     <section className="hero desc">
       <Scroll/>
@@ -71,7 +71,7 @@ function HeroDesc({token, setToken, setIdVet, setUsername}) {
         <button className="aside__subtitles hover btn" aria-label='Inicia sesión'>Inicia sesión</button>
         </Link>
         <div >
-        <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername}/></div>
+        <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername} setList={setList} setPrivateList={setPrivateList}/></div>
  
       </div>
 

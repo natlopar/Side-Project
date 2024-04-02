@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import ls from '../services/localStorage';
 
-function LogOut({ token, setToken, setUsername, setIdVet }) {
+function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateList }) {
   const navigate = useNavigate();
   const [messageLog, setMessageLog] = '';
   const [hiddenLog, setHiddenLog] = 'hidden';
@@ -29,6 +29,8 @@ function LogOut({ token, setToken, setUsername, setIdVet }) {
           ls.set('userData', null);
           ls.remove('list');
           navigate('/');
+          setList(null);
+          setPrivateList([]);
         });
     } else {
       setUsername('');
