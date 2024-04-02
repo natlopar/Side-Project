@@ -64,8 +64,8 @@ function App() {
         }
       })
 
-  }, [casesOptionName, casesOptionBreed, casesOptionClinic, idVet, token]);
-
+  }, [casesOptionName, casesOptionBreed, casesOptionClinic]);
+  
   const handleCasesOptions = data => {
     if (data.key === 'name'){
       setCasesOptionName(data.value);
@@ -76,21 +76,6 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    const params = {
-      name: casesOptionName,
-      breed: casesOptionBreed,
-      clinic: casesOptionClinic
-    };
-    apiCase.getFilterCase(params, token, idVet).then(data => {
-        if (data.success){
-          setList(data.patients);
-        } else {
-          console.error('Error al obtener los datos. Comprueba que tu conexión es correcta.');
-        }
-      })
-
-  }, [casesOptionName, casesOptionBreed, casesOptionClinic]);
 
   useEffect(() => {
     ls.set('isDark', isDark);
