@@ -13,7 +13,6 @@ function NoFilter() {
       </span>
       <p>No hay casos registrados con esos criterios de búsqueda</p>
    
-      <LoginBtn/>
     </div>
  
   </>

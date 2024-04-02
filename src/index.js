@@ -322,7 +322,7 @@ server.get('/case', authenticateToken, async (req, res) => {
   } catch (error) {
     console.error("Error al obtener datos:", error);
     return res.status(404).json({
-      success:false, 
+      success: false, 
       message: 'Error al obtener datos'
     });
   }

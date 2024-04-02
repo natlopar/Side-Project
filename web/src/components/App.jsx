@@ -37,7 +37,7 @@ function App() {
   const [casesOptionClinic, setCasesOptionClinic] = useState('');
   const [contact, setContact] = useState({ name: '', comments: '' });
   const [msgContact, setmsgContact] = useState('');
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(null);
 
 
 
@@ -57,16 +57,16 @@ function App() {
       breed: casesOptionBreed,
       clinic: casesOptionClinic
     };
-    apiCase.getFilterCase(params, token, idVet).then(response => {
-      if (response.patients.length > 0){
-        return setPrivateList(response.patients);
-      } else {
-        return <NoFilter/>
-      }
-    
-    })
+    apiCase.getFilterCase(params, token, idVet).then(data => {
+        if (data.success){
+          setList(data.patients);
+        } else {
+          console.error('Error al obtener los datos. Comprueba que tu conexión es correcta.');
+        }
+      })
 
-  }, [casesOptionName, casesOptionBreed, casesOptionClinic]);
+  }, [casesOptionName, casesOptionBreed, casesOptionClinic, idVet, token]);
+
   useEffect(() => {
     ls.set('isDark', isDark);
     document.body.className = isDark;

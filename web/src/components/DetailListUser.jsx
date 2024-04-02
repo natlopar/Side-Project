@@ -10,6 +10,7 @@ import Filters from './Filters';
 import { Link } from 'react-router-dom';
 import LoginBtn from './LoginBtn';
 import Scroll from './Scroll';
+import NoFilter from './NoFilter';
 
 function DetailListUser({
   token,
@@ -48,7 +49,6 @@ function DetailListUser({
         );
         const userData = await response.json();
         if (userData.success) {
-          // setList(userData.patients);
           setPrivateList(userData.patients);
         } else {
           console.error('Error al obtener los datos del usuario');
@@ -88,9 +88,18 @@ function DetailListUser({
     ));
   };
   
-  // const caseSection = list && list.length > 0 ? renderCases(list) : renderCases(privateList);
+  // const filterSection = () => {
+  //   if(list && list.length > 0 ){
+  //     renderCases(list)
+  //   } else if (list.length === 0) {
+  //     <NoFilter/>
+  //   } else if (list === null){
+  //     renderCases(privateList)
+  //   }
+    
+  //   }
 
-
+const filterSection = list && list.length > 0 ? renderCases(list) : <NoFilter/> 
 
   return (
     <>
@@ -109,7 +118,9 @@ function DetailListUser({
           <Filters handleCasesOptions={handleCasesOptions}
               casesOptionName={casesOptionName} casesOptionBreed={casesOptionBreed} casesOptionClinic={casesOptionClinic} />
           </div>
-     
+
+          <ul className="sectionList">{filterSection}</ul>
+
         </>
       ) : (
         <h2 className="sectionList__title">
@@ -117,8 +128,8 @@ function DetailListUser({
         </h2>
       )}
 
-      
-        <ul className="sectionList">{renderCases(privateList)}</ul>
+        
+        
      
       <CreateCase />
     </>
