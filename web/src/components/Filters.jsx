@@ -14,7 +14,7 @@ function Filters({
   const handleChange =(e)=>{
     e.preventDefault();
     handleCasesOptions({
-      value: e.target.value,
+      value: e.target.value.toLowerCase(),
       key: e.target.id
     });
   }
