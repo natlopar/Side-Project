@@ -62,14 +62,14 @@ function App() {
       breed: casesOptionBreed,
       clinical: casesOptionClinic
     };
-    apiCase.getFilterCase(params).then(response => {
+    apiCase.getFilterCase(params, token, idVet).then(response => {
       if (response.patients.length > 0){
         setList(response.patients);
       } 
     
     })
 
-  }, [casesOptionName, casesOptionBreed, casesOptionClinic]);
+  }, [casesOptionName, casesOptionBreed, casesOptionClinic, idVet, token]);
 
   const handleCasesOptions = data => {
     if (data.key === 'name'){
