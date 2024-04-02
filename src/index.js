@@ -261,6 +261,7 @@ server.get('/case', async (req, res) => {
       sql += " AND clinical LIKE ?";
       values.push(`%${clinical}%`);
     }
+    
     const [resultQuery] = await connection.query(sql, values);
    
     if (resultQuery.length === 0) {

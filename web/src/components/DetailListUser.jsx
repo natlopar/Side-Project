@@ -1,13 +1,12 @@
 
 import '../styles/logOut.scss';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import UserCases from './UserCases';
 import CreateCase from './CreateCase';
 import LogOut from './LogOut';
 import '../styles/list.scss';
 import Welcome from './Welcome';
 import Filters from './Filters';
-import ls from '../services/localStorage'
 import { Link } from 'react-router-dom';
 import LoginBtn from './LoginBtn';
 import Scroll from './Scroll';
@@ -24,7 +23,8 @@ function DetailListUser({
   setPrivateList, 
   handleCasesOptions, 
   casesOptionName,
-  list, privateList, 
+  list, 
+  privateList, 
   casesOptionBreed,
   casesOptionClinic
 }) {
@@ -50,7 +50,6 @@ function DetailListUser({
         if (userData.success) {
           // setList(userData.patients);
           setPrivateList(userData.patients);
-          // ls.set('list', userData.patients);
         } else {
           console.error('Error al obtener los datos del usuario');
         }
@@ -61,7 +60,7 @@ function DetailListUser({
     fetchData();
   }, [token, idVet, setPrivateList]);
 
-  if (!privateList) {
+  if (!token) {
     return (
       <>
         <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
@@ -78,6 +77,7 @@ function DetailListUser({
       </>
     );
   }
+
   const renderCases = (dataList) => {
     return dataList.map(data => (
       <li key={data.idCase} className="sectionList__ul">
@@ -88,9 +88,8 @@ function DetailListUser({
     ));
   };
   
-  const caseSection = list && list.length > 0 ? renderCases(list) : renderCases(privateList);
-  
-  
+  // const caseSection = list && list.length > 0 ? renderCases(list) : renderCases(privateList);
+
 
 
   return (
@@ -119,7 +118,7 @@ function DetailListUser({
       )}
 
       
-        <ul className="sectionList">{caseSection}</ul>
+        <ul className="sectionList">{renderCases(privateList)}</ul>
      
       <CreateCase />
     </>

@@ -8,11 +8,7 @@ function FilterName({ casesOptionName, handleChange}) {
 
 <div className="input">
       <label htmlFor="name" className="input__label">
-<<<<<<< HEAD
         Busca por nombre:{' '}
-=======
-        `Busca por nombre:{' '}
->>>>>>> old_filter
       </label>
       <input
         type="text"

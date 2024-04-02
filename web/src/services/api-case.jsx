@@ -8,7 +8,14 @@ const getPublicCases= () => {
 }
 
 const getFilterCase = (params) => {
-  return fetch(`http://vetfolio-manager.onrender.com/case?name=${params.name}&breed=${params.breed}&clinical=${params.clinic}`)
+  return fetch(`http://vetfolio-manager.onrender.com/case?name=${params.name}&breed=${params.breed}&clinical=${params.clinic}`, {
+    method: 'GET',    
+    withCredentials: true,    
+    crossorigin: true,    
+    mode: 'no-cors',  
+
+  }
+  )
   .then(response => response.json())
   .then(data => {
      return data;

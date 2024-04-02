@@ -20,9 +20,9 @@ function Filters({
   }
   return (
    <form className='form'>
-      <FilterName handleCasesOptions={handleCasesOptions} casesOptionName={casesOptionName} handleChange={handleChange}/>
-      <FilterBreed handleCasesOptions={handleCasesOptions} casesOptionBreed={casesOptionBreed} handleChange={handleChange}/>
-      <FilterClinical handleCasesOptions={handleCasesOptions} casesOptionClinic={casesOptionClinic} handleChange={handleChange}/>
+      <FilterName  casesOptionName={casesOptionName} handleChange={handleChange}/>
+      <FilterBreed  casesOptionBreed={casesOptionBreed} handleChange={handleChange}/>
+      <FilterClinical casesOptionClinic={casesOptionClinic} handleChange={handleChange}/>
     </form>
   );
 }
