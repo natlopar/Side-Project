@@ -65,7 +65,7 @@ function App() {
       })
 
   }, [casesOptionName, casesOptionBreed, casesOptionClinic, idVet, token]);
-  
+
   const handleCasesOptions = data => {
     if (data.key === 'name'){
       setCasesOptionName(data.value);
@@ -90,7 +90,7 @@ function App() {
         }
       })
 
-  }, [casesOptionName, casesOptionBreed, casesOptionClinic, idVet, token]);
+  }, [casesOptionName, casesOptionBreed, casesOptionClinic]);
 
   useEffect(() => {
     ls.set('isDark', isDark);
