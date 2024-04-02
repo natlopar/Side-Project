@@ -85,13 +85,13 @@ function DetailListUser({
 
     // Aplica los filtros
     if (casesOptionName !== '') {
-      filteredData = filteredData.filter(data => data.name === casesOptionName);
+      filteredData = filteredData.filter(data => data.name.toLowerCase === casesOptionName.toLowerCase);
     }
     if (casesOptionBreed !== '') {
-      filteredData = filteredData.filter(data => data.breed === casesOptionBreed);
+      filteredData = filteredData.filter(data => data.breed.toLowerCase.includes((casesOptionBreed).toLowerCase));
     }
     if (casesOptionClinic !== '') {
-      filteredData = filteredData.filter(data => data.clinic === casesOptionClinic);
+      filteredData = filteredData.filter(data => data.clinic.toLowerCase.includes((casesOptionClinic).toLowerCase));
     }
     return filteredData.length === 0 ? <NoFilter/> :
     // Renderiza los casos filtrados
