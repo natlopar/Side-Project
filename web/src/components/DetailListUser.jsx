@@ -82,8 +82,6 @@ function DetailListUser({
 
   const renderFilteredCases = () => {
     let filteredData = privateList;
-
-    // Aplica los filtros
     if (casesOptionName !== '') {
       filteredData = filteredData.filter(data => data.name.toLowerCase() === casesOptionName);
     }
@@ -94,7 +92,7 @@ function DetailListUser({
       filteredData = filteredData.filter(data => data.clinical.toLowerCase().includes(casesOptionClinic));
     }
     return filteredData.length === 0 ? <NoFilter/> :
-    // Renderiza los casos filtrados
+
      filteredData.map(data => (
       <li key={data.idCase} className="sectionList__ul">
         <Link to={`/case/${data.idCase}`} className='link'>
@@ -141,62 +139,3 @@ function DetailListUser({
 export default DetailListUser;
 
 
-//   const renderCases = (dataList) => {
-//     return dataList.map(data => (
-//       <li key={data.idCase} className="sectionList__ul">
-//         <Link to={`/case/${data.idCase}`} className='link'>
-//           <UserCases data={data} idVet={idVet} />
-//         </Link>
-//       </li>
-//     ));
-//   };
-  
-
-
-// // const filterSection = list && list.length > 0 ? renderCases(list) : <NoFilter/> 
-
-// const filterSection = () =>{
-//   if(list === null && privateList.length > 0){
-//     renderCases(privateList)
-//   } else if (list.length === 0){
-//     <NoFilter/> 
-//   } else if (list.length > 0){
-//     renderCases(list)
-//   }
-// }
-//   return (
-//     <>
-    
-//       <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
-//       <Scroll/>
-//       <div className="logout">
-//         <LogOut token={token} setToken={setToken} 
-//         setIdVet={setIdVet} setUsername={setUsername} setList={setList} setPrivateList={setPrivateList}/>
-//       </div>
-
-//       {privateList.length > 0 ? (
-//         <>
-//           <h2 className="sectionList__title">Este es tu historial de casos</h2>
-//           <div className='sectionList__filters'>
-//           <Filters handleCasesOptions={handleCasesOptions}
-//               casesOptionName={casesOptionName} casesOptionBreed={casesOptionBreed} casesOptionClinic={casesOptionClinic} />
-//           </div>
-
-//           <ul className="sectionList">{filterSection()}</ul>
-
-//         </>
-//       ) : (
-//         <h2 className="sectionList__title">
-//           Todavía no tienes ningún caso registrado
-//         </h2>
-//       )}
-
-        
-        
-     
-//       <CreateCase />
-//     </>
-//   );
-// }
-
-// export default DetailListUser;
