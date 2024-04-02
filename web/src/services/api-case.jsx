@@ -8,7 +8,7 @@ const getPublicCases= () => {
 }
 
 const getFilterCase = (params, token, idVet) => {
-  return fetch(`http://vetfolio-manager.onrender.com/case?name=${params.name}&breed=${params.breed}&clinical=${params.clinical}`, 
+  return fetch(`https://vetfolio-manager.onrender.com/case?name=${params.name}&breed=${params.breed}&clinical=${params.clinical}`, 
   {
     method: 'GET',
     headers: {
