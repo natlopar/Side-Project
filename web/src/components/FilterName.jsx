@@ -8,7 +8,7 @@ function FilterName({ casesOptionName, handleChange}) {
 
 <div className="input">
       <label htmlFor="name" className="input__label">
-        `Busca por nombre:{' '}
+        Busca por nombre:{' '}
       </label>
       <input
         type="text"

@@ -29,9 +29,9 @@ setPublicList}) {
       if (data.success) {
         setListCases(data); 
         setPublicList(data.patients);
-        ls.set('public',data.patients);
+        ls.set('public', data.patients);
       } else {
-        console.error('Error al obtener los datos del usuario. Comprueba que estás registrados');
+        console.error('Error al obtener los datos. Comprueba que tu conexión es correcta.');
       }
     })
     .catch(error => {

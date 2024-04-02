@@ -3,9 +3,7 @@ import '../styles/App.scss';
 import HeroDesc from './HeroDesc';
 import { Routes, Route } from 'react-router';
 import SignIn from './SignIn';
-import { useNavigate } from 'react-router-dom';
 import BtnList from './BtnList';
-
 import NewCase from './NewCase';
 import ListCases from './ListCases';
 import { useState, useEffect } from 'react';
@@ -14,19 +12,16 @@ import Login from './Login';
 import DetailListUser from './DetailListUser';
 import LoginBtn from './LoginBtn';
 import DetailUserCase from './DetailUserCase';
-
 import apiUser from '../services/api-user';
 import apiCase from '../services/api-case';
 import Footer from './Footer';
 import BtnListPublic from './BtnListPublic';
 import HeaderPages from './HeaderPages';
 import Contact from './Contact';
+import NoFilter from './NoFilter';
 
 function App() {
-  // const preference = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const [isDark, setIsDark] = useState(ls.get('isDark', ''));
-  // const [newUser, setNewUser] = useState({});
-  const [filterCases, setFilterCases] = useState([]);
   const [publicU, setPublicU] = useState(false);
   const [token, setToken] = useState(ls.get('token',''));
   const [username, setUsername] = useState(ls.get('username', ''));
@@ -40,10 +35,9 @@ function App() {
   const [casesOptionName, setCasesOptionName] = useState('');
   const [casesOptionBreed, setCasesOptionBreed] = useState('');
   const [casesOptionClinic, setCasesOptionClinic] = useState('');
-
   const [contact, setContact] = useState({ name: '', comments: '' });
   const [msgContact, setmsgContact] = useState('');
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(null);
 
 
   // const emptyUser = {
@@ -60,17 +54,18 @@ function App() {
     const params = {
       name: casesOptionName,
       breed: casesOptionBreed,
-      clinical: casesOptionClinic
+      clinic: casesOptionClinic
     };
-    apiCase.getFilterCase(params, token, idVet).then(response => {
-      if (response.patients.length > 0){
-        setList(response.patients);
-      } 
-    
-    })
+    apiCase.getFilterCase(params, token, idVet).then(data => {
+        if (data.success){
+          setList(data.patients);
+        } else {
+          console.error('Error al obtener los datos. Comprueba que tu conexión es correcta.');
+        }
+      })
 
   }, [casesOptionName, casesOptionBreed, casesOptionClinic, idVet, token]);
-
+  
   const handleCasesOptions = data => {
     if (data.key === 'name'){
       setCasesOptionName(data.value);
@@ -80,6 +75,22 @@ function App() {
       setCasesOptionClinic(data.value);
     }
   };
+
+  useEffect(() => {
+    const params = {
+      name: casesOptionName,
+      breed: casesOptionBreed,
+      clinic: casesOptionClinic
+    };
+    apiCase.getFilterCase(params, token, idVet).then(data => {
+        if (data.success){
+          setList(data.patients);
+        } else {
+          console.error('Error al obtener los datos. Comprueba que tu conexión es correcta.');
+        }
+      })
+
+  }, [casesOptionName, casesOptionBreed, casesOptionClinic, idVet, token]);
 
   useEffect(() => {
     ls.set('isDark', isDark);
