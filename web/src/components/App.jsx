@@ -59,9 +59,9 @@ function App() {
     };
     apiCase.getFilterCase(params).then(response => {
       if (response.patients.length > 0){
-        setPrivateList(response.patients);
+        return setPrivateList(response.patients);
       } else {
-        <NoFilter/>
+        return <NoFilter/>
       }
     
     })

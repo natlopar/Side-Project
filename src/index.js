@@ -247,6 +247,7 @@ server.get('/case', async (req, res) => {
   try {
     const connection = await getConnection();
     const {name, breed, clinical}= req.query;
+  
     let sql = "SELECT * FROM `case` WHERE 1"; 
     const values = [];
     if (name) {
@@ -261,7 +262,7 @@ server.get('/case', async (req, res) => {
       sql += " AND clinical LIKE ?";
       values.push(`%${clinical}%`);
     }
-    
+
     const [resultQuery] = await connection.query(sql, values);
    
     if (resultQuery.length === 0) {
