@@ -242,13 +242,16 @@ server.get('/getPublic', async (req, res) => {
 });
 
 //---------FILTRO BÚSQUEDA.........//
-
-server.get('/case', async (req, res) => {
+server.get('/case', authenticateToken, async (req, res) => {
   try {
     const connection = await getConnection();
-    const {name, breed, clinical}= req.query;
-    let sql = "SELECT * FROM `case` WHERE 1"; 
-    const values = [];
+    const { name, breed, clinical } = req.query;
+    const idVet = req.headers['id'];
+    const numberId = parseInt(idVet);
+    let sql = `SELECT * FROM \`case\` WHERE fk_Vet = ?`;
+
+    const values = [numberId];
+
     if (name) {
       sql += " AND name = ?";
       values.push(name);
@@ -261,8 +264,9 @@ server.get('/case', async (req, res) => {
       sql += " AND clinical LIKE ?";
       values.push(`%${clinical}%`);
     }
+
     const [resultQuery] = await connection.query(sql, values);
-   
+
     if (resultQuery.length === 0) {
       return res.status(200).json({
         success: true,
@@ -281,6 +285,46 @@ server.get('/case', async (req, res) => {
     });
   }
 });
+
+
+// server.get('/case', async (req, res) => {
+//   try {
+//     const connection = await getConnection();
+//     const {name, breed, clinical}= req.query;
+//     let sql = "SELECT * FROM `case` WHERE 1"; 
+//     const values = [];
+//     if (name) {
+//       sql += " AND name = ?";
+//       values.push(name);
+//     }
+//     if (breed) {
+//       sql += " AND breed LIKE ?";
+//       values.push(`%${breed}%`);
+//     }
+//     if (clinical) {
+//       sql += " AND clinical LIKE ?";
+//       values.push(`%${clinical}%`);
+//     }
+//     const [resultQuery] = await connection.query(sql, values);
+   
+//     if (resultQuery.length === 0) {
+//       return res.status(200).json({
+//         success: true,
+//         message: 'Ningún caso con esos criterios de búsqueda',
+//         patients: resultQuery
+//       });
+//     } else {
+//       res.status(200).json({ success: true, patients: resultQuery });
+//     }
+//     connection.end();
+//   } catch (error) {
+//     console.error("Error al obtener datos:", error);
+//     return res.status(404).json({
+//       success:false, 
+//       message: 'Error al obtener datos'
+//     });
+//   }
+// });
 
 
 server.post('/contact', async (req, res) => {
