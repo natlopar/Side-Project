@@ -24,10 +24,12 @@ function Filters({
   }
   return (
     <>
-   <form className='form'>
+   <form className='filters' >
+    <div className='filters__form'>
       <FilterName  casesOptionName={casesOptionName} handleChange={handleChange}/>
       <FilterBreed  casesOptionBreed={casesOptionBreed} handleChange={handleChange}/>
       <FilterClinical casesOptionClinic={casesOptionClinic} handleChange={handleChange}/>
+    </div>
       <ResetFilter setCasesOptionBreed={setCasesOptionBreed} setCasesOptionName={setCasesOptionName} setCasesOptionClinic={setCasesOptionClinic}/>
     </form>
   

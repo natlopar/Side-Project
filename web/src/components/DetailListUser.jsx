@@ -107,7 +107,7 @@ function DetailListUser({
   return (
     <>
       <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
-      <Scroll/>
+ 
       <div className="logout">
         <LogOut token={token} setToken={setToken} 
         setIdVet={setIdVet} setUsername={setUsername} setList={setList} setPrivateList={setPrivateList}/>

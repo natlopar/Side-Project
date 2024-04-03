@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import '../styles/filters.scss';
 
 function ResetFilter({setCasesOptionName,setCasesOptionBreed, setCasesOptionClinic }) {
 
@@ -12,8 +13,8 @@ function ResetFilter({setCasesOptionName,setCasesOptionBreed, setCasesOptionClin
  }
 
   return (
-    <div>
-         <button className="create__btn btn hover" aria-label='Borrar filtros' onClick={handleReset}>Borrar filtros</button>
+    <div className="filters__reset">
+         <button className="create__btn btn filters__reset--btn" aria-label='Borrar filtros' onClick={handleReset}>Borrar filtros</button>
     </div>
   )
 }
