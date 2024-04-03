@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import ls from '../services/localStorage';
+import PropTypes from "prop-types";
 
 function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateList }) {
   const navigate = useNavigate();
@@ -54,6 +55,16 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
       <p className={`${hiddenLog}user__msg`}>{messageLog}</p>
     </>
   );
+}
+
+
+LogOut.propTypes = {
+  token: PropTypes.string, 
+  setUsername: PropTypes.func,
+  setIdVet: PropTypes.func,
+  setList: PropTypes.func,
+  setPrivateList: PropTypes.func,
+  setToken: PropTypes.func
 }
 
 export default LogOut;

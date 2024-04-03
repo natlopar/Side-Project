@@ -4,6 +4,8 @@ import { Toggle } from './Toggle';
 import MenuNav from './MenuNav';
 import '../styles/header.scss';
 import { useState } from 'react';
+import PropTypes from "prop-types";
+
 
 
 
@@ -37,6 +39,11 @@ const handleMenu = (e)=> {
       </div>
     </header>
   );
+}
+
+HeaderPages.propTypes = {
+  isDark: PropTypes.bool, 
+  setIsDark: PropTypes.func, 
 }
 
 export default HeaderPages;

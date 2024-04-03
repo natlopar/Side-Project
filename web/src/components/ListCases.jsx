@@ -7,7 +7,8 @@ import apiCase from '../services/api-case';
 import LogOut from './LogOut';
 import { Link } from 'react-router-dom';
 import Scroll from './Scroll';
-import ls from '../services/localStorage'
+import ls from '../services/localStorage';
+import PropTypes from "prop-types";
 
 
 function ListCases({ 
@@ -61,5 +62,18 @@ setPublicList}) {
     </>
   );
 }
+
+ListCases.propTypes = {
+  token: PropTypes.string,
+  setToken: PropTypes.func,
+  setUsername: PropTypes.func,
+  setIdVet: PropTypes.func, 
+  setPublicList: PropTypes.func, 
+  setList: PropTypes.array, 
+  isDark: PropTypes.bool, 
+  setIsDark: PropTypes.func,
+  idVet: PropTypes.number,
+}
+
 
 export default ListCases;

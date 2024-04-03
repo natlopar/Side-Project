@@ -1,4 +1,5 @@
 import '../styles/filters.scss';
+import PropTypes from "prop-types";
 
 function Contact({handleContact, contact, setContact, msgContact}) {
 
@@ -41,5 +42,15 @@ function Contact({handleContact, contact, setContact, msgContact}) {
   </section>
   )
 }
+
+Contact.propTypes = {
+  handleContact: PropTypes.func,
+  contact: PropTypes.shape({
+    name: PropTypes.string,
+    comments: PropTypes.string
+  }),
+  setContact: PropTypes.func.isRequired,
+  msgContact: PropTypes.string,
+};
 
 export default Contact

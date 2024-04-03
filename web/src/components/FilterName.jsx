@@ -1,4 +1,4 @@
-
+import PropTypes from "prop-types";
 
 function FilterName({ casesOptionName, handleChange}) {
  
@@ -21,6 +21,11 @@ function FilterName({ casesOptionName, handleChange}) {
   </div>
   )
 }
-   
+
+FilterName.propTypes = {
+  casesOptionName: PropTypes.string, 
+  handleChange: PropTypes.func
+}
+
 
 export default FilterName

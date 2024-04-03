@@ -18,7 +18,7 @@ import Footer from './Footer';
 import BtnListPublic from './BtnListPublic';
 import HeaderPages from './HeaderPages';
 import Contact from './Contact';
-import NoFilter from './NoFilter';
+
 
 function App() {
   const [isDark, setIsDark] = useState(ls.get('isDark', ''));
@@ -194,7 +194,6 @@ function App() {
               casesOptionName={casesOptionName}
               casesOptionBreed={casesOptionBreed}
               casesOptionClinic={casesOptionClinic}
-              list={list}
               setList={setList}
               privateList={privateList}
             />

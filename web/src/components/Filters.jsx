@@ -1,8 +1,8 @@
 import '../styles/filters.scss';
 import FilterBreed from './FilterBreed';
-
 import FilterClinical from './FilterClinical';
 import FilterName from './FilterName';
+import PropTypes from "prop-types";
 
 function Filters({
   handleCasesOptions,
@@ -25,6 +25,13 @@ function Filters({
       <FilterClinical casesOptionClinic={casesOptionClinic} handleChange={handleChange}/>
     </form>
   );
+}
+
+Filters.propTypes = {
+  casesOptionName: PropTypes.string, 
+  casesOptionBreed: PropTypes.string, 
+  casesOptionClinic: PropTypes.string, 
+  handleCasesOptions: PropTypes.func
 }
 
 export default Filters;

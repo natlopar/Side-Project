@@ -6,6 +6,7 @@ import '../styles/signIn.scss';
 import {useState } from 'react';
 import ls from '../services/localStorage'
 import Scroll from './Scroll';
+import PropTypes from "prop-types";
 
 function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, setToken }) {
   const [login, setLogin] = useState({ username: '', password: '' });
@@ -168,5 +169,15 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
     </>
   );
 }
+
+Login.propTypes = {
+  handleLogin: PropTypes.func, 
+  isDark: PropTypes.bool, 
+  setIsDark: PropTypes.func, 
+  hiddenClass: PropTypes.string, 
+  setHiddenClass: PropTypes.func, 
+  setToken: PropTypes.func
+}
+
 
 export default Login;

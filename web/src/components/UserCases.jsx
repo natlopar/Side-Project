@@ -1,8 +1,8 @@
-import React from 'react';
+
 import '../styles/list.scss';
-import { Link } from 'react-router-dom';
 import dog from '../images/perro perfil.jpg'
 import cat from '../images/raya.jpg'
+import PropTypes from "prop-types";
 
 function UserCases({ data , idVet}) {
   return (
@@ -57,5 +57,19 @@ function UserCases({ data , idVet}) {
     </> 
   );
 }
+
+
+UserCases.propTypes = {
+  idVet: PropTypes.number,
+  data: PropTypes.shape({
+    specie: PropTypes.string,
+    name: PropTypes.string,
+    breed: PropTypes.string,
+    clinical: PropTypes.string,
+    results: PropTypes.string,
+    fk_Vet: PropTypes.number
+  })
+}
+
 
 export default UserCases;

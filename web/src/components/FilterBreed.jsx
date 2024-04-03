@@ -1,4 +1,4 @@
-
+import PropTypes from "prop-types";
 
 function FilterBreed({casesOptionBreed, handleChange}) {
   return (
@@ -17,6 +17,11 @@ function FilterBreed({casesOptionBreed, handleChange}) {
       />
   </div>
   );
+}
+
+FilterBreed.propTypes = {
+  casesOptionBreed: PropTypes.string, 
+  handleChange: PropTypes.func
 }
 
 export default FilterBreed;

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import '../styles/signIn.scss';
 import { useState } from 'react';
 import Scroll from './Scroll';
+import PropTypes from "prop-types";
 
 
 function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , message, loginBtn, hiddenClass}) {
@@ -43,27 +44,6 @@ function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , mess
     ev.preventDefault();
     sendSignUpToApi(registry);
   }
-  //   fetch("http://localhost:4000/signin", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(registry),
-  //   })
-
-  //   .then((response) =>  response.json())
-  //   .then((data)=>{
-  //     if (data.success) {
-  //       setMessage(
-  //         "Registro realizado correctamente. Ahora puedes iniciar sesión con tu nombre de usuario y contraseña."
-  //       );
-  //      setLoginBtn(<LoginBtn />);
-     
-  //     } else {
-  //       setMessage("No te puedes registrar. Revisa tus datos.");
-        
-  //     }
-  //   })
-   
-  // };
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' && event.target.value.trim() === '') {
@@ -266,6 +246,17 @@ function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , mess
      
     </>
   );
+}
+
+SignIn.propTypes = {
+  isDark: PropTypes.bool, 
+  setIsDark: PropTypes.func, 
+  hiddenClass: PropTypes.string, 
+  publicU: PropTypes.bool, 
+  setPublicU: PropTypes.func, 
+  sendSignUpToApi: PropTypes.func, 
+  message: PropTypes.string, 
+  loginBtn: PropTypes.any
 }
 
 export default SignIn;

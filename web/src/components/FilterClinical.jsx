@@ -1,4 +1,4 @@
-
+import PropTypes from "prop-types";
 
 function FilterClinical({ casesOptionClinic, handleChange}) {
   return (
@@ -16,6 +16,11 @@ function FilterClinical({ casesOptionClinic, handleChange}) {
     />
 </div>
   );
+}
+
+FilterClinical.propTypes = {
+  casesOptionClinic: PropTypes.string, 
+  handleChange: PropTypes.func
 }
 
 export default FilterClinical;

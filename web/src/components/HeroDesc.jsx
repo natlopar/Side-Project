@@ -5,8 +5,9 @@ import cat from '../images/cat.jpg';
 import heroVet from '../images/heroVet.jpg';
 import hero2 from '../images/hero2.webp';
 import LogOut from './LogOut';
-import '../styles/logOut.scss'
+import '../styles/logOut.scss';
 import Scroll from './Scroll';
+import PropTypes from "prop-types";
 
 function HeroDesc({token, setToken, setIdVet, setUsername, setList, setPrivateList}) {
   return (
@@ -77,6 +78,15 @@ function HeroDesc({token, setToken, setIdVet, setUsername, setList, setPrivateLi
 
     </section>
   );
+}
+
+HeroDesc.propTypes = {
+  token: PropTypes.string,
+  setToken: PropTypes.func,
+  setUsername: PropTypes.func,
+  setIdVet: PropTypes.func, 
+  setPrivateList: PropTypes.func, 
+  setList: PropTypes.array
 }
 
 export default HeroDesc;

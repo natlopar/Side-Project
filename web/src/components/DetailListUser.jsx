@@ -1,4 +1,3 @@
-
 import '../styles/logOut.scss';
 import { useEffect } from 'react';
 import UserCases from './UserCases';
@@ -11,6 +10,7 @@ import { Link } from 'react-router-dom';
 import LoginBtn from './LoginBtn';
 import Scroll from './Scroll';
 import NoFilter from './NoFilter';
+import PropTypes from "prop-types";
 
 function DetailListUser({
   token,
@@ -24,7 +24,6 @@ function DetailListUser({
   setPrivateList, 
   handleCasesOptions, 
   casesOptionName,
-  list, 
   privateList, 
   casesOptionBreed,
   casesOptionClinic, 
@@ -134,6 +133,25 @@ function DetailListUser({
       <CreateCase />
     </>
   );
+}
+
+DetailListUser.propTypes = {
+  token: PropTypes.string,
+  setToken: PropTypes.func,
+  idVet: PropTypes.number,
+  username: PropTypes.string,
+  isDark: PropTypes.bool,
+  setIsDark: PropTypes.func,
+  setUsername: PropTypes.func,
+  setIdVet: PropTypes.func, 
+  setPrivateList: PropTypes.func, 
+  handleCasesOptions: PropTypes.func, 
+  casesOptionName: PropTypes.string,
+  privateList: PropTypes.array, 
+  casesOptionBreed: PropTypes.string,
+  casesOptionClinic: PropTypes.string, 
+  setList: PropTypes.array, 
+ 
 }
 
 export default DetailListUser;

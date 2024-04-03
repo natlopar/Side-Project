@@ -4,6 +4,7 @@ import { Toggle } from './Toggle';
 import MenuNav from './MenuNav';
 import '../styles/header.scss';
 import { useState } from 'react';
+import PropTypes from "prop-types";
 
 
 function Header({ isDark, setIsDark }) {
@@ -38,6 +39,11 @@ const handleMenu = (e)=> {
     </header>
 
   );
+}
+
+Header.propTypes = {
+  isDark: PropTypes.bool, 
+  setIsDark: PropTypes.func, 
 }
 
 export default Header;

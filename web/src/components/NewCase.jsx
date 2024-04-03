@@ -5,6 +5,8 @@ import '../styles/newCase.scss';
 import { useForm } from 'react-hook-form';
 import BtnList from './BtnList';
 import Scroll from './Scroll';
+import PropTypes from "prop-types";
+
 
 function NewCase({ isDark, setIsDark, idVet}) {
   const [publicA, setPublicA] = useState (false)
@@ -342,4 +344,9 @@ function NewCase({ isDark, setIsDark, idVet}) {
   );
 }
 
+NewCase.propTypes = {
+  isDark: PropTypes.bool, 
+  setIsDark: PropTypes.func, 
+  idVet: PropTypes.number
+}
 export default NewCase;
