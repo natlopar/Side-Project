@@ -3,12 +3,16 @@ import FilterBreed from './FilterBreed';
 import FilterClinical from './FilterClinical';
 import FilterName from './FilterName';
 import PropTypes from "prop-types";
+import ResetFilter from './ResetFilter';
 
 function Filters({
   handleCasesOptions,
   casesOptionName,
   casesOptionBreed,
   casesOptionClinic,
+  setCasesOptionBreed, 
+  setCasesOptionClinic, 
+  setCasesOptionName
 }) {
 
   const handleChange =(e)=>{
@@ -19,12 +23,16 @@ function Filters({
     });
   }
   return (
+    <>
    <form className='form'>
       <FilterName  casesOptionName={casesOptionName} handleChange={handleChange}/>
       <FilterBreed  casesOptionBreed={casesOptionBreed} handleChange={handleChange}/>
       <FilterClinical casesOptionClinic={casesOptionClinic} handleChange={handleChange}/>
+      <ResetFilter setCasesOptionBreed={setCasesOptionBreed} setCasesOptionName={setCasesOptionName} setCasesOptionClinic={setCasesOptionClinic}/>
     </form>
-  );
+  
+    </>
+  )
 }
 
 Filters.propTypes = {

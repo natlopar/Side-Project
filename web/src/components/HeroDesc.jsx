@@ -86,7 +86,7 @@ HeroDesc.propTypes = {
   setUsername: PropTypes.func,
   setIdVet: PropTypes.func, 
   setPrivateList: PropTypes.func, 
-  setList: PropTypes.array
+  setList: PropTypes.func
 }
 
 export default HeroDesc;

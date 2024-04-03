@@ -28,6 +28,9 @@ function DetailListUser({
   casesOptionBreed,
   casesOptionClinic, 
   setList, 
+  setCasesOptionBreed, 
+  setCasesOptionClinic, 
+  setCasesOptionName
  
 }) {
 
@@ -115,7 +118,7 @@ function DetailListUser({
           <h2 className="sectionList__title">Este es tu historial de casos</h2>
           <div className='sectionList__filters'>
             <Filters handleCasesOptions={handleCasesOptions}
-              casesOptionName={casesOptionName} casesOptionBreed={casesOptionBreed} casesOptionClinic={casesOptionClinic} />
+              casesOptionName={casesOptionName} casesOptionBreed={casesOptionBreed} casesOptionClinic={casesOptionClinic} setCasesOptionBreed={setCasesOptionBreed} setCasesOptionClinic={setCasesOptionClinic} setCasesOptionName={setCasesOptionName} />
           </div>
 
           <ul className="sectionList">
@@ -150,7 +153,7 @@ DetailListUser.propTypes = {
   privateList: PropTypes.array, 
   casesOptionBreed: PropTypes.string,
   casesOptionClinic: PropTypes.string, 
-  setList: PropTypes.array, 
+  setList: PropTypes.func, 
  
 }
 
