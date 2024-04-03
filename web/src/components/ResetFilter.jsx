@@ -18,4 +18,10 @@ function ResetFilter({setCasesOptionName,setCasesOptionBreed, setCasesOptionClin
   )
 }
 
+ResetFilter.propTypes = {
+  setCasesOptionBreed: PropTypes.func, 
+  setCasesOptionClinic: PropTypes.func, 
+  setCasesOptionName: PropTypes.func
+}
+
 export default ResetFilter

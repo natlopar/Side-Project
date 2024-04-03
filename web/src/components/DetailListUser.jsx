@@ -154,6 +154,9 @@ DetailListUser.propTypes = {
   casesOptionBreed: PropTypes.string,
   casesOptionClinic: PropTypes.string, 
   setList: PropTypes.func, 
+  setCasesOptionBreed: PropTypes.func, 
+  setCasesOptionClinic: PropTypes.func, 
+  setCasesOptionName: PropTypes.func
  
 }
 

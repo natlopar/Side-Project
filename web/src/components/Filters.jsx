@@ -39,7 +39,10 @@ Filters.propTypes = {
   casesOptionName: PropTypes.string, 
   casesOptionBreed: PropTypes.string, 
   casesOptionClinic: PropTypes.string, 
-  handleCasesOptions: PropTypes.func
+  handleCasesOptions: PropTypes.func,
+  setCasesOptionBreed: PropTypes.func, 
+  setCasesOptionClinic: PropTypes.func, 
+  setCasesOptionName: PropTypes.func
 }
 
 export default Filters;
