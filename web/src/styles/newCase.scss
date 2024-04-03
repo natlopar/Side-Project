@@ -27,7 +27,6 @@
   }
 
   &__form {
-    
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -38,9 +37,12 @@
       flex-direction: row;
       flex-wrap: wrap;
       @media (min-width: 1024px) {
-        gap: 60px;
+        
       }
   
+    }
+    &--bottom {
+    margin: 0 auto;
     }
     &--buttons {
       margin: 0 auto;
@@ -51,7 +53,9 @@
       justify-content: center;
       @media (min-width: 768px) {
         flex-direction: row;
+   
       }
+   
     }
     &--input {
       
@@ -99,12 +103,11 @@
         width: 2rem;
         outline: none;
         border: 2px solid #ccc;
-        
-     
       }
       label {
         margin-left: 10px;
       }
+      
     }
     &--text {
       font-family: $fontSecond;

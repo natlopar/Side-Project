@@ -310,6 +310,7 @@ function NewCase({ isDark, setIsDark, idVet}) {
               Debes rellenar este campo
             </p>
           )}
+          <div className='case__form--bottom'>
           <div className="case__form--check">
            <input 
             type="checkbox" 
@@ -317,7 +318,6 @@ function NewCase({ isDark, setIsDark, idVet}) {
             id="public"
             checked= {publicA}
             onChange={handleInput}
-            
             />
             <label htmlFor="public">
               Indica si quieres hacer público este caso.
@@ -333,6 +333,7 @@ function NewCase({ isDark, setIsDark, idVet}) {
             onClick={handleCancel}
             />
            <BtnList/>
+          </div>
           </div>
             
         </form>
