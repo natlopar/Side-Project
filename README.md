@@ -5,7 +5,7 @@ Hola! Bienvenid@s a mi primer proyecto **Full Stack**, en el que he querido prac
 Esta aplicación web surge de mi aspiración por fusionar la tecnología con las demandas que surgen en la rutina diaria de los profesionales veterinarios de clínica. Esta iniciativa toma forma después de acumular 14 años de experiencia en este ámbito específico.
 
 
-El proyecto comenzó sin utilizar ningún framework ni librería, y a medida que he ido adquiriendo nuevos conocimientos, lo he ido adaptando gradualmente. Actualmente, el frontend está desarrollado utilizando **ReactJS y SaSS**, mientras que el backend está construido con **Node.js, Express.js y MySQL**.
+El proyecto comenzó sin utilizar ningún framework ni librería, y a medida que he ido adquiriendo nuevos conocimientos lo he ido adaptando gradualmente. Actualmente, el frontend está desarrollado utilizando **ReactJS y SaSS**, mientras que el backend está construido con **Node.js, Express.js y MySQL**.
 
 
  ## Características principales  ☑️
@@ -16,9 +16,9 @@ Esta app está diseñada para veterinarios que desean llevar un registro de sus 
 2. ***Registro de casos clínicos***: Los usuarios pueden registrar y almacenar los detalles de los casos clínicos de sus pacientes, incluyendo síntomas, diagnósticos, tratamientos y notas adicionales.
 3. ***Modo oscuro***: Toda la web puede cambiar de modo claro a modo oscuro seleccionando el icono correspondiente en el header, lo que hace la app más accesible.
 4. ***Privacidad y compartición pública***: Los usuarios tienen la opción de mantener sus casos como privados o compartirlos públicamente en la plataforma para que otros veterinarios puedan consultarlos.
-5. ***Búsqueda y filtrado de casos***  (en desarrollo): Los usuarios pueden buscar y filtrar casos clínicos por diversos criterios, como especie, diagnóstico o tratamiento. 
-6. ***Modificación de sus registros***: Los usuarios registrados podrán realizar las modificaciones que deseen en cada uno de sus casos cuando lo necesiten.
-7. ***Interacción social*** (en desarrollo): Los usuarios pueden comentar y calificar los casos clínicos compartidos por otros veterinarios, fomentando la interacción y el intercambio de conocimientos.
+5. ***Búsqueda y filtrado de casos*** : Los usuarios pueden buscar y filtrar casos clínicos por diversos criterios, como especie, raza, o cuadro clínico.
+6. ***Modificación de sus registros*** (en desarrollo) : Los usuarios registrados podrán realizar las modificaciones que deseen en cada uno de sus casos cuando lo necesiten.
+7. ***Interacción social*** (en desarrollo): Los usuarios podrán comentar y calificar los casos clínicos compartidos por otros veterinarios, fomentando la interacción y el intercambio de conocimientos.
 
 
 
@@ -27,7 +27,7 @@ Esta app está diseñada para veterinarios que desean llevar un registro de sus 
 ***Backend***: Node.js (con framework Express.js)
 ***Base de datos***: MySQL (MySQL Workbench)
 ***Autenticación y autorización***: JSON Web Tokens (JWT)
-***Despliegue***: Render
+***Despliegue***: Vercel / Render.
 
 ## Maquetación 
 
