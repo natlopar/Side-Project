@@ -9,7 +9,7 @@ import Scroll from './Scroll';
 import PropTypes from "prop-types";
 
 function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, setToken }) {
-  const [login, setLogin] = useState({ username: '', password: '' });
+  const [login, setLogin] = useState({ username: '', email: '', password: '' });
   const [message, setMessage] = useState('');
  
   const {

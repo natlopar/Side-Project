@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import Scroll from './Scroll';
 import ls from '../services/localStorage';
 import PropTypes from "prop-types";
+import PublicRender from './PublicRender';
 
 
 function ListCases({ 
@@ -50,15 +51,7 @@ setPublicList}) {
       </h2>
       <div className='sectionList__logOut'>
         <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername}/></div>
-      <ul className="sectionList">
-        {listCases.patients.map((data) => (
-          <li key={data.idCase} className="sectionList__ul">
-           <Link to={`/publicCase/${data.idCase}`} className='link'>
-            <UserCases data={data} idVet={idVet}/>
-            </Link>
-          </li>
-        ))}
-      </ul>
+         <PublicRender idVet={idVet} listCases={listCases} />
     </>
   );
 }

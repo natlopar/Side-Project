@@ -28,13 +28,11 @@ const handleMenu = (e)=> {
       </Link>
       <div className="header__style">
         <Toggle
-          className="header__style--light"
           isDark={isDark}
           handleChange={() => setIsDark(!isDark)}
         />
         <button  className={`${moveMenu} header__menu`}  onClick={handleMenu} aria-label='Menu'><i className= "fa-solid fa-bars"></i></button>
         {dropMenu ? <MenuNav /> : <div></div> }
-      {/* <DropMenu/> */}
       </div>
     </header>
 
