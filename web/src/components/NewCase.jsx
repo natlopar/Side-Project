@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import HeaderPages from './HeaderPages';
-import { useNavigate,} from 'react-router-dom';
-import '../styles/newCase.scss';
 import { useForm } from 'react-hook-form';
+import { useNavigate,} from 'react-router-dom';
+import HeaderPages from './HeaderPages';
+import '../styles/newCase.scss';
 import BtnList from './BtnList';
 import Scroll from './Scroll';
 import PropTypes from "prop-types";
