@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router';
 import '../styles/App.scss';
+import apiUser from '../services/api-user';
 import ls from '../services/localStorage';
 import Header from './shared/Header';
 import HeroDesc from './shared/HeroDesc';
@@ -12,7 +13,6 @@ import Login from './user/Login';
 import DetailListUser from './cases/DetailListUser';
 import LoginBtn from './user/LoginBtn';
 import DetailUserCase from './cases/DetailUserCase';
-import apiUser from '../services/api-user';
 import Footer from './shared/Footer';
 import BtnListPublic from './cases/BtnListPublic';
 import HeaderPages from './shared/HeaderPages';
@@ -22,7 +22,7 @@ import UpdateCase from './cases/UpdateCase'
 
 function App() {
   const [isDark, setIsDark] = useState(ls.get('isDark', true));
-  const [publicU, setPublicU] = useState(false);
+  const [publicSign, setPublicSign] = useState(false);
   const [token, setToken] = useState(ls.get('token',''));
   const [username, setUsername] = useState(ls.get('username', ''));
   const [idVet, setIdVet] = useState(ls.get('idVet', 0));
@@ -38,7 +38,26 @@ function App() {
   const [contact, setContact] = useState({ name: '', comments: '' });
   const [msgContact, setmsgContact] = useState('');
   const [list, setList] = useState(null);
-
+  
+  const [idCase, setIdCase] = useState(null);
+  const [publicAnimal, setPublicAnimal] = useState (false)
+  const [messageCase, setMessageCase] = useState("");
+  const [hiddenClassCase, setHiddenClassCase] = useState('hidden');
+  const [animal, setAnimal] = useState({
+    name: "",
+    specie: "Selecciona una especie",
+    breed: "",
+    birthday: "",
+    clinical: "",
+    exploration : "", 
+    tests: "", 
+    results: "", 
+    treatment: "",
+    evolution: "", 
+    comments: "", 
+    public: 0, 
+    fk_Vet: idVet,
+  });
 
   
   const handleCasesOptions = data => {
@@ -67,7 +86,7 @@ function App() {
 
   const sendSignUpToApi = (registry) => {
     apiUser.sendSignUpToApi(registry).then((response) => {
-      if (response.success === true) {
+      if (response.success) {
         setHiddenClassSign('');
         setMessage(
           'Registro realizado correctamente. Ahora puedes iniciar sesión con tu nombre de usuario y contraseña.'
@@ -83,7 +102,7 @@ function App() {
   };
 
   const handleContact = () => {
-    fetch('https://vetfolio-manager.onrender.com/contact', {
+    fetch('https://side-project-vetfolio-manager.vercel.app/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(contact),
@@ -140,8 +159,8 @@ function App() {
           element={
             <SignIn
               sendSignUpToApi={sendSignUpToApi}
-              publicU={publicU}
-              setPublicU={setPublicU}
+              publicSign={publicSign}
+              setPublicSign={setPublicSign}
               isDark={isDark}
               setIsDark={setIsDark}
               loginBtn={loginBtn}
@@ -189,10 +208,18 @@ function App() {
           path="/newCase"
           element={
             <NewCase
-              idVet={idVet}
-              publicU={publicU}
+              publicSign={publicSign}
               isDark={isDark}
               setIsDark={setIsDark}
+              animal = {animal}
+              setAnimal = {setAnimal}
+              publicAnimal = {publicAnimal}
+              setPublicAnimal = { setPublicAnimal }
+              messageCase = {messageCase}
+              setMessageCase = {setMessageCase}
+              hiddenClassCase = { hiddenClassCase}
+              setHiddenClassCase = {setHiddenClassCase}
+              setIdCase={setIdCase}
             />
           }
         />

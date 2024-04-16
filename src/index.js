@@ -38,7 +38,7 @@ async function getConnection() {
 
 //funciones token
 const generateToken = (payload) => {
-  const token = jwt.sign(payload, 'secreto', { expiresIn: '1h' }); 
+  const token = jwt.sign(payload, 'secreto', { expiresIn: '2h' }); 
   return token;
 };
 
@@ -189,8 +189,7 @@ server.get('/listUser', authenticateToken, async (req, res) => {
   }
 });
 
-const staticServer = './src/public-react';
-server.use(express.static(staticServer));
+
 
 //.................ENDPOINT AÑADIR UN CASO.............
 
@@ -200,9 +199,10 @@ server.post('/newCase', async (req, res) => {
   const insertCase = 'INSERT INTO `case` (`name`, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)';
   const [resultCases] = await connection.query(insertCase, [ name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet]);
   connection.end(); 
+  console.log(resultCases);
   res.json({
     success: true,
-    caseName: resultCases,
+    idCase: resultCases
   })
 })
 //......ENDPOINT MODIFICAR UN CASO.................
@@ -211,6 +211,9 @@ server.put('/updateCase/:id', async (req, res) => {
   const connection = await getConnection();
   const data = req.body;
   const idCase = req.query.id;
+  // if (isNaN(idCase)) {
+  //   return res.json({ success: false, error: 'El id del caso debe ser un número' });
+  // }
   const {name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet} = data;
   const updateCase = 'UPDATE `case` SET `name` = ?, specie = ?, breed = ?, birthday = 2023, clinical = ?, exploration = ?, tests = ?, results = ?, treatment = ?, evolution = ?, comments = ?, public = 1 WHERE fk_Vet = 19 AND idCase = 3';
   const [result] = await connection.query(updateCase, [ name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet, idCase]);
@@ -218,7 +221,7 @@ server.put('/updateCase/:id', async (req, res) => {
   res.json({
     success: true,
     message: 'actualizado correctamente',
-    changedRows: result.affectedRows,//validar si es 1, es que se ha actualizado ese caso
+    casesChanged: result.affectedRows,//validar si es 1, es que se ha actualizado ese caso
   })
  } catch (error) {
   res.json ({
@@ -233,11 +236,11 @@ server.put('/updateCase/:id', async (req, res) => {
 
 server.put('/logout', async (req, res) =>{
   const authHeader = req.headers["authorization"];
-  jwt.sign(authHeader, "", { expiresIn: 1 } , (logout, err) => {
+  jwt.sign(authHeader, "", { expiresIn: 2 } , (logout, err) => {
      if (logout) {
       res.json({success: true, message: 'se ha cerrado tu sesión'});
      } else {
-      res.json({success: false, message: 'no se ha podido cerrar la sesión'});
+      res.json({success: false, message: 'no se ha podido cerrar la sesión', err});
      }
   });
 })
@@ -327,3 +330,5 @@ server.post('/contact', async (req, res) => {
 
   });
 
+  const staticServer = './src/public-react';
+  server.use(express.static(staticServer));

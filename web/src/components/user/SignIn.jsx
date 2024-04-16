@@ -7,7 +7,7 @@ import Scroll from '../shared/Scroll';
 import PropTypes from "prop-types";
 
 
-function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , message, loginBtn, hiddenClass}) {
+function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi , message, loginBtn, hiddenClass}) {
 
   const [registry, setRegistry] = useState({
     userName: "",
@@ -33,7 +33,7 @@ function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , mess
     ev.preventDefault();
     const { id, value, checked } = ev.target;
     if (id === 'public') {
-      setPublicU(checked);
+      setPublicSign(checked);
       setRegistry({ ...registry, [id]: checked ? 1 : 0 });
     } else {
       setRegistry({ ...registry, [id]: value });
@@ -210,7 +210,7 @@ function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , mess
             type="checkbox" 
             name="public" 
             id="public"
-            checked= {publicU}
+            checked= {publicSign}
             onChange={handleInput}
             />
 
@@ -252,8 +252,8 @@ SignIn.propTypes = {
   isDark: PropTypes.bool, 
   setIsDark: PropTypes.func, 
   hiddenClass: PropTypes.string, 
-  publicU: PropTypes.bool, 
-  setPublicU: PropTypes.func, 
+  publicSign: PropTypes.bool, 
+  setPublicSign: PropTypes.func, 
   sendSignUpToApi: PropTypes.func, 
   message: PropTypes.string, 
   loginBtn: PropTypes.any
