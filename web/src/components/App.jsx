@@ -17,6 +17,7 @@ import Footer from './shared/Footer';
 import BtnListPublic from './cases/BtnListPublic';
 import HeaderPages from './shared/HeaderPages';
 import Contact from './shared/Contact';
+import UpdateCase from './cases/UpdateCase'
 
 
 function App() {
@@ -195,6 +196,7 @@ function App() {
             />
           }
         />
+        <Route path='/updateCase' element= { <UpdateCase />}/>
         <Route
           path="/publicList"
           element={

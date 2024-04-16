@@ -49,19 +49,20 @@ function UserCases({ data , idVet}) {
           </div>
         </Link> }
         
-         {data.fk_Vet === idVet ? (<><div className="icontool  link_rev">
+         {data.fk_Vet === idVet ? ( <Link to={'/updateCase'} className="link"><div className="icontool  link_rev">
             <span className="tooltip">Modificar</span>
             <span>
               {' '}
               <i className="fa-solid fa-file-pen"></i>
             </span>
           </div>
-          <div className="icontool link_rev">
+          </Link>) : <span></span>}
+          { data.fk_Vet === idVet ? <Link to={'/listUser'} className="link"> <div className="icontool link_rev">
             <span className="tooltip">Eliminar</span>
             <span>
               <i className=" fa-solid fa-trash"></i>
             </span>
-          </div> </>) : <span></span>} 
+          </div></Link> : <span></span>}
         </nav>
       </article>
     </> 

@@ -1,14 +1,32 @@
 import { useForm } from "react-hook-form";
 import BtnList from "./BtnList";
+import { useNavigate,} from 'react-router-dom';
 
-function FormNewCase( {handleSubmit, animal, handleInput, handleCancel, publicA}) {
+function FormNewCase( {handleSubmit, animal, setAnimal, publicA, setPublicA}) {
   
+  const navigate = useNavigate();
     const {
         register,
         formState: { errors },
       } = useForm();
     
-  
+      const handleInput = (ev) => {
+        ev.preventDefault();
+        const { id, value, checked} = ev.target;
+      if (id === 'public') {
+          setPublicA(checked);
+          setAnimal({ ...animal, [id]: checked ? 1 : 0 });
+        } else {
+          setAnimal({ ...animal, [id]: checked ? 1 : value });
+        }
+      };
+
+      const handleCancel = (ev) => {
+        ev.preventDefault();
+        setAnimal({});
+        navigate("/listUser");
+      }; 
+
     return (
     <form className="case__form" onSubmit={handleSubmit}>
     <label htmlFor="" className="case__form--label">

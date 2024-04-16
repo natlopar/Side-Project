@@ -36,21 +36,21 @@ function NewCase({ isDark, setIsDark, idVet}) {
 
   const navigate = useNavigate();
 
-  const handleInput = (ev) => {
-    ev.preventDefault();
-    const { id, value, checked} = ev.target;
-  if (id === 'public') {
-      setPublicA(checked);
-      setAnimal({ ...animal, [id]: checked ? 1 : 0 });
-    } else {
-      setAnimal({ ...animal, [id]: checked ? 1 : value });
-    }
-  };
+  // const handleInput = (ev) => {
+  //   ev.preventDefault();
+  //   const { id, value, checked} = ev.target;
+  // if (id === 'public') {
+  //     setPublicA(checked);
+  //     setAnimal({ ...animal, [id]: checked ? 1 : 0 });
+  //   } else {
+  //     setAnimal({ ...animal, [id]: checked ? 1 : value });
+  //   }
+  // };
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
 
-    fetch("https://vetfolio-manager.onrender.com/newcase", {
+    fetch("https://side-project-vetfolio-manager.vercel.app/newCase", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(animal),
@@ -72,11 +72,11 @@ function NewCase({ isDark, setIsDark, idVet}) {
    
   };
   
-  const handleCancel = (ev) => {
-    ev.preventDefault();
-    setAnimal({});
-    navigate("/listUser");
-  };
+  // const handleCancel = (ev) => {
+  //   ev.preventDefault();
+  //   setAnimal({});
+  //   navigate("/listUser");
+  // };
 
   return (
     <>
@@ -84,7 +84,7 @@ function NewCase({ isDark, setIsDark, idVet}) {
       <HeaderPages isDark={isDark} setIsDark={setIsDark} />
       <div className="case">
         <h3 className="case__title"><i className="case__title--icon fa-solid fa-paw"></i>Crea tu caso</h3>
-        <FormNewCase handleCancel={handleCancel} handleInput={handleInput} handleSubmit={handleSubmit} animal={animal} publicA={publicA}/>
+        <FormNewCase setPublicA={setPublicA} setAnimal={setAnimal} handleSubmit={handleSubmit} animal={animal} publicA={publicA}/>
        
         <p className={`${hiddenClass} user__msg`}>{message}</p>
 

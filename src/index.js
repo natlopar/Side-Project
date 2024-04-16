@@ -205,6 +205,29 @@ server.post('/newCase', async (req, res) => {
     caseName: resultCases,
   })
 })
+//......ENDPOINT MODIFICAR UN CASO.................
+server.put('/updateCase/:id', async (req, res) => {
+ try{
+  const connection = await getConnection();
+  const data = req.body;
+  const idCase = req.query.id;
+  const {name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet} = data;
+  const updateCase = 'UPDATE `case` SET `name` = ?, specie = ?, breed = ?, birthday = 2023, clinical = ?, exploration = ?, tests = ?, results = ?, treatment = ?, evolution = ?, comments = ?, public = 1 WHERE fk_Vet = 19 AND idCase = 3';
+  const [result] = await connection.query(updateCase, [ name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet, idCase]);
+  connection.end(); 
+  res.json({
+    success: true,
+    message: 'actualizado correctamente',
+    changedRows: result.affectedRows,//validar si es 1, es que se ha actualizado ese caso
+  })
+ } catch (error) {
+  res.json ({
+    success: false,
+    error: error
+  })
+ }
+})
+
 
 //----ENDPOINT CIERRE SESION----------------
 
