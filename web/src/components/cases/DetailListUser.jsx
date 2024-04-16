@@ -1,15 +1,14 @@
-import '../styles/logOut.scss';
-import '../styles/list.scss';
-import apiCase from '../services/api-case'
+import '../../styles/logOut.scss';
+import '../../styles/list.scss';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import apiCase from '../../services/api-case'
 import UserCases from './UserCases';
 import CreateCase from './CreateCase';
-import LogOut from './LogOut';
-import Welcome from './Welcome';
+import LogOut from '../user/LogOut';
+import Welcome from '../shared/Welcome';
 import Filters from './Filters';
-import LoginBtn from './LoginBtn';
-import Scroll from './Scroll';
+import LoginBtn from '../user/LoginBtn';
+import Scroll from '../shared/Scroll';
 import NoFilter from './NoFilter';
 import PropTypes from "prop-types";
 

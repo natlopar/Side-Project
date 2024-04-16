@@ -1,9 +1,9 @@
+import '../../styles/signIn.scss';
 import { useNavigate } from 'react-router-dom';
-import HeaderPages from './HeaderPages';
 import { useForm } from 'react-hook-form';
-import '../styles/signIn.scss';
 import { useState } from 'react';
-import Scroll from './Scroll';
+import HeaderPages from '../shared/HeaderPages';
+import Scroll from '../shared/Scroll';
 import PropTypes from "prop-types";
 
 

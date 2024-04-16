@@ -1,8 +1,8 @@
+import '../../styles/signIn.scss';
 import HeaderPages from './HeaderPages';
 import TitleWelcome from './TitleWelcome';
 import PropTypes from "prop-types";
 
-import '../styles/signIn.scss';
 
 function Welcome({username, isDark, setIsDark}) {
   return (

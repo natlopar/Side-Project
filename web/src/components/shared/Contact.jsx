@@ -1,4 +1,4 @@
-import '../styles/filters.scss';
+import '../../styles/filters.scss';
 import PropTypes from "prop-types";
 
 function Contact({handleContact, contact, setContact, msgContact}) {

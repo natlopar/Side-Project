@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
-import logo from '../images/logoVET.png';
+import '../../styles/header.scss';
 import { Toggle } from './Toggle';
-import MenuNav from './MenuNav';
-import '../styles/header.scss';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import logo from '../../images/logoVET.png';
+import MenuNav from './MenuNav';
 import PropTypes from "prop-types";
 
 

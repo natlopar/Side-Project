@@ -1,4 +1,4 @@
-import '../styles/toggle.scss';
+import '../../styles/toggle.scss';
 import PropTypes from "prop-types";
 
 export const Toggle = ({ handleChange, isDark }) => {

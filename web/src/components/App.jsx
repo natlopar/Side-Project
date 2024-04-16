@@ -1,22 +1,22 @@
+import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router';
 import '../styles/App.scss';
 import ls from '../services/localStorage';
-import { Routes, Route } from 'react-router';
-import { useState, useEffect } from 'react';
-import Header from './Header';
-import HeroDesc from './HeroDesc';
-import SignIn from './SignIn';
-import BtnList from './BtnList';
-import NewCase from './NewCase';
-import ListCases from './ListCases';
-import Login from './Login';
-import DetailListUser from './DetailListUser';
-import LoginBtn from './LoginBtn';
-import DetailUserCase from './DetailUserCase';
+import Header from './shared/Header';
+import HeroDesc from './shared/HeroDesc';
+import SignIn from './user/SignIn';
+import BtnList from './cases/BtnList';
+import NewCase from './cases/NewCase';
+import ListCases from './cases/ListCases';
+import Login from './user/Login';
+import DetailListUser from './cases/DetailListUser';
+import LoginBtn from './user/LoginBtn';
+import DetailUserCase from './cases/DetailUserCase';
 import apiUser from '../services/api-user';
-import Footer from './Footer';
-import BtnListPublic from './BtnListPublic';
-import HeaderPages from './HeaderPages';
-import Contact from './Contact';
+import Footer from './shared/Footer';
+import BtnListPublic from './cases/BtnListPublic';
+import HeaderPages from './shared/HeaderPages';
+import Contact from './shared/Contact';
 
 
 function App() {

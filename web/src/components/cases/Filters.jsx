@@ -1,4 +1,4 @@
-import '../styles/filters.scss';
+import '../../styles/filters.scss';
 import FilterBreed from './FilterBreed';
 import FilterClinical from './FilterClinical';
 import FilterName from './FilterName';

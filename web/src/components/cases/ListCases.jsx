@@ -1,13 +1,11 @@
 
-import '../styles/list.scss';
-import Welcome from './Welcome';
-import UserCases from './UserCases';
+import '../../styles/list.scss';
+import Welcome from '../shared/Welcome';
 import { useEffect, useState } from 'react';
-import apiCase from '../services/api-case';
-import LogOut from './LogOut';
-import { Link } from 'react-router-dom';
-import Scroll from './Scroll';
-import ls from '../services/localStorage';
+import apiCase from '../../services/api-case';
+import LogOut from '../user/LogOut';
+import Scroll from '../shared/Scroll';
+import ls from '../../services/localStorage';
 import PropTypes from "prop-types";
 import PublicRender from './PublicRender';
 

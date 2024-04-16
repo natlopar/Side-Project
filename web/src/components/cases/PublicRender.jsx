@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import UserCases from './UserCases';
 
 function PublicRender({ listCases, idVet }) {
