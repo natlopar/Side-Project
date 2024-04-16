@@ -5,9 +5,7 @@ function PublicRender({ listCases, idVet }) {
     <ul className="sectionList">
       {listCases.patients.map((data) => (
         <li key={data.idCase} className="sectionList__ul">
-          
             <UserCases data={data} idVet={idVet} />
-   
         </li>
       ))}
     </ul>

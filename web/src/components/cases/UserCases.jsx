@@ -33,14 +33,22 @@ function UserCases({ data , idVet}) {
           <p className="listPet__desc">{data.results}</p>
         </div>
         <nav className="listPet__btn ">
-        <Link to={`/case/${data.idCase}`} className='link'>
+          {data.fk_Vet === idVet ? <Link to={`/case/${data.idCase}`} className='link'>
           <div className="icontool link_rev ">
             <span className="tooltip">Revisar</span>
             <span>
               <i className=" fa-solid fa-book-medical"></i>
             </span>
           </div>
-        </Link>
+        </Link> : <Link to={`/publicCase/${data.idCase}`} className='link'>
+          <div className="icontool link_rev ">
+            <span className="tooltip">Revisar</span>
+            <span>
+              <i className=" fa-solid fa-book-medical"></i>
+            </span>
+          </div>
+        </Link> }
+        
          {data.fk_Vet === idVet ? (<><div className="icontool  link_rev">
             <span className="tooltip">Modificar</span>
             <span>
