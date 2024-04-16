@@ -1,14 +1,14 @@
 
 
 const getPublicCases= () => {
-  return fetch ("https://side-project-vetfolio-manager-web.vercel.app/getPublic")
+  return fetch ("https://side-project-vetfolio-manager.vercel.app/getPublic")
     .then(response => response.json())
     .then(data=>
           data)
 }
 
 const getFilterCase = (params, token, idVet) => {
-  return fetch(`https://side-project-vetfolio-manager-web.vercel.app/case?name=${params.name}&breed=${params.breed}&clinical=${params.clinic}`, 
+  return fetch(`https://side-project-vetfolio-manager.vercel.app/case?name=${params.name}&breed=${params.breed}&clinical=${params.clinic}`, 
   {
     method: 'GET',
     headers: {

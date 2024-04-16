@@ -10,7 +10,7 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
   const handleLogOut = (e) => {
     e.preventDefault();
     if (token !== '') {
-      fetch('https://vetfolio-manager.onrender.com/logout', {
+      fetch('https://side-project-vetfolio-manager.vercel.app/logout', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

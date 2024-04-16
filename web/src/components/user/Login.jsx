@@ -27,7 +27,7 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
   const handleSubmit = async (ev) => {
     ev.preventDefault();
 
-    const response = await fetch('https://side-project-vetfolio-manager-web.vercel.app/login', {
+    const response = await fetch('https://side-project-vetfolio-manager.vercel.app/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(login),
