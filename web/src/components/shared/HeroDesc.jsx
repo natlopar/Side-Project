@@ -1,11 +1,11 @@
+import '../../styles/heroDesc.scss';
+import '../../styles/logOut.scss';
 import { Link } from 'react-router-dom';
-import '../styles/heroDesc.scss';
-import dog from '../images/perro.jpg';
-import cat from '../images/cat.jpg';
-import heroVet from '../images/heroVet.jpg';
-import hero2 from '../images/hero2.webp';
-import LogOut from './LogOut';
-import '../styles/logOut.scss';
+import dog from '../../images/perro.jpg';
+import cat from '../../images/cat.jpg';
+import heroVet from '../../images/heroVet.jpg';
+import hero2 from '../../images/hero2.webp';
+import LogOut from '../user/LogOut';
 import Scroll from './Scroll';
 import PropTypes from "prop-types";
 
@@ -86,7 +86,7 @@ HeroDesc.propTypes = {
   setUsername: PropTypes.func,
   setIdVet: PropTypes.func, 
   setPrivateList: PropTypes.func, 
-  setList: PropTypes.array
+  setList: PropTypes.func
 }
 
 export default HeroDesc;

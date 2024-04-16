@@ -1,6 +1,6 @@
 
+import '../../styles/signIn.scss';
 import { Link } from 'react-router-dom';
-import '../styles/signIn.scss';
 
 function LoginBtn() {
   return (

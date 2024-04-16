@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import ls from '../services/localStorage';
+import ls from '../../services/localStorage';
 import PropTypes from "prop-types";
 
 function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateList }) {

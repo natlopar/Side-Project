@@ -1,4 +1,4 @@
-import '../styles/signIn.scss';
+import '../../styles/signIn.scss';
 import PropTypes from "prop-types";
 
 function TitleWelcome({username}) {

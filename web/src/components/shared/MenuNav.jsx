@@ -8,7 +8,6 @@ function MenuNav() {
     <Link to={"/signIn"} className="link"><li>Regístrate</li></Link> 
     <Link to={"/publicList"} className="link"><li>Casos públicos</li></Link>
     <Link to={"/listUser"} className="link"><li>Mi historial</li></Link>
-
    </ul>
   )
 }

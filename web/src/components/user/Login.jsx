@@ -1,15 +1,15 @@
 // import { Link } from 'react-router-dom';
-import HeaderPages from './HeaderPages';
+import '../../styles/signIn.scss';
+import {useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import '../styles/signIn.scss';
-import {useState } from 'react';
-import ls from '../services/localStorage'
-import Scroll from './Scroll';
+import HeaderPages from '../shared/HeaderPages';
+import ls from '../../services/localStorage'
+import Scroll from '../shared/Scroll';
 import PropTypes from "prop-types";
 
 function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, setToken }) {
-  const [login, setLogin] = useState({ username: '', password: '' });
+  const [login, setLogin] = useState({ username: '', email: '', password: '' });
   const [message, setMessage] = useState('');
  
   const {

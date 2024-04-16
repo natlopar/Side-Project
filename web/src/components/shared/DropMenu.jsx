@@ -1,6 +1,6 @@
-import Dropdown from 'react-bootstrap/Dropdown';
+import '../../styles/header.scss'
 import { Link } from 'react-router-dom';
-import '../styles/header.scss'
+import Dropdown from 'react-bootstrap/Dropdown';
 
 
 function DropMenu() {

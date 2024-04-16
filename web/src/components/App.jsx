@@ -1,27 +1,26 @@
-import Header from './Header';
-import '../styles/App.scss';
-import HeroDesc from './HeroDesc';
-import { Routes, Route } from 'react-router';
-import SignIn from './SignIn';
-import BtnList from './BtnList';
-import NewCase from './NewCase';
-import ListCases from './ListCases';
 import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router';
+import '../styles/App.scss';
 import ls from '../services/localStorage';
-import Login from './Login';
-import DetailListUser from './DetailListUser';
-import LoginBtn from './LoginBtn';
-import DetailUserCase from './DetailUserCase';
+import Header from './shared/Header';
+import HeroDesc from './shared/HeroDesc';
+import SignIn from './user/SignIn';
+import BtnList from './cases/BtnList';
+import NewCase from './cases/NewCase';
+import ListCases from './cases/ListCases';
+import Login from './user/Login';
+import DetailListUser from './cases/DetailListUser';
+import LoginBtn from './user/LoginBtn';
+import DetailUserCase from './cases/DetailUserCase';
 import apiUser from '../services/api-user';
-import apiCase from '../services/api-case';
-import Footer from './Footer';
-import BtnListPublic from './BtnListPublic';
-import HeaderPages from './HeaderPages';
-import Contact from './Contact';
+import Footer from './shared/Footer';
+import BtnListPublic from './cases/BtnListPublic';
+import HeaderPages from './shared/HeaderPages';
+import Contact from './shared/Contact';
 
 
 function App() {
-  const [isDark, setIsDark] = useState(ls.get('isDark', ''));
+  const [isDark, setIsDark] = useState(ls.get('isDark', true));
   const [publicU, setPublicU] = useState(false);
   const [token, setToken] = useState(ls.get('token',''));
   const [username, setUsername] = useState(ls.get('username', ''));
@@ -39,21 +38,7 @@ function App() {
   const [msgContact, setmsgContact] = useState('');
   const [list, setList] = useState(null);
 
-  useEffect(() => {
-    const params = {
-      name: casesOptionName,
-      breed: casesOptionBreed,
-      clinic: casesOptionClinic
-    };
-    apiCase.getFilterCase(params, token, idVet).then(data => {
-        if (data.success){
-          setList(data.patients);
-        } else {
-          console.error('Error al obtener los datos. Comprueba que tu conexión es correcta.');
-        }
-      })
 
-  }, [casesOptionName, casesOptionBreed, casesOptionClinic]);
   
   const handleCasesOptions = data => {
     if (data.key === 'name'){

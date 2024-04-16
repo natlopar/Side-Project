@@ -1,14 +1,14 @@
-import '../styles/logOut.scss';
+import '../../styles/logOut.scss';
+import '../../styles/list.scss';
 import { useEffect } from 'react';
+import apiCase from '../../services/api-case'
 import UserCases from './UserCases';
 import CreateCase from './CreateCase';
-import LogOut from './LogOut';
-import '../styles/list.scss';
-import Welcome from './Welcome';
+import LogOut from '../user/LogOut';
+import Welcome from '../shared/Welcome';
 import Filters from './Filters';
-import { Link } from 'react-router-dom';
-import LoginBtn from './LoginBtn';
-import Scroll from './Scroll';
+import LoginBtn from '../user/LoginBtn';
+import Scroll from '../shared/Scroll';
 import NoFilter from './NoFilter';
 import PropTypes from "prop-types";
 
@@ -61,6 +61,21 @@ function DetailListUser({
     fetchData();
   }, [token, idVet, setPrivateList]);
 
+  useEffect(() => {
+    const params = {
+      name: casesOptionName,
+      breed: casesOptionBreed,
+      clinic: casesOptionClinic
+    };
+    apiCase.getFilterCase(params, token, idVet).then(data => {
+        if (data.success){
+          setList(data.patients);
+        } else {
+          console.error('Error al obtener los datos. Comprueba que tu conexión es correcta.');
+        }
+      })
+  }, [casesOptionName, casesOptionBreed, casesOptionClinic]);
+
   if (!token) {
     return (
       <>
@@ -94,9 +109,9 @@ function DetailListUser({
 
      filteredData.map(data => (
       <li key={data.idCase} className="sectionList__ul">
-        <Link to={`/case/${data.idCase}`} className='link'>
+      
           <UserCases data={data} idVet={idVet} />
-        </Link>
+        
       </li>
     ));
   };
@@ -150,7 +165,7 @@ DetailListUser.propTypes = {
   privateList: PropTypes.array, 
   casesOptionBreed: PropTypes.string,
   casesOptionClinic: PropTypes.string, 
-  setList: PropTypes.array, 
+  setList: PropTypes.func, 
  
 }
 
