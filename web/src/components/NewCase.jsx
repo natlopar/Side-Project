@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import HeaderPages from './HeaderPages';
-import { useNavigate,} from 'react-router-dom';
 import '../styles/newCase.scss';
+import { useState } from 'react';
+import { useNavigate,} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import HeaderPages from './HeaderPages';
 import BtnList from './BtnList';
 import Scroll from './Scroll';
 import PropTypes from "prop-types";
@@ -74,7 +74,7 @@ function NewCase({ isDark, setIsDark, idVet}) {
   const handleCancel = (ev) => {
     ev.preventDefault();
     setAnimal({});
-    navigate("/");
+    navigate("/listUser");
   };
 
   return (

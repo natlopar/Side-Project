@@ -51,7 +51,7 @@ setPublicList}) {
       </h2>
       <div className='sectionList__logOut'>
         <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername}/></div>
-         <PublicRender idVet={idVet} listCases={listCases} />
+        <PublicRender idVet={idVet} listCases={listCases} />
     </>
   );
 }

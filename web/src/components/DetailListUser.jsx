@@ -110,9 +110,9 @@ function DetailListUser({
 
      filteredData.map(data => (
       <li key={data.idCase} className="sectionList__ul">
-        <Link to={`/case/${data.idCase}`} className='link'>
+      
           <UserCases data={data} idVet={idVet} />
-        </Link>
+        
       </li>
     ));
   };

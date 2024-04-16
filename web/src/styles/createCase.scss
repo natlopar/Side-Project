@@ -27,14 +27,15 @@
     font-family: $fontSecond;
     background-color: $colorDark;
     color: $colorLight;
-    width: 170px;
+    width: 120px;
     margin: 0 auto;
     margin-top: 20px;
     font-size: 1.5rem;
-    padding: 5px;
+    padding: 10px;
     font-weight: 500;
     @media (min-width: 768px) {
       font-size: 2.5rem;
+      width: 200px;
     }
   }
 }
