@@ -153,7 +153,7 @@ function DetailListUser({
 DetailListUser.propTypes = {
   token: PropTypes.string,
   setToken: PropTypes.func,
-  idVet: PropTypes.number,
+  idVet: PropTypes.any,
   username: PropTypes.string,
   isDark: PropTypes.bool,
   setIsDark: PropTypes.func,

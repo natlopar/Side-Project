@@ -20,7 +20,7 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          setToken('');
+          token && setToken('');
           setUsername('');
           setIdVet('');
           ls.remove('token');
@@ -32,6 +32,7 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
           navigate('/');
           setList(null);
           setPrivateList([]);
+         
         });
     } else {
       setUsername('');
@@ -45,6 +46,7 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
       // setMessageLog('No tienes iniciada la sesión');
       // setHiddenLog('');
     }
+
   };
 
   return (

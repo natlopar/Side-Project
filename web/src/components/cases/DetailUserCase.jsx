@@ -94,7 +94,7 @@ function DetailUserCase({ list, idVet }) {
 
 DetailUserCase.propTypes = {
   list: PropTypes.array, 
-  idVet: PropTypes.number
+  idVet: PropTypes.any
 }
 
 export default DetailUserCase;

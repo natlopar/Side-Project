@@ -63,7 +63,7 @@ ListCases.propTypes = {
   setList: PropTypes.array, 
   isDark: PropTypes.bool, 
   setIsDark: PropTypes.func,
-  idVet: PropTypes.number,
+  idVet: PropTypes.any,
 }
 
 
