@@ -202,7 +202,7 @@ server.post('/newCase', async (req, res) => {
   console.log(resultCases);
   res.json({
     success: true,
-    idCase: resultCases
+    result: resultCases
   })
 })
 //......ENDPOINT MODIFICAR UN CASO.................

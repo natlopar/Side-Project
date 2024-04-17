@@ -43,7 +43,7 @@ function App() {
   const [publicAnimal, setPublicAnimal] = useState (false)
   const [messageCase, setMessageCase] = useState("");
   const [hiddenClassCase, setHiddenClassCase] = useState('hidden');
-  const [animal, setAnimal] = useState({
+  const [animal, setAnimal] = useState( {
     name: "",
     specie: "Selecciona una especie",
     breed: "",
@@ -56,9 +56,24 @@ function App() {
     evolution: "", 
     comments: "", 
     public: 0, 
-    fk_Vet: idVet,
+    fk_Vet: idVet
   });
-
+  
+  const resetAnimal = {
+    name: "",
+    specie: "Selecciona una especie",
+    breed: "",
+    birthday: "",
+    clinical: "",
+    exploration : "", 
+    tests: "", 
+    results: "", 
+    treatment: "",
+    evolution: "", 
+    comments: "", 
+    public: 0, 
+    fk_Vet: idVet
+  }
   
   const handleCasesOptions = data => {
     if (data.key === 'name'){
@@ -220,6 +235,7 @@ function App() {
               hiddenClassCase = { hiddenClassCase}
               setHiddenClassCase = {setHiddenClassCase}
               setIdCase={setIdCase}
+              resetAnimal={resetAnimal}
             />
           }
         />

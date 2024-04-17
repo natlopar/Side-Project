@@ -16,13 +16,14 @@ function NewCase({
   setMessageCase,
   hiddenClassCase,
   setHiddenClassCase, 
-  setIdCase
+  setIdCase, 
+  resetAnimal
 }) {
-  const handleSubmit = (ev) => {
+  const handleSubmit = async (ev) => {
     ev.preventDefault();
-    apiCase.createCase(animal).then(data => {
+    await apiCase.createCase(animal).then(data => {
         if (data.success) {
-          const idCase = data.insertId;
+          const idCase = data.caseName.insertId;
           setMessageCase('Caso añadido correctamente a tu historial.');
           setHiddenClassCase('');
           setIdCase(idCase);
@@ -33,7 +34,14 @@ function NewCase({
           setHiddenClassCase('');
         }
       });
+      await setAnimal(resetAnimal);
   };
+
+  const handleResetMessage = () => {
+    setMessageCase('');
+    setHiddenClassCase('hidden');
+  }
+
 
   return (
     <>
@@ -49,6 +57,7 @@ function NewCase({
           handleSubmit={handleSubmit}
           animal={animal}
           publicAnimal={publicAnimal}
+          handleResetMessage= {handleResetMessage}
         />
 
         <p className={`${hiddenClassCase} user__msg`}>{messageCase}</p>

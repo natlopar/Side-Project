@@ -8,6 +8,7 @@ function FormNewCase({
   setAnimal,
   publicAnimal,
   setPublicAnimal,
+  handleResetMessage
 }) {
   const navigate = useNavigate();
   const {
@@ -27,6 +28,7 @@ function FormNewCase({
     }
    
   };
+
 
   const handleCancel = (ev) => {
     ev.preventDefault();
@@ -293,7 +295,7 @@ function FormNewCase({
           value="Cancelar"
           onClick={handleCancel}
         />
-        <BtnList />
+        <BtnList handleResetMessage= {handleResetMessage}/>
       </div>
     </form>
   );
