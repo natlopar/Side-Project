@@ -49,7 +49,7 @@ function UserCases({ data , idVet}) {
           </div>
         </Link> }
         
-         {data.fk_Vet === idVet ? ( <Link to={'/updateCase'} className="link"><div className="icontool  link_rev">
+         {data.fk_Vet === idVet ? ( <Link to={`/updateCase/${data.idCase}`} className="link"><div className="icontool  link_rev">
             <span className="tooltip">Modificar</span>
             <span>
               {' '}

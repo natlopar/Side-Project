@@ -242,7 +242,7 @@ function App() {
             />
           }
         />
-        <Route path='/updateCase' element= { <UpdateCase />}/>
+        <Route path='/updateCase/:id' element= { <UpdateCase isDark={isDark} setIsDark= {setIsDark} setPublicAnimal={setPublicAnimal} publicAnimal= {setPublicAnimal} setHiddenClassCase= {setHiddenClassCase} hiddenClassCase={hiddenClassCase} setAnimal={setAnimal} animal={animal} messageCase={messageCase} setMessageCase={setMessageCase} privateList={privateList} />}/>
         <Route
           path="/publicList"
           element={

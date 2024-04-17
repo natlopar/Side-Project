@@ -49,7 +49,7 @@ function NewCase({
       <HeaderPages isDark={isDark} setIsDark={setIsDark} />
       <div className="case">
         <h3 className="case__title">
-          <i className="case__title--icon fa-solid fa-paw"></i>Crea tu caso
+          <i className="case__title--icon fa-solid fa-paw"></i>  Crea tu caso
         </h3>
         <FormNewCase
           setPublicAnimal={setPublicAnimal}

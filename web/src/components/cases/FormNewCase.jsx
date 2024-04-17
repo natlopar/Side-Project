@@ -3,12 +3,13 @@ import BtnList from './BtnList';
 import { useNavigate } from 'react-router-dom';
 
 function FormNewCase({
-  handleSubmit,
+
   animal,
   setAnimal,
   publicAnimal,
   setPublicAnimal,
-  handleResetMessage
+  handleResetMessage,
+  idCase
 }) {
   const navigate = useNavigate();
   const {
@@ -25,7 +26,16 @@ function FormNewCase({
      
     } else {
       setAnimal({ ...animal, [id]: checked ? 1 : value });
+      
     }
+    // if (id === 'public') {
+    //   setPublicAnimal(checked);
+    // }
+    // setAnimal(prevAnimal => ({
+    //   ...prevAnimal,
+    //   [id]: checked ? 1 : value
+    // }));
+
    
   };
 
@@ -35,7 +45,20 @@ function FormNewCase({
     setAnimal({});
     navigate('/listUser');
   };
-
+ 
+  const handleSubmit = (ev) => {//el fetch da error
+    ev.preventDefault();//tenría que ejecutar un fetch u otro en fx de si estoy modificanto o creando un caso; crear una variable?
+    fetch(`https://side-project-vetfolio-manager.vercel.app/updateCase?idCase=${idCase}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(animal)
+    })
+    .then((response) =>  response.json())
+    .then(data => {
+      console.log(data);
+      return data
+   });
+  }
 
   
 
@@ -51,7 +74,7 @@ function FormNewCase({
         id="name"
         // autoComplete="name"
         required
-        value={animal.name}
+        defaultValue={animal.name}//no me recoge el valor del input para hacer el fetch
         onInput={handleInput}
         {...register('name', { required: true, maxLength: 20 })}
         aria-invalid={errors.name ? 'true' : 'false'}
@@ -289,6 +312,7 @@ function FormNewCase({
           value="Crear"
           className=" create__btn  btn hover"
         />
+        {/* crear un componente para los botones para poder añadirlos desde new case o desde update case; en update tendria que ser modificar caso el que ejecute submit */}
         <input
           className=" btn hover create__btn "
           type="button"
