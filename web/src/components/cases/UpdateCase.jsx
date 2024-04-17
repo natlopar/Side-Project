@@ -1,9 +1,11 @@
 import { useParams } from 'react-router-dom';
 import '../../styles/newCase.scss';
+import ls from '../../services/localStorage';
 import HeaderPages from '../shared/HeaderPages';
 import Scroll from '../shared/Scroll';
 import FormNewCase from './FormNewCase';
 import BtnUpdateCase from './BtnUpdateCase';
+import { useEffect } from 'react';
 
 
 function UpdateCase({isDark, setIsDark, setPublicAnimal, publicAnimal,setHiddenClassCase, hiddenClassCase, setAnimal, messageCase, setMessageCase , privateList }) {
@@ -12,7 +14,9 @@ function UpdateCase({isDark, setIsDark, setPublicAnimal, publicAnimal,setHiddenC
   const { id } = useParams();
   const idCase = parseInt(id);
   const animalData = privateList.find((one) => one.idCase === parseInt(id));
-  
+  useEffect (() => {
+    ls.set('animal', animalData);
+  }, [animalData])
 
   // const handleSubmit = async (ev) => {
   //   ev.preventDefault();

@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form';
 import BtnList from './BtnList';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import ls from '../../services/localStorage';
 
 
 function FormNewCase({
@@ -60,7 +62,11 @@ function FormNewCase({
   //     return data
   //  });
   // }
+//   let data = useRef();
+//  useEffect(()=> {
+//   data.current = ls.get('animal', animal);
 
+//  }, [animal])
   
 
   return (
