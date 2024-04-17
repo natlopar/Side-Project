@@ -8,7 +8,7 @@ import BtnUpdateCase from './BtnUpdateCase';
 import { useEffect } from 'react';
 
 
-function UpdateCase({isDark, setIsDark, handleResetMessage, setPublicAnimal, publicAnimal,setHiddenClassCase, hiddenClassCase, setAnimal, messageCase, setMessageCase , privateList }) {
+function UpdateCase({isDark, setIsDark, dataAnimal, handleResetMessage, setPublicAnimal, publicAnimal,setHiddenClassCase, hiddenClassCase, setAnimal, messageCase, setMessageCase , privateList }) {
 
 
   const { id } = useParams();
@@ -63,6 +63,7 @@ function UpdateCase({isDark, setIsDark, handleResetMessage, setPublicAnimal, pub
           setPublicAnimal={setPublicAnimal}
           setAnimal={setAnimal}
           idCase = {idCase}
+          dataAnimal={dataAnimal}
           // handleSubmit={handleSubmit}
           animal={animalData}
           publicAnimal={publicAnimal}

@@ -11,10 +11,10 @@ function FormNewCase({
   publicAnimal,
   setPublicAnimal,
   handleResetMessage,
-  
+  dataAnimal
 }) {
 
-  const [updateData, setUpdateData] = useState({})
+  const [updateData, setUpdateData] = useState(dataAnimal)
   const navigate = useNavigate();
   const {
     register,
@@ -48,8 +48,8 @@ function FormNewCase({
 
   const handleCancel = (ev) => {
     ev.preventDefault();
-    setAnimal({});
-    setUpdateData({})
+    setAnimal(dataAnimal);
+    setUpdateData(dataAnimal)
     navigate('/listUser');
   };
  
@@ -339,7 +339,7 @@ const resetUpdateData = () => {
           value="Cancelar"
           onClick={handleCancel}
         />
-        <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal}/>
+        <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal}/>
       </div>
     </form>
   );

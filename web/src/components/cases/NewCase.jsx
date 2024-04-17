@@ -35,7 +35,7 @@ function NewCase({
           setHiddenClassCase('');
         }
       });
-      await setAnimal(dataAnimal);
+      await setAnimal(animal);
   };
 
  
@@ -56,6 +56,7 @@ function NewCase({
           animal={animal}
           publicAnimal={publicAnimal}
           handleResetMessage= {handleResetMessage}
+          dataAnimal={dataAnimal}
         />
          <BtnCreateNewCase handleSubmitNew={handleSubmitNew}/>
 
