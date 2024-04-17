@@ -72,7 +72,7 @@ function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi 
             type="text"
             className="user__form--input"
             id="userName"
-            autoComplete='userName'
+            autoComplete='username'
             required
             value={registry.userName}
             onInput={handleInput}
@@ -92,7 +92,7 @@ function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi 
             type="text"
             className="user__form--input"
             id="nameVet"
-            autoComplete='nameVet'
+            autoComplete='namevet'
             required
             value={registry.nameVet}
             onInput={handleInput}
@@ -112,6 +112,7 @@ function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi 
             type="email"
             required
             className="user__form--input"
+            autoComplete='email'
             id="email"
           value={registry.email}
           onInput={handleInput}

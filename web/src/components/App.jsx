@@ -1,3 +1,4 @@
+import React, { Suspense } from 'react';
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router';
 import '../styles/App.scss';
@@ -8,9 +9,7 @@ import HeroDesc from './shared/HeroDesc';
 import SignIn from './user/SignIn';
 import BtnList from './cases/BtnList';
 import NewCase from './cases/NewCase';
-import ListCases from './cases/ListCases';
 import Login from './user/Login';
-import DetailListUser from './cases/DetailListUser';
 import LoginBtn from './user/LoginBtn';
 import DetailUserCase from './cases/DetailUserCase';
 import Footer from './shared/Footer';
@@ -18,6 +17,8 @@ import BtnListPublic from './cases/BtnListPublic';
 import HeaderPages from './shared/HeaderPages';
 import Contact from './shared/Contact';
 import UpdateCase from './cases/UpdateCase'
+const DetailListUser = React.lazy(() => import ('./cases/DetailListUser'));
+const ListCases = React.lazy(() => import ('./cases/ListCases'));
 
 
 function App() {
@@ -200,7 +201,8 @@ function App() {
         <Route
           path="/listUser"
           element={
-            <DetailListUser
+          <Suspense fallback = {<div>Cargando...</div>}>
+          <DetailListUser
               token={token}
               setToken={setToken}
               idVet={idVet}
@@ -217,6 +219,7 @@ function App() {
               setList={setList}
               privateList={privateList}
             />
+          </Suspense>
           }
         />
         <Route
@@ -243,6 +246,7 @@ function App() {
         <Route
           path="/publicList"
           element={
+            <Suspense fallback = {<div>Cargando...</div>}>
             <ListCases
               idVet={idVet}
               publicList={publicList}
@@ -252,6 +256,7 @@ function App() {
               setUsername={setUsername}
               setIdVet={setIdVet}
             />
+            </Suspense>
           }
         />
         <Route
