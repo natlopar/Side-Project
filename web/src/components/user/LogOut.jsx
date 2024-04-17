@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import ls from '../../services/localStorage';
 import PropTypes from "prop-types";
+import '../../styles/createCase.scss';
 
 function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateList }) {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
 
   return (
     <>
-      <button className="create__btn btn hover" onClick={handleLogOut} aria-label='Cerrar sesión'>
+      <button className="create__btn btn hover desc__subtitles" onClick={handleLogOut} aria-label='Cerrar sesión'>
         Cerrar sesión
       </button>
       <p className={`${hiddenLog}user__msg`}>{messageLog}</p>

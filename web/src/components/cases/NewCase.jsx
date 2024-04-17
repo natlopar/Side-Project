@@ -18,7 +18,8 @@ function NewCase({
   hiddenClassCase,
   setHiddenClassCase, 
   setIdCase, 
-  dataAnimal
+  dataAnimal, 
+  handleResetMessage
 }) {
   const handleSubmitNew = async () => {
     await apiCase.createCase(animal).then(data => {
@@ -37,10 +38,7 @@ function NewCase({
       await setAnimal(dataAnimal);
   };
 
-  const handleResetMessage = () => {
-    setMessageCase('');
-    setHiddenClassCase('hidden');
-  }
+ 
 
 
   return (

@@ -91,6 +91,12 @@ function App() {
     setIdVet(id);
   };
 
+  const handleResetMessage = () => {
+    setMessageCase('');
+    setHiddenClassCase('hidden');
+    
+  }
+
   const sendSignUpToApi = (registry) => {
     apiUser.sendSignUpToApi(registry).then((response) => {
       if (response.success) {
@@ -217,6 +223,7 @@ function App() {
           path="/newCase"
           element={
             <NewCase
+            handleResetMessage={handleResetMessage}
               publicSign={publicSign}
               isDark={isDark}
               setIsDark={setIsDark}
@@ -234,7 +241,7 @@ function App() {
             />
           }
         />
-        <Route path='/updateCase/:id' element= { <UpdateCase isDark={isDark} setIsDark= {setIsDark} setPublicAnimal={setPublicAnimal} publicAnimal= {setPublicAnimal} setHiddenClassCase= {setHiddenClassCase} hiddenClassCase={hiddenClassCase} setAnimal={setAnimal} animal={animal} messageCase={messageCase} setMessageCase={setMessageCase} privateList={privateList} />}/>
+        <Route path='/updateCase/:id' element= { <UpdateCase   handleResetMessage={handleResetMessage} isDark={isDark} setIsDark= {setIsDark} setPublicAnimal={setPublicAnimal} publicAnimal= {setPublicAnimal} setHiddenClassCase= {setHiddenClassCase} hiddenClassCase={hiddenClassCase} setAnimal={setAnimal} animal={animal} messageCase={messageCase} setMessageCase={setMessageCase} privateList={privateList} />}/>
         <Route
           path="/publicList"
           element={

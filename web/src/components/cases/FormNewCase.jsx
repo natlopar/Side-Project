@@ -1,12 +1,11 @@
 import { useForm } from 'react-hook-form';
 import BtnList from './BtnList';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ls from '../../services/localStorage';
 
 
 function FormNewCase({
-
   animal,
   setAnimal,
   publicAnimal,
@@ -14,6 +13,8 @@ function FormNewCase({
   handleResetMessage,
   
 }) {
+
+  const [updateData, setUpdateData] = useState({...animal})
   const navigate = useNavigate();
   const {
     register,
@@ -25,10 +26,10 @@ function FormNewCase({
     const { id, value, checked } = ev.target;
     if (id === 'public') {
       setPublicAnimal(checked);
-      setAnimal({ ...animal, [id]: checked ? 1 : 0 });
+      setUpdateData({ ...animal, [id]: checked ? 1 : 0 });
      
     } else {
-      setAnimal({ ...animal, [id]: checked ? 1 : value });
+      setUpdateData({ ...animal, [id]: checked ? 1 : value });
       
     }
     // if (id === 'public') {
@@ -46,6 +47,7 @@ function FormNewCase({
   const handleCancel = (ev) => {
     ev.preventDefault();
     setAnimal({});
+    setUpdateData({})
     navigate('/listUser');
   };
  
@@ -62,13 +64,16 @@ function FormNewCase({
   //     return data
   //  });
   // }
-//   let data = useRef();
-//  useEffect(()=> {
-//   data.current = ls.get('animal', animal);
 
-//  }, [animal])
+ useEffect(()=> {
   
+  setUpdateData(ls.get('animal', {}));
 
+ }, [])
+  
+const resetUpdateData = () => {
+  setUpdateData({})
+}
   return (
     <form className="case__form" >
       <label htmlFor="" className="case__form--label">
@@ -81,7 +86,8 @@ function FormNewCase({
         id="name"
         // autoComplete="name"
         required
-        value={animal.name}//no me recoge el valor del input para hacer el fetch
+        placeholder={animal.name}
+        value={updateData.name}//no me recoge el valor del input para hacer el fetch
         onInput={handleInput}
         {...register('name', { required: true, maxLength: 20 })}
         aria-invalid={errors.name ? 'true' : 'false'}
@@ -329,7 +335,7 @@ function FormNewCase({
           value="Cancelar"
           onClick={handleCancel}
         />
-        <BtnList handleResetMessage= {handleResetMessage}/>
+        <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} />
       </div>
     </form>
   );
