@@ -3,7 +3,7 @@ import React from 'react'
 function BtnUpdateCase({  handleSubmitUpdate}) {
  
 
-const handleSumbit =(e) =>{
+const handleUpdate =(e) =>{
     e.preventDefault()
     handleSubmitUpdate()
 }
@@ -13,7 +13,7 @@ const handleSumbit =(e) =>{
     type="submit"
     value="Modificar"
     className=" create__btn  btn hover"
-    onClick={handleSumbit}
+    onClick={handleUpdate}
     
   />
   )

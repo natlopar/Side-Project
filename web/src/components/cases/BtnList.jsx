@@ -1,12 +1,13 @@
 import ls from '../../services/localStorage';
 import { Link } from 'react-router-dom'
 
-function BtnList({handleResetMessage, resetUpdateData}) {
+function BtnList({handleResetMessage, resetUpdateData, setAnimal}) {
 
   const handleClickBack =()=>{
     handleResetMessage()
     resetUpdateData()
     ls.remove('animal')
+    setAnimal({})
   }
   return (
     <div className='btnList'>

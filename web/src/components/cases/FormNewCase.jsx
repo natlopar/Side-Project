@@ -14,7 +14,7 @@ function FormNewCase({
   
 }) {
 
-  const [updateData, setUpdateData] = useState({...animal})
+  const [updateData, setUpdateData] = useState({})
   const navigate = useNavigate();
   const {
     register,
@@ -26,10 +26,12 @@ function FormNewCase({
     const { id, value, checked } = ev.target;
     if (id === 'public') {
       setPublicAnimal(checked);
-      setUpdateData({ ...animal, [id]: checked ? 1 : 0 });
+      setUpdateData({ ...updateData, [id]: checked ? 1 : 0 });
+      setAnimal({...animal, [id]: checked ? 1 : 0 })
      
     } else {
-      setUpdateData({ ...animal, [id]: checked ? 1 : value });
+      setAnimal({ ...animal, [id]: checked ? 1 : value });
+      setUpdateData({ ...updateData, [id]: checked ? 1 : value });
       
     }
     // if (id === 'public') {
@@ -65,16 +67,16 @@ function FormNewCase({
   //  });
   // }
 
- useEffect(()=> {
+//  useEffect(()=> {
   
-  setUpdateData(ls.get('animal', {}));
+//   setUpdateData(ls.get('animal', {}));
 
- }, [])
+//  }, [])
   
 const resetUpdateData = () => {
   setUpdateData({})
 }
-  return (   ///al cambiar de input se me vuelven a cambiar los valores!!!!!!!!!
+  return (   ///al cambiar de input se me vuelven a cambiar los valores
     <form className="case__form" >
       <label htmlFor="" className="case__form--label">
         {' '}
@@ -86,7 +88,7 @@ const resetUpdateData = () => {
         id="name"
         // autoComplete="name"
         required
-        placeholder={animal.name}
+        placeholder={animal?.name}
         value={updateData.name}//no me recoge el valor del input para hacer el fetch
         onInput={handleInput}
         {...register('name', { required: true, maxLength: 20 })}
@@ -337,7 +339,7 @@ const resetUpdateData = () => {
           value="Cancelar"
           onClick={handleCancel}
         />
-        <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} />
+        <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal}/>
       </div>
     </form>
   );

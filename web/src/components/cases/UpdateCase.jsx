@@ -18,17 +18,18 @@ function UpdateCase({isDark, setIsDark, handleResetMessage, setPublicAnimal, pub
     ls.set('animal', animalData);
   }, [animalData])
 
-  // const handleSubmit = async (ev) => {
-  //   ev.preventDefault();
-  //   fetch(`https://side-project-vetfolio-manager.vercel.app/updateCase?idCase=${idCase}`, {
-  //     method: "PUT",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(animal)
-  //   })
-  //   .then((response) =>  response.json())
-  //   .then(data => {
-  //     return data
-  //  });
+  const handleSubmitUpdate = async () => {
+    
+    fetch(`https://side-project-vetfolio-manager.vercel.app/updateCase?idCase=${idCase}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(animal)
+    })
+    .then((response) =>  response.json())
+    .then(data => {
+      return data
+   });
+  }
     // fetch("https://vetfolio-manager.onrender.com/newcase", {
     //   method: "POST",
     //   headers: { "Content-Type": "application/json" },
@@ -66,7 +67,7 @@ function UpdateCase({isDark, setIsDark, handleResetMessage, setPublicAnimal, pub
           animal={animalData}
           publicAnimal={publicAnimal}
           handleResetMessage={handleResetMessage}/>
-          <BtnUpdateCase/>
+          <BtnUpdateCase handleSubmitUpdate={handleSubmitUpdate}/>
        
         <p className={`${hiddenClassCase} user__msg`}>{messageCase}</p>
       </div>
