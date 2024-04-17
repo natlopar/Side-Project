@@ -74,7 +74,7 @@ function FormNewCase({
 const resetUpdateData = () => {
   setUpdateData({})
 }
-  return (
+  return (   ///al cambiar de input se me vuelven a cambiar los valores!!!!!!!!!
     <form className="case__form" >
       <label htmlFor="" className="case__form--label">
         {' '}
@@ -108,7 +108,8 @@ const resetUpdateData = () => {
         autoComplete="specie"
         required
         id="specie"
-        value={animal.specie}
+        placeholder={animal.specie}
+        value={updateData.specie}
         onInput={handleInput}
         {...register('specie', { required: true })}
         aria-invalid={errors.specie ? 'true' : 'false'}
@@ -134,7 +135,8 @@ const resetUpdateData = () => {
         autoComplete="breed"
         required
         id="breed"
-        value={animal.breed}
+        placeholder={animal.breed}
+        value={updateData.breed}
         onInput={handleInput}
         {...register('breed', { required: true, maxLength: 20 })}
         aria-invalid={errors.breed ? 'true' : 'false'}
