@@ -1,8 +1,7 @@
 import { useForm } from 'react-hook-form';
 import BtnList from './BtnList';
 import { useNavigate } from 'react-router-dom';
-import BtnCreateNewCase from './BtnCreateNewCase';
-import BtnUpdateCase from './BtnUpdateCase';
+
 
 function FormNewCase({
 
@@ -11,7 +10,7 @@ function FormNewCase({
   publicAnimal,
   setPublicAnimal,
   handleResetMessage,
-  idCase
+  
 }) {
   const navigate = useNavigate();
   const {

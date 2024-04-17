@@ -18,15 +18,15 @@ function NewCase({
   hiddenClassCase,
   setHiddenClassCase, 
   setIdCase, 
-  resetAnimal
+  dataAnimal
 }) {
   const handleSubmitNew = async () => {
     await apiCase.createCase(animal).then(data => {
         if (data.success) {
-          const idCase = data.caseName.insertId;
+          // const idCase = data.caseName.insertId;
           setMessageCase('Caso añadido correctamente a tu historial.');
           setHiddenClassCase('');
-          setIdCase(idCase);
+          // setIdCase(idCase);
         } else {
           setMessageCase(
             'No se pudo añadir tu caso. Revisa que todos los campos estén completos'
@@ -34,7 +34,7 @@ function NewCase({
           setHiddenClassCase('');
         }
       });
-      await setAnimal(resetAnimal);
+      await setAnimal(dataAnimal);
   };
 
   const handleResetMessage = () => {

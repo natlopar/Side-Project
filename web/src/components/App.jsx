@@ -22,11 +22,27 @@ const ListCases = React.lazy(() => import ('./cases/ListCases'));
 
 
 function App() {
+  const [idVet, setIdVet] = useState(ls.get('idVet', 0));
+  const dataAnimal = {
+    name: "",
+    specie: "Selecciona una especie",
+    breed: "",
+    birthday: "",
+    clinical: "",
+    exploration : "", 
+    tests: "", 
+    results: "", 
+    treatment: "",
+    evolution: "", 
+    comments: "", 
+    public: 0, 
+    fk_Vet: idVet
+  };
   const [isDark, setIsDark] = useState(ls.get('isDark', true));
   const [publicSign, setPublicSign] = useState(false);
   const [token, setToken] = useState(ls.get('token',''));
   const [username, setUsername] = useState(ls.get('username', ''));
-  const [idVet, setIdVet] = useState(ls.get('idVet', 0));
+
   const [message, setMessage] = useState('');
   const [loginBtn, setLoginBtn] = useState('');
   const [publicList, setPublicList] = useState(ls.get('list', []));
@@ -40,42 +56,17 @@ function App() {
   const [msgContact, setmsgContact] = useState('');
   const [list, setList] = useState(null);
   
-  const [idCase, setIdCase] = useState(null);
+  // const [idCase, setIdCase] = useState(null);
   const [publicAnimal, setPublicAnimal] = useState (false)
   const [messageCase, setMessageCase] = useState("");
   const [hiddenClassCase, setHiddenClassCase] = useState('hidden');
-  const [animal, setAnimal] = useState( {
-    name: "",
-    specie: "Selecciona una especie",
-    breed: "",
-    birthday: "",
-    clinical: "",
-    exploration : "", 
-    tests: "", 
-    results: "", 
-    treatment: "",
-    evolution: "", 
-    comments: "", 
-    public: 0, 
-    fk_Vet: idVet
-  });
-  
-  const resetAnimal = {
-    name: "",
-    specie: "Selecciona una especie",
-    breed: "",
-    birthday: "",
-    clinical: "",
-    exploration : "", 
-    tests: "", 
-    results: "", 
-    treatment: "",
-    evolution: "", 
-    comments: "", 
-    public: 0, 
-    fk_Vet: idVet
-  }
-  
+  const [animal, setAnimal] = useState( ls.get('animal', dataAnimal));
+    
+
+  useEffect(() => {
+		ls.set('animal', animal);
+	}, [animal]);
+
   const handleCasesOptions = data => {
     if (data.key === 'name'){
       setCasesOptionName(data.value);
@@ -237,8 +228,9 @@ function App() {
               setMessageCase = {setMessageCase}
               hiddenClassCase = { hiddenClassCase}
               setHiddenClassCase = {setHiddenClassCase}
-              setIdCase={setIdCase}
-              resetAnimal={resetAnimal}
+              dataAnimal={dataAnimal}
+              // setIdCase={setIdCase}
+           
             />
           }
         />
