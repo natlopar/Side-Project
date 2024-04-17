@@ -4,6 +4,7 @@ import HeaderPages from '../shared/HeaderPages';
 import Scroll from '../shared/Scroll';
 import PropTypes from 'prop-types';
 import FormNewCase from './FormNewCase';
+import BtnCreateNewCase from './BtnCreateNewCase';
 
 function NewCase({
   isDark,
@@ -19,8 +20,7 @@ function NewCase({
   setIdCase, 
   resetAnimal
 }) {
-  const handleSubmit = async (ev) => {
-    ev.preventDefault();
+  const handleSubmitNew = async () => {
     await apiCase.createCase(animal).then(data => {
         if (data.success) {
           const idCase = data.caseName.insertId;
@@ -54,11 +54,12 @@ function NewCase({
         <FormNewCase
           setPublicAnimal={setPublicAnimal}
           setAnimal={setAnimal}
-          handleSubmit={handleSubmit}
+          handleSubmitNew={handleSubmitNew}
           animal={animal}
           publicAnimal={publicAnimal}
           handleResetMessage= {handleResetMessage}
         />
+         <BtnCreateNewCase handleSubmitNew={handleSubmitNew}/>
 
         <p className={`${hiddenClassCase} user__msg`}>{messageCase}</p>
       </div>

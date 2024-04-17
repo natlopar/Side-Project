@@ -3,6 +3,7 @@ import '../../styles/newCase.scss';
 import HeaderPages from '../shared/HeaderPages';
 import Scroll from '../shared/Scroll';
 import FormNewCase from './FormNewCase';
+import BtnUpdateCase from './BtnUpdateCase';
 
 
 function UpdateCase({isDark, setIsDark, setPublicAnimal, publicAnimal,setHiddenClassCase, hiddenClassCase, setAnimal, messageCase, setMessageCase , privateList }) {
@@ -60,6 +61,7 @@ function UpdateCase({isDark, setIsDark, setPublicAnimal, publicAnimal,setHiddenC
           // handleSubmit={handleSubmit}
           animal={animalData}
           publicAnimal={publicAnimal}/>
+          <BtnUpdateCase/>
        
         <p className={`${hiddenClassCase} user__msg`}>{messageCase}</p>
       </div>
