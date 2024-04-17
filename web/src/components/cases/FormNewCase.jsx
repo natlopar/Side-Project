@@ -3,6 +3,7 @@ import BtnList from './BtnList';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import ls from '../../services/localStorage';
+import { string } from 'prop-types';
 
 
 function FormNewCase({
@@ -11,10 +12,11 @@ function FormNewCase({
   publicAnimal,
   setPublicAnimal,
   handleResetMessage,
-  dataAnimal
+  dataAnimal,
+  updateData,  setUpdateData 
 }) {
 
-  const [updateData, setUpdateData] = useState(dataAnimal)
+  
   const navigate = useNavigate();
   const {
     register,
@@ -23,26 +25,25 @@ function FormNewCase({
 
   const handleInput = (ev) => {
     ev.preventDefault();
-    const { id, value, checked } = ev.target;
+    const { id, value, checked, placeholder } = ev.target;
+    console.log("Value:", value);
+    console.log("Placeholder:", placeholder);
+    const inputValue = value === '' || value === undefined ? placeholder : value;
+    // const inputValue = value.length === 1 && value === "" ? placeholder : value;
+
+    console.log("InputValue:", inputValue);
+
     if (id === 'public') {
       setPublicAnimal(checked);
       setUpdateData({ ...updateData, [id]: checked ? 1 : 0 });
       setAnimal({...animal, [id]: checked ? 1 : 0 })
      
     } else {
-      setAnimal({ ...animal, [id]: checked ? 1 : value });
-      setUpdateData({ ...updateData, [id]: checked ? 1 : value });
+      setAnimal({ ...animal, [id]: checked ? 1 : inputValue });
+      setUpdateData({ ...updateData, [id]: checked ? 1 : inputValue});
       
     }
-    // if (id === 'public') {
-    //   setPublicAnimal(checked);
-    // }
-    // setAnimal(prevAnimal => ({
-    //   ...prevAnimal,
-    //   [id]: checked ? 1 : value
-    // }));
-
-   
+     
   };
 
 
@@ -88,8 +89,8 @@ const resetUpdateData = () => {
         id="name"
         // autoComplete="name"
         required
-        placeholder={animal?.name}
-        value={updateData.name}//no me recoge el valor del input para hacer el fetch
+        placeholder={animal.name}
+        value={updateData.name}
         onInput={handleInput}
         {...register('name', { required: true, maxLength: 20 })}
         aria-invalid={errors.name ? 'true' : 'false'}
@@ -157,7 +158,8 @@ const resetUpdateData = () => {
         className="case__form--input"
         required
         id="birthday"
-        value={animal.birthday}
+        value={updateData.birthday}
+        placeholder={animal.birthday}
         onInput={handleInput}
         {...register('birthday', { required: true, maxLength: 20 })}
         aria-invalid={errors.birthday ? 'true' : 'false'}
@@ -177,7 +179,8 @@ const resetUpdateData = () => {
         autoComplete="clinical"
         required
         id="clinical"
-        value={animal.clinical}
+        value={updateData.clinical}
+        placeholder={animal.clinical}
         onInput={handleInput}
         {...register('clinical', { required: true, maxLength: 20 })}
         aria-invalid={errors.clinical ? 'true' : 'false'}
@@ -198,7 +201,8 @@ const resetUpdateData = () => {
         autoComplete="exploration"
         required
         id="exploration"
-        value={animal.exploration}
+        value={updateData.exploration}
+        placeholder={animal.exploration}
         onInput={handleInput}
         {...register('exploration', { required: true, maxLength: 20 })}
         aria-invalid={errors.exploration ? 'true' : 'false'}
@@ -218,7 +222,8 @@ const resetUpdateData = () => {
         autoComplete="tests"
         required
         id="tests"
-        value={animal.tests}
+        value={updateData.tests}
+        placeholder={animal.tests}
         onInput={handleInput}
         {...register('tests', { required: true, maxLength: 20 })}
         aria-invalid={errors.test ? 'true' : 'false'}
@@ -238,7 +243,8 @@ const resetUpdateData = () => {
         autoComplete="results"
         required
         id="results"
-        value={animal.results}
+        value={updateData.results}
+        placeholder={animal.results}
         onInput={handleInput}
         {...register('results', { required: true, maxLength: 20 })}
         aria-invalid={errors.results ? 'true' : 'false'}
@@ -259,7 +265,8 @@ const resetUpdateData = () => {
         autoComplete="treatment"
         required
         id="treatment"
-        value={animal.treatment}
+        value={updateData.treatment}
+        placeholder={animal.treatment}
         onInput={handleInput}
         {...register('treatment', { required: true, maxLength: 20 })}
         aria-invalid={errors.treatment ? 'true' : 'false'}
@@ -280,7 +287,8 @@ const resetUpdateData = () => {
         autoComplete="evolution"
         required
         id="evolution"
-        value={animal.evolution}
+        placeholder={animal.evolution}
+        value={updateData.evolution}
         onInput={handleInput}
         {...register('evolution', { required: true, maxLength: 20 })}
         aria-invalid={errors.evolution ? 'true' : 'false'}
@@ -301,7 +309,8 @@ const resetUpdateData = () => {
         autoComplete="comments"
         required
         id="comments"
-        value={animal.comments}
+        value={updateData.comments}
+        placeholder={animal.comments}
         onInput={handleInput}
         {...register('comments', { required: true, maxLength: 20 })}
         aria-invalid={errors.comments ? 'true' : 'false'}

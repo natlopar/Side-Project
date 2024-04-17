@@ -8,7 +8,7 @@ import BtnUpdateCase from './BtnUpdateCase';
 import { useEffect } from 'react';
 
 
-function UpdateCase({isDark, setIsDark, dataAnimal, handleResetMessage, setPublicAnimal, publicAnimal,setHiddenClassCase, hiddenClassCase, setAnimal, messageCase, setMessageCase , privateList }) {
+function UpdateCase({isDark, setIsDark, dataAnimal, updateData,  setUpdateData, handleResetMessage, setPublicAnimal, publicAnimal,setHiddenClassCase, hiddenClassCase, setAnimal, messageCase, setMessageCase , privateList }) {
 
 
   const { id } = useParams();
@@ -18,17 +18,18 @@ function UpdateCase({isDark, setIsDark, dataAnimal, handleResetMessage, setPubli
     ls.set('animal', animalData);
   }, [animalData])
 
-  const handleSubmitUpdate = async () => {
+  const handleSubmitUpdate = () => {
+    setUpdateData(updateData);
     
-    fetch(`https://side-project-vetfolio-manager.vercel.app/updateCase?idCase=${idCase}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(animal)
-    })
-    .then((response) =>  response.json())
-    .then(data => {
-      return data
-   });
+  //   fetch(`https://side-project-vetfolio-manager.vercel.app/updateCase?idCase=${idCase}`, {
+  //     method: "PUT",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(animal)
+  //   })
+  //   .then((response) =>  response.json())
+  //   .then(data => {
+  //     return data
+  //  });
   }
     // fetch("https://vetfolio-manager.onrender.com/newcase", {
     //   method: "POST",
@@ -67,7 +68,10 @@ function UpdateCase({isDark, setIsDark, dataAnimal, handleResetMessage, setPubli
           // handleSubmit={handleSubmit}
           animal={animalData}
           publicAnimal={publicAnimal}
-          handleResetMessage={handleResetMessage}/>
+          handleResetMessage={handleResetMessage}
+          updateData={updateData}
+          setUpdateData={setUpdateData}/>
+
           <BtnUpdateCase handleSubmitUpdate={handleSubmitUpdate}/>
        
         <p className={`${hiddenClassCase} user__msg`}>{messageCase}</p>

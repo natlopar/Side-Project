@@ -1,6 +1,7 @@
 import React from 'react'
+import UpdateCase from './UpdateCase'
 
-function BtnUpdateCase({  handleSubmitUpdate}) {
+function BtnUpdateCase({ handleSubmitUpdate}) {
  
 
 const handleUpdate =(e) =>{

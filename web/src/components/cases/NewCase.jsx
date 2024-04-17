@@ -19,7 +19,7 @@ function NewCase({
   setHiddenClassCase, 
   setIdCase, 
   dataAnimal, 
-  handleResetMessage
+  handleResetMessage, updateData, setUpdateData
 }) {
   const handleSubmitNew = async () => {
     await apiCase.createCase(animal).then(data => {
@@ -57,6 +57,8 @@ function NewCase({
           publicAnimal={publicAnimal}
           handleResetMessage= {handleResetMessage}
           dataAnimal={dataAnimal}
+          updateData={updateData}
+          setUpdateData={setUpdateData}
         />
          <BtnCreateNewCase handleSubmitNew={handleSubmitNew}/>
 

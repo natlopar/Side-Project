@@ -16,31 +16,30 @@ import Footer from './shared/Footer';
 import BtnListPublic from './cases/BtnListPublic';
 import HeaderPages from './shared/HeaderPages';
 import Contact from './shared/Contact';
-import UpdateCase from './cases/UpdateCase'
-const DetailListUser = React.lazy(() => import ('./cases/DetailListUser'));
-const ListCases = React.lazy(() => import ('./cases/ListCases'));
-
+import UpdateCase from './cases/UpdateCase';
+const DetailListUser = React.lazy(() => import('./cases/DetailListUser'));
+const ListCases = React.lazy(() => import('./cases/ListCases'));
 
 function App() {
   const [idVet, setIdVet] = useState(ls.get('idVet', 0));
   const dataAnimal = {
-    name: "",
-    specie: "Selecciona una especie",
-    breed: "",
-    birthday: "",
-    clinical: "",
-    exploration : "", 
-    tests: "", 
-    results: "", 
-    treatment: "",
-    evolution: "", 
-    comments: "", 
-    public: 0, 
-    fk_Vet: idVet
+    name: '',
+    specie: 'Selecciona una especie',
+    breed: '',
+    birthday: '',
+    clinical: '',
+    exploration: '',
+    tests: '',
+    results: '',
+    treatment: '',
+    evolution: '',
+    comments: '',
+    public: 0,
+    fk_Vet: idVet,
   };
   const [isDark, setIsDark] = useState(ls.get('isDark', true));
   const [publicSign, setPublicSign] = useState(false);
-  const [token, setToken] = useState(ls.get('token',''));
+  const [token, setToken] = useState(ls.get('token', ''));
   const [username, setUsername] = useState(ls.get('username', ''));
 
   const [message, setMessage] = useState('');
@@ -55,28 +54,27 @@ function App() {
   const [contact, setContact] = useState({ name: '', comments: '' });
   const [msgContact, setmsgContact] = useState('');
   const [list, setList] = useState(null);
-  
+
   // const [idCase, setIdCase] = useState(null);
-  const [publicAnimal, setPublicAnimal] = useState (false)
-  const [messageCase, setMessageCase] = useState("");
+  const [publicAnimal, setPublicAnimal] = useState(false);
+  const [messageCase, setMessageCase] = useState('');
   const [hiddenClassCase, setHiddenClassCase] = useState('hidden');
-  const [animal, setAnimal] = useState( ls.get('animal', dataAnimal));
-    
+  const [animal, setAnimal] = useState(ls.get('animal', dataAnimal));
+  const [updateData, setUpdateData] = useState(dataAnimal);
 
   useEffect(() => {
-		ls.set('animal', animal);
-	}, [animal]);
+    ls.set('animal', animal);
+  }, [animal]);
 
-  const handleCasesOptions = data => {
-    if (data.key === 'name'){
+  const handleCasesOptions = (data) => {
+    if (data.key === 'name') {
       setCasesOptionName(data.value);
     } else if (data.key === 'breed') {
       setCasesOptionBreed(data.value);
-    } else if (data.key === 'clinical'){
+    } else if (data.key === 'clinical') {
       setCasesOptionClinic(data.value);
     }
   };
-
 
   useEffect(() => {
     ls.set('isDark', isDark);
@@ -94,8 +92,7 @@ function App() {
   const handleResetMessage = () => {
     setMessageCase('');
     setHiddenClassCase('hidden');
-    
-  }
+  };
 
   const sendSignUpToApi = (registry) => {
     apiUser.sendSignUpToApi(registry).then((response) => {
@@ -198,63 +195,85 @@ function App() {
         <Route
           path="/listUser"
           element={
-          <Suspense fallback = {<div>Cargando...</div>}>
-          <DetailListUser
-              token={token}
-              setToken={setToken}
-              idVet={idVet}
-              username={username}
-              isDark={isDark}
-              setIsDark={setIsDark}
-              setUsername={setUsername}
-              setIdVet={setIdVet}
-              setPrivateList={setPrivateList}
-              handleCasesOptions={handleCasesOptions}
-              casesOptionName={casesOptionName}
-              casesOptionBreed={casesOptionBreed}
-              casesOptionClinic={casesOptionClinic}
-              setList={setList}
-              privateList={privateList}
-            />
-          </Suspense>
+            <Suspense fallback={<div>Cargando...</div>}>
+              <DetailListUser
+                token={token}
+                setToken={setToken}
+                idVet={idVet}
+                username={username}
+                isDark={isDark}
+                setIsDark={setIsDark}
+                setUsername={setUsername}
+                setIdVet={setIdVet}
+                setPrivateList={setPrivateList}
+                handleCasesOptions={handleCasesOptions}
+                casesOptionName={casesOptionName}
+                casesOptionBreed={casesOptionBreed}
+                casesOptionClinic={casesOptionClinic}
+                setList={setList}
+                privateList={privateList}
+              />
+            </Suspense>
           }
         />
         <Route
           path="/newCase"
           element={
             <NewCase
-            handleResetMessage={handleResetMessage}
+              handleResetMessage={handleResetMessage}
               publicSign={publicSign}
               isDark={isDark}
               setIsDark={setIsDark}
-              animal = {animal}
-              setAnimal = {setAnimal}
-              publicAnimal = {publicAnimal}
-              setPublicAnimal = { setPublicAnimal }
-              messageCase = {messageCase}
-              setMessageCase = {setMessageCase}
-              hiddenClassCase = { hiddenClassCase}
-              setHiddenClassCase = {setHiddenClassCase}
+              animal={animal}
+              setAnimal={setAnimal}
+              publicAnimal={publicAnimal}
+              setPublicAnimal={setPublicAnimal}
+              messageCase={messageCase}
+              setMessageCase={setMessageCase}
+              hiddenClassCase={hiddenClassCase}
+              setHiddenClassCase={setHiddenClassCase}
               dataAnimal={dataAnimal}
+              updateData={updateData}
+              setUpdateData={setUpdateData}
               // setIdCase={setIdCase}
-           
             />
           }
         />
-        <Route path='/updateCase/:id' element= { <UpdateCase dataAnimal={dataAnimal}  handleResetMessage={handleResetMessage} isDark={isDark} setIsDark= {setIsDark} setPublicAnimal={setPublicAnimal} publicAnimal= {setPublicAnimal} setHiddenClassCase= {setHiddenClassCase} hiddenClassCase={hiddenClassCase} setAnimal={setAnimal} animal={animal} messageCase={messageCase} setMessageCase={setMessageCase} privateList={privateList} />}/>
+        <Route
+          path="/updateCase/:id"
+          element={
+            <UpdateCase
+              dataAnimal={dataAnimal}
+              handleResetMessage={handleResetMessage}
+              isDark={isDark}
+              setIsDark={setIsDark}
+              setPublicAnimal={setPublicAnimal}
+              publicAnimal={publicAnimal}
+              setHiddenClassCase={setHiddenClassCase}
+              hiddenClassCase={hiddenClassCase}
+              setAnimal={setAnimal}
+              animal={animal}
+              messageCase={messageCase}
+              setMessageCase={setMessageCase}
+              privateList={privateList}
+              updateData={updateData}
+              setUpdateData={setUpdateData}
+            />
+          }
+        />
         <Route
           path="/publicList"
           element={
-            <Suspense fallback = {<div>Cargando...</div>}>
-            <ListCases
-              idVet={idVet}
-              publicList={publicList}
-              setPublicList={setPublicList}
-              isDark={isDark}
-              setIsDark={setIsDark}
-              setUsername={setUsername}
-              setIdVet={setIdVet}
-            />
+            <Suspense fallback={<div>Cargando...</div>}>
+              <ListCases
+                idVet={idVet}
+                publicList={publicList}
+                setPublicList={setPublicList}
+                isDark={isDark}
+                setIsDark={setIsDark}
+                setUsername={setUsername}
+                setIdVet={setIdVet}
+              />
             </Suspense>
           }
         />
