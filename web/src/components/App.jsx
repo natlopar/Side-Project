@@ -210,6 +210,9 @@ function App() {
                 casesOptionName={casesOptionName}
                 casesOptionBreed={casesOptionBreed}
                 casesOptionClinic={casesOptionClinic}
+                setCasesOptionBreed={setCasesOptionBreed}
+                setCasesOptionClinic={setCasesOptionClinic}
+                setCasesOptionName={setCasesOptionName}
                 setList={setList}
                 privateList={privateList}
               />

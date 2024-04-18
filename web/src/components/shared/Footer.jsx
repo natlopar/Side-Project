@@ -7,9 +7,8 @@ function Footer() {
     
     <footer className="footer">
       <div>
-      <p className="footer__text">Natalia López Ariel </p>
-    
-    <p className="footer__text">&copy; 2024</p>
+      <p className="footer__text">Natalia López Ariel &copy; 2024</p>
+
       </div>
 <div>
 <Link to={'/contact'}className="footer__text link">Contacto</Link>
