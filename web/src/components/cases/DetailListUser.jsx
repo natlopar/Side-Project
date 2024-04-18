@@ -1,7 +1,7 @@
 import '../../styles/logOut.scss';
 import '../../styles/list.scss';
 import { useEffect } from 'react';
-import apiCase from '../../services/api-case'
+import apiCase from '../../services/api-case';
 import UserCases from './UserCases';
 import CreateCase from './CreateCase';
 import LogOut from '../user/LogOut';
@@ -10,7 +10,7 @@ import Filters from './Filters';
 import LoginBtn from '../user/LoginBtn';
 import Scroll from '../shared/Scroll';
 import NoFilter from './NoFilter';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 function DetailListUser({
   token,
@@ -20,20 +20,18 @@ function DetailListUser({
   isDark,
   setIsDark,
   setUsername,
-  setIdVet, 
-  setPrivateList, 
-  handleCasesOptions, 
+  setIdVet,
+  setPrivateList,
+  handleCasesOptions,
   casesOptionName,
-  privateList, 
+  privateList,
   casesOptionBreed,
-  casesOptionClinic, 
-  setList, 
- 
+  casesOptionClinic,
+  setList,
+  setCasesOptionBreed,
+  setCasesOptionClinic,
+  setCasesOptionName,
 }) {
-
- 
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -53,96 +51,124 @@ function DetailListUser({
           setPrivateList(userData.patients);
         } else {
           console.error('Error al obtener los datos del usuario');
-          
         }
       } catch (error) {
-        console.error('Error al obtener los datos del usuario, comprueba que has iniciado sesión correctamente', error);
+        console.error(
+          'Error al obtener los datos del usuario, comprueba que has iniciado sesión correctamente',
+          error
+        );
       }
     };
     fetchData();
-  }, [idVet,token,setPrivateList]);
+  }, [idVet, token, setPrivateList]);
 
   useEffect(() => {
     const params = {
       name: casesOptionName,
       breed: casesOptionBreed,
-      clinic: casesOptionClinic
+      clinic: casesOptionClinic,
     };
-    apiCase.getFilterCase(params, token, idVet).then(data => {
-        if (data.success){
-          setList(data.patients);
-        } else {
-          console.error('Error al obtener los datos. Comprueba que tu conexión es correcta.');
-        }
-      })
+    apiCase.getFilterCase(params, token, idVet).then((data) => {
+      if (data.success) {
+        setList(data.patients);
+      } else {
+        console.error(
+          'Error al obtener los datos. Comprueba que tu conexión es correcta.'
+        );
+      }
+    });
   }, [casesOptionName, casesOptionBreed, casesOptionClinic]);
 
   if (!token) {
     return (
       <>
         <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
-       <Scroll/>
+        <Scroll />
         <div className="sectionList loading">
           <span>
             <i className="fa-solid fa-spinner"></i>
           </span>
           <p>Cargando...</p>
           <p>¿Has iniciado sesión?</p>
-          <LoginBtn/>
+          <LoginBtn />
         </div>
-     
       </>
     );
   }
 
-  const renderFilteredCases = () => {
-    let filteredData = privateList;
-    if (casesOptionName !== '') {
-      filteredData = filteredData.filter(data => data.name.toLowerCase() === casesOptionName);
-    }
-    if (casesOptionBreed !== '') {
-      filteredData = filteredData.filter(data => data.breed.toLowerCase().includes(casesOptionBreed));
-    }
-    if (casesOptionClinic !== '') {
-      filteredData = filteredData.filter(data => data.clinical.toLowerCase().includes(casesOptionClinic));
-    }
-    return filteredData.length === 0 ? <NoFilter/> :
 
-     filteredData.map(data => (
-      <li key={data.idCase} className="sectionList__ul">
+    const normalizeString = (str) => {
+      return str
+        .toLowerCase() 
+        .normalize("NFD") // Normalizar caracteres a forma de descomposición
+        .replace(/[\u0300-\u036f]/g, ""); // Eliminar caracteres diacríticos
+    };
+    
+    const renderFilteredCases = () => {
+      let filteredData = privateList;
+      if (casesOptionName !== '') {
+        filteredData = filteredData.filter(
+          (data) => normalizeString(data.name).includes(normalizeString(casesOptionName))
+        );
+      }
+      if (casesOptionBreed !== '') {
+        filteredData = filteredData.filter((data) =>
+          normalizeString(data.breed).includes(normalizeString(casesOptionBreed))
+        );
+      }
+      if (casesOptionClinic !== '') {
+        filteredData = filteredData.filter((data) =>
+          normalizeString(data.clinical).includes(normalizeString(casesOptionClinic))
+        );
+      }
+    return filteredData.length === 0 ? (
+      <NoFilter />
+    ) : (
+      filteredData.map((data) => (
+        <li key={data.idCase} className="sectionList__ul">
           <UserCases data={data} idVet={idVet} />
-      </li>
-    ));
+        </li>
+      ))
+    );
   };
 
   return (
     <>
       <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
-      <Scroll/>
+
       <div className="logout">
-        <LogOut token={token} setToken={setToken} 
-        setIdVet={setIdVet} setUsername={setUsername} setList={setList} setPrivateList={setPrivateList}/>
+        <LogOut
+          token={token}
+          setToken={setToken}
+          setIdVet={setIdVet}
+          setUsername={setUsername}
+          setList={setList}
+          setPrivateList={setPrivateList}
+        />
       </div>
 
       {privateList.length > 0 ? (
         <>
           <h2 className="sectionList__title">Este es tu historial de casos</h2>
-          <div className='sectionList__filters'>
-            <Filters handleCasesOptions={handleCasesOptions}
-              casesOptionName={casesOptionName} casesOptionBreed={casesOptionBreed} casesOptionClinic={casesOptionClinic} />
+          <div className="sectionList__filters">
+            <Filters
+              handleCasesOptions={handleCasesOptions}
+              casesOptionName={casesOptionName}
+              casesOptionBreed={casesOptionBreed}
+              casesOptionClinic={casesOptionClinic}
+              setCasesOptionBreed={setCasesOptionBreed}
+              setCasesOptionClinic={setCasesOptionClinic}
+              setCasesOptionName={setCasesOptionName}
+            />
           </div>
 
-          <ul className="sectionList">
-            {renderFilteredCases()}
-          </ul>
+          <ul className="sectionList">{renderFilteredCases()}</ul>
         </>
       ) : (
         <h2 className="sectionList__title">
           Todavía no tienes ningún caso registrado
         </h2>
       )}
-
-
 
       <CreateCase />
     </>
@@ -157,17 +183,17 @@ DetailListUser.propTypes = {
   isDark: PropTypes.bool,
   setIsDark: PropTypes.func,
   setUsername: PropTypes.func,
-  setIdVet: PropTypes.func, 
-  setPrivateList: PropTypes.func, 
-  handleCasesOptions: PropTypes.func, 
+  setIdVet: PropTypes.func,
+  setPrivateList: PropTypes.func,
+  handleCasesOptions: PropTypes.func,
   casesOptionName: PropTypes.string,
-  privateList: PropTypes.array, 
+  privateList: PropTypes.array,
   casesOptionBreed: PropTypes.string,
-  casesOptionClinic: PropTypes.string, 
-  setList: PropTypes.func, 
- 
-}
+  casesOptionClinic: PropTypes.string,
+  setList: PropTypes.func,
+  setCasesOptionBreed: PropTypes.func,
+  setCasesOptionClinic: PropTypes.func,
+  setCasesOptionName: PropTypes.func,
+};
 
 export default DetailListUser;
-
-
