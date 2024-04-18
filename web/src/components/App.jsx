@@ -1,30 +1,47 @@
+import React, { Suspense } from 'react';
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router';
 import '../styles/App.scss';
+import apiUser from '../services/api-user';
 import ls from '../services/localStorage';
 import Header from './shared/Header';
 import HeroDesc from './shared/HeroDesc';
 import SignIn from './user/SignIn';
 import BtnList from './cases/BtnList';
 import NewCase from './cases/NewCase';
-import ListCases from './cases/ListCases';
 import Login from './user/Login';
-import DetailListUser from './cases/DetailListUser';
 import LoginBtn from './user/LoginBtn';
 import DetailUserCase from './cases/DetailUserCase';
-import apiUser from '../services/api-user';
 import Footer from './shared/Footer';
 import BtnListPublic from './cases/BtnListPublic';
 import HeaderPages from './shared/HeaderPages';
 import Contact from './shared/Contact';
-
+import UpdateCase from './cases/UpdateCase';
+const DetailListUser = React.lazy(() => import('./cases/DetailListUser'));
+const ListCases = React.lazy(() => import('./cases/ListCases'));
 
 function App() {
-  const [isDark, setIsDark] = useState(ls.get('isDark', true));
-  const [publicU, setPublicU] = useState(false);
-  const [token, setToken] = useState(ls.get('token',''));
-  const [username, setUsername] = useState(ls.get('username', ''));
   const [idVet, setIdVet] = useState(ls.get('idVet', 0));
+  const dataAnimal = {
+    name: '',
+    specie: 'Selecciona una especie',
+    breed: '',
+    birthday: '',
+    clinical: '',
+    exploration: '',
+    tests: '',
+    results: '',
+    treatment: '',
+    evolution: '',
+    comments: '',
+    public: 0,
+    fk_Vet: idVet,
+  };
+  const [isDark, setIsDark] = useState(ls.get('isDark', true));
+  const [publicSign, setPublicSign] = useState(false);
+  const [token, setToken] = useState(ls.get('token', ''));
+  const [username, setUsername] = useState('');
+
   const [message, setMessage] = useState('');
   const [loginBtn, setLoginBtn] = useState('');
   const [publicList, setPublicList] = useState(ls.get('list', []));
@@ -38,18 +55,26 @@ function App() {
   const [msgContact, setmsgContact] = useState('');
   const [list, setList] = useState(null);
 
+  // const [idCase, setIdCase] = useState(null);
+  const [publicAnimal, setPublicAnimal] = useState(false);
+  const [messageCase, setMessageCase] = useState('');
+  const [hiddenClassCase, setHiddenClassCase] = useState('hidden');
+  const [animal, setAnimal] = useState(ls.get('animal', dataAnimal));
+  const [updateData, setUpdateData] = useState(dataAnimal);
 
-  
-  const handleCasesOptions = data => {
-    if (data.key === 'name'){
+  useEffect(() => {
+    ls.set('animal', animal);
+  }, [animal]);
+
+  const handleCasesOptions = (data) => {
+    if (data.key === 'name') {
       setCasesOptionName(data.value);
     } else if (data.key === 'breed') {
       setCasesOptionBreed(data.value);
-    } else if (data.key === 'clinical'){
+    } else if (data.key === 'clinical') {
       setCasesOptionClinic(data.value);
     }
   };
-
 
   useEffect(() => {
     ls.set('isDark', isDark);
@@ -60,13 +85,18 @@ function App() {
     setToken(token);
     ls.set('token', token);
     setUsername(name);
-    ls.set('username', username);
+    // ls.set('username', username);
     setIdVet(id);
+  };
+
+  const handleResetMessage = () => {
+    setMessageCase('');
+    setHiddenClassCase('hidden');
   };
 
   const sendSignUpToApi = (registry) => {
     apiUser.sendSignUpToApi(registry).then((response) => {
-      if (response.success === true) {
+      if (response.success) {
         setHiddenClassSign('');
         setMessage(
           'Registro realizado correctamente. Ahora puedes iniciar sesión con tu nombre de usuario y contraseña.'
@@ -82,7 +112,7 @@ function App() {
   };
 
   const handleContact = () => {
-    fetch('https://vetfolio-manager.onrender.com/contact', {
+    fetch('https://side-project-vetfolio-manager.vercel.app/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(contact),
@@ -139,8 +169,8 @@ function App() {
           element={
             <SignIn
               sendSignUpToApi={sendSignUpToApi}
-              publicU={publicU}
-              setPublicU={setPublicU}
+              publicSign={publicSign}
+              setPublicSign={setPublicSign}
               isDark={isDark}
               setIsDark={setIsDark}
               loginBtn={loginBtn}
@@ -165,48 +195,86 @@ function App() {
         <Route
           path="/listUser"
           element={
-            <DetailListUser
-              token={token}
-              setToken={setToken}
-              idVet={idVet}
-              username={username}
-              isDark={isDark}
-              setIsDark={setIsDark}
-              setUsername={setUsername}
-              setIdVet={setIdVet}
-              setPrivateList={setPrivateList}
-              handleCasesOptions={handleCasesOptions}
-              casesOptionName={casesOptionName}
-              casesOptionBreed={casesOptionBreed}
-              casesOptionClinic={casesOptionClinic}
-              setList={setList}
-              privateList={privateList}
-            />
+            <Suspense fallback={<div>Cargando...</div>}>
+              <DetailListUser
+                token={token}
+                setToken={setToken}
+                idVet={idVet}
+                username={username}
+                isDark={isDark}
+                setIsDark={setIsDark}
+                setUsername={setUsername}
+                setIdVet={setIdVet}
+                setPrivateList={setPrivateList}
+                handleCasesOptions={handleCasesOptions}
+                casesOptionName={casesOptionName}
+                casesOptionBreed={casesOptionBreed}
+                casesOptionClinic={casesOptionClinic}
+                setList={setList}
+                privateList={privateList}
+              />
+            </Suspense>
           }
         />
         <Route
           path="/newCase"
           element={
             <NewCase
-              idVet={idVet}
-              publicU={publicU}
+              handleResetMessage={handleResetMessage}
+              publicSign={publicSign}
               isDark={isDark}
               setIsDark={setIsDark}
+              animal={animal}
+              setAnimal={setAnimal}
+              publicAnimal={publicAnimal}
+              setPublicAnimal={setPublicAnimal}
+              messageCase={messageCase}
+              setMessageCase={setMessageCase}
+              hiddenClassCase={hiddenClassCase}
+              setHiddenClassCase={setHiddenClassCase}
+              dataAnimal={dataAnimal}
+              updateData={updateData}
+              setUpdateData={setUpdateData}
+              // setIdCase={setIdCase}
+            />
+          }
+        />
+        <Route
+          path="/updateCase/:id"
+          element={
+            <UpdateCase
+              dataAnimal={dataAnimal}
+              handleResetMessage={handleResetMessage}
+              isDark={isDark}
+              setIsDark={setIsDark}
+              setPublicAnimal={setPublicAnimal}
+              publicAnimal={publicAnimal}
+              setHiddenClassCase={setHiddenClassCase}
+              hiddenClassCase={hiddenClassCase}
+              setAnimal={setAnimal}
+              animal={animal}
+              messageCase={messageCase}
+              setMessageCase={setMessageCase}
+              privateList={privateList}
+              updateData={updateData}
+              setUpdateData={setUpdateData}
             />
           }
         />
         <Route
           path="/publicList"
           element={
-            <ListCases
-              idVet={idVet}
-              publicList={publicList}
-              setPublicList={setPublicList}
-              isDark={isDark}
-              setIsDark={setIsDark}
-              setUsername={setUsername}
-              setIdVet={setIdVet}
-            />
+            <Suspense fallback={<div>Cargando...</div>}>
+              <ListCases
+                idVet={idVet}
+                publicList={publicList}
+                setPublicList={setPublicList}
+                isDark={isDark}
+                setIsDark={setIsDark}
+                setUsername={setUsername}
+                setIdVet={setIdVet}
+              />
+            </Suspense>
           }
         />
         <Route

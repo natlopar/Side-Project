@@ -53,13 +53,14 @@ function DetailListUser({
           setPrivateList(userData.patients);
         } else {
           console.error('Error al obtener los datos del usuario');
+          
         }
       } catch (error) {
-        console.error('Error al obtener los datos del usuario:', error);
+        console.error('Error al obtener los datos del usuario, comprueba que has iniciado sesión correctamente', error);
       }
     };
     fetchData();
-  }, [token, idVet, setPrivateList]);
+  }, [idVet,token,setPrivateList]);
 
   useEffect(() => {
     const params = {
@@ -109,9 +110,7 @@ function DetailListUser({
 
      filteredData.map(data => (
       <li key={data.idCase} className="sectionList__ul">
-      
           <UserCases data={data} idVet={idVet} />
-        
       </li>
     ));
   };

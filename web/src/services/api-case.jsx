@@ -23,10 +23,37 @@ const getFilterCase = (params, token, idVet) => {
   });
 };
 
+const createCase = (animal) => {
+  return fetch('https://side-project-vetfolio-manager.vercel.app/newCase', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(animal),
+  })
+    .then(response => response.json())
+    .then(data => {
+      return data
+    } )
+};
+
+
+const updateCase = (updateData, idCase) => {
+  return fetch(`https://side-project-vetfolio-manager.vercel.app/updateCase/${idCase}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateData)
+      })
+      .then((response) =>  response.json())
+      .then(data => {
+      return data
+   });
+}
+
 
 const objToExport = {
 getPublicCases: getPublicCases,
-getFilterCase: getFilterCase
+getFilterCase: getFilterCase, 
+updateCase: updateCase,
+createCase: createCase
 };
 
 

@@ -38,7 +38,7 @@ async function getConnection() {
 
 //funciones token
 const generateToken = (payload) => {
-  const token = jwt.sign(payload, 'secreto', { expiresIn: '1h' }); 
+  const token = jwt.sign(payload, 'secreto', { expiresIn: '2h' }); 
   return token;
 };
 
@@ -189,8 +189,7 @@ server.get('/listUser', authenticateToken, async (req, res) => {
   }
 });
 
-const staticServer = './src/public-react';
-server.use(express.static(staticServer));
+
 
 //.................ENDPOINT AÑADIR UN CASO.............
 
@@ -200,21 +199,95 @@ server.post('/newCase', async (req, res) => {
   const insertCase = 'INSERT INTO `case` (`name`, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)';
   const [resultCases] = await connection.query(insertCase, [ name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet]);
   connection.end(); 
+  console.log(resultCases);
   res.json({
     success: true,
-    caseName: resultCases,
+    result: resultCases
   })
 })
+//......ENDPOINT MODIFICAR UN CASO.................
+// server.patch('/updateCase/:id', async (req, res) => {
+//  try{
+//   const connection = await getConnection();
+//   const data = req.body;
+//   const idCase = req.params.id;
+//   const {name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet} = data;
+//   const updateCase = 'UPDATE `case` SET `name` = ?, specie = ?, breed = ?, birthday = ?, clinical = ?, exploration = ?, tests = ?, results = ?, treatment = ?, evolution = ?, comments = ?, public = ?, fk_Vet = ? WHERE idCase = ? ';
+//   const [result] = await connection.query(updateCase, [ name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet, idCase]);
+//   connection.end(); 
+//   res.json({
+//     success: true,
+//     message: 'actualizado correctamente',
+//     casesChanged: result.affectedRows,//validar si es 1, es que se ha actualizado ese caso
+//   })
+//  } catch (error) {
+//   res.json ({
+//     success: false,
+//     error: error
+//   })
+//  }
+// })
+server.patch('/updateCase/:id', async (req, res) => {
+  try {
+   const connection = await getConnection();
+   const id = req.params.id;
+   const data = req.body;
+ 
+   // Consulta para obtener los valores actuales del registro
+   const selectQuery = 'SELECT * FROM `case` WHERE idCase = ?';
+   const [rows] = await connection.query(selectQuery, [id]);
+ 
+   if (rows.length === 0) {
+     return res.json({
+       success: false,
+       message: 'No se encontró el caso con el ID proporcionado.'
+     });
+   }
+ 
+   // Para cada campo recibido en la solicitud PATCH
+   for (const key in data) {
+     if (data.hasOwnProperty(key)) {
+       // Si el campo tiene un valor no vacío, actualizarlo
+       if (data[key] !== '') {
+         rows[0][key] = data[key];
+       }
+     }
+   }
+ 
+   // Construir la consulta de actualización con los campos actualizados
+   const updateFields = Object.keys(rows[0]).map(key => `${key} = ?`).join(', ');
+   const updateValues = Object.values(rows[0]);
+   updateValues.push(id);
+ 
+   const updateQuery = `UPDATE \`case\` SET ${updateFields} WHERE idCase = ?`;
+ 
+   // Ejecutar la consulta de actualización
+   const [result] = await connection.query(updateQuery, updateValues);
+   connection.end(); 
+   res.json({
+     success: true,
+     message: 'Actualizado correctamente',
+     casesChanged: result.affectedRows,
+   });
+  } catch (error) {
+   res.json ({
+     success: false,
+     error: error
+   });
+  }
+ });
+ 
+ 
 
 //----ENDPOINT CIERRE SESION----------------
 
 server.put('/logout', async (req, res) =>{
   const authHeader = req.headers["authorization"];
-  jwt.sign(authHeader, "", { expiresIn: 1 } , (logout, err) => {
+  jwt.sign(authHeader, "", { expiresIn: 2 } , (logout, err) => {
      if (logout) {
       res.json({success: true, message: 'se ha cerrado tu sesión'});
      } else {
-      res.json({success: false, message: 'no se ha podido cerrar la sesión'});
+      res.json({success: false, message: 'no se ha podido cerrar la sesión', err});
      }
   });
 })
@@ -304,3 +377,5 @@ server.post('/contact', async (req, res) => {
 
   });
 
+  const staticServer = './src/public-react';
+  server.use(express.static(staticServer));
