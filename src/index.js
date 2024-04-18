@@ -206,31 +206,78 @@ server.post('/newCase', async (req, res) => {
   })
 })
 //......ENDPOINT MODIFICAR UN CASO.................
-server.put('/updateCase/:id', async (req, res) => {
- try{
-  const connection = await getConnection();
-  const data = req.body;
-  const idCase = req.query.id;
-  // if (isNaN(idCase)) {
-  //   return res.json({ success: false, error: 'El id del caso debe ser un número' });
-  // }
-  const {name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet} = data;
-  const updateCase = 'UPDATE `case` SET `name` = ?, specie = ?, breed = ?, birthday = 2023, clinical = ?, exploration = ?, tests = ?, results = ?, treatment = ?, evolution = ?, comments = ?, public = 1 WHERE fk_Vet = 19 AND idCase = 3';
-  const [result] = await connection.query(updateCase, [ name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet, idCase]);
-  connection.end(); 
-  res.json({
-    success: true,
-    message: 'actualizado correctamente',
-    casesChanged: result.affectedRows,//validar si es 1, es que se ha actualizado ese caso
-  })
- } catch (error) {
-  res.json ({
-    success: false,
-    error: error
-  })
- }
-})
-
+// server.patch('/updateCase/:id', async (req, res) => {
+//  try{
+//   const connection = await getConnection();
+//   const data = req.body;
+//   const idCase = req.params.id;
+//   const {name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet} = data;
+//   const updateCase = 'UPDATE `case` SET `name` = ?, specie = ?, breed = ?, birthday = ?, clinical = ?, exploration = ?, tests = ?, results = ?, treatment = ?, evolution = ?, comments = ?, public = ?, fk_Vet = ? WHERE idCase = ? ';
+//   const [result] = await connection.query(updateCase, [ name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet, idCase]);
+//   connection.end(); 
+//   res.json({
+//     success: true,
+//     message: 'actualizado correctamente',
+//     casesChanged: result.affectedRows,//validar si es 1, es que se ha actualizado ese caso
+//   })
+//  } catch (error) {
+//   res.json ({
+//     success: false,
+//     error: error
+//   })
+//  }
+// })
+server.patch('/updateCase/:id', async (req, res) => {
+  try {
+   const connection = await getConnection();
+   const idCase = req.params.id;
+   const data = req.body;
+ 
+   // Consulta para obtener los valores actuales del registro
+   const selectQuery = 'SELECT * FROM `case` WHERE idCase = ?';
+   const [rows] = await connection.query(selectQuery, [idCase]);
+ 
+   if (rows.length === 0) {
+     return res.json({
+       success: false,
+       message: 'No se encontró el caso con el ID proporcionado.'
+     });
+   }
+ 
+   // Para cada campo recibido en la solicitud PATCH
+   for (const key in data) {
+     if (data.hasOwnProperty(key)) {
+       // Si el campo tiene un valor no vacío, actualizarlo
+       if (data[key] !== '') {
+         rows[0][key] = data[key];
+       }
+     }
+   }
+ 
+   // Construir la consulta de actualización con los campos actualizados
+   const updateFields = Object.keys(rows[0]).map(key => `${key} = ?`).join(', ');
+   const updateValues = Object.values(rows[0]);
+   updateValues.push(idCase);
+ 
+   const updateQuery = `UPDATE \`case\` SET ${updateFields} WHERE idCase = ?`;
+ 
+   // Ejecutar la consulta de actualización
+   const [result] = await connection.query(updateQuery, updateValues);
+   connection.end(); 
+   res.json({
+     success: true,
+     message: 'Actualizado correctamente',
+     casesChanged: result.affectedRows,
+   });
+  } catch (error) {
+   res.json ({
+     success: false,
+     error: error
+   });
+  }
+ });
+ 
+ 
 
 //----ENDPOINT CIERRE SESION----------------
 
