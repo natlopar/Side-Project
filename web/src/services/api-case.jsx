@@ -37,7 +37,7 @@ const createCase = (animal) => {
 
 
 const updateCase = (updateData, idCase) => {
-  return fetch(`https://side-project-vetfolio-manager.vercel.app/updateCase/${idCase}`, {
+  return fetch(`https://vetfolio-manager.onrender.com/updateCase/${idCase}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updateData)

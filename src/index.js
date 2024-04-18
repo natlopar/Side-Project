@@ -206,27 +206,7 @@ server.post('/newCase', async (req, res) => {
   })
 })
 //......ENDPOINT MODIFICAR UN CASO.................
-// server.patch('/updateCase/:id', async (req, res) => {
-//  try{
-//   const connection = await getConnection();
-//   const data = req.body;
-//   const idCase = req.params.id;
-//   const {name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet} = data;
-//   const updateCase = 'UPDATE `case` SET `name` = ?, specie = ?, breed = ?, birthday = ?, clinical = ?, exploration = ?, tests = ?, results = ?, treatment = ?, evolution = ?, comments = ?, public = ?, fk_Vet = ? WHERE idCase = ? ';
-//   const [result] = await connection.query(updateCase, [ name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet, idCase]);
-//   connection.end(); 
-//   res.json({
-//     success: true,
-//     message: 'actualizado correctamente',
-//     casesChanged: result.affectedRows,//validar si es 1, es que se ha actualizado ese caso
-//   })
-//  } catch (error) {
-//   res.json ({
-//     success: false,
-//     error: error
-//   })
-//  }
-// })
+
 server.patch('/updateCase/:id', async (req, res) => {
   try {
    const connection = await getConnection();
