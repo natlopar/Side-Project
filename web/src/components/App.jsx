@@ -40,7 +40,7 @@ function App() {
   const [isDark, setIsDark] = useState(ls.get('isDark', true));
   const [publicSign, setPublicSign] = useState(false);
   const [token, setToken] = useState(ls.get('token', ''));
-  const [username, setUsername] = useState(ls.get('username', ''));
+  const [username, setUsername] = useState('');
 
   const [message, setMessage] = useState('');
   const [loginBtn, setLoginBtn] = useState('');
@@ -85,7 +85,7 @@ function App() {
     setToken(token);
     ls.set('token', token);
     setUsername(name);
-    ls.set('username', username);
+    // ls.set('username', username);
     setIdVet(id);
   };
 

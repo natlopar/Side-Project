@@ -25,13 +25,8 @@ function FormNewCase({
 
   const handleInput = (ev) => {
     ev.preventDefault();
-    const { id, value, checked, placeholder } = ev.target;
-    console.log("Value:", value);
-    console.log("Placeholder:", placeholder);
-    const inputValue = value === '' || value === undefined ? placeholder : value;
-    // const inputValue = value.length === 1 && value === "" ? placeholder : value;
+    const { id, value, checked} = ev.target;
 
-    console.log("InputValue:", inputValue);
 
     if (id === 'public') {
       setPublicAnimal(checked);
@@ -39,8 +34,8 @@ function FormNewCase({
       setAnimal({...animal, [id]: checked ? 1 : 0 })
      
     } else {
-      setAnimal({ ...animal, [id]: checked ? 1 : inputValue });
-      setUpdateData({ ...updateData, [id]: checked ? 1 : inputValue});
+      setAnimal({ ...animal, [id]: checked ? 1 : value });
+      setUpdateData({ ...updateData, [id]: checked ? 1 : value});
       
     }
      
@@ -75,7 +70,7 @@ function FormNewCase({
 //  }, [])
   
 const resetUpdateData = () => {
-  setUpdateData({})
+  setUpdateData(dataAnimal)
 }
   return (   ///al cambiar de input se me vuelven a cambiar los valores
     <form className="case__form" >
@@ -348,7 +343,7 @@ const resetUpdateData = () => {
           value="Cancelar"
           onClick={handleCancel}
         />
-        <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal}/>
+        <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal} setUpdateData={setUpdateData}/>
       </div>
     </form>
   );

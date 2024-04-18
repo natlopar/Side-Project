@@ -60,7 +60,7 @@ function DetailListUser({
       }
     };
     fetchData();
-  }, [idVet,token,setPrivateList,privateList]);
+  }, [idVet,token,setPrivateList]);
 
   useEffect(() => {
     const params = {

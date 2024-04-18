@@ -27,7 +27,7 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
           ls.remove('token');
           ls.remove('idVet');
           ls.remove('login');
-          ls.remove('username');
+          // ls.remove('username');
           ls.set('userData', null);
           ls.remove('list');
           navigate('/');
@@ -41,7 +41,7 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
       setIdVet('');
       ls.remove('idVet');
       ls.remove('login');
-      ls.remove('username');
+      // ls.remove('username');
       ls.set('userData', null);
       ls.remove('list');
       // setMessageLog('No tienes iniciada la sesión');

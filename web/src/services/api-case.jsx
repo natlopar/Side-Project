@@ -36,14 +36,14 @@ const createCase = (animal) => {
 };
 
 
-const updateCase = (updatedAnimal, idCase) => {
-  return  fetch(`https://side-project-vetfolio-manager.vercel.app/updateCase?idCase=${idCase}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedAnimal)
-    })
-    .then((response) =>  response.json())
-    .then(data => {
+const updateCase = (updateData, idCase) => {
+  return fetch(`https://side-project-vetfolio-manager.vercel.app/updateCase/${idCase}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateData)
+      })
+      .then((response) =>  response.json())
+      .then(data => {
       return data
    });
 }

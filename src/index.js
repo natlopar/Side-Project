@@ -230,12 +230,12 @@ server.post('/newCase', async (req, res) => {
 server.patch('/updateCase/:id', async (req, res) => {
   try {
    const connection = await getConnection();
-   const idCase = req.params.id;
+   const id = req.params.id;
    const data = req.body;
  
    // Consulta para obtener los valores actuales del registro
    const selectQuery = 'SELECT * FROM `case` WHERE idCase = ?';
-   const [rows] = await connection.query(selectQuery, [idCase]);
+   const [rows] = await connection.query(selectQuery, [id]);
  
    if (rows.length === 0) {
      return res.json({
@@ -257,7 +257,7 @@ server.patch('/updateCase/:id', async (req, res) => {
    // Construir la consulta de actualización con los campos actualizados
    const updateFields = Object.keys(rows[0]).map(key => `${key} = ?`).join(', ');
    const updateValues = Object.values(rows[0]);
-   updateValues.push(idCase);
+   updateValues.push(id);
  
    const updateQuery = `UPDATE \`case\` SET ${updateFields} WHERE idCase = ?`;
  
