@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import ls from '../services/localStorage';
+import ls from '../../services/localStorage';
 import PropTypes from "prop-types";
+import '../../styles/createCase.scss';
 
 function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateList }) {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
   const handleLogOut = (e) => {
     e.preventDefault();
     if (token !== '') {
-      fetch('https://vetfolio-manager.onrender.com/logout', {
+      fetch('https://side-project-vetfolio-manager.vercel.app/logout', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -20,18 +21,19 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          setToken('');
+          token && setToken('');
           setUsername('');
           setIdVet('');
           ls.remove('token');
           ls.remove('idVet');
           ls.remove('login');
-          ls.remove('username');
+          // ls.remove('username');
           ls.set('userData', null);
           ls.remove('list');
           navigate('/');
           setList(null);
           setPrivateList([]);
+         
         });
     } else {
       setUsername('');
@@ -39,17 +41,18 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
       setIdVet('');
       ls.remove('idVet');
       ls.remove('login');
-      ls.remove('username');
+      // ls.remove('username');
       ls.set('userData', null);
       ls.remove('list');
       // setMessageLog('No tienes iniciada la sesión');
       // setHiddenLog('');
     }
+
   };
 
   return (
     <>
-      <button className="create__btn btn hover" onClick={handleLogOut} aria-label='Cerrar sesión'>
+      <button className="create__btn btn hover desc__subtitles" onClick={handleLogOut} aria-label='Cerrar sesión'>
         Cerrar sesión
       </button>
       <p className={`${hiddenLog}user__msg`}>{messageLog}</p>

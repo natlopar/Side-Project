@@ -1,4 +1,4 @@
-import '../styles/filters.scss';
+import '../../styles/filters.scss';
 import FilterBreed from './FilterBreed';
 import FilterClinical from './FilterClinical';
 import FilterName from './FilterName';
@@ -16,9 +16,8 @@ function Filters({
 }) {
 
   const handleChange =(e)=>{
-    e.preventDefault();
     handleCasesOptions({
-      value: e.target.value.toLowerCase(),
+      value: e.target.value,
       key: e.target.id
     });
   }

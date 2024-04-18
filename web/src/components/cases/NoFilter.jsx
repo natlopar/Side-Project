@@ -1,5 +1,5 @@
-import LoginBtn from "./LoginBtn"
-import Scroll from "./Scroll"
+import LoginBtn from "../user/LoginBtn"
+import Scroll from "../shared/Scroll"
 
 
 

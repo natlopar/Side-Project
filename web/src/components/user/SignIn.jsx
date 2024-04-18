@@ -1,13 +1,13 @@
+import '../../styles/signIn.scss';
 import { useNavigate } from 'react-router-dom';
-import HeaderPages from './HeaderPages';
 import { useForm } from 'react-hook-form';
-import '../styles/signIn.scss';
 import { useState } from 'react';
-import Scroll from './Scroll';
+import HeaderPages from '../shared/HeaderPages';
+import Scroll from '../shared/Scroll';
 import PropTypes from "prop-types";
 
 
-function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , message, loginBtn, hiddenClass}) {
+function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi , message, loginBtn, hiddenClass}) {
 
   const [registry, setRegistry] = useState({
     userName: "",
@@ -33,7 +33,7 @@ function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , mess
     ev.preventDefault();
     const { id, value, checked } = ev.target;
     if (id === 'public') {
-      setPublicU(checked);
+      setPublicSign(checked);
       setRegistry({ ...registry, [id]: checked ? 1 : 0 });
     } else {
       setRegistry({ ...registry, [id]: value });
@@ -72,7 +72,7 @@ function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , mess
             type="text"
             className="user__form--input"
             id="userName"
-            autoComplete='userName'
+            autoComplete='username'
             required
             value={registry.userName}
             onInput={handleInput}
@@ -92,7 +92,7 @@ function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , mess
             type="text"
             className="user__form--input"
             id="nameVet"
-            autoComplete='nameVet'
+            autoComplete='namevet'
             required
             value={registry.nameVet}
             onInput={handleInput}
@@ -112,6 +112,7 @@ function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , mess
             type="email"
             required
             className="user__form--input"
+            autoComplete='email'
             id="email"
           value={registry.email}
           onInput={handleInput}
@@ -210,7 +211,7 @@ function SignIn({ publicU, setPublicU, isDark, setIsDark, sendSignUpToApi , mess
             type="checkbox" 
             name="public" 
             id="public"
-            checked= {publicU}
+            checked= {publicSign}
             onChange={handleInput}
             />
 
@@ -252,8 +253,8 @@ SignIn.propTypes = {
   isDark: PropTypes.bool, 
   setIsDark: PropTypes.func, 
   hiddenClass: PropTypes.string, 
-  publicU: PropTypes.bool, 
-  setPublicU: PropTypes.func, 
+  publicSign: PropTypes.bool, 
+  setPublicSign: PropTypes.func, 
   sendSignUpToApi: PropTypes.func, 
   message: PropTypes.string, 
   loginBtn: PropTypes.any

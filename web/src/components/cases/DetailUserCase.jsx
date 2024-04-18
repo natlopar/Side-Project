@@ -1,9 +1,9 @@
+import '../../styles/list.scss';
 import { useParams } from 'react-router-dom';
-import '../styles/list.scss';
 import { Link } from 'react-router-dom';
-import dog from '../images/perro perfil.jpg';
-import cat from '../images/raya.jpg';
-import Scroll from './Scroll';
+import dog from '../../images/perro perfil.jpg';
+import cat from '../../images/raya.jpg';
+import Scroll from '../shared/Scroll';
 import PropTypes from "prop-types";
 
 
@@ -94,7 +94,7 @@ function DetailUserCase({ list, idVet }) {
 
 DetailUserCase.propTypes = {
   list: PropTypes.array, 
-  idVet: PropTypes.number
+  idVet: PropTypes.any
 }
 
 export default DetailUserCase;

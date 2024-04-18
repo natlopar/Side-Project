@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import '../styles/filters.scss';
+import '../../styles/filters.scss';
 
 function ResetFilter({setCasesOptionName,setCasesOptionBreed, setCasesOptionClinic }) {
 

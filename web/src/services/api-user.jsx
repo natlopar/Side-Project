@@ -1,7 +1,7 @@
 
 
 const sendSignUpToApi = (registry) =>{
-    return  fetch("https://vetfolio-manager.onrender.com/signin", {
+    return  fetch("https://side-project-vetfolio-manager.vercel.app/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(registry),

@@ -1,5 +1,5 @@
+import '../../styles/createCase.scss'
 import { Link } from "react-router-dom";
-import '../styles/createCase.scss'
 
 function CreateCase() {
   return (

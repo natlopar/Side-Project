@@ -1,9 +1,9 @@
+import '../../styles/header.scss';
 import { Link } from 'react-router-dom';
-import logo from '../images/logoVET.png';
 import { Toggle } from './Toggle';
-import MenuNav from './MenuNav';
-import '../styles/header.scss';
 import { useState } from 'react';
+import logo from '../../images/logoVET.png';
+import MenuNav from './MenuNav';
 import PropTypes from "prop-types";
 
 
@@ -28,13 +28,12 @@ const handleMenu = (e)=> {
       </Link>
       <div className="header__style">
         <Toggle
-          className="header__style--light"
           isDark={isDark}
           handleChange={() => setIsDark(!isDark)}
         />
         <button  className={`${moveMenu} header__menu`}  onClick={handleMenu} aria-label='Menu'><i className= "fa-solid fa-bars"></i></button>
         {dropMenu ? <MenuNav /> : <div></div> }
-      {/* <DropMenu/> */}
+        {/* <DropMenu/> */}
       </div>
     </header>
 

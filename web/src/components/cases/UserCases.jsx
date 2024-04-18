@@ -1,7 +1,7 @@
-
-import '../styles/list.scss';
-import dog from '../images/perro perfil.jpg'
-import cat from '../images/raya.jpg'
+import '../../styles/list.scss';
+import { Link } from 'react-router-dom';
+import dog from '../../images/perro perfil.jpg'
+import cat from '../../images/raya.jpg'
 import PropTypes from "prop-types";
 
 function UserCases({ data , idVet}) {
@@ -32,27 +32,38 @@ function UserCases({ data , idVet}) {
           <h6 className="listPet__text ">Diagnóstico</h6>
           <p className="listPet__desc">{data.results}</p>
         </div>
-        <div className="listPet__btn ">
+        <nav className="listPet__btn ">
+          {data.fk_Vet === idVet ? <Link to={`/case/${data.idCase}`} className='link'>
           <div className="icontool link_rev ">
             <span className="tooltip">Revisar</span>
             <span>
               <i className=" fa-solid fa-book-medical"></i>
             </span>
           </div>
-         {data.fk_Vet === idVet ? (<><div className="icontool  link_rev">
+        </Link> : <Link to={`/publicCase/${data.idCase}`} className='link'>
+          <div className="icontool link_rev ">
+            <span className="tooltip">Revisar</span>
+            <span>
+              <i className=" fa-solid fa-book-medical"></i>
+            </span>
+          </div>
+        </Link> }
+        
+         {data.fk_Vet === idVet ? ( <Link to={`/updateCase/${data.idCase}`} className="link"><div className="icontool  link_rev">
             <span className="tooltip">Modificar</span>
             <span>
               {' '}
               <i className="fa-solid fa-file-pen"></i>
             </span>
           </div>
-          <div to={'/'} className="icontool link_rev">
+          </Link>) : <span></span>}
+          { data.fk_Vet === idVet ? <Link to={'/listUser'} className="link"> <div className="icontool link_rev">
             <span className="tooltip">Eliminar</span>
             <span>
               <i className=" fa-solid fa-trash"></i>
             </span>
-          </div> </>) : <span></span>} 
-        </div>
+          </div></Link> : <span></span>}
+        </nav>
       </article>
     </> 
   );
@@ -67,7 +78,8 @@ UserCases.propTypes = {
     breed: PropTypes.string,
     clinical: PropTypes.string,
     results: PropTypes.string,
-    fk_Vet: PropTypes.number
+    fk_Vet: PropTypes.number,
+    idCase: PropTypes.number
   })
 }
 
