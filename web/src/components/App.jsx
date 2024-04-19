@@ -1,4 +1,6 @@
 import React, { Suspense } from 'react';
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router';
 import '../styles/App.scss';
@@ -17,8 +19,11 @@ import BtnListPublic from './cases/BtnListPublic';
 import HeaderPages from './shared/HeaderPages';
 import Contact from './shared/Contact';
 import UpdateCase from './cases/UpdateCase';
+import ModalDelete from './cases/ModalDelete';
 const DetailListUser = React.lazy(() => import('./cases/DetailListUser'));
 const ListCases = React.lazy(() => import('./cases/ListCases'));
+
+
 
 function App() {
   const [idVet, setIdVet] = useState(ls.get('idVet', 0));
@@ -61,6 +66,8 @@ function App() {
   const [hiddenClassCase, setHiddenClassCase] = useState('hidden');
   const [animal, setAnimal] = useState(ls.get('animal', dataAnimal));
   const [updateData, setUpdateData] = useState(dataAnimal);
+
+  const [modalShow, setModalShow] = React.useState(false);
 
   useEffect(() => {
     ls.set('animal', animal);
@@ -192,6 +199,10 @@ function App() {
             />
           }
         />
+
+        <Route path="/delete" element={<>  <Button variant="primary" onClick={() => setModalShow(true)}>
+        Launch vertically centered modal
+      </Button><ModalDelete show={modalShow} onHide={()=> {setModalShow(false)}}/></>} />
         <Route
           path="/listUser"
           element={

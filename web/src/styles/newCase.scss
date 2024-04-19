@@ -104,13 +104,13 @@
         border-color: $colorGreenBright;
         box-shadow: 0 0 0 0.2rem rgb(133, 237, 237, 0.25);
       }
-   
+      @media (min-width: 1024px) {
+       margin: 20px 30%;
+      }
       input{
         width: 2rem;
         outline: none;
         border: 2px solid #ccc;
-        
-     
       }
       label {
         margin-left: 10px;

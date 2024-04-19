@@ -239,7 +239,7 @@ flex-direction: row;
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: space-evenly;
-    
+    align-items: center;
   }
 
   &__subtitles {

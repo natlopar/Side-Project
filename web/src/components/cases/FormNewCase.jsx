@@ -328,15 +328,6 @@ const resetUpdateData = () => {
         </label>
       </div>
       <div className="case__form--buttons">
-        {/* <input
-          type="submit"
-          value="Crear"
-          className=" create__btn  btn hover"
-        /> */}
-       
-        
-
-        {/* crear un componente para los botones para poder añadirlos desde new case o desde update case; en update tendria que ser modificar caso el que ejecute submit */}
         <input
           className=" btn hover create__btn "
           type="button"
