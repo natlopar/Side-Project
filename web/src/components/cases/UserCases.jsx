@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import dog from '../../images/perro perfil.jpg'
 import cat from '../../images/raya.jpg'
 import PropTypes from "prop-types";
+import ModalDelete from './ModalDelete';
+import React from 'react';
 
 function UserCases({ data , idVet}) {
+  const [modalShow, setModalShow] = React.useState(false);
   return (
     <>
       <article className="listPet borderTog btn">
@@ -57,12 +60,13 @@ function UserCases({ data , idVet}) {
             </span>
           </div>
           </Link>) : <span></span>}
-          { data.fk_Vet === idVet ? <Link to={'/listUser'} className="link"> <div className="icontool link_rev">
+          { data.fk_Vet === idVet ?  <div className="icontool link_rev">
             <span className="tooltip">Eliminar</span>
-            <span>
+            <a onClick={() => setModalShow(true)}>
               <i className=" fa-solid fa-trash"></i>
-            </span>
-          </div></Link> : <span></span>}
+            </a>
+            <ModalDelete show={modalShow} onHide={()=> {setModalShow(false)}}/>
+          </div> : <span></span>}
         </nav>
       </article>
     </> 

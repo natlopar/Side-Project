@@ -67,7 +67,7 @@ function App() {
   const [animal, setAnimal] = useState(ls.get('animal', dataAnimal));
   const [updateData, setUpdateData] = useState(dataAnimal);
 
-  const [modalShow, setModalShow] = React.useState(false);
+
 
   useEffect(() => {
     ls.set('animal', animal);
@@ -200,9 +200,9 @@ function App() {
           }
         />
 
-        <Route path="/delete" element={<>  <Button variant="primary" onClick={() => setModalShow(true)}>
+        {/* <Route path="/delete" element={<>  <Button variant="primary" onClick={() => setModalShow(true)}> */}
         Launch vertically centered modal
-      </Button><ModalDelete show={modalShow} onHide={()=> {setModalShow(false)}}/></>} />
+      {/* </Button><ModalDelete show={modalShow} onHide={()=> {setModalShow(false)}}/></>} /> */}
         <Route
           path="/listUser"
           element={
