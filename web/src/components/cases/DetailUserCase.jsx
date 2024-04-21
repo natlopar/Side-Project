@@ -23,39 +23,39 @@ function DetailUserCase({ list, idVet }) {
           )}
           <h5 className="listPet__title--name ">{data.name}</h5>
         </div>
-        <div>
+        <div className='listPet__block'>
           <h6 className="listPet__text nameClient  ">Raza</h6>
           <p className="listPet__desc">{data.breed}</p>
         </div>
-        <div>
+        <div className='listPet__block'>
           <h6 className="listPet__text ">Año de nacimiento</h6>
           <p className="listPet__desc">{data.birthday}</p>
         </div>
-        <div>
+        <div className='listPet__block'>
           <h6 className="listPet__text ">Cuadro clínico</h6>
           <p className="listPet__desc">{data.clinical}</p>
         </div>
-        <div>
+        <div className='listPet__block'>
           <h6 className="listPet__text ">Exploración</h6>
           <p className="listPet__desc">{data.exploration}</p>
         </div>
-        <div>
+        <div className='listPet__block'>
           <h6 className="listPet__text ">Pruebas diagnósticas</h6>
           <p className="listPet__desc">{data.tests}</p>
         </div>
-        <div>
+        <div className='listPet__block'>
           <h6 className="listPet__text ">Resultados</h6>
           <p className="listPet__desc">{data.results}</p>
         </div>
-        <div>
+        <div className='listPet__block'>
           <h6 className="listPet__text ">Tratamiento</h6>
           <p className="listPet__desc">{data.treatment}</p>
         </div>
-        <div>
+        <div className='listPet__block'>
           <h6 className="listPet__text ">Evolución</h6>
           <p className="listPet__desc">{data.evolution}</p>
         </div>
-        <div>
+        <div className='listPet__block'>
           <h6 className="listPet__text ">Diagnóstico</h6>
           <p className="listPet__desc">{data.results}</p>
         </div>
