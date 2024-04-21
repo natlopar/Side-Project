@@ -1,4 +1,7 @@
 import React, { Suspense } from 'react';
+
+import { ProgressSpinner } from 'primereact/progressspinner';
+        
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react';
@@ -278,7 +281,9 @@ function App() {
         <Route
           path="/publicList"
           element={
-            <Suspense fallback={<div>Cargando...</div>}>
+            <Suspense fallback={<div className="card flex justify-content-center">
+                          <ProgressSpinner />
+                      </div>}>
               <ListCases
                 idVet={idVet}
                 publicList={publicList}
