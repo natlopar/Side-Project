@@ -55,8 +55,11 @@
   &__block{
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    margin: 10px 0;
     @media (min-width: 768px) {
-    flex-direction: wrap;
+    flex-direction: row;
+    justify-content: start;
     }
   }
   &__btn {
@@ -102,12 +105,20 @@
     text-shadow: -4px 3px 6px rgb(0 0 0 / 47%);
     color: $colorGreenBright;
     margin: 5px 20px;
+    @media (min-width: 768px) {
+      border-bottom: 1px solid $colorLight;
+      padding-bottom: 5px;
+      }
   }
   &__desc {
     text-align: center;
     font-weight: lighter;
     color: $colorLight;
     text-shadow: -4px 3px 6px rgb(0 0 0 / 47%);
+    @media (min-width: 768px) {
+      align-content: center;
+      margin: 0;
+      }
   }
 }
 
