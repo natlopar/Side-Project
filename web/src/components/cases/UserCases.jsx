@@ -7,18 +7,22 @@ import ModalDelete from './ModalDelete';
 import React, { useState } from 'react';
 
 
+
 function UserCases({ data , idVet}) {
   const [modalShow, setModalShow] = React.useState(false);
   const [idDelete, setIdDelete]= useState(null);
 
   const onHide = ()=> {
     setModalShow(false)
-    setIdDelete(null);
+    setIdDelete(0);
   }
 
-  const handleDelete = async (ev)=>{
-    setModalShow(true);
-    setIdDelete(parseInt(ev.currentTarget.id));
+  const handleDelete = (ev) => {
+   console.log('clic')
+   setModalShow(true);
+   const idSelected = ev.currentTarget.id;
+   console.log(idSelected)
+   setIdDelete(data.idCase);
   }
   
   return (
@@ -73,13 +77,14 @@ function UserCases({ data , idVet}) {
             </span>
           </div>
           </Link>) : <span></span>}
-          { data.fk_Vet === idVet ?  <div className="icontool link_rev">
+
+          { data.fk_Vet === idVet ?  <nav className="icontool link_rev" onClick={handleDelete}  id={`${data.idCase}`}>
             <span className="tooltip">Eliminar</span>
-            <a onClick={handleDelete}  id={`${data.idCase}`}>
+            <a >
               <i className=" fa-solid fa-trash"></i>
             </a>
             <ModalDelete  onHide={onHide} idDelete={idDelete} setIdDelete={setIdDelete} setModalShow={setModalShow}/>
-          </div> : <span></span>}
+          </nav> : <span></span>}
         </nav>
       </article>
     </> 
