@@ -23,6 +23,18 @@ const getFilterCase = (params, token, idVet) => {
   });
 };
 
+const deleteCase = (idCase) => {
+  return fetch(`http://localhost:5000/listUser?id=${idCase}`, 
+  {method: 'DELETE'}
+)
+.then(response => response.json())
+.then(data => {
+  console.log(data)
+  return data;
+})
+}
+
+
 const createCase = (animal) => {
   return fetch('https://side-project-vetfolio-manager.vercel.app/newCase', {
     method: 'POST',
@@ -53,7 +65,8 @@ const objToExport = {
 getPublicCases: getPublicCases,
 getFilterCase: getFilterCase, 
 updateCase: updateCase,
-createCase: createCase
+createCase: createCase, 
+deleteCase: deleteCase
 };
 
 

@@ -18,23 +18,27 @@ function ListCases({
   setToken,  
   setUsername, 
   setIdVet,
-setPublicList}) {
+setPublicList, setIsLoading}) {
   
   // const [userData, setUserData] = useState(null);
   const [listCases, setListCases] = useState({ patients: [] });
 
   useEffect(() => {
+    setIsLoading(true);
     apiCase.getPublicCases()
     .then(data => {
       if (data.success) {
+        setIsLoading(false)
         setListCases(data); 
         setPublicList(data.patients);
         ls.set('public', data.patients);
       } else {
+        setIsLoading(false)
         console.error('Error al obtener los datos. Comprueba que tu conexión es correcta.');
       }
     })
     .catch(error => {
+      setIsLoading(false)
       console.error('Error al obtener los datos:', error);
     });
   }, [setPublicList]);

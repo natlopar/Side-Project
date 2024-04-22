@@ -4,10 +4,22 @@ import dog from '../../images/perro perfil.jpg'
 import cat from '../../images/raya.jpg'
 import PropTypes from "prop-types";
 import ModalDelete from './ModalDelete';
-import React from 'react';
+import React, { useState } from 'react';
+
 
 function UserCases({ data , idVet}) {
   const [modalShow, setModalShow] = React.useState(false);
+  const [idDelete, setIdDelete]= useState(null);
+
+  const onHide = ()=> {
+    setModalShow(false)
+    setIdDelete(null);
+  }
+
+  const handleDelete = async (ev)=>{
+    setModalShow(true);
+    setIdDelete(parseInt(ev.currentTarget.id));
+  }
   
   return (
     <>
@@ -63,10 +75,10 @@ function UserCases({ data , idVet}) {
           </Link>) : <span></span>}
           { data.fk_Vet === idVet ?  <div className="icontool link_rev">
             <span className="tooltip">Eliminar</span>
-            <a onClick={() => setModalShow(true)}>
+            <a onClick={handleDelete}  id={`${data.idCase}`}>
               <i className=" fa-solid fa-trash"></i>
             </a>
-            <ModalDelete show={modalShow} onHide={()=> {setModalShow(false)}}/>
+            <ModalDelete  onHide={onHide} idDelete={idDelete} setIdDelete={setIdDelete} setModalShow={setModalShow}/>
           </div> : <span></span>}
         </nav>
       </article>

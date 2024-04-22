@@ -189,7 +189,36 @@ server.get('/listUser', authenticateToken, async (req, res) => {
   }
 });
 
+//.........eliminar un caso...................
 
+server.delete('/listUser', async (req,res)=> {
+try {
+  const idCase = req.query.id;
+  const connection = await getConnection();
+  const deleteSQL = 'DELETE from `case` WHERE idCase = ?';
+  const [result] = await connection.query(deleteSQL, [idCase]);
+  if (result.affectedRows > 0) {
+    res.json({
+      success: true,
+      message: 'El caso seleccionado ha sido eliminado correctamente',
+    });
+  } else {
+    res.json({
+      success: false,
+      message: 'No se ha podido eliminar el caso',
+    });
+  }
+ 
+} catch(error) {
+  res.json({
+    success: false,
+    message: error,
+  });
+
+}
+
+
+})
 
 //.................ENDPOINT AÑADIR UN CASO.............
 

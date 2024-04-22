@@ -31,9 +31,11 @@ function DetailListUser({
   setCasesOptionBreed,
   setCasesOptionClinic,
   setCasesOptionName,
+  setIsLoading
 }) {
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true)
       try {
         const response = await fetch(
           'https://side-project-vetfolio-manager.vercel.app/listUser',
@@ -46,6 +48,7 @@ function DetailListUser({
             },
           }
         );
+        setIsLoading(false)
         const userData = await response.json();
         if (userData.success) {
           setPrivateList(userData.patients);
@@ -53,6 +56,7 @@ function DetailListUser({
           console.error('Error al obtener los datos del usuario');
         }
       } catch (error) {
+        setIsLoading(false)
         console.error(
           'Error al obtener los datos del usuario, comprueba que has iniciado sesión correctamente',
           error

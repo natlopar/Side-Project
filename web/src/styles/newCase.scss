@@ -105,7 +105,7 @@
         box-shadow: 0 0 0 0.2rem rgb(133, 237, 237, 0.25);
       }
       @media (min-width: 1024px) {
-       margin: 20px 30%;
+       margin: 20px 25%;
       }
       input{
         width: 2rem;
@@ -126,15 +126,7 @@
  
       }
     }
-    // &--submit {
-    //   font-family: $fontSecond;
-    //   background-color: $colorDark;
-    //   color: $colorLight;
-    //   width: 150px;
-    //   font-size: 1.5rem;
-    //   padding: 5px;
-    //   margin: 20px auto 100px auto;
-    // }
+
     &__message {
       border: 1px solid $colorYellow;
       padding: 10px;

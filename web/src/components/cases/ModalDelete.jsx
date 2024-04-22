@@ -1,10 +1,28 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import apiCase from '../../services/api-case'
 
 
 function ModalDelete(props) {
 
+  const handleClickDelete = async () =>{
+    await apiCase.deleteCase(props.idDelete).then((data) => {
+      props.setModalShow(false)
+      console.log(data)
+      props.setIdDelete(null)
+    })
+  }
+
+  // const idDelete = parseInt(ev.currentTarget.id);
+  //   console.log(idDelete);
+  //   //ya tengo el id en number del caso que quiero eliminar
+  //   await apiCase.deleteCase(idDelete).then((data) => {
+  //     console.log(data);
+  //     // if(data.success){
+
+  //     // }
+  //   })
   return (
     <>
       <Modal
@@ -26,7 +44,7 @@ function ModalDelete(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide} variant='success' className='btn-lg'>Cancelar</Button>
-        <Button variant="danger" className='btn-lg' onClick={props.onHide}>Eliminar</Button>
+        <Button variant="danger" className='btn-lg' onClick={handleClickDelete}>Eliminar</Button>
       </Modal.Footer>
     </Modal>
   </>

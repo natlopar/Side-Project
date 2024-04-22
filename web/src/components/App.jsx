@@ -1,8 +1,5 @@
 import React, { Suspense } from 'react';
-
 import { ProgressSpinner } from 'primereact/progressspinner';
-        
-import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router';
@@ -69,6 +66,7 @@ function App() {
   const [hiddenClassCase, setHiddenClassCase] = useState('hidden');
   const [animal, setAnimal] = useState(ls.get('animal', dataAnimal));
   const [updateData, setUpdateData] = useState(dataAnimal);
+  const [isLoading, setIsLoading] = useState(false);
 
 
 
@@ -209,7 +207,7 @@ function App() {
         <Route
           path="/listUser"
           element={
-            <Suspense fallback={<div>Cargando...</div>}>
+            <Suspense fallback={isLoading && <ProgressSpinner />}>
               <DetailListUser
                 token={token}
                 setToken={setToken}
@@ -229,6 +227,7 @@ function App() {
                 setCasesOptionName={setCasesOptionName}
                 setList={setList}
                 privateList={privateList}
+                setIsLoading={setIsLoading}
               />
             </Suspense>
           }
@@ -281,9 +280,7 @@ function App() {
         <Route
           path="/publicList"
           element={
-            <Suspense fallback={<div className="card flex justify-content-center">
-                          <ProgressSpinner />
-                      </div>}>
+            <Suspense fallback={isLoading && <ProgressSpinner />}>
               <ListCases
                 idVet={idVet}
                 publicList={publicList}
@@ -292,6 +289,7 @@ function App() {
                 setIsDark={setIsDark}
                 setUsername={setUsername}
                 setIdVet={setIdVet}
+                setIsLoading={setIsLoading}
               />
             </Suspense>
           }
