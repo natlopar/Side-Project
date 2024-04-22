@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import apiCase from '../../services/api-case';
 import '../../styles/newCase.scss';
 import ls from '../../services/localStorage';
@@ -7,6 +7,8 @@ import Scroll from '../shared/Scroll';
 import FormNewCase from './FormNewCase';
 import BtnUpdateCase from './BtnUpdateCase';
 import { useEffect } from 'react';
+import BtnList from './BtnList';
+import BtnCancelForm from './BtnCancelForm';
 
 function UpdateCase({
   isDark,
@@ -23,7 +25,11 @@ function UpdateCase({
   messageCase,
   setMessageCase,
   privateList,
+  resetUpdateData,
+  setIsLoading
 }) {
+
+  const navigate = useNavigate();
   const { id } = useParams();
   const idCase = parseInt(id);
   const animalData = privateList.find((one) => one.idCase === parseInt(id));
@@ -32,16 +38,29 @@ function UpdateCase({
   }, [animalData]);
 
   const handleSubmitUpdate = async () => {
+    setIsLoading(true)
     await apiCase.updateCase(updateData, idCase).then((data) => {
+     
       if (data.success) {
+        setIsLoading(false)
         setMessageCase('El caso ha sido modificado correctamente.');
         setHiddenClassCase('');
       } else {
+        setIsLoading(false)
         setMessageCase('Error al modificar tu caso. Ha habido un problema con el servidor, inténtalo más tarde por favor.');
         setHiddenClassCase('');
       }
     });
   };
+
+  
+  const handleCancel = (ev) => {
+    ev.preventDefault();
+    setAnimal(dataAnimal);
+    setUpdateData(dataAnimal)
+    navigate('/listUser');
+  };
+
 
   return (
     <>
@@ -66,7 +85,8 @@ function UpdateCase({
         />
 
         <BtnUpdateCase handleSubmitUpdate={handleSubmitUpdate} />
-
+        <BtnCancelForm handleCancel={handleCancel}/>
+        <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal} setUpdateData={setUpdateData}/>
         <p className={`${hiddenClassCase} user__msg`}>{messageCase}</p>
       </div>
     </>

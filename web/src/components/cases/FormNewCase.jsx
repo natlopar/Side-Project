@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import ls from '../../services/localStorage';
 import { string } from 'prop-types';
+import BtnCancelForm from './BtnCancelForm';
 
 
 function FormNewCase({
@@ -42,12 +43,6 @@ function FormNewCase({
   };
 
 
-  const handleCancel = (ev) => {
-    ev.preventDefault();
-    setAnimal(dataAnimal);
-    setUpdateData(dataAnimal)
-    navigate('/listUser');
-  };
  
   // const handleSubmit = (ev) => {//el fetch da error
   //   ev.preventDefault();//tenría que ejecutar un fetch u otro en fx de si estoy modificanto o creando un caso; crear una variable?
@@ -69,10 +64,9 @@ function FormNewCase({
 
 //  }, [])
   
-const resetUpdateData = () => {
-  setUpdateData(dataAnimal)
-}
-  return (   ///al cambiar de input se me vuelven a cambiar los valores
+
+  return ( 
+     <>
     <form className="case__form" >
       <label htmlFor="" className="case__form--label">
         {' '}
@@ -328,15 +322,12 @@ const resetUpdateData = () => {
         </label>
       </div>
       <div className="case__form--buttons">
-        <input
-          className=" btn hover create__btn "
-          type="button"
-          value="Cancelar"
-          onClick={handleCancel}
-        />
-        <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal} setUpdateData={setUpdateData}/>
+      
+       
       </div>
     </form>
+    {/* <BtnCancelForm handleCancel={handleCancel}/> */}
+    </>
   );
 }
 

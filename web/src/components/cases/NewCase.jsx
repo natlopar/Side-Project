@@ -5,6 +5,9 @@ import Scroll from '../shared/Scroll';
 import PropTypes from 'prop-types';
 import FormNewCase from './FormNewCase';
 import BtnCreateNewCase from './BtnCreateNewCase';
+import BtnList from './BtnList';
+import BtnCancelForm from './BtnCancelForm';
+import { useNavigate } from 'react-router-dom';
 
 function NewCase({
   isDark,
@@ -19,8 +22,10 @@ function NewCase({
   setHiddenClassCase, 
   setIdCase, 
   dataAnimal, 
-  handleResetMessage, updateData, setUpdateData
+  handleResetMessage, updateData, setUpdateData, resetUpdateData
 }) {
+    
+  const navigate = useNavigate();
   const handleSubmitNew = async () => {
     await apiCase.createCase(animal).then(data => {
         if (data.success) {
@@ -39,6 +44,12 @@ function NewCase({
   };
 
  
+  const handleCancel = (ev) => {
+    ev.preventDefault();
+    setAnimal(dataAnimal);
+    setUpdateData(dataAnimal)
+    navigate('/listUser');
+  };
 
 
   return (
@@ -60,7 +71,9 @@ function NewCase({
           updateData={updateData}
           setUpdateData={setUpdateData}
         />
-         <BtnCreateNewCase handleSubmitNew={handleSubmitNew}/>
+        <BtnCreateNewCase handleSubmitNew={handleSubmitNew}/>
+        <BtnCancelForm handleCancel={handleCancel}/>
+        <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal} setUpdateData={setUpdateData}/>
 
         <p className={`${hiddenClassCase} user__msg`}>{messageCase}</p>
       </div>

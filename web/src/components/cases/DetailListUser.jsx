@@ -130,7 +130,7 @@ function DetailListUser({
     ) : (
       filteredData.map((data) => (
         <li key={data.idCase} className="sectionList__ul">
-          <UserCases data={data} idVet={idVet} />
+          <UserCases data={data} idVet={idVet}  />
         </li>
       ))
     );

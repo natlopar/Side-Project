@@ -102,6 +102,10 @@ function App() {
     setHiddenClassCase('hidden');
   };
 
+
+  const resetUpdateData = () => {
+    setUpdateData(dataAnimal)
+  }
   const sendSignUpToApi = (registry) => {
     apiUser.sendSignUpToApi(registry).then((response) => {
       if (response.success) {
@@ -235,6 +239,7 @@ function App() {
         <Route
           path="/newCase"
           element={
+            <>
             <NewCase
               handleResetMessage={handleResetMessage}
               publicSign={publicSign}
@@ -251,13 +256,17 @@ function App() {
               dataAnimal={dataAnimal}
               updateData={updateData}
               setUpdateData={setUpdateData}
-              // setIdCase={setIdCase}
+              resetUpdateData={resetUpdateData}
+              
             />
-          }
+            
+          
+            </>}
         />
         <Route
           path="/updateCase/:id"
           element={
+            <Suspense fallback={isLoading && <ProgressSpinner />}>
             <UpdateCase
               dataAnimal={dataAnimal}
               handleResetMessage={handleResetMessage}
@@ -274,7 +283,10 @@ function App() {
               privateList={privateList}
               updateData={updateData}
               setUpdateData={setUpdateData}
+              resetUpdateData={resetUpdateData}
+              setIsLoading={setIsLoading}
             />
+            </Suspense>
           }
         />
         <Route
@@ -301,7 +313,8 @@ function App() {
               <section className="user">
                 <Header isDark={isDark} setIsDark={setIsDark} />
                 <DetailUserCase list={privateList} />
-                <BtnList />
+                {/* <BtnList handleResetMessage={handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal} setUpdateData={setUpdateData}/> */}
+                <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal} setUpdateData={setUpdateData}/>
               </section>
             </>
           }
