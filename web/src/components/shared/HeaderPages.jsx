@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 
 
 
-function HeaderPages({isDark, setIsDark}) {
+function HeaderPages({ isDark, setIsDark, token, setToken, setUsername, setIdVet, setList, setPrivateList }) {
 
 const [dropMenu, setDropMenu] = useState(false);
 const [moveMenu, setMoveMenu] = useState('');
@@ -35,7 +35,7 @@ const handleMenu = (e)=> {
 
 
       <button  className={`${moveMenu} header__menu `}  onClick={handleMenu} aria-label='Menu'><i className= "fa-solid fa-bars"></i></button>
-        {dropMenu ? <MenuNav /> : <div></div> }
+        {dropMenu ? <MenuNav token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList}/> : <div></div> }
       </div>
     </header>
   );

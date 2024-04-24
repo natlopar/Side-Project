@@ -6,7 +6,7 @@ import logo from '../../images/logoVET.png';
 import MenuNav from './MenuNav';
 import PropTypes from 'prop-types';
 
-function Header({ isDark, setIsDark }) {
+function Header({ isDark, setIsDark, token, setToken, setUsername, setIdVet, setList, setPrivateList }) {
   const [dropMenu, setDropMenu] = useState(false);
   const [moveMenu, setMoveMenu] = useState('');
 
@@ -37,7 +37,7 @@ function Header({ isDark, setIsDark }) {
           
         </button>
 
-        {dropMenu ? <MenuNav /> : <div></div>}
+        {dropMenu ? <MenuNav token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList}/> : <div></div>}
       </div>
     </header>
   );

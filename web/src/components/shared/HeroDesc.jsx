@@ -14,7 +14,7 @@ function HeroDesc({token, setToken, setIdVet, setUsername, setList, setPrivateLi
     <section className="hero desc">
       <Scroll/>
       <h1 className="hero__title">Vetfolio Manager</h1>
-      {/* <div className="desc"> */}
+
       <div className="container">
         <section className="hero__section">
           <article className="heroArticle">
@@ -30,7 +30,7 @@ function HeroDesc({token, setToken, setIdVet, setUsername, setList, setPrivateLi
                 Crea tu propia base de datos con tus casos más relevantes
               </h3>
             </div>
-            {/* <img className="hero__section--img" src={dog} alt="" /> */}
+
           </article>
         </section>
         <section className="hero__info">
@@ -71,10 +71,10 @@ function HeroDesc({token, setToken, setIdVet, setUsername, setList, setPrivateLi
         <Link to={'/logIn'} className="link">
         <button className="aside__subtitles hover btn" aria-label='Inicia sesión'>Inicia sesión</button>
         </Link>
-        <div >
+        <div className='aside__logout'>
         <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername} setList={setList} setPrivateList={setPrivateList}/></div>
  
-      </div>
+       </div>
 
     </section>
   );

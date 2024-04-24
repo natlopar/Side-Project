@@ -6,6 +6,7 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
+import ls from '../../services/localStorage';
 import { useEffect } from 'react';
 import apiCase from '../../services/api-case';
 import UserCases from './UserCases';
@@ -17,6 +18,7 @@ import LoginBtn from '../user/LoginBtn';
 import Scroll from '../shared/Scroll';
 import NoFilter from './NoFilter';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function DetailListUser({
   token,
@@ -62,6 +64,7 @@ function DetailListUser({
         const userData = await response.json();
         if (userData.success) {
           setPrivateList(userData.patients);
+          ls.set('private',userData.patients)
         } else {
           console.error('Error al obtener los datos del usuario');
         }
@@ -96,7 +99,7 @@ function DetailListUser({
   if (!token || !username) {
     return (
       <>
-        <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
+        <Welcome  isDark={isDark} setIsDark={setIsDark}  token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList} />
         <Scroll />
         <div className="sectionList loading">
           <p>Cargando...</p>
@@ -150,15 +153,19 @@ function DetailListUser({
       <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
 
       <div className="logout">
-        <LogOut
+        {/* <LogOut
           token={token}
           setToken={setToken}
           setIdVet={setIdVet}
           setUsername={setUsername}
           setList={setList}
           setPrivateList={setPrivateList}
-        />
+        /> */}
+        <Link to={'/newCase'} className="link">
+        <button className="create__btn btn hover" aria-label='Comenzar'>Crear caso</button>
+      </Link>
       </div>
+
       {isLoading ? (
         <div className="spinner flex justify-content-center">
           <ProgressSpinner />{' '}

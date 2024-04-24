@@ -71,7 +71,7 @@ function App() {
   const [animal, setAnimal] = useState(ls.get('animal', dataAnimal));
   const [updateData, setUpdateData] = useState(dataAnimal);
   const [isLoading, setIsLoading] = useState(false);
-const [isDeleted, setIsDeleted] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
 
 
   useEffect(() => {
@@ -168,7 +168,7 @@ const [isDeleted, setIsDeleted] = useState(false);
           path="/"
           element={
             <>
-              <Header isDark={isDark} setIsDark={setIsDark} />
+              <Header isDark={isDark} setIsDark={setIsDark}  token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList} />
               <HeroDesc
                 token={token}
                 setToken={setToken}
@@ -247,14 +247,13 @@ const [isDeleted, setIsDeleted] = useState(false);
                 isLoading={isLoading}
                 isDeleted={isDeleted}
                 setIsDeleted={setIsDeleted}
+             
               />
               <Footer />
             </Suspense>
           }
         />
-        <Route path='/spinner' element={<div className="spinner flex justify-content-center">
-            <ProgressSpinner />
-        </div>}/>
+       
         <Route
           path="/newCase"
           element={
@@ -279,8 +278,6 @@ const [isDeleted, setIsDeleted] = useState(false);
               
             />
             <Footer />
-            
-          
             </>}
         />
         <Route
@@ -337,10 +334,8 @@ const [isDeleted, setIsDeleted] = useState(false);
           element={
             <>
               <section className="user">
-                <Header isDark={isDark} setIsDark={setIsDark} />
-                <DetailUserCase list={privateList}  />
-                {/* <BtnList handleResetMessage={handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal} setUpdateData={setUpdateData}/> */}
-                
+                <Header  isDark={isDark} setIsDark={setIsDark}  token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList} />
+                <DetailUserCase list={privateList}  />  
                 <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal} setUpdateData={setUpdateData}/>
               <BtnListPublic/>
               </section>
@@ -353,7 +348,7 @@ const [isDeleted, setIsDeleted] = useState(false);
           element={
             <>
               <section className="user">
-                <Header isDark={isDark} setIsDark={setIsDark} />
+                <Header  isDark={isDark} setIsDark={setIsDark}  token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList} />
                 <DetailUserCase list={publicList} idVet={idVet} />
                 <BtnList/>
                 <BtnListPublic />
@@ -366,7 +361,7 @@ const [isDeleted, setIsDeleted] = useState(false);
           path="/contact"
           element={
             <>
-              <HeaderPages isDark={isDark} setIsDark={setIsDark} />
+              <HeaderPages  isDark={isDark} setIsDark={setIsDark}  token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList}/>
               <Contact
                 handleContact={handleContact}
                 contact={contact}
