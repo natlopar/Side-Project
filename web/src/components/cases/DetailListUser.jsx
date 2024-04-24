@@ -1,5 +1,11 @@
 import '../../styles/logOut.scss';
 import '../../styles/list.scss';
+import { ProgressSpinner } from 'primereact/progressspinner';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+import 'primeflex/primeflex.css';
 import { useEffect } from 'react';
 import apiCase from '../../services/api-case';
 import UserCases from './UserCases';
@@ -32,6 +38,7 @@ function DetailListUser({
   setCasesOptionClinic,
   setCasesOptionName,
   setIsLoading, 
+  isLoading,
   isDeleted, 
   setIsDeleted
 }) {
@@ -92,10 +99,10 @@ function DetailListUser({
         <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
         <Scroll />
         <div className="sectionList loading">
-          <span>
-            <i className="fa-solid fa-spinner"></i>
-          </span>
+          
           <p>Cargando...</p>
+          
+            <ProgressSpinner /> 
           <p>¿Has iniciado sesión?</p>
           <LoginBtn />
         </div>
@@ -153,6 +160,8 @@ function DetailListUser({
           setPrivateList={setPrivateList}
         />
       </div>
+      {isLoading? (<div className="spinner flex justify-content-center">
+            <ProgressSpinner /> </div>) : null}
 
       {privateList.length > 0 ? (
         <>

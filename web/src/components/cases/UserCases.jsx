@@ -1,39 +1,36 @@
 import '../../styles/list.scss';
 import { Link } from 'react-router-dom';
-import dog from '../../images/perro perfil.jpg'
-import cat from '../../images/raya.jpg'
-import PropTypes from "prop-types";
+import dog from '../../images/perro perfil.jpg';
+import cat from '../../images/raya.jpg';
+import PropTypes from 'prop-types';
 import ModalDelete from './ModalDelete';
-import  { useState } from 'react';
+import { useState } from 'react';
 
-
-
-function UserCases({ data , idVet, setIsDeleted}) {
+function UserCases({ data, idVet, setIsDeleted }) {
   const [modalShow, setModalShow] = useState(false);
-  const [idDelete, setIdDelete]= useState(null);
+  const [idDelete, setIdDelete] = useState(null);
 
-let idSelected = 0
+  let idSelected = 0;
 
   const handleDelete = async (ev) => {
     ev.preventDefault();
-  
-   setModalShow(true);
-   idSelected = parseInt(ev.currentTarget.id);
- 
-    setIdDelete(idSelected);
 
-  }
-  
+    setModalShow(true);
+    idSelected = parseInt(ev.currentTarget.id);
+
+    setIdDelete(idSelected);
+  };
+
   return (
     <>
       <article className="listPet borderTog btn">
         <div className="listPet__title userPicture">
           {data.specie === 'canina' ? (
             // <i className="fa-solid fa-dog iconPet"></i>
-            <img src={dog} alt="foto perro" className='listPet__title--img' />
+            <img src={dog} alt="foto perro" className="listPet__title--img" />
           ) : (
             // <i className="fa-solid fa-cat iconPet"></i>
-            <img src={cat} alt="foto gato" className='listPet__title--img' />
+            <img src={cat} alt="foto gato" className="listPet__title--img" />
           )}
           <h5 className="listPet__title--name ">{data.name}</h5>
         </div>
@@ -51,46 +48,63 @@ let idSelected = 0
           <p className="listPet__desc">{data.results}</p>
         </div>
         <nav className="listPet__btn ">
-          {data.fk_Vet === idVet ? <Link to={`/case/${data.idCase}`} className='link'>
-          <div className="icontool link_rev ">
-            <span className="tooltip">Revisar</span>
-            <span>
-              <i className=" fa-solid fa-book-medical"></i>
-            </span>
-          </div>
-        </Link> : <Link to={`/publicCase/${data.idCase}`} className='link'>
-          <div className="icontool link_rev ">
-            <span className="tooltip">Revisar</span>
-            <span>
-              <i className=" fa-solid fa-book-medical"></i>
-            </span>
-          </div>
-        </Link> }
-        
-         {data.fk_Vet === idVet ? ( <Link to={`/updateCase/${data.idCase}`} className="link"><div className="icontool  link_rev">
-            <span className="tooltip">Modificar</span>
-            <span>
-              {' '}
-              <i className="fa-solid fa-file-pen"></i>
-            </span>
-          </div>
-          </Link>) : <span></span>}
+          {data.fk_Vet === idVet ? (
+            <Link to={`/case/${data.idCase}`} className="link">
+              <div className="icontool link_rev ">
+                <span className="tooltip">Revisar</span>
+                <span>
+                  <i className=" fa-solid fa-book-medical"></i>
+                </span>
+              </div>
+            </Link>
+          ) : (
+            <Link to={`/publicCase/${data.idCase}`} className="link">
+              <div className="icontool link_rev ">
+                <span className="tooltip">Revisar</span>
+                <span>
+                  <i className=" fa-solid fa-book-medical"></i>
+                </span>
+              </div>
+            </Link>
+          )}
 
-          { data.fk_Vet === idVet ?  
-          <div className="icontool link_rev" >
-            <span className="tooltip">Eliminar</span>
-            <a onClick={handleDelete}  id={data.idCase}>
-              <i className=" fa-solid fa-trash"></i>
-            </a>
-            <ModalDelete show={modalShow} onHide={()=> setModalShow(false)} idDelete={idDelete} 
-            setIdDelete={setIdDelete} setModalShow={setModalShow} setIsDeleted={setIsDeleted}/>
-          </div> : <span></span>}
+          {data.fk_Vet === idVet ? (
+            <Link to={`/updateCase/${data.idCase}`} className="link">
+              <div className="icontool  link_rev">
+                <span className="tooltip">Modificar</span>
+                <span>
+                  {' '}
+                  <i className="fa-solid fa-file-pen"></i>
+                </span>
+              </div>
+            </Link>
+          ) : (
+            <span></span>
+          )}
+
+          {data.fk_Vet === idVet ? (
+            <div className="icontool link_rev">
+              <span className="tooltip">Eliminar</span>
+              <a onClick={handleDelete} id={data.idCase}>
+                <i className=" fa-solid fa-trash"></i>
+              </a>
+              <ModalDelete
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                idDelete={idDelete}
+                setIdDelete={setIdDelete}
+                setModalShow={setModalShow}
+                setIsDeleted={setIsDeleted}
+              />
+            </div>
+          ) : (
+            <span></span>
+          )}
         </nav>
       </article>
-    </> 
-  )
+    </>
+  );
 }
-
 
 UserCases.propTypes = {
   idVet: PropTypes.number,
@@ -101,9 +115,8 @@ UserCases.propTypes = {
     clinical: PropTypes.string,
     results: PropTypes.string,
     fk_Vet: PropTypes.number,
-    idCase: PropTypes.number
-  })
-}
-
+    idCase: PropTypes.number,
+  }),
+};
 
 export default UserCases;

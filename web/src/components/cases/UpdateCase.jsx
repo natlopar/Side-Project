@@ -1,4 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { ProgressSpinner } from 'primereact/progressspinner';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+import 'primeflex/primeflex.css';
 import apiCase from '../../services/api-case';
 import '../../styles/newCase.scss';
 import ls from '../../services/localStorage';
@@ -26,7 +32,7 @@ function UpdateCase({
   setMessageCase,
   privateList,
   resetUpdateData,
-  setIsLoading
+  setIsLoading, isLoading
 }) {
 
   const navigate = useNavigate();
@@ -89,6 +95,8 @@ function UpdateCase({
         <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal} setUpdateData={setUpdateData}/>
         <p className={`${hiddenClassCase} user__msg`}>{messageCase}</p>
       </div>
+      {isLoading? (<div className="spinner flex justify-content-center">
+            <ProgressSpinner /> </div>) : null}
     </>
   );
 }

@@ -235,6 +235,7 @@ const [isDeleted, setIsDeleted] = useState(false);
                 setList={setList}
                 privateList={privateList}
                 setIsLoading={setIsLoading}
+                isLoading={isLoading}
                 isDeleted={isDeleted}
                 setIsDeleted={setIsDeleted}
               />
@@ -293,6 +294,7 @@ const [isDeleted, setIsDeleted] = useState(false);
               setUpdateData={setUpdateData}
               resetUpdateData={resetUpdateData}
               setIsLoading={setIsLoading}
+              isLoading={isLoading}
             />
             </Suspense>
           }
