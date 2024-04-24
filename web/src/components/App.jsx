@@ -177,12 +177,15 @@ const [isDeleted, setIsDeleted] = useState(false);
                 setList={setList}
                 setPrivateList={setPrivateList}
               />
+                 <Footer />
+      
             </>
           }
         />
         <Route
           path="/signIn"
           element={
+            <>
             <SignIn
               sendSignUpToApi={sendSignUpToApi}
               publicSign={publicSign}
@@ -193,11 +196,14 @@ const [isDeleted, setIsDeleted] = useState(false);
               message={message}
               hiddenClass={hiddenClassSign}
             />
+            <Footer />
+            </>
           }
         />
         <Route
           path="/logIn"
           element={
+            <>
             <Login
               handleLogin={handleLogin}
               isDark={isDark}
@@ -206,6 +212,9 @@ const [isDeleted, setIsDeleted] = useState(false);
               setHiddenClass={setHiddenClass}
               setToken={setToken}
             />
+            <Footer />
+            </>
+            
           }
         />
 
@@ -239,6 +248,7 @@ const [isDeleted, setIsDeleted] = useState(false);
                 isDeleted={isDeleted}
                 setIsDeleted={setIsDeleted}
               />
+              <Footer />
             </Suspense>
           }
         />
@@ -268,6 +278,7 @@ const [isDeleted, setIsDeleted] = useState(false);
               resetUpdateData={resetUpdateData}
               
             />
+            <Footer />
             
           
             </>}
@@ -295,7 +306,9 @@ const [isDeleted, setIsDeleted] = useState(false);
               resetUpdateData={resetUpdateData}
               setIsLoading={setIsLoading}
               isLoading={isLoading}
+              idVet={idVet}
             />
+            <Footer />
             </Suspense>
           }
         />
@@ -312,8 +325,11 @@ const [isDeleted, setIsDeleted] = useState(false);
                 setUsername={setUsername}
                 setIdVet={setIdVet}
                 setIsLoading={setIsLoading}
+                isLoading={isLoading}
               />
+              <Footer />
             </Suspense>
+            
           }
         />
         <Route
@@ -322,10 +338,13 @@ const [isDeleted, setIsDeleted] = useState(false);
             <>
               <section className="user">
                 <Header isDark={isDark} setIsDark={setIsDark} />
-                <DetailUserCase list={privateList} />
+                <DetailUserCase list={privateList}  />
                 {/* <BtnList handleResetMessage={handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal} setUpdateData={setUpdateData}/> */}
+                
                 <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal} setUpdateData={setUpdateData}/>
+              <BtnListPublic/>
               </section>
+              <Footer />
             </>
           }
         />
@@ -336,8 +355,10 @@ const [isDeleted, setIsDeleted] = useState(false);
               <section className="user">
                 <Header isDark={isDark} setIsDark={setIsDark} />
                 <DetailUserCase list={publicList} idVet={idVet} />
+                <BtnList/>
                 <BtnListPublic />
               </section>
+              <Footer />
             </>
           }
         />
@@ -352,11 +373,12 @@ const [isDeleted, setIsDeleted] = useState(false);
                 setContact={setContact}
                 msgContact={msgContact}
               />
+              <Footer />
             </>
           }
         />
       </Routes>
-      <Footer />
+      
     </div>
   );
 }

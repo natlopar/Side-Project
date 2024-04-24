@@ -1,5 +1,11 @@
 
 import '../../styles/list.scss';
+import { ProgressSpinner } from 'primereact/progressspinner';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+import 'primeflex/primeflex.css';
 import Welcome from '../shared/Welcome';
 import { useEffect, useState } from 'react';
 import apiCase from '../../services/api-case';
@@ -18,7 +24,7 @@ function ListCases({
   setToken,  
   setUsername, 
   setIdVet,
-setPublicList, setIsLoading}) {
+setPublicList, setIsLoading, isLoading}) {
   
   // const [userData, setUserData] = useState(null);
   const [listCases, setListCases] = useState({ patients: [] });
@@ -53,6 +59,8 @@ setPublicList, setIsLoading}) {
       </h2>
       <div className='sectionList__logOut'>
         <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername}/></div>
+        {isLoading? (<div className="spinner flex justify-content-center">
+            <ProgressSpinner /> </div>) : null}
         <PublicRender idVet={idVet} listCases={listCases} />
     </>
   );

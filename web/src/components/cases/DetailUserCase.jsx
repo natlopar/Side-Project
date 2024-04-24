@@ -1,13 +1,12 @@
 import '../../styles/list.scss';
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import dog from '../../images/perro perfil.jpg';
 import cat from '../../images/raya.jpg';
 import Scroll from '../shared/Scroll';
 import PropTypes from "prop-types";
 
 
-function DetailUserCase({ list, idVet }) {
+function DetailUserCase({ list }) {
   const { id } = useParams();
   const data = list.find((one) => one.idCase === parseInt(id));
 
@@ -59,33 +58,7 @@ function DetailUserCase({ list, idVet }) {
           <h6 className="listPet__text ">Diagnóstico</h6>
           <p className="listPet__desc">{data.results}</p>
         </div>
-        <div className="listPet__btn ">
-          {data.fk_Vet === idVet ? (
-            <>
-              <Link to={'/'} className="icontool link_rev ">
-                <span className="tooltip">Revisar</span>
-                <span>
-                  <i className=" fa-solid fa-book-medical"></i>
-                </span>
-              </Link>
-              <Link to={'/'} className="icontool  link_rev">
-                <span className="tooltip">Modificar</span>
-                <span>
-                  {' '}
-                  <i className="fa-solid fa-file-pen"></i>
-                </span>
-              </Link>
-              <Link to={'/'} className="icontool link_rev">
-                <span className="tooltip">Eliminar</span>
-                <span>
-                  <i className=" fa-solid fa-trash"></i>
-                </span>
-              </Link>
-            </>
-          ) : (
-            <div></div>
-          )}
-        </div>
+    
       </article>
       </>
    

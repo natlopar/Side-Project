@@ -15,6 +15,10 @@ import BtnUpdateCase from './BtnUpdateCase';
 import { useEffect } from 'react';
 import BtnList from './BtnList';
 import BtnCancelForm from './BtnCancelForm';
+import BtnListPublic from './BtnListPublic';
+import DetailListUser from './DetailListUser';
+import ErrorPage from '../shared/ErrorPage';
+
 
 function UpdateCase({
   isDark,
@@ -32,10 +36,32 @@ function UpdateCase({
   setMessageCase,
   privateList,
   resetUpdateData,
-  setIsLoading, isLoading
-}) {
+  setIsLoading,
+  isLoading,
+  idVet,
+  animal,
+  token,
+  setToken,
 
+  username,
+
+  setUsername,
+  setIdVet,
+  setPrivateList,
+  handleCasesOptions,
+  casesOptionName,
+  casesOptionBreed,
+  casesOptionClinic,
+  setCasesOptionBreed,
+  setCasesOptionClinic,
+  setCasesOptionName,
+  setList,
+
+  isDeleted,
+  setIsDeleted,
+}) {
   const navigate = useNavigate();
+
   const { id } = useParams();
   const idCase = parseInt(id);
   const animalData = privateList.find((one) => one.idCase === parseInt(id));
@@ -44,59 +70,81 @@ function UpdateCase({
   }, [animalData]);
 
   const handleSubmitUpdate = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     await apiCase.updateCase(updateData, idCase).then((data) => {
-     
       if (data.success) {
-        setIsLoading(false)
+        setIsLoading(false);
         setMessageCase('El caso ha sido modificado correctamente.');
         setHiddenClassCase('');
       } else {
-        setIsLoading(false)
-        setMessageCase('Error al modificar tu caso. Ha habido un problema con el servidor, inténtalo más tarde por favor.');
+        setIsLoading(false);
+        setMessageCase(
+          'Error al modificar tu caso. Ha habido un problema con el servidor, inténtalo más tarde por favor.'
+        );
         setHiddenClassCase('');
       }
     });
   };
 
-  
   const handleCancel = (ev) => {
     ev.preventDefault();
     setAnimal(dataAnimal);
-    setUpdateData(dataAnimal)
+    setUpdateData(dataAnimal);
     navigate('/listUser');
   };
 
+  // useEffect(() => {
+  //   ls.set('lastVisitedRoute', window.location.pathname);
+  // }, []);
 
+  // useEffect(() => {
+  //   const lastVisitedRoute = ls.get('lastVisitedRoute');
+  //   if (lastVisitedRoute) {
+  //     navigate(lastVisitedRoute);
+  //   }
+  // }, []);
   return (
     <>
       <Scroll />
       <HeaderPages isDark={isDark} setIsDark={setIsDark} />
-      <div className="case">
-        <h3 className="case__title">
-          <i className="case__title--icon fa-solid fa-paw"></i> Modifica tu caso
-        </h3>
-
-        <FormNewCase
-          setPublicAnimal={setPublicAnimal}
-          setAnimal={setAnimal}
-          idCase={idCase}
-          dataAnimal={dataAnimal}
-          // handleSubmit={handleSubmit}
-          animal={animalData}
-          publicAnimal={publicAnimal}
-          handleResetMessage={handleResetMessage}
-          updateData={updateData}
-          setUpdateData={setUpdateData}
-        />
-
-        <BtnUpdateCase handleSubmitUpdate={handleSubmitUpdate} />
-        <BtnCancelForm handleCancel={handleCancel}/>
-        <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal} setUpdateData={setUpdateData}/>
-        <p className={`${hiddenClassCase} user__msg`}>{messageCase}</p>
-      </div>
-      {isLoading? (<div className="spinner flex justify-content-center">
-            <ProgressSpinner /> </div>) : null}
+  
+      {animalData ? (
+        <div className="case">
+          <h3 className="case__title">
+            <i className="case__title--icon fa-solid fa-paw"></i> Modifica tu caso
+          </h3>
+          <FormNewCase
+            setPublicAnimal={setPublicAnimal}
+            setAnimal={setAnimal}
+            idCase={idCase}
+            dataAnimal={dataAnimal}
+            animal={animalData}
+            publicAnimal={publicAnimal}
+            handleResetMessage={handleResetMessage}
+            updateData={updateData}
+            setUpdateData={setUpdateData}
+          />
+          <BtnUpdateCase handleSubmitUpdate={handleSubmitUpdate} />
+          <BtnCancelForm handleCancel={handleCancel} />
+          <BtnList
+            handleResetMessage={handleResetMessage}
+            resetUpdateData={resetUpdateData}
+            setAnimal={setAnimal}
+            dataAnimal={dataAnimal}
+            setUpdateData={setUpdateData}
+          />
+          <BtnListPublic />
+          <p className={`${hiddenClassCase} user__msg`}>{messageCase}</p>
+        </div>
+      ) : (
+        <ErrorPage/>
+      )}
+  
+      {isLoading && (
+        <div className="spinner flex justify-content-center">
+          <ProgressSpinner />
+        </div>
+      )}
     </>
   );
 }

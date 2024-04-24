@@ -37,15 +37,15 @@ function DetailListUser({
   setCasesOptionBreed,
   setCasesOptionClinic,
   setCasesOptionName,
-  setIsLoading, 
+  setIsLoading,
   isLoading,
-  isDeleted, 
-  setIsDeleted
+  isDeleted,
+  setIsDeleted,
 }) {
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true)
-      setIsDeleted(false)
+      setIsLoading(true);
+      setIsDeleted(false);
       try {
         const response = await fetch(
           'https://side-project-vetfolio-manager.vercel.app/listUser',
@@ -58,7 +58,7 @@ function DetailListUser({
             },
           }
         );
-        setIsLoading(false)
+        setIsLoading(false);
         const userData = await response.json();
         if (userData.success) {
           setPrivateList(userData.patients);
@@ -66,7 +66,7 @@ function DetailListUser({
           console.error('Error al obtener los datos del usuario');
         }
       } catch (error) {
-        setIsLoading(false)
+        setIsLoading(false);
         console.error(
           'Error al obtener los datos del usuario, comprueba que has iniciado sesión correctamente',
           error
@@ -74,7 +74,7 @@ function DetailListUser({
       }
     };
     fetchData();
-  }, [idVet, setIsLoading, setPrivateList,token, isDeleted, setIsDeleted]);
+  }, [idVet, setIsLoading, setPrivateList, token, isDeleted, setIsDeleted]);
 
   useEffect(() => {
     const params = {
@@ -99,10 +99,8 @@ function DetailListUser({
         <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
         <Scroll />
         <div className="sectionList loading">
-          
           <p>Cargando...</p>
-          
-            <ProgressSpinner /> 
+          <ProgressSpinner />
           <p>¿Has iniciado sesión?</p>
           <LoginBtn />
         </div>
@@ -110,37 +108,38 @@ function DetailListUser({
     );
   }
 
+  const normalizeString = (str) => {
+    return str
+      .toLowerCase()
+      .normalize('NFD') // Normalizar caracteres a forma de descomposición
+      .replace(/[\u0300-\u036f]/g, ''); // Eliminar caracteres diacríticos
+  };
 
-    const normalizeString = (str) => {
-      return str
-        .toLowerCase() 
-        .normalize("NFD") // Normalizar caracteres a forma de descomposición
-        .replace(/[\u0300-\u036f]/g, ""); // Eliminar caracteres diacríticos
-    };
-    
-    const renderFilteredCases = () => {
-      let filteredData = privateList;
-      if (casesOptionName !== '') {
-        filteredData = filteredData.filter(
-          (data) => normalizeString(data.name).includes(normalizeString(casesOptionName))
-        );
-      }
-      if (casesOptionBreed !== '') {
-        filteredData = filteredData.filter((data) =>
-          normalizeString(data.breed).includes(normalizeString(casesOptionBreed))
-        );
-      }
-      if (casesOptionClinic !== '') {
-        filteredData = filteredData.filter((data) =>
-          normalizeString(data.clinical).includes(normalizeString(casesOptionClinic))
-        );
-      }
+  const renderFilteredCases = () => {
+    let filteredData = privateList;
+    if (casesOptionName !== '') {
+      filteredData = filteredData.filter((data) =>
+        normalizeString(data.name).includes(normalizeString(casesOptionName))
+      );
+    }
+    if (casesOptionBreed !== '') {
+      filteredData = filteredData.filter((data) =>
+        normalizeString(data.breed).includes(normalizeString(casesOptionBreed))
+      );
+    }
+    if (casesOptionClinic !== '') {
+      filteredData = filteredData.filter((data) =>
+        normalizeString(data.clinical).includes(
+          normalizeString(casesOptionClinic)
+        )
+      );
+    }
     return filteredData.length === 0 ? (
       <NoFilter />
     ) : (
       filteredData.map((data) => (
         <li key={data.idCase} className="sectionList__ul">
-          <UserCases data={data} idVet={idVet} setIsDeleted={setIsDeleted}  />
+          <UserCases data={data} idVet={idVet} setIsDeleted={setIsDeleted} />
         </li>
       ))
     );
@@ -160,8 +159,11 @@ function DetailListUser({
           setPrivateList={setPrivateList}
         />
       </div>
-      {isLoading? (<div className="spinner flex justify-content-center">
-            <ProgressSpinner /> </div>) : null}
+      {isLoading ? (
+        <div className="spinner flex justify-content-center">
+          <ProgressSpinner />{' '}
+        </div>
+      ) : null}
 
       {privateList.length > 0 ? (
         <>
