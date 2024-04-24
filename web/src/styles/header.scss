@@ -13,6 +13,7 @@
   padding:20px;
   z-index: 5;
   height: 15vh;
+ 
   @media (min-width: 768px) {
     padding: 80px 20px;
     height: 15vh;
@@ -22,13 +23,15 @@
     background-color: transparent;
     border-color: transparent;
     color: $colorLight;
-    font-size: 3rem;
+    font-size: 4rem;
     position: absolute;
     top: 30px;
     right: 30px;
     cursor: pointer;
     @media (min-width: 768px) {
-   font-size: 4rem;
+    font-size: 5rem;
+    top: 45px;
+
   
     }
 
@@ -58,10 +61,9 @@
   }
   &__style {
     display: flex;
-    flex-direction: row;
+   
     font-family: $fontSecond;
-    @media screen and (min-width: 768px) {
-    }
+   
     &--menu {
       text-decoration: none;
       list-style: none;
