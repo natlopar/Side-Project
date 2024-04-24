@@ -24,7 +24,7 @@ const getFilterCase = (params, token, idVet) => {
 };
 
 const deleteCase = (idCase) => {
-  return fetch(`https://side-project-vetfolio-manager.vercel.app/listUser?id=${idCase}`, 
+  return fetch(`https://vetfolio-manager.onrender.com/listUser?id=${idCase}`, 
   {method: 'DELETE'}
 )
 .then(response => response.json())
