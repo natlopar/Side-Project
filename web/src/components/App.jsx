@@ -1,6 +1,10 @@
 import React, { Suspense } from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+import 'primeflex/primeflex.css';
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router';
 import '../styles/App.scss';
@@ -19,7 +23,7 @@ import BtnListPublic from './cases/BtnListPublic';
 import HeaderPages from './shared/HeaderPages';
 import Contact from './shared/Contact';
 import UpdateCase from './cases/UpdateCase';
-import ModalDelete from './cases/ModalDelete';
+
 const DetailListUser = React.lazy(() => import('./cases/DetailListUser'));
 const ListCases = React.lazy(() => import('./cases/ListCases'));
 
@@ -45,7 +49,7 @@ function App() {
   const [isDark, setIsDark] = useState(ls.get('isDark', true));
   const [publicSign, setPublicSign] = useState(false);
   const [token, setToken] = useState(ls.get('token', ''));
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(ls.get('username', ''));
 
   const [message, setMessage] = useState('');
   const [loginBtn, setLoginBtn] = useState('');
@@ -67,7 +71,7 @@ function App() {
   const [animal, setAnimal] = useState(ls.get('animal', dataAnimal));
   const [updateData, setUpdateData] = useState(dataAnimal);
   const [isLoading, setIsLoading] = useState(false);
-
+const [isDeleted, setIsDeleted] = useState(false);
 
 
   useEffect(() => {
@@ -205,13 +209,12 @@ function App() {
           }
         />
 
-        {/* <Route path="/delete" element={<>  <Button variant="primary" onClick={() => setModalShow(true)}> */}
-        Launch vertically centered modal
-      {/* </Button><ModalDelete show={modalShow} onHide={()=> {setModalShow(false)}}/></>} /> */}
+
         <Route
           path="/listUser"
           element={
-            <Suspense fallback={isLoading && <ProgressSpinner />}>
+            <Suspense fallback={isLoading? (<div className="spinner flex justify-content-center">
+            <ProgressSpinner /><ProgressSpinner /> </div>)  : null }>
               <DetailListUser
                 token={token}
                 setToken={setToken}
@@ -232,10 +235,15 @@ function App() {
                 setList={setList}
                 privateList={privateList}
                 setIsLoading={setIsLoading}
+                isDeleted={isDeleted}
+                setIsDeleted={setIsDeleted}
               />
             </Suspense>
           }
         />
+        <Route path='/spinner' element={<div className="spinner flex justify-content-center">
+            <ProgressSpinner />
+        </div>}/>
         <Route
           path="/newCase"
           element={

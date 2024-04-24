@@ -4,25 +4,24 @@ import dog from '../../images/perro perfil.jpg'
 import cat from '../../images/raya.jpg'
 import PropTypes from "prop-types";
 import ModalDelete from './ModalDelete';
-import React, { useState } from 'react';
+import  { useState } from 'react';
 
 
 
-function UserCases({ data , idVet}) {
-  const [modalShow, setModalShow] = React.useState(false);
+function UserCases({ data , idVet, setIsDeleted}) {
+  const [modalShow, setModalShow] = useState(false);
   const [idDelete, setIdDelete]= useState(null);
 
-  const onHide = ()=> {
-    setModalShow(false)
-    setIdDelete(0);
-  }
+let idSelected = 0
 
-  const handleDelete = (ev) => {
-   console.log('clic')
+  const handleDelete = async (ev) => {
+    ev.preventDefault();
+  
    setModalShow(true);
-   const idSelected = ev.currentTarget.id;
-   console.log(idSelected)
-   setIdDelete(data.idCase);
+   idSelected = parseInt(ev.currentTarget.id);
+ 
+    setIdDelete(idSelected);
+
   }
   
   return (
@@ -46,8 +45,7 @@ function UserCases({ data , idVet}) {
           <h6 className="listPet__text ">Cuadro clínico</h6>
           <p className="listPet__desc">{data.clinical}</p>
         </div>
-        {/* <h6></h6>
-        <p className="listPet__text">{data.breed}</p> */}
+
         <div>
           <h6 className="listPet__text ">Diagnóstico</h6>
           <p className="listPet__desc">{data.results}</p>
@@ -78,17 +76,19 @@ function UserCases({ data , idVet}) {
           </div>
           </Link>) : <span></span>}
 
-          { data.fk_Vet === idVet ?  <nav className="icontool link_rev" onClick={handleDelete}  id={`${data.idCase}`}>
+          { data.fk_Vet === idVet ?  
+          <div className="icontool link_rev" >
             <span className="tooltip">Eliminar</span>
-            <a >
+            <a onClick={handleDelete}  id={data.idCase}>
               <i className=" fa-solid fa-trash"></i>
             </a>
-            <ModalDelete  onHide={onHide} idDelete={idDelete} setIdDelete={setIdDelete} setModalShow={setModalShow}/>
-          </nav> : <span></span>}
+            <ModalDelete show={modalShow} onHide={()=> setModalShow(false)} idDelete={idDelete} 
+            setIdDelete={setIdDelete} setModalShow={setModalShow} setIsDeleted={setIsDeleted}/>
+          </div> : <span></span>}
         </nav>
       </article>
     </> 
-  );
+  )
 }
 
 

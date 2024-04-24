@@ -31,11 +31,14 @@ function DetailListUser({
   setCasesOptionBreed,
   setCasesOptionClinic,
   setCasesOptionName,
-  setIsLoading
+  setIsLoading, 
+  isDeleted, 
+  setIsDeleted
 }) {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true)
+      setIsDeleted(false)
       try {
         const response = await fetch(
           'https://side-project-vetfolio-manager.vercel.app/listUser',
@@ -64,7 +67,7 @@ function DetailListUser({
       }
     };
     fetchData();
-  }, [idVet, token, setPrivateList]);
+  }, [idVet, setIsLoading, setPrivateList,token, isDeleted, setIsDeleted]);
 
   useEffect(() => {
     const params = {
@@ -83,7 +86,7 @@ function DetailListUser({
     });
   }, [casesOptionName, casesOptionBreed, casesOptionClinic]);
 
-  if (!token) {
+  if (!token || !username) {
     return (
       <>
         <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
@@ -130,7 +133,7 @@ function DetailListUser({
     ) : (
       filteredData.map((data) => (
         <li key={data.idCase} className="sectionList__ul">
-          <UserCases data={data} idVet={idVet}  />
+          <UserCases data={data} idVet={idVet} setIsDeleted={setIsDeleted}  />
         </li>
       ))
     );

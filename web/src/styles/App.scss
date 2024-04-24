@@ -8,6 +8,7 @@
   // color: #008080;
 }
 
+
 .dark {
   color: $colorLight;
   background-color: $colorDark;
@@ -75,3 +76,6 @@
   color: $colorDark;
 }
 
+.spinner {
+  height: 100vh;
+}
