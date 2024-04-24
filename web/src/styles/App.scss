@@ -4,8 +4,6 @@
 .body {
   height: 100%;
   font-family: $fontMain;
-  // background-color: #fefbf0;
-  // color: #008080;
 }
 
 .error {
@@ -19,25 +17,24 @@
   align-items: center;
   text-align: center;
 }
+
 .dark {
   color: $colorLight;
   background-color: $colorDark;
   .link {
     color: $colorLight;
   }
-  
+
   .btn {
     color: $colorDark;
     background-color: $colorLight;
-   
   }
-  .borderTog{
+  .borderTog {
     border: 1px solid $colorLight;
   }
   .bordertoLight {
     border-top: 1px solid $colorDark;
   }
-  
 }
 
 .hidden {
@@ -73,7 +70,7 @@
   color: $colorDark;
 }
 
-.borderTog{
+.borderTog {
   border-color: 1px solid $colorLight;
 }
 
@@ -81,7 +78,7 @@
   border-top: 1px solid $colorLight;
 }
 
-.link_rev{
+.link_rev {
   text-decoration: none;
   color: $colorDark;
 }
