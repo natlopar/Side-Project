@@ -106,7 +106,7 @@ function UpdateCase({
   return (
     <>
       <Scroll />
-      <HeaderPages isDark={isDark} setIsDark={setIsDark} />
+      <HeaderPages  username={username}  isDark={isDark} setIsDark={setIsDark}   token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList} />
   
       {animalData ? (
         <div className="case">

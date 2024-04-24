@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import ModalDelete from './ModalDelete';
 import { useState } from 'react';
 
-function UserCases({ data, idVet, setIsDeleted }) {
+function UserCases({ data, idVet, setIsDeleted, isLoading, setIsLoading }) {
   const [modalShow, setModalShow] = useState(false);
   const [idDelete, setIdDelete] = useState(null);
 
@@ -96,6 +96,8 @@ function UserCases({ data, idVet, setIsDeleted }) {
                 setIdDelete={setIdDelete}
                 setModalShow={setModalShow}
                 setIsDeleted={setIsDeleted}
+                isLoading={isLoading}
+                setIsLoading ={setIsLoading}
               />
             </div>
           ) : (
@@ -116,8 +118,9 @@ UserCases.propTypes = {
     clinical: PropTypes.string,
     results: PropTypes.string,
     fk_Vet: PropTypes.number,
-    idCase: PropTypes.number,
+    idCase: PropTypes.any,
   }),
+  setIsDeleted: PropTypes.func
 };
 
 export default UserCases;

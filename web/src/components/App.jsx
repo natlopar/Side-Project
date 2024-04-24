@@ -27,8 +27,6 @@ import UpdateCase from './cases/UpdateCase';
 const DetailListUser = React.lazy(() => import('./cases/DetailListUser'));
 const ListCases = React.lazy(() => import('./cases/ListCases'));
 
-
-
 function App() {
   const [idVet, setIdVet] = useState(ls.get('idVet', 0));
   const dataAnimal = {
@@ -73,7 +71,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
 
-
   useEffect(() => {
     ls.set('animal', animal);
   }, [animal]);
@@ -106,10 +103,9 @@ function App() {
     setHiddenClassCase('hidden');
   };
 
-
   const resetUpdateData = () => {
-    setUpdateData(dataAnimal)
-  }
+    setUpdateData(dataAnimal);
+  };
   const sendSignUpToApi = (registry) => {
     apiUser.sendSignUpToApi(registry).then((response) => {
       if (response.success) {
@@ -168,8 +164,9 @@ function App() {
           path="/"
           element={
             <>
-              <Header isDark={isDark} setIsDark={setIsDark}  token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList} />
-              <HeroDesc
+              <Header
+                isDark={isDark}
+                setIsDark={setIsDark}
                 token={token}
                 setToken={setToken}
                 setUsername={setUsername}
@@ -177,8 +174,17 @@ function App() {
                 setList={setList}
                 setPrivateList={setPrivateList}
               />
-                 <Footer />
-      
+              <HeroDesc
+                token={token}
+                setToken={setToken}
+                setUsername={setUsername}
+                setIdVet={setIdVet}
+                setList={setList}
+                setPrivateList={setPrivateList}
+                setIsDeleted={setIsDeleted}
+           
+              />
+              <Footer />
             </>
           }
         />
@@ -186,17 +192,23 @@ function App() {
           path="/signIn"
           element={
             <>
-            <SignIn
-              sendSignUpToApi={sendSignUpToApi}
-              publicSign={publicSign}
-              setPublicSign={setPublicSign}
-              isDark={isDark}
-              setIsDark={setIsDark}
-              loginBtn={loginBtn}
-              message={message}
-              hiddenClass={hiddenClassSign}
-            />
-            <Footer />
+              <SignIn
+                sendSignUpToApi={sendSignUpToApi}
+                publicSign={publicSign}
+                setPublicSign={setPublicSign}
+                isDark={isDark}
+                setIsDark={setIsDark}
+                loginBtn={loginBtn}
+                message={message}
+                hiddenClass={hiddenClassSign}
+                setToken={setToken}
+                token={token}
+                setIdVet={setIdVet}
+                setUsername={setUsername}
+                setList={setList}
+                setPrivateList={setPrivateList}
+              />
+              <Footer />
             </>
           }
         />
@@ -204,26 +216,36 @@ function App() {
           path="/logIn"
           element={
             <>
-            <Login
-              handleLogin={handleLogin}
-              isDark={isDark}
-              setIsDark={setIsDark}
-              hiddenClass={hiddenClass}
-              setHiddenClass={setHiddenClass}
-              setToken={setToken}
-            />
-            <Footer />
+              <Login
+                handleLogin={handleLogin}
+                isDark={isDark}
+                setIsDark={setIsDark}
+                hiddenClass={hiddenClass}
+                setHiddenClass={setHiddenClass}
+                setToken={setToken}
+                token={token}
+                setIdVet={setIdVet}
+                setUsername={setUsername}
+                setList={setList}
+                setPrivateList={setPrivateList}
+              />
+              <Footer />
             </>
-            
           }
         />
-
 
         <Route
           path="/listUser"
           element={
-            <Suspense fallback={isLoading? (<div className="spinner flex justify-content-center">
-            <ProgressSpinner /><ProgressSpinner /> </div>)  : null }>
+            <Suspense
+              fallback={
+                isLoading ? (
+                  <div className="spinner flex justify-content-center">
+                    <ProgressSpinner />
+                  </div>
+                ) : null
+              }
+            >
               <DetailListUser
                 token={token}
                 setToken={setToken}
@@ -247,72 +269,93 @@ function App() {
                 isLoading={isLoading}
                 isDeleted={isDeleted}
                 setIsDeleted={setIsDeleted}
-             
               />
               <Footer />
             </Suspense>
           }
         />
-       
+
         <Route
           path="/newCase"
           element={
             <>
-            <NewCase
-              handleResetMessage={handleResetMessage}
-              publicSign={publicSign}
-              isDark={isDark}
-              setIsDark={setIsDark}
-              animal={animal}
-              setAnimal={setAnimal}
-              publicAnimal={publicAnimal}
-              setPublicAnimal={setPublicAnimal}
-              messageCase={messageCase}
-              setMessageCase={setMessageCase}
-              hiddenClassCase={hiddenClassCase}
-              setHiddenClassCase={setHiddenClassCase}
-              dataAnimal={dataAnimal}
-              updateData={updateData}
-              setUpdateData={setUpdateData}
-              resetUpdateData={resetUpdateData}
-              
-            />
-            <Footer />
-            </>}
+              <NewCase
+                handleResetMessage={handleResetMessage}
+                publicSign={publicSign}
+                isDark={isDark}
+                setIsDark={setIsDark}
+                animal={animal}
+                setAnimal={setAnimal}
+                publicAnimal={publicAnimal}
+                setPublicAnimal={setPublicAnimal}
+                messageCase={messageCase}
+                setMessageCase={setMessageCase}
+                hiddenClassCase={hiddenClassCase}
+                setHiddenClassCase={setHiddenClassCase}
+                dataAnimal={dataAnimal}
+                updateData={updateData}
+                setUpdateData={setUpdateData}
+                resetUpdateData={resetUpdateData}
+                setToken={setToken}
+                token={token}
+                setIdVet={setIdVet}
+                setUsername={setUsername}
+                setList={setList}
+                setPrivateList={setPrivateList}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+              />
+              <Footer />
+            </>
+          }
         />
         <Route
           path="/updateCase/:id"
           element={
-            <Suspense fallback={isLoading && <ProgressSpinner />}>
-            <UpdateCase
-              dataAnimal={dataAnimal}
-              handleResetMessage={handleResetMessage}
-              isDark={isDark}
-              setIsDark={setIsDark}
-              setPublicAnimal={setPublicAnimal}
-              publicAnimal={publicAnimal}
-              setHiddenClassCase={setHiddenClassCase}
-              hiddenClassCase={hiddenClassCase}
-              setAnimal={setAnimal}
-              animal={animal}
-              messageCase={messageCase}
-              setMessageCase={setMessageCase}
-              privateList={privateList}
-              updateData={updateData}
-              setUpdateData={setUpdateData}
-              resetUpdateData={resetUpdateData}
-              setIsLoading={setIsLoading}
-              isLoading={isLoading}
-              idVet={idVet}
-            />
-            <Footer />
+            <Suspense fallback={ isLoading ? (
+              <div className="spinner flex justify-content-center">
+                <ProgressSpinner />
+              </div>
+            ) : null}>
+              <UpdateCase
+                dataAnimal={dataAnimal}
+                handleResetMessage={handleResetMessage}
+                isDark={isDark}
+                setIsDark={setIsDark}
+                setPublicAnimal={setPublicAnimal}
+                publicAnimal={publicAnimal}
+                setHiddenClassCase={setHiddenClassCase}
+                hiddenClassCase={hiddenClassCase}
+                setAnimal={setAnimal}
+                animal={animal}
+                messageCase={messageCase}
+                setMessageCase={setMessageCase}
+                privateList={privateList}
+                updateData={updateData}
+                setUpdateData={setUpdateData}
+                resetUpdateData={resetUpdateData}
+                setIsLoading={setIsLoading}
+                isLoading={isLoading}
+                idVet={idVet}
+                setToken={setToken}
+                token={token}
+                setIdVet={setIdVet}
+                setUsername={setUsername}
+                setList={setList}
+                setPrivateList={setPrivateList}
+              />
+              <Footer />
             </Suspense>
           }
         />
         <Route
           path="/publicList"
           element={
-            <Suspense fallback={isLoading && <ProgressSpinner />}>
+            <Suspense fallback={ isLoading ? (
+              <div className="spinner flex justify-content-center">
+                <ProgressSpinner />
+              </div>
+            ) : null}>
               <ListCases
                 idVet={idVet}
                 publicList={publicList}
@@ -323,10 +366,15 @@ function App() {
                 setIdVet={setIdVet}
                 setIsLoading={setIsLoading}
                 isLoading={isLoading}
+                setToken={setToken}
+                token={token}
+                setList={setList}
+                setPrivateList={setPrivateList}
+                username={username}
+            
               />
               <Footer />
             </Suspense>
-            
           }
         />
         <Route
@@ -334,10 +382,26 @@ function App() {
           element={
             <>
               <section className="user">
-                <Header  isDark={isDark} setIsDark={setIsDark}  token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList} />
-                <DetailUserCase list={privateList}  />  
-                <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal} setUpdateData={setUpdateData}/>
-              <BtnListPublic/>
+                <Header
+                  isDark={isDark}
+                  setIsDark={setIsDark}
+                  token={token}
+                  setToken={setToken}
+                  setUsername={setUsername}
+                  setIdVet={setIdVet}
+                  setList={setList}
+                  setPrivateList={setPrivateList}
+               
+                />
+                <DetailUserCase list={privateList} />
+                <BtnList
+                  handleResetMessage={handleResetMessage}
+                  resetUpdateData={resetUpdateData}
+                  setAnimal={setAnimal}
+                  dataAnimal={dataAnimal}
+                  setUpdateData={setUpdateData}
+                />
+                <BtnListPublic />
               </section>
               <Footer />
             </>
@@ -348,9 +412,18 @@ function App() {
           element={
             <>
               <section className="user">
-                <Header  isDark={isDark} setIsDark={setIsDark}  token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList} />
+                <Header
+                  isDark={isDark}
+                  setIsDark={setIsDark}
+                  token={token}
+                  setToken={setToken}
+                  setUsername={setUsername}
+                  setIdVet={setIdVet}
+                  setList={setList}
+                  setPrivateList={setPrivateList}
+                />
                 <DetailUserCase list={publicList} idVet={idVet} />
-                <BtnList/>
+                <BtnList />
                 <BtnListPublic />
               </section>
               <Footer />
@@ -361,7 +434,17 @@ function App() {
           path="/contact"
           element={
             <>
-              <HeaderPages  isDark={isDark} setIsDark={setIsDark}  token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList}/>
+              <HeaderPages
+                isDark={isDark}
+                setIsDark={setIsDark}
+                token={token}
+                setToken={setToken}
+                setUsername={setUsername}
+                setIdVet={setIdVet}
+                setList={setList}
+                setPrivateList={setPrivateList}
+            
+              />
               <Contact
                 handleContact={handleContact}
                 contact={contact}
@@ -373,7 +456,6 @@ function App() {
           }
         />
       </Routes>
-      
     </div>
   );
 }

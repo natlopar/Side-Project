@@ -4,23 +4,37 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import HeaderPages from '../shared/HeaderPages';
 import Scroll from '../shared/Scroll';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-
-function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi , message, loginBtn, hiddenClass}) {
-
+function SignIn({
+  publicSign,
+  setPublicSign,
+  isDark,
+  setIsDark,
+  sendSignUpToApi,
+  message,
+  loginBtn,
+  hiddenClass,
+  setToken,
+  idVet,
+  token,
+  setUsername,
+  setIdVet,
+  setPublicList,
+  setIsLoading,
+  isLoading,
+  setList, 
+  setPrivateList
+}) {
   const [registry, setRegistry] = useState({
-    userName: "",
-    nameVet: "",
-    email: "",
-    password: "",
-    city: "",
-    country: "",
-    public: 0
+    userName: '',
+    nameVet: '',
+    email: '',
+    password: '',
+    city: '',
+    country: '',
+    public: 0,
   });
-
-
-
 
   const {
     register,
@@ -39,11 +53,11 @@ function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi 
       setRegistry({ ...registry, [id]: value });
     }
   };
- 
+
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     sendSignUpToApi(registry);
-  }
+  };
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' && event.target.value.trim() === '') {
@@ -53,14 +67,23 @@ function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi 
 
   const handleCancel = (ev) => {
     ev.preventDefault();
-    navigate("/");
+    navigate('/');
   };
-
 
   return (
     <>
-    <Scroll/>
-      <HeaderPages isDark={isDark} setIsDark={setIsDark} />
+      <Scroll />
+      <HeaderPages
+        
+        isDark={isDark}
+        setIsDark={setIsDark}
+        token={token}
+        setToken={setToken}
+        setUsername={setUsername}
+        setIdVet={setIdVet}
+        setList={setList}
+        setPrivateList={setPrivateList}
+      />
       <div className="user">
         <h3 className="user__title">Regístrate</h3>
         <form className="user__form" onSubmit={handleSubmit}>
@@ -72,7 +95,7 @@ function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi 
             type="text"
             className="user__form--input"
             id="userName"
-            autoComplete='username'
+            autoComplete="username"
             required
             value={registry.userName}
             onInput={handleInput}
@@ -84,7 +107,7 @@ function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi 
               Debes rellenar este campo
             </p>
           )}
-           <label htmlFor="nameVet" className="user__form--label">
+          <label htmlFor="nameVet" className="user__form--label">
             {' '}
             Nombre{' '}
           </label>
@@ -92,7 +115,7 @@ function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi 
             type="text"
             className="user__form--input"
             id="nameVet"
-            autoComplete='namevet'
+            autoComplete="namevet"
             required
             value={registry.nameVet}
             onInput={handleInput}
@@ -112,10 +135,10 @@ function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi 
             type="email"
             required
             className="user__form--input"
-            autoComplete='email'
+            autoComplete="email"
             id="email"
-          value={registry.email}
-          onInput={handleInput}
+            value={registry.email}
+            onInput={handleInput}
             {...register('email', {
               required: true,
               pattern: {
@@ -147,7 +170,7 @@ function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi 
             id="password"
             value={registry.password}
             onInput={handleInput}
-            autoComplete='current-password'
+            autoComplete="current-password"
             {...register('password', {
               required: true,
               minLength: {
@@ -207,15 +230,13 @@ function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi 
             </p>
           )}
           <div className="user__form--check">
-            <input 
-            type="checkbox" 
-            name="public" 
-            id="public"
-            checked= {publicSign}
-            onChange={handleInput}
+            <input
+              type="checkbox"
+              name="public"
+              id="public"
+              checked={publicSign}
+              onChange={handleInput}
             />
-
-            
 
             <label className="user__form--label" htmlFor="public">
               Indica si quieres que tus casos sean públicos en esta web
@@ -233,31 +254,29 @@ function SignIn({ publicSign, setPublicSign, isDark, setIsDark, sendSignUpToApi 
             className="user__form--submit btn hover"
             onKeyDown={handleKeyDown}
           />
-             <input
-  className="user__form--submit btn hover" 
-        type="button"
-        value="Cancelar"
-        onClick={handleCancel}
-      />
-         
+          <input
+            className="user__form--submit btn hover"
+            type="button"
+            value="Cancelar"
+            onClick={handleCancel}
+          />
         </form>
         <p className={`${hiddenClass} user__msg`}>{message}</p>
         <div>{loginBtn}</div>
       </div>
-     
     </>
   );
 }
 
 SignIn.propTypes = {
-  isDark: PropTypes.bool, 
-  setIsDark: PropTypes.func, 
-  hiddenClass: PropTypes.string, 
-  publicSign: PropTypes.bool, 
-  setPublicSign: PropTypes.func, 
-  sendSignUpToApi: PropTypes.func, 
-  message: PropTypes.string, 
-  loginBtn: PropTypes.any
-}
+  isDark: PropTypes.bool,
+  setIsDark: PropTypes.func,
+  hiddenClass: PropTypes.string,
+  publicSign: PropTypes.bool,
+  setPublicSign: PropTypes.func,
+  sendSignUpToApi: PropTypes.func,
+  message: PropTypes.string,
+  loginBtn: PropTypes.any,
+};
 
 export default SignIn;

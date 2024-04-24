@@ -19,6 +19,8 @@ function MenuNav({token, setToken, setUsername, setIdVet, setList, setPrivateLis
         .then((data) => {
           console.log(data);
           token && setToken('');
+          setUsername('');
+          setIdVet('');
           ls.remove('username')
           ls.remove('token');
           ls.remove('idVet');
@@ -31,6 +33,8 @@ function MenuNav({token, setToken, setUsername, setIdVet, setList, setPrivateLis
          
         });
     } else {
+      setUsername('');
+      setIdVet('');
       ls.remove('username')
       navigate('/');
       ls.remove('idVet');

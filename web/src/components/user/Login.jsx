@@ -1,17 +1,33 @@
 // import { Link } from 'react-router-dom';
 import '../../styles/signIn.scss';
-import {useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import HeaderPages from '../shared/HeaderPages';
-import ls from '../../services/localStorage'
+import ls from '../../services/localStorage';
 import Scroll from '../shared/Scroll';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, setToken }) {
+function Login({
+  handleLogin,
+  isDark,
+  setIsDark,
+  hiddenClass,
+  setHiddenClass,
+  setToken,
+  idVet,
+  token,
+  setUsername,
+  setIdVet,
+  setPublicList,
+  setIsLoading,
+  isLoading,
+  setList, 
+  setPrivateList
+}) {
   const [login, setLogin] = useState({ username: '', email: '', password: '' });
   const [message, setMessage] = useState('');
- 
+
   const {
     register,
     formState: { errors },
@@ -19,7 +35,6 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
 
   const handleInput = (ev) => {
     setLogin({ ...login, [ev.target.id]: ev.target.value });
-   
   };
 
   const navigate = useNavigate();
@@ -27,22 +42,24 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
   const handleSubmit = async (ev) => {
     ev.preventDefault();
 
-    const response = await fetch('https://side-project-vetfolio-manager.vercel.app/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(login),
-    });
+    const response = await fetch(
+      'https://side-project-vetfolio-manager.vercel.app/login',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(login),
+      }
+    );
 
     const data = await response.json();
- 
+
     if (data.success) {
       handleLogin(data.token, data.name, data.id);
       ls.set('idVet', data.id);
-      ls.set('username',data.name)
+      ls.set('username', data.name);
       setToken(data.token);
-      navigate(`/listUser`); 
+      navigate(`/listUser`);
     } else {
-    
       setMessage('El usuario o la contraseña no son válidos');
       setHiddenClass('');
     }
@@ -61,8 +78,17 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
   };
   return (
     <>
-    <Scroll/>
-      <HeaderPages isDark={isDark} setIsDark={setIsDark} />
+      <Scroll />
+      <HeaderPages
+        isDark={isDark}
+        setIsDark={setIsDark}
+        token={token}
+        setToken={setToken}
+        setUsername={setUsername}
+        setIdVet={setIdVet}
+        setList={setList}
+        setPrivateList={setPrivateList}
+      />
 
       <div className="login ">
         <h3 className="user__title">Inicia sesión</h3>
@@ -89,7 +115,7 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
               Debes rellenar este campo
             </p>
           )}
-    <label htmlFor="email" className="user__form--label">
+          <label htmlFor="email" className="user__form--label">
             {' '}
             Correo electrónico{' '}
           </label>
@@ -99,8 +125,8 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
             className="user__form--input"
             autoComplete="email"
             id="email"
-          value={login.email}
-          onInput={handleInput}
+            value={login.email}
+            onInput={handleInput}
             {...register('email', {
               required: true,
               pattern: {
@@ -120,7 +146,10 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
               Debes rellenar este campo
             </p>
           )}
-          <label htmlFor="password" className="user__form--label"> Contraseña </label>
+          <label htmlFor="password" className="user__form--label">
+            {' '}
+            Contraseña{' '}
+          </label>
           <input
             type="password"
             required
@@ -149,19 +178,19 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
               Debes rellenar este campo
             </p>
           )}
-          <div className='formBtn'>
-          <input
-            type="submit"
-            value="Aceptar"
-            className="user__form--submit btn hover"
-            onKeyDown={handleKeyDown}
-          />
-          <input
-            className="user__form--submit btn hover"
-            type="button"
-            value="Cancelar"
-            onClick={handleCancel}
-          />
+          <div className="formBtn">
+            <input
+              type="submit"
+              value="Aceptar"
+              className="user__form--submit btn hover"
+              onKeyDown={handleKeyDown}
+            />
+            <input
+              className="user__form--submit btn hover"
+              type="button"
+              value="Cancelar"
+              onClick={handleCancel}
+            />
           </div>
           <p className={`${hiddenClass} user__msg`}>{message}</p>
         </form>
@@ -171,13 +200,12 @@ function Login({ handleLogin, isDark, setIsDark, hiddenClass, setHiddenClass, se
 }
 
 Login.propTypes = {
-  handleLogin: PropTypes.func, 
-  isDark: PropTypes.bool, 
-  setIsDark: PropTypes.func, 
-  hiddenClass: PropTypes.string, 
-  setHiddenClass: PropTypes.func, 
-  setToken: PropTypes.func
-}
-
+  handleLogin: PropTypes.func,
+  isDark: PropTypes.bool,
+  setIsDark: PropTypes.func,
+  hiddenClass: PropTypes.string,
+  setHiddenClass: PropTypes.func,
+  setToken: PropTypes.func,
+};
 
 export default Login;

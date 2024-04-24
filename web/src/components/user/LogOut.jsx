@@ -2,16 +2,20 @@ import { useNavigate } from 'react-router-dom';
 import ls from '../../services/localStorage';
 import PropTypes from "prop-types";
 import '../../styles/createCase.scss';
+import ModalMessageDelete from '../cases/ModalMessageDelete';
+import { useState } from 'react';
 
-function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateList }) {
+function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateList, setIsDeleted }) {
   const navigate = useNavigate();
-  const [messageLog, setMessageLog] = '';
-  const [hiddenLog, setHiddenLog] = 'hidden';
+  // const [smShow, setSmShow] = useState(false);
+  // const [messageLog, setMessageLog] = useState('');
+  // const [titleLog, setTitleLog] = useState ('')
+  // const [hiddenLog, setHiddenLog] = 'hidden';
 
-  const handleLogOut = (e) => {
+  const handleLogOut = async (e) => {
     e.preventDefault();
     if (token !== '') {
-      fetch('https://side-project-vetfolio-manager.vercel.app/logout', {
+     await fetch('https://side-project-vetfolio-manager.vercel.app/logout', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -33,6 +37,8 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
           navigate('/');
           setList(null);
           setPrivateList([]);
+          // setMessageLog('Tu sesión ha sido cerrada.');
+          // setTitleLog('Hasta pronto');
          
         });
     } else {
@@ -55,7 +61,9 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
       <button className="create__btn btn hover desc__subtitles" onClick={handleLogOut} aria-label='Cerrar sesión'>
         Cerrar sesión
       </button>
-      <p className={`${hiddenLog}user__msg`}>{messageLog}</p>
+      {/* <p className={`${hiddenLog}user__msg`}>{messageLog}</p> */}
+      {/* <ModalMessageDelete smShow={smShow} setSmShow={setSmShow} messageDelete={messageLog} titleDelete={titleLog} setIsDeleted={setIsDeleted}/> */}
+
     </>
   );
 }

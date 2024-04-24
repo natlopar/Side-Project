@@ -1,6 +1,11 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ProgressSpinner } from 'primereact/progressspinner';
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+import 'primeflex/primeflex.css';
 import apiCase from '../../services/api-case';
 import ModalMessageDelete from './ModalMessageDelete';
 import { useState } from 'react';
@@ -12,14 +17,17 @@ function ModalDelete(props) {
 
   const handleClickDelete = async (e) => {
     e.preventDefault();
+    props.setIsLoading(true)
     await apiCase.deleteCase(props.idDelete).then((data) => {
       props.setModalShow(false);
       
       if (data.success) {
+        props.setIsLoading(false);
         props.setIdDelete(null);
         setTitleDelete('✅')
         setMessageDelete('El caso seleccionado ha sido eliminado')
       } else {
+        props.setIsLoading(false);
         setTitleDelete('❗')
         setMessageDelete('Ha habido un error en la operación. Por favor, inténtalo de nuevo más tarde')
       }
@@ -66,6 +74,12 @@ function ModalDelete(props) {
         </Modal.Footer>
       </Modal>
      {smShow && <ModalMessageDelete smShow={smShow} setSmShow={setSmShow} messageDelete={messageDelete} titleDelete={titleDelete} setIsDeleted={props.setIsDeleted}/>}
+     {props.isLoading ? (
+        <div className="spinner flex justify-content-center">
+          <ProgressSpinner />
+        </div>
+      ) : null}
+   
     </>
   )
 }

@@ -9,7 +9,7 @@ import LogOut from '../user/LogOut';
 import Scroll from './Scroll';
 import PropTypes from "prop-types";
 
-function HeroDesc({token, setToken, setIdVet, setUsername, setList, setPrivateList}) {
+function HeroDesc({token, setToken, setIdVet, setUsername, setList, setPrivateList, setIsDeleted}) {
   return (
     <section className="hero desc">
       <Scroll/>
@@ -72,7 +72,7 @@ function HeroDesc({token, setToken, setIdVet, setUsername, setList, setPrivateLi
         <button className="aside__subtitles hover btn" aria-label='Inicia sesión'>Inicia sesión</button>
         </Link>
         <div className='aside__logout'>
-        <LogOut token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername} setList={setList} setPrivateList={setPrivateList}/></div>
+        <LogOut setIsDeleted={setIsDeleted} token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername} setList={setList} setPrivateList={setPrivateList}/></div>
  
        </div>
 

@@ -142,7 +142,7 @@ function DetailListUser({
     ) : (
       filteredData.map((data) => (
         <li key={data.idCase} className="sectionList__ul">
-          <UserCases data={data} idVet={idVet} setIsDeleted={setIsDeleted} />
+          <UserCases isLoading={isLoading} setIsLoading={setIsLoading} data={data} idVet={idVet} setIsDeleted={setIsDeleted} />
         </li>
       ))
     );
@@ -150,17 +150,10 @@ function DetailListUser({
 
   return (
     <>
-      <Welcome username={username} isDark={isDark} setIsDark={setIsDark} />
+      <Welcome username={username}  isDark={isDark} setIsDark={setIsDark}   token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList} />
 
       <div className="logout">
-        {/* <LogOut
-          token={token}
-          setToken={setToken}
-          setIdVet={setIdVet}
-          setUsername={setUsername}
-          setList={setList}
-          setPrivateList={setPrivateList}
-        /> */}
+     
         <Link to={'/newCase'} className="link">
         <button className="create__btn btn hover" aria-label='Comenzar'>Crear caso</button>
       </Link>
