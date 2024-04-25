@@ -112,7 +112,7 @@ function SignIn({
             className="user__form--input"
             id="userName"
             autoComplete="username"
-            
+            required
             value={registry.userName}
             onInput={handleInput}
             {...register('userName', { required: true, maxLength: 20 })}
@@ -132,7 +132,7 @@ function SignIn({
             className="user__form--input"
             id="nameVet"
             autoComplete="namevet"
-            
+            required
             value={registry.nameVet}
             onInput={handleInput}
             {...register('nameVet', { required: true, maxLength: 20 })}
@@ -215,7 +215,7 @@ function SignIn({
           </label>
           <input
             type="text"
-            
+            required
             className="user__form--input"
             id="city"
             value={registry.city}
@@ -235,7 +235,7 @@ function SignIn({
           </label>
           <input
             type="text"
-            
+            required
             className="user__form--input"
             id="country"
             value={registry.country}

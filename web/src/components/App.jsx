@@ -420,7 +420,7 @@ function App() {
                 setList={setList}
                 setPrivateList={setPrivateList}
                 username={username}
-                smShow={smShow}
+                     smShow={smShow}
                 messageLog= {messageLog}
                 titleLog= {titleLog}
                 isLogOut= {isLogOut} 
