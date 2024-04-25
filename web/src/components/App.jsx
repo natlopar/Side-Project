@@ -123,7 +123,8 @@ function App() {
         setIdVet(response.id);
         setLoginBtn(<LoginBtn />);
       } else {
-        setMessage('No te puedes registrar. Revisa tus datos.');
+        const msg = response.msg;
+        (msg === 'Usuario ya registrado' ? setMessage('No se ha podido realizar el registro. Usuario ya registrado.') : setMessage('No se ha podido realizar el registro. Revisa que el email y la contraseña sean correctos.'))
         setHiddenClassSign('');
       }
     });
@@ -189,8 +190,6 @@ function App() {
                 setTitleLog={setTitleLog}
                 setIsLogOut={setIsLogOut}
                 setSmShow={setSmShow}
-
-           
               />
               <Footer />
             </>
@@ -223,6 +222,8 @@ function App() {
                 setTitleLog={setTitleLog}
                 setIsLogOut={setIsLogOut}
                 setSmShow={setSmShow}
+                setMessage={setMessage}
+                setHiddenClassSign={setHiddenClassSign}
               />
               <Footer />
             </>

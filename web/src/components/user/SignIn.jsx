@@ -32,7 +32,9 @@ function SignIn({
   setMessageLog, 
   setTitleLog, 
   setIsLogOut, 
-  setSmShow
+  setSmShow, 
+  setMessage, 
+  setHiddenClassSign
 }) {
   const [registry, setRegistry] = useState({
     userName: '',
@@ -43,7 +45,7 @@ function SignIn({
     country: '',
     public: 0,
   });
-
+  const [passwordError, setPasswordError] = useState('');
   const {
     register,
     formState: { errors },
@@ -64,7 +66,15 @@ function SignIn({
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
-    sendSignUpToApi(registry);
+    if (!/(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9_]{8,}/.test(registry.password)) {
+      setPasswordError('La contraseña debe tener al menos 8 caracteres con números y letras');
+      
+    } else {
+      setPasswordError('Contraseña válida')
+      sendSignUpToApi(registry);
+    }
+
+   
   };
 
   const handleKeyDown = (event) => {
@@ -76,6 +86,8 @@ function SignIn({
   const handleCancel = (ev) => {
     ev.preventDefault();
     navigate('/');
+    setHiddenClassSign('hidden');
+    setMessage('');
   };
 
   return (
@@ -196,12 +208,12 @@ function SignIn({
             })}
             aria-invalid={errors.password ? 'true' : 'false'}
           ></input>
-          {errors.password && (
+          {passwordError ? (
             <span className="user__form--validation">
-              {errors.password.message}
-            </span> )}
+              {passwordError}
+            </span> ): null}
             {/* <span className="user__form--validation">
-            8 caracteres con números y letras
+            8 caracteres
           </span> */}
          
           {errors.password?.type === 'required' && (
