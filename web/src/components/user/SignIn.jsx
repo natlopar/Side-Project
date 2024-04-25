@@ -24,7 +24,15 @@ function SignIn({
   setIsLoading,
   isLoading,
   setList, 
-  setPrivateList
+  setPrivateList,
+  smShow, 
+  messageLog, 
+  titleLog, 
+  isLogOut, 
+  setMessageLog, 
+  setTitleLog, 
+  setIsLogOut, 
+  setSmShow
 }) {
   const [registry, setRegistry] = useState({
     userName: '',
@@ -83,6 +91,14 @@ function SignIn({
         setIdVet={setIdVet}
         setList={setList}
         setPrivateList={setPrivateList}
+        smShow={smShow}
+        messageLog= {messageLog}
+        titleLog= {titleLog}
+        isLogOut= {isLogOut} 
+        setMessageLog={setMessageLog}
+        setTitleLog={setTitleLog}
+        setIsLogOut={setIsLogOut}
+        setSmShow={setSmShow}
       />
       <div className="user">
         <h3 className="user__title">Regístrate</h3>
@@ -96,7 +112,7 @@ function SignIn({
             className="user__form--input"
             id="userName"
             autoComplete="username"
-            required
+            
             value={registry.userName}
             onInput={handleInput}
             {...register('userName', { required: true, maxLength: 20 })}
@@ -116,7 +132,7 @@ function SignIn({
             className="user__form--input"
             id="nameVet"
             autoComplete="namevet"
-            required
+            
             value={registry.nameVet}
             onInput={handleInput}
             {...register('nameVet', { required: true, maxLength: 20 })}
@@ -171,11 +187,11 @@ function SignIn({
             value={registry.password}
             onInput={handleInput}
             autoComplete="current-password"
-            {...register('password', {
+            {...register("password", {
               required: true,
-              minLength: {
-                value: 8,
-                message: 'La contraseña debe tener al menos 8 caracteres',
+              pattern:{
+                value: /(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9_]{8,}/,
+                message: 'La contraseña debe tener al menos 8 caracteres con números y letras',
               },
             })}
             aria-invalid={errors.password ? 'true' : 'false'}
@@ -183,8 +199,11 @@ function SignIn({
           {errors.password && (
             <span className="user__form--validation">
               {errors.password.message}
-            </span>
-          )}
+            </span> )}
+            {/* <span className="user__form--validation">
+            8 caracteres con números y letras
+          </span> */}
+         
           {errors.password?.type === 'required' && (
             <p role="alert" className="user__form--validation">
               Debes rellenar este campo
@@ -196,7 +215,7 @@ function SignIn({
           </label>
           <input
             type="text"
-            required
+            
             className="user__form--input"
             id="city"
             value={registry.city}
@@ -216,7 +235,7 @@ function SignIn({
           </label>
           <input
             type="text"
-            required
+            
             className="user__form--input"
             id="country"
             value={registry.country}

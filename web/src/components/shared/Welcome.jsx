@@ -1,26 +1,58 @@
 import '../../styles/signIn.scss';
 import HeaderPages from './HeaderPages';
 import TitleWelcome from './TitleWelcome';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-
-function Welcome({username, isDark, setIsDark, token, setToken, setUsername, setIdVet, setList, setPrivateList}) {
+function Welcome({
+  username,
+  isDark,
+  setIsDark,
+  token,
+  setToken,
+  setUsername,
+  setIdVet,
+  setList,
+  setPrivateList,
+  smShow, 
+  messageLog, 
+  titleLog, 
+  isLogOut, 
+  setMessageLog, 
+  setTitleLog, 
+  setIsLogOut, 
+  setSmShow
+}) {
   return (
     <>
-      <HeaderPages    isDark={isDark} setIsDark={setIsDark}   token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList}/>
+      <HeaderPages
+        isDark={isDark}
+        setIsDark={setIsDark}
+        token={token}
+        setToken={setToken}
+        setUsername={setUsername}
+        setIdVet={setIdVet}
+        setList={setList}
+        setPrivateList={setPrivateList}
+        smShow={smShow}
+        messageLog= {messageLog}
+        titleLog= {titleLog}
+        isLogOut= {isLogOut} 
+        setMessageLog={setMessageLog}
+        setTitleLog={setTitleLog}
+        setIsLogOut={setIsLogOut}
+        setSmShow={setSmShow}
+      />
       <div className="user">
-      <TitleWelcome username={username} />
-        
+        <TitleWelcome username={username} />
       </div>
     </>
   );
 }
 
-
 Welcome.propTypes = {
   isDark: PropTypes.bool,
   setIsDark: PropTypes.func,
-  username: PropTypes.string
-}
+  username: PropTypes.string,
+};
 
 export default Welcome;

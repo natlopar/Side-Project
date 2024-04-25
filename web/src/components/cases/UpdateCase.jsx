@@ -59,6 +59,14 @@ function UpdateCase({
 
   isDeleted,
   setIsDeleted,
+  smShow, 
+  messageLog, 
+  titleLog, 
+  isLogOut, 
+  setMessageLog, 
+  setTitleLog, 
+  setIsLogOut, 
+  setSmShow
 }) {
   const navigate = useNavigate();
 
@@ -93,20 +101,17 @@ function UpdateCase({
     navigate('/listUser');
   };
 
-  // useEffect(() => {
-  //   ls.set('lastVisitedRoute', window.location.pathname);
-  // }, []);
-
-  // useEffect(() => {
-  //   const lastVisitedRoute = ls.get('lastVisitedRoute');
-  //   if (lastVisitedRoute) {
-  //     navigate(lastVisitedRoute);
-  //   }
-  // }, []);
   return (
     <>
       <Scroll />
-      <HeaderPages  username={username}  isDark={isDark} setIsDark={setIsDark}   token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList} />
+      <HeaderPages       smShow={smShow}
+        messageLog={messageLog}
+        titleLog={titleLog}
+        isLogOut={isLogOut}
+        setMessageLog={setMessageLog}
+        setTitleLog={setTitleLog}
+        setIsLogOut={setIsLogOut}
+        setSmShow={setSmShow}  username={username}  isDark={isDark} setIsDark={setIsDark}   token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList} />
   
       {animalData ? (
         <div className="case">

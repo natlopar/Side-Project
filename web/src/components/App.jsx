@@ -23,6 +23,7 @@ import BtnListPublic from './cases/BtnListPublic';
 import HeaderPages from './shared/HeaderPages';
 import Contact from './shared/Contact';
 import UpdateCase from './cases/UpdateCase';
+import LogOut from './user/LogOut';
 
 const DetailListUser = React.lazy(() => import('./cases/DetailListUser'));
 const ListCases = React.lazy(() => import('./cases/ListCases'));
@@ -70,6 +71,11 @@ function App() {
   const [updateData, setUpdateData] = useState(dataAnimal);
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
+
+  const [smShow, setSmShow] = useState(false);
+  const [messageLog, setMessageLog] = useState('');
+  const [titleLog, setTitleLog] = useState('');
+  const [isLogOut, setIsLogOut] = useState(false);
 
   useEffect(() => {
     ls.set('animal', animal);
@@ -141,22 +147,7 @@ function App() {
       });
   };
 
-  // const logOut = (token) => {
-  //   apiUser.sendLogOutToApi(token).then((response)=>{
-  //     if (response.success === true) {
-  //       setToken('');
-  //       ls.remove('token');
-  //       ls.remove('idVet');
-  //       ls.remove('login');
-  //       ls.remove('username');
-  //       navigate('/');
-  //     } else {
-  //       console.log('no se ha podido cerrar sesion')
-  //     }
-
-  //   })
-  // }
-
+ 
   return (
     <div className={`body ${isDark ? 'dark' : 'light'}`}>
       <Routes>
@@ -173,6 +164,14 @@ function App() {
                 setIdVet={setIdVet}
                 setList={setList}
                 setPrivateList={setPrivateList}
+                smShow={smShow}
+                messageLog= {messageLog}
+                titleLog= {titleLog}
+                isLogOut= {isLogOut} 
+                setMessageLog={setMessageLog}
+                setTitleLog={setTitleLog}
+                setIsLogOut={setIsLogOut}
+                setSmShow={setSmShow}
               />
               <HeroDesc
                 token={token}
@@ -182,6 +181,15 @@ function App() {
                 setList={setList}
                 setPrivateList={setPrivateList}
                 setIsDeleted={setIsDeleted}
+                smShow={smShow}
+                messageLog= {messageLog}
+                titleLog= {titleLog}
+                isLogOut= {isLogOut} 
+                setMessageLog={setMessageLog}
+                setTitleLog={setTitleLog}
+                setIsLogOut={setIsLogOut}
+                setSmShow={setSmShow}
+
            
               />
               <Footer />
@@ -207,6 +215,14 @@ function App() {
                 setUsername={setUsername}
                 setList={setList}
                 setPrivateList={setPrivateList}
+                smShow={smShow}
+                messageLog= {messageLog}
+                titleLog= {titleLog}
+                isLogOut= {isLogOut} 
+                setMessageLog={setMessageLog}
+                setTitleLog={setTitleLog}
+                setIsLogOut={setIsLogOut}
+                setSmShow={setSmShow}
               />
               <Footer />
             </>
@@ -228,6 +244,14 @@ function App() {
                 setUsername={setUsername}
                 setList={setList}
                 setPrivateList={setPrivateList}
+                smShow={smShow}
+                messageLog= {messageLog}
+                titleLog= {titleLog}
+                isLogOut= {isLogOut} 
+                setMessageLog={setMessageLog}
+                setTitleLog={setTitleLog}
+                setIsLogOut={setIsLogOut}
+                setSmShow={setSmShow}
               />
               <Footer />
             </>
@@ -269,6 +293,14 @@ function App() {
                 isLoading={isLoading}
                 isDeleted={isDeleted}
                 setIsDeleted={setIsDeleted}
+                smShow={smShow}
+                messageLog= {messageLog}
+                titleLog= {titleLog}
+                isLogOut= {isLogOut} 
+                setMessageLog={setMessageLog}
+                setTitleLog={setTitleLog}
+                setIsLogOut={setIsLogOut}
+                setSmShow={setSmShow}
               />
               <Footer />
             </Suspense>
@@ -304,12 +336,21 @@ function App() {
                 setPrivateList={setPrivateList}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
+                smShow={smShow}
+            messageLog= {messageLog}
+            titleLog= {titleLog}
+            isLogOut= {isLogOut} 
+            setMessageLog={setMessageLog}
+            setTitleLog={setTitleLog}
+            setIsLogOut={setIsLogOut}
+            setSmShow={setSmShow} 
               />
               <Footer />
             </>
           }
         />
-        <Route
+      
+       <Route
           path="/updateCase/:id"
           element={
             <Suspense fallback={ isLoading ? (
@@ -343,6 +384,14 @@ function App() {
                 setUsername={setUsername}
                 setList={setList}
                 setPrivateList={setPrivateList}
+                smShow={smShow}
+                messageLog={messageLog}
+                titleLog={titleLog}
+                isLogOut={isLogOut}
+                setMessageLog={setMessageLog}
+                setTitleLog={setTitleLog}
+                setIsLogOut={setIsLogOut}
+                setSmShow={setSmShow}
               />
               <Footer />
             </Suspense>
@@ -371,6 +420,14 @@ function App() {
                 setList={setList}
                 setPrivateList={setPrivateList}
                 username={username}
+                smShow={smShow}
+                messageLog= {messageLog}
+                titleLog= {titleLog}
+                isLogOut= {isLogOut} 
+                setMessageLog={setMessageLog}
+                setTitleLog={setTitleLog}
+                setIsLogOut={setIsLogOut}
+                setSmShow={setSmShow}
             
               />
               <Footer />
@@ -391,6 +448,14 @@ function App() {
                   setIdVet={setIdVet}
                   setList={setList}
                   setPrivateList={setPrivateList}
+                  smShow={smShow}
+                  messageLog= {messageLog}
+                  titleLog= {titleLog}
+                  isLogOut= {isLogOut} 
+                  setMessageLog={setMessageLog}
+                  setTitleLog={setTitleLog}
+                  setIsLogOut={setIsLogOut}
+                  setSmShow={setSmShow}
                
                 />
                 <DetailUserCase list={privateList} />
@@ -421,6 +486,14 @@ function App() {
                   setIdVet={setIdVet}
                   setList={setList}
                   setPrivateList={setPrivateList}
+                  smShow={smShow}
+                  messageLog= {messageLog}
+                  titleLog= {titleLog}
+                  isLogOut= {isLogOut} 
+                  setMessageLog={setMessageLog}
+                  setTitleLog={setTitleLog}
+                  setIsLogOut={setIsLogOut}
+                  setSmShow={setSmShow}
                 />
                 <DetailUserCase list={publicList} idVet={idVet} />
                 <BtnList />
@@ -443,6 +516,14 @@ function App() {
                 setIdVet={setIdVet}
                 setList={setList}
                 setPrivateList={setPrivateList}
+                smShow={smShow}
+                messageLog= {messageLog}
+                titleLog= {titleLog}
+                isLogOut= {isLogOut} 
+                setMessageLog={setMessageLog}
+                setTitleLog={setTitleLog}
+                setIsLogOut={setIsLogOut}
+                setSmShow={setSmShow}
             
               />
               <Contact

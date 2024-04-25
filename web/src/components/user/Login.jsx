@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import HeaderPages from '../shared/HeaderPages';
 import ls from '../../services/localStorage';
+import apiUser from '../../services/api-user';
 import Scroll from '../shared/Scroll';
 import PropTypes from 'prop-types';
 
@@ -23,7 +24,15 @@ function Login({
   setIsLoading,
   isLoading,
   setList, 
-  setPrivateList
+  setPrivateList,
+  smShow, 
+  messageLog, 
+  titleLog, 
+  isLogOut, 
+  setMessageLog, 
+  setTitleLog, 
+  setIsLogOut, 
+  setSmShow
 }) {
   const [login, setLogin] = useState({ username: '', email: '', password: '' });
   const [message, setMessage] = useState('');
@@ -41,28 +50,18 @@ function Login({
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
-
-    const response = await fetch(
-      'https://side-project-vetfolio-manager.vercel.app/login',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(login),
+    await apiUser.logInToApi(login).then((data) =>{
+      if (data.success) {
+        handleLogin(data.token, data.name, data.id);
+        ls.set('idVet', data.id);
+        ls.set('username', data.name);
+        setToken(data.token);
+        navigate(`/listUser`);
+      } else {
+        setMessage('El usuario o la contraseña no son válidos');
+        setHiddenClass('');
       }
-    );
-
-    const data = await response.json();
-
-    if (data.success) {
-      handleLogin(data.token, data.name, data.id);
-      ls.set('idVet', data.id);
-      ls.set('username', data.name);
-      setToken(data.token);
-      navigate(`/listUser`);
-    } else {
-      setMessage('El usuario o la contraseña no son válidos');
-      setHiddenClass('');
-    }
+    })
   };
 
   const handleCancel = (ev) => {
@@ -88,6 +87,14 @@ function Login({
         setIdVet={setIdVet}
         setList={setList}
         setPrivateList={setPrivateList}
+        smShow={smShow}
+        messageLog= {messageLog}
+        titleLog= {titleLog}
+        isLogOut= {isLogOut} 
+        setMessageLog={setMessageLog}
+        setTitleLog={setTitleLog}
+        setIsLogOut={setIsLogOut}
+        setSmShow={setSmShow}
       />
 
       <div className="login ">
@@ -148,7 +155,7 @@ function Login({
           )}
           <label htmlFor="password" className="user__form--label">
             {' '}
-            Contraseña{' '}
+            Contraseña 
           </label>
           <input
             type="password"
@@ -161,9 +168,9 @@ function Login({
             onInput={handleInput}
             {...register('password', {
               required: true,
-              minLength: {
-                value: 8,
-                message: 'La contraseña debe tener al menos 8 caracteres',
+              pattern:{
+                value: /(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9_]{8,}/,
+                message: 'La contraseña debe tener al menos 8 caracteres con números y letras',
               },
             })}
             aria-invalid={errors.password ? 'true' : 'false'}

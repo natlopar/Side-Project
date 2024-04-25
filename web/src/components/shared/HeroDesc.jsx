@@ -7,12 +7,28 @@ import heroVet from '../../images/heroVet.jpg';
 import hero2 from '../../images/hero2.webp';
 import LogOut from '../user/LogOut';
 import Scroll from './Scroll';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-function HeroDesc({token, setToken, setIdVet, setUsername, setList, setPrivateList, setIsDeleted}) {
+function HeroDesc({
+  token,
+  setToken,
+  setIdVet,
+  setUsername,
+  setList,
+  setPrivateList,
+  setIsDeleted,
+  smShow, 
+  messageLog, 
+  titleLog, 
+  isLogOut, 
+  setMessageLog, 
+  setTitleLog, 
+  setIsLogOut, 
+  setSmShow
+}) {
   return (
     <section className="hero desc">
-      <Scroll/>
+      <Scroll />
       <h1 className="hero__title">Vetfolio Manager</h1>
 
       <div className="container">
@@ -30,7 +46,6 @@ function HeroDesc({token, setToken, setIdVet, setUsername, setList, setPrivateLi
                 Crea tu propia base de datos con tus casos más relevantes
               </h3>
             </div>
-
           </article>
         </section>
         <section className="hero__info">
@@ -46,7 +61,7 @@ function HeroDesc({token, setToken, setIdVet, setUsername, setList, setPrivateLi
         </section>
         <section className="hero__section">
           <article className="heroArticle">
-          <img className="hero__section--img" src={cat} alt="" />
+            <img className="hero__section--img" src={cat} alt="" />
             <img
               src={heroVet}
               alt="imagen Veterinaria"
@@ -60,22 +75,46 @@ function HeroDesc({token, setToken, setIdVet, setUsername, setList, setPrivateLi
                 Un Archivo Digital para Veterinarios Apasionados
               </h3>
             </div>
-      
           </article>
         </section>
       </div>
-      <div className='aside'>
+      <div className="aside">
         <Link to={'/signIn'} className="link">
-        <button className="aside__subtitles hover btn" aria-label='Regístrate'>Regístrate</button>
+          <button
+            className="aside__subtitles hover btn"
+            aria-label="Regístrate"
+          >
+            Regístrate
+          </button>
         </Link>
         <Link to={'/logIn'} className="link">
-        <button className="aside__subtitles hover btn" aria-label='Inicia sesión'>Inicia sesión</button>
+          <button
+            className="aside__subtitles hover btn"
+            aria-label="Inicia sesión"
+          >
+            Inicia sesión
+          </button>
         </Link>
-        <div className='aside__logout'>
-        <LogOut setIsDeleted={setIsDeleted} token={token} setToken={setToken} setIdVet={setIdVet} setUsername={setUsername} setList={setList} setPrivateList={setPrivateList}/></div>
- 
-       </div>
-
+        <div className="aside__logout">
+          <LogOut
+            setIsDeleted={setIsDeleted}
+            token={token}
+            setToken={setToken}
+            setIdVet={setIdVet}
+            setUsername={setUsername}
+            setList={setList}
+            setPrivateList={setPrivateList}
+            smShow={smShow}
+  messageLog= {messageLog}
+  titleLog= {titleLog}
+  isLogOut= {isLogOut} 
+  setMessageLog={setMessageLog}
+  setTitleLog={setTitleLog}
+  setIsLogOut={setIsLogOut}
+  setSmShow={setSmShow}
+          />
+        </div>
+      </div>
     </section>
   );
 }
@@ -84,9 +123,9 @@ HeroDesc.propTypes = {
   token: PropTypes.string,
   setToken: PropTypes.func,
   setUsername: PropTypes.func,
-  setIdVet: PropTypes.func, 
-  setPrivateList: PropTypes.func, 
-  setList: PropTypes.func
-}
+  setIdVet: PropTypes.func,
+  setPrivateList: PropTypes.func,
+  setList: PropTypes.func,
+};
 
 export default HeroDesc;

@@ -108,7 +108,7 @@ function UserCases({ data, idVet, setIsDeleted, isLoading, setIsLoading }) {
 }
 
 UserCases.propTypes = {
-  idVet: PropTypes.number,
+  idVet: PropTypes.any,
   data: PropTypes.shape({
     specie: PropTypes.string,
     name: PropTypes.string,

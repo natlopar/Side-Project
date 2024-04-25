@@ -27,7 +27,15 @@ function ListCases({
   isLoading,
   setList,
   setPrivateList,
-  username
+  username,
+  smShow, 
+  messageLog, 
+  titleLog, 
+  isLogOut, 
+  setMessageLog, 
+  setTitleLog, 
+  setIsLogOut, 
+  setSmShow
 }) {
   // const [userData, setUserData] = useState(null);
   const [listCases, setListCases] = useState({ patients: [] });
@@ -67,6 +75,14 @@ function ListCases({
         setIdVet={setIdVet}
         setList={setList}
         setPrivateList={setPrivateList}
+        smShow={smShow}
+        messageLog={messageLog}
+        titleLog={titleLog}
+        isLogOut={isLogOut}
+        setMessageLog={setMessageLog}
+        setTitleLog={setTitleLog}
+        setIsLogOut={setIsLogOut}
+        setSmShow={setSmShow}
       />
       <Scroll />
       <h2 className="sectionList__title">
@@ -78,6 +94,8 @@ function ListCases({
           setToken={setToken}
           setIdVet={setIdVet}
           setUsername={setUsername}
+          setList={setList}
+          setPrivateList={setPrivateList}
         />
       </div>
       {isLoading ? (

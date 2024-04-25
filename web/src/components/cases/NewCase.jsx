@@ -12,16 +12,19 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 
 function NewCase({
   username,
-  isDark, 
-  setIsDark, 
-  idVet, 
-  token, 
-  setToken,  
-  setUsername, 
+  isDark,
+  setIsDark,
+  idVet,
+  token,
+  setToken,
+  setUsername,
   setIdVet,
-setPublicList, setIsLoading, isLoading, setList,setPrivateList,
+  setPublicList,
+  setIsLoading,
+  isLoading,
+  setList,
+  setPrivateList,
 
- 
   animal,
   setAnimal,
   publicAnimal,
@@ -29,48 +32,74 @@ setPublicList, setIsLoading, isLoading, setList,setPrivateList,
   messageCase,
   setMessageCase,
   hiddenClassCase,
-  setHiddenClassCase, 
-  setIdCase, 
-  dataAnimal, 
-  handleResetMessage, updateData, setUpdateData, resetUpdateData
+  setHiddenClassCase,
+  setIdCase,
+  dataAnimal,
+  handleResetMessage,
+  updateData,
+  setUpdateData,
+  resetUpdateData,
+  smShow,
+  messageLog,
+  titleLog,
+  isLogOut,
+  setMessageLog,
+  setTitleLog,
+  setIsLogOut,
+  setSmShow,
 }) {
-    
   const navigate = useNavigate();
   const handleSubmitNew = async () => {
-    setIsLoading(true)
-    await apiCase.createCase(animal).then(data => {
-        if (data.success) {
-          setIsLoading(false)
-          setMessageCase('Caso añadido correctamente a tu historial.');
-          setHiddenClassCase('');
-          // setIdCase(idCase);
-        } else {
-          setIsLoading(false)
-          setMessageCase(
-            'No se pudo añadir tu caso. Revisa que todos los campos estén completos'
-          );
-          setHiddenClassCase('');
-        }
-      });
-      await setAnimal(animal);
+    setIsLoading(true);
+    await apiCase.createCase(animal).then((data) => {
+      if (data.success) {
+        setIsLoading(false);
+        setMessageCase('Caso añadido correctamente a tu historial.');
+        setHiddenClassCase('');
+        // setIdCase(idCase);
+      } else {
+        setIsLoading(false);
+        setMessageCase(
+          'No se pudo añadir tu caso. Revisa que todos los campos estén completos'
+        );
+        setHiddenClassCase('');
+      }
+    });
+    await setAnimal(animal);
   };
 
- 
   const handleCancel = (ev) => {
     ev.preventDefault();
     setAnimal(dataAnimal);
-    setUpdateData(dataAnimal)
+    setUpdateData(dataAnimal);
     navigate('/listUser');
   };
-
 
   return (
     <>
       <Scroll />
-      <HeaderPages  username={username}  isDark={isDark} setIsDark={setIsDark}   token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList} />
+      <HeaderPages
+        username={username}
+        isDark={isDark}
+        setIsDark={setIsDark}
+        token={token}
+        setToken={setToken}
+        setUsername={setUsername}
+        setIdVet={setIdVet}
+        setList={setList}
+        setPrivateList={setPrivateList}
+        smShow={smShow}
+        messageLog={messageLog}
+        titleLog={titleLog}
+        isLogOut={isLogOut}
+        setMessageLog={setMessageLog}
+        setTitleLog={setTitleLog}
+        setIsLogOut={setIsLogOut}
+        setSmShow={setSmShow}
+      />
       <div className="case">
         <h3 className="case__title">
-          <i className="case__title--icon fa-solid fa-paw"></i>  Crea tu caso
+          <i className="case__title--icon fa-solid fa-paw"></i> Crea tu caso
         </h3>
         <FormNewCase
           setPublicAnimal={setPublicAnimal}
@@ -78,14 +107,20 @@ setPublicList, setIsLoading, isLoading, setList,setPrivateList,
           handleSubmitNew={handleSubmitNew}
           animal={animal}
           publicAnimal={publicAnimal}
-          handleResetMessage= {handleResetMessage}
+          handleResetMessage={handleResetMessage}
           dataAnimal={dataAnimal}
           updateData={updateData}
           setUpdateData={setUpdateData}
         />
-        <BtnCreateNewCase handleSubmitNew={handleSubmitNew}/>
-        <BtnCancelForm handleCancel={handleCancel}/>
-        <BtnList handleResetMessage= {handleResetMessage} resetUpdateData={resetUpdateData} setAnimal={setAnimal} dataAnimal={dataAnimal} setUpdateData={setUpdateData}/>
+        <BtnCreateNewCase handleSubmitNew={handleSubmitNew} />
+        <BtnCancelForm handleCancel={handleCancel} />
+        <BtnList
+          handleResetMessage={handleResetMessage}
+          resetUpdateData={resetUpdateData}
+          setAnimal={setAnimal}
+          dataAnimal={dataAnimal}
+          setUpdateData={setUpdateData}
+        />
 
         <p className={`${hiddenClassCase} user__msg`}>{messageCase}</p>
       </div>

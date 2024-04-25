@@ -6,7 +6,24 @@ import logo from '../../images/logoVET.png';
 import MenuNav from './MenuNav';
 import PropTypes from 'prop-types';
 
-function Header({ isDark, setIsDark, token, setToken, setUsername, setIdVet, setList, setPrivateList }) {
+function Header({
+  isDark,
+  setIsDark,
+  token,
+  setToken,
+  setUsername,
+  setIdVet,
+  setList,
+  setPrivateList,
+  smShow, 
+  messageLog, 
+  titleLog, 
+  isLogOut, 
+  setMessageLog, 
+  setTitleLog, 
+  setIsLogOut, 
+  setSmShow
+}) {
   const [dropMenu, setDropMenu] = useState(false);
   const [moveMenu, setMoveMenu] = useState('');
 
@@ -33,11 +50,30 @@ function Header({ isDark, setIsDark, token, setToken, setUsername, setIdVet, set
           onClick={handleMenu}
           aria-label="Menu"
         >
-          <i className= "fa-solid fa-bars"></i>
-          
+          <i className="fa-solid fa-bars"></i>
         </button>
 
-        {dropMenu ? <MenuNav token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList}/> : <div></div>}
+        {dropMenu ? (
+          <MenuNav
+            token={token}
+            setToken={setToken}
+            setUsername={setUsername}
+            setIdVet={setIdVet}
+            setList={setList}
+            setPrivateList={setPrivateList}
+            smShow={smShow}
+            messageLog= {messageLog}
+            titleLog= {titleLog}
+            isLogOut= {isLogOut} 
+            setMessageLog={setMessageLog}
+            setTitleLog={setTitleLog}
+            setIsLogOut={setIsLogOut}
+            setSmShow={setSmShow}
+
+          />
+        ) : (
+          <div></div>
+        )}
       </div>
     </header>
   );

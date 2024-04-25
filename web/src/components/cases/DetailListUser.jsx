@@ -43,6 +43,15 @@ function DetailListUser({
   isLoading,
   isDeleted,
   setIsDeleted,
+  smShow, 
+  messageLog, 
+  titleLog, 
+  isLogOut, 
+  setMessageLog, 
+  setTitleLog, 
+  setIsLogOut, 
+  setSmShow
+
 }) {
   useEffect(() => {
     const fetchData = async () => {
@@ -99,7 +108,14 @@ function DetailListUser({
   if (!token || !username) {
     return (
       <>
-        <Welcome  isDark={isDark} setIsDark={setIsDark}  token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList} />
+        <Welcome  isDark={isDark} setIsDark={setIsDark}  token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList}    smShow={smShow}
+        messageLog={messageLog}
+        titleLog={titleLog}
+        isLogOut={isLogOut}
+        setMessageLog={setMessageLog}
+        setTitleLog={setTitleLog}
+        setIsLogOut={setIsLogOut}
+        setSmShow={setSmShow}/>
         <Scroll />
         <div className="sectionList loading">
           <p>Cargando...</p>
