@@ -15,10 +15,8 @@ function UserCases({ data, idVet, setIsDeleted, isLoading, setIsLoading }) {
 
   const handleDelete = async (ev) => {
     ev.preventDefault();
-
     setModalShow(true);
     idSelected = parseInt(ev.currentTarget.id);
-
     setIdDelete(idSelected);
   };
 
@@ -119,8 +117,12 @@ UserCases.propTypes = {
     results: PropTypes.string,
     fk_Vet: PropTypes.number,
     idCase: PropTypes.any,
+    isLoading: PropTypes.bool,
+    setIsLoading: PropTypes.func
   }),
-  setIsDeleted: PropTypes.func
+  setIsDeleted: PropTypes.func,
+  isLoading: PropTypes.bool,
+  setIsLoading: PropTypes.func
 };
 
 export default UserCases;

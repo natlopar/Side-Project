@@ -2,15 +2,17 @@ import { useNavigate } from 'react-router-dom';
 import ls from '../../services/localStorage';
 import PropTypes from "prop-types";
 import '../../styles/createCase.scss';
-import ModalMessageDelete from '../cases/ModalMessageDelete';
+import ModalMessage from '../cases/ModalMessage';
 import { useState } from 'react';
 
-function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateList, setIsDeleted }) {
+function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateList }) {
+
   const navigate = useNavigate();
-  // const [smShow, setSmShow] = useState(false);
-  // const [messageLog, setMessageLog] = useState('');
-  // const [titleLog, setTitleLog] = useState ('')
-  // const [hiddenLog, setHiddenLog] = 'hidden';
+  const [smShow, setSmShow] = useState(false);
+  const [messageLog, setMessageLog] = useState('');
+  const [titleLog, setTitleLog] = useState ('')
+  const [isLogOut, setIsLogOut] = useState (false);
+  
 
   const handleLogOut = async (e) => {
     e.preventDefault();
@@ -37,8 +39,10 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
           navigate('/');
           setList(null);
           setPrivateList([]);
-          // setMessageLog('Tu sesión ha sido cerrada.');
-          // setTitleLog('Hasta pronto');
+          setMessageLog('Tu sesión ha sido cerrada ✅');
+          setTitleLog('Hasta pronto');
+          setIsLogOut(true)
+          setSmShow(true);
          
         });
     } else {
@@ -50,8 +54,11 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
       // ls.remove('username');
       ls.set('userData', null);
       ls.remove('list');
-      // setMessageLog('No tienes iniciada la sesión');
-      // setHiddenLog('');
+      setMessageLog('No tienes iniciada la sesión');
+      setTitleLog('❗');
+      setIsLogOut(true);
+      setSmShow(true);
+    
     }
 
   };
@@ -62,7 +69,7 @@ function LogOut({ token, setToken, setUsername, setIdVet, setList, setPrivateLis
         Cerrar sesión
       </button>
       {/* <p className={`${hiddenLog}user__msg`}>{messageLog}</p> */}
-      {/* <ModalMessageDelete smShow={smShow} setSmShow={setSmShow} messageDelete={messageLog} titleDelete={titleLog} setIsDeleted={setIsDeleted}/> */}
+      {isLogOut ? <ModalMessage smShow={smShow} setSmShow={setSmShow} message={messageLog} title={titleLog} setIsDeleted={setIsLogOut}/> : null}
 
     </>
   );
