@@ -51,7 +51,8 @@ function DetailListUser({
   setTitleLog, 
   setIsLogOut, 
   setSmShow, 
-  setAnimal
+  setAnimal, 
+  dataAnimal
 
 }) {
   useEffect(() => {

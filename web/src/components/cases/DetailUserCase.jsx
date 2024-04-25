@@ -24,39 +24,43 @@ function DetailUserCase({ list }) {
         </div>
         <div className='listPet__block'>
           <h6 className="listPet__text nameClient  ">Raza</h6>
-          <p className="listPet__desc">{data.breed}</p>
+          <p className="listPet__desc">{data.breed ?  data.breed : 'Sin datos'}</p>
+        </div>
+        <div className='listPet__block'>
+          <h6 className="listPet__text nameClient  ">Género</h6>
+          <p className="listPet__desc">{data.gender ? data.gender : 'Sin datos'}</p>
         </div>
         <div className='listPet__block'>
           <h6 className="listPet__text ">Año de nacimiento</h6>
-          <p className="listPet__desc">{data.birthday}</p>
+          <p className="listPet__desc">{data.birthday ? data.birthday : 'Sin datos'}</p>
         </div>
         <div className='listPet__block'>
           <h6 className="listPet__text ">Cuadro clínico</h6>
-          <p className="listPet__desc">{data.clinical}</p>
+          <p className="listPet__desc">{data.clinical ? data.clinical : 'Sin datos'}</p>
         </div>
         <div className='listPet__block'>
           <h6 className="listPet__text ">Exploración</h6>
-          <p className="listPet__desc">{data.exploration}</p>
+          <p className="listPet__desc">{data.exploration ? data.exploration : 'Sin datos'}</p>
         </div>
         <div className='listPet__block'>
           <h6 className="listPet__text ">Pruebas diagnósticas</h6>
-          <p className="listPet__desc">{data.tests}</p>
+          <p className="listPet__desc">{data.tests ? data.tests : 'Sin datos'}</p>
         </div>
         <div className='listPet__block'>
           <h6 className="listPet__text ">Resultados</h6>
-          <p className="listPet__desc">{data.results}</p>
+          <p className="listPet__desc">{data.results ? data.results : 'Sin datos'}</p>
         </div>
         <div className='listPet__block'>
           <h6 className="listPet__text ">Tratamiento</h6>
-          <p className="listPet__desc">{data.treatment}</p>
+          <p className="listPet__desc">{data.treatment ? data.treatment : 'Sin datos'}</p>
         </div>
         <div className='listPet__block'>
           <h6 className="listPet__text ">Evolución</h6>
-          <p className="listPet__desc">{data.evolution}</p>
+          <p className="listPet__desc">{data.evolution ? data.evolution : 'Sin datos'}</p>
         </div>
         <div className='listPet__block'>
           <h6 className="listPet__text ">Diagnóstico</h6>
-          <p className="listPet__desc">{data.results}</p>
+          <p className="listPet__desc">{data.results ? data.results: 'Sin datos'}</p>
         </div>
     
       </article>

@@ -42,27 +42,6 @@ function FormNewCase({
      
   };
 
-
- 
-  // const handleSubmit = (ev) => {//el fetch da error
-  //   ev.preventDefault();//tenría que ejecutar un fetch u otro en fx de si estoy modificanto o creando un caso; crear una variable?
-  //   fetch(`https://side-project-vetfolio-manager.vercel.app/updateCase?idCase=${idCase}`, {
-  //     method: "PUT",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(animal)
-  //   })
-  //   .then((response) =>  response.json())
-  //   .then(data => {
-  //     console.log(data);
-  //     return data
-  //  });
-  // }
-
-//  useEffect(()=> {
-  
-//   setUpdateData(ls.get('animal', {}));
-
-//  }, [])
   
 
   return ( 
@@ -136,6 +115,33 @@ function FormNewCase({
       {errors.breed?.type === 'required' && (
         <p role="alert" className="case__form--validation">
           Debes rellenar este campo
+        </p>
+      )}
+       <label htmlFor="gender" className="case__form--label">
+        {' '}
+        Género{' '}
+      </label>
+      <select
+        name="gender"
+        className="case__form--input"
+        autoComplete="gender"
+        required
+        id="gender"
+        placeholder={animal.gender}
+        value={updateData.gender}
+        onInput={handleInput}
+        {...register('gender', { required: true })}
+        aria-invalid={errors.gender ? 'true' : 'false'}
+      >
+        <option value={'Selecciona un género'} disabled>
+          Selecciona un género
+        </option>
+        <option value="masculino">Masculino</option>
+        <option value="femenino">Femenino</option>
+      </select>
+      {errors.gender?.type === 'required' && (
+        <p role="alert" className="case__form--validation">
+          Debes elegir un género
         </p>
       )}
       <label htmlFor="birthday" className="case__form--label">

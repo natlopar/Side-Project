@@ -224,9 +224,9 @@ try {
 
 server.post('/newCase', async (req, res) => {
   const connection = await getConnection();
-  const {name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet} = req.body;
-  const insertCase = 'INSERT INTO `case` (`name`, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)';
-  const [resultCases] = await connection.query(insertCase, [ name, specie, breed, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet]);
+  const {name, specie, breed, gender, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet} = req.body;
+  const insertCase = 'INSERT INTO `case` (`name`, specie, breed, gender, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+  const [resultCases] = await connection.query(insertCase, [ name, specie, breed, gender, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet]);
   connection.end(); 
   console.log(resultCases);
   res.json({

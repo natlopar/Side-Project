@@ -34,6 +34,7 @@ function App() {
     name: '',
     specie: 'Selecciona una especie',
     breed: '',
+    gender: 'Selecciona un género',
     birthday: '',
     clinical: '',
     exploration: '',
@@ -303,6 +304,7 @@ function App() {
                 setIsLogOut={setIsLogOut}
                 setSmShow={setSmShow}
                 setAnimal={setAnimal}
+                dataAnimal={dataAnimal}
               />
               <Footer />
             </Suspense>

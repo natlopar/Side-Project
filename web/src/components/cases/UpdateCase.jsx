@@ -73,6 +73,7 @@ function UpdateCase({
   const { id } = useParams();
   const idCase = parseInt(id);
   const animalData = privateList.find((one) => one.idCase === parseInt(id));
+ 
   useEffect(() => {
     ls.set('animal', animalData);
   }, [animalData]);
