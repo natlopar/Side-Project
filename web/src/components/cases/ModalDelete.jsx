@@ -8,43 +8,49 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import apiCase from '../../services/api-case';
 import ModalMessage from './ModalMessage';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 function ModalDelete(props) {
   const [smShow, setSmShow] = useState(false);
-  const [message, setMessage] = useState('')
-  const [title, setTitle] = useState ('')
-  const {show, onHide, idDelete, setIdDelete, setModalShow, setIsDeleted, isLoading, setIsLoading} = props
+  const [message, setMessage] = useState('');
+  const [title, setTitle] = useState('');
+  const {
+    show,
+    onHide,
+    idDelete,
+    setIdDelete,
+    setModalShow,
+    setIsDeleted,
+    isLoading,
+    setIsLoading,
+  } = props;
 
   const handleClickDelete = async (e) => {
     e.preventDefault();
-    setIsLoading(true)
-    await apiCase.deleteCase(idDelete)
-    .then((data) => {
+    setIsLoading(true);
+    await apiCase.deleteCase(idDelete).then((data) => {
       setModalShow(false);
       if (data.success) {
         setIsLoading(false);
         setIdDelete(null);
-        setTitle('✅')
-        setMessage('El caso seleccionado ha sido eliminado')
+        setTitle('✅');
+        setMessage('El caso seleccionado ha sido eliminado');
       } else {
         setIsLoading(false);
-        setTitle('❗')
-        setMessage('Ha habido un error en la operación. Por favor, inténtalo de nuevo más tarde')
+        setTitle('❗');
+        setMessage(
+          'Ha habido un error en la operación. Por favor, inténtalo de nuevo más tarde'
+        );
       }
       setSmShow(true);
-      
-     
     });
-
-   
   };
 
   return (
     <>
       <Modal
-       {...props}
+        {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -54,6 +60,7 @@ function ModalDelete(props) {
           <Modal.Title id="contained-modal-title-vcenter">
             Eliminar este caso
           </Modal.Title>
+         
         </Modal.Header>
         <Modal.Body className=" bg-success-subtle border border-success-subtle rounded-3">
           <h3>¿Estás seguro de querer eliminar este registro?</h3>
@@ -61,6 +68,7 @@ function ModalDelete(props) {
             Si eliges `Eliminar` se borrarán de manera irreversible los datos
             asociados a este caso.
           </p>
+          {isLoading ? <ProgressSpinner /> : null}
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={onHide} variant="success" className="btn-lg">
@@ -75,26 +83,27 @@ function ModalDelete(props) {
           </Button>
         </Modal.Footer>
       </Modal>
-     {smShow && <ModalMessage smShow={smShow} setSmShow={setSmShow} message={message} title={title} setIsDeleted={setIsDeleted}/>}
-     {isLoading ? (
-        <div className="spinner flex justify-content-center">
-          <ProgressSpinner />
-        </div>
-      ) : null}
-   
+      {smShow && (
+        <ModalMessage
+          smShow={smShow}
+          setSmShow={setSmShow}
+          message={message}
+          title={title}
+          setIsDeleted={setIsDeleted}
+        />
+      )}
     </>
-  )
+  );
 }
-
 
 ModalDelete.propTypes = {
   setIsLoading: PropTypes.func,
   idDelete: PropTypes.number,
   setIdDelete: PropTypes.func,
   setModalShow: PropTypes.func,
-  isLoading: PropTypes.bool, 
+  isLoading: PropTypes.bool,
   onHide: PropTypes.func,
-  setIsDeleted: PropTypes.func, 
+  setIsDeleted: PropTypes.func,
   show: PropTypes.bool,
-}
+};
 export default ModalDelete;

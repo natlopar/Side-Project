@@ -29,7 +29,7 @@ const DetailListUser = React.lazy(() => import('./cases/DetailListUser'));
 const ListCases = React.lazy(() => import('./cases/ListCases'));
 
 function App() {
-  const [idVet, setIdVet] = useState(ls.get('idVet', 0));
+  const [idVet, setIdVet] = useState(ls.get('idVet', null));
   const dataAnimal = {
     name: '',
     specie: 'Selecciona una especie',
@@ -302,6 +302,7 @@ function App() {
                 setTitleLog={setTitleLog}
                 setIsLogOut={setIsLogOut}
                 setSmShow={setSmShow}
+                setAnimal={setAnimal}
               />
               <Footer />
             </Suspense>
