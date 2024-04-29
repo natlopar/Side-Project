@@ -13,6 +13,7 @@ import Scroll from '../shared/Scroll';
 import ls from '../../services/localStorage';
 import PropTypes from 'prop-types';
 import PublicRender from './PublicRender';
+import { Link } from 'react-router-dom';
 
 function ListCases({
   isDark,
@@ -35,7 +36,8 @@ function ListCases({
   setMessageLog, 
   setTitleLog, 
   setIsLogOut, 
-  setSmShow
+  setSmShow, 
+  isLogIn, setIsLogIn
 }) {
   // const [userData, setUserData] = useState(null);
   const [listCases, setListCases] = useState({ patients: [] });
@@ -83,12 +85,14 @@ function ListCases({
         setTitleLog={setTitleLog}
         setIsLogOut={setIsLogOut}
         setSmShow={setSmShow}
+        isLogIn={isLogIn}
+        setIsLogIn={setIsLogIn}
       />
       <Scroll />
       <h2 className="sectionList__title">
         Consulta los casos publicados por otr@s veterinari@s
       </h2>
-      <div className="sectionList__logOut">
+     { isLogIn ? <div className="sectionList__logOut">
         <LogOut
           token={token}
           setToken={setToken}
@@ -96,8 +100,11 @@ function ListCases({
           setUsername={setUsername}
           setList={setList}
           setPrivateList={setPrivateList}
+          setIsLogIn={setIsLogIn}
+          isLogIn={isLogIn}
         />
-      </div>
+      </div> :  (<div className="sectionList__logOut"><Link to={'/logIn'} className="link">
+        <li className="create__btn btn hover desc__subtitles">Inicia Sesión</li>  </Link></div>)}
       {isLoading ? (
         <div className="spinner flex justify-content-center">
           <ProgressSpinner />{' '}

@@ -64,7 +64,6 @@ function App() {
   const [msgContact, setmsgContact] = useState('');
   const [list, setList] = useState(null);
 
-  // const [idCase, setIdCase] = useState(null);
   const [publicAnimal, setPublicAnimal] = useState(false);
   const [messageCase, setMessageCase] = useState('');
   const [hiddenClassCase, setHiddenClassCase] = useState('hidden');
@@ -77,6 +76,7 @@ function App() {
   const [messageLog, setMessageLog] = useState('');
   const [titleLog, setTitleLog] = useState('');
   const [isLogOut, setIsLogOut] = useState(false);
+  const [isLogIn, setIsLogIn] = useState(false);
 
   useEffect(() => {
     ls.set('animal', animal);
@@ -101,8 +101,8 @@ function App() {
     setToken(token);
     ls.set('token', token);
     setUsername(name);
-    // ls.set('username', username);
     setIdVet(id);
+    setIsLogIn(true);
   };
 
   const handleResetMessage = () => {
@@ -174,6 +174,8 @@ function App() {
                 setTitleLog={setTitleLog}
                 setIsLogOut={setIsLogOut}
                 setSmShow={setSmShow}
+                isLogIn={isLogIn}
+                setIsLogIn={setIsLogIn}
               />
               <HeroDesc
                 token={token}
@@ -191,6 +193,8 @@ function App() {
                 setTitleLog={setTitleLog}
                 setIsLogOut={setIsLogOut}
                 setSmShow={setSmShow}
+                setIsLogIn={setIsLogIn}
+                isLogIn={isLogIn}
               />
               <Footer />
             </>
@@ -225,6 +229,8 @@ function App() {
                 setSmShow={setSmShow}
                 setMessage={setMessage}
                 setHiddenClassSign={setHiddenClassSign}
+                isLogIn={isLogIn}
+                setIsLogIn={setIsLogIn}
               />
               <Footer />
             </>
@@ -254,6 +260,8 @@ function App() {
                 setTitleLog={setTitleLog}
                 setIsLogOut={setIsLogOut}
                 setSmShow={setSmShow}
+                isLogIn={isLogIn}
+                setIsLogIn={setIsLogIn}
               />
               <Footer />
             </>
@@ -305,6 +313,8 @@ function App() {
                 setSmShow={setSmShow}
                 setAnimal={setAnimal}
                 dataAnimal={dataAnimal}
+                isLogIn={isLogIn}
+               setIsLogin={setIsLogIn}
               />
               <Footer />
             </Suspense>
@@ -348,6 +358,8 @@ function App() {
             setTitleLog={setTitleLog}
             setIsLogOut={setIsLogOut}
             setSmShow={setSmShow} 
+            isLogIn={isLogIn}
+            setIsLogIn={setIsLogIn}
               />
               <Footer />
             </>
@@ -396,6 +408,8 @@ function App() {
                 setTitleLog={setTitleLog}
                 setIsLogOut={setIsLogOut}
                 setSmShow={setSmShow}
+                isLogIn={isLogIn}
+                setIsLogIn={setIsLogIn}
               />
               <Footer />
             </Suspense>
@@ -432,6 +446,8 @@ function App() {
                 setTitleLog={setTitleLog}
                 setIsLogOut={setIsLogOut}
                 setSmShow={setSmShow}
+                isLogIn={isLogIn}
+                setIsLogIn={setIsLogIn}
             
               />
               <Footer />
@@ -460,9 +476,11 @@ function App() {
                   setTitleLog={setTitleLog}
                   setIsLogOut={setIsLogOut}
                   setSmShow={setSmShow}
+                  isLogIn={isLogIn}
+                  setIsLogIn={setIsLogIn}
                
                 />
-                <DetailUserCase list={privateList} />
+                <DetailUserCase list={privateList} isLogIn={isLogIn} />
                 <BtnList
                   handleResetMessage={handleResetMessage}
                   resetUpdateData={resetUpdateData}
@@ -498,6 +516,8 @@ function App() {
                   setTitleLog={setTitleLog}
                   setIsLogOut={setIsLogOut}
                   setSmShow={setSmShow}
+                  isLogIn={isLogIn}
+                  setIsLogIn={setIsLogIn}
                 />
                 <DetailUserCase list={publicList} idVet={idVet} />
                 <BtnList />
@@ -528,6 +548,8 @@ function App() {
                 setTitleLog={setTitleLog}
                 setIsLogOut={setIsLogOut}
                 setSmShow={setSmShow}
+                isLogIn={isLogIn}
+                setIsLogIn={setIsLogIn}
             
               />
               <Contact

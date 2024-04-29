@@ -22,7 +22,9 @@ function HeaderPages({
   setMessageLog, 
   setTitleLog, 
   setIsLogOut, 
-  setSmShow
+  setSmShow, 
+  isLogIn, 
+  setIsLogIn
 }) {
   const [dropMenu, setDropMenu] = useState(false);
   const [moveMenu, setMoveMenu] = useState('');
@@ -64,9 +66,11 @@ function HeaderPages({
             setTitleLog={setTitleLog}
             setIsLogOut={setIsLogOut}
             setSmShow={setSmShow}
+            isLogIn={isLogIn}
+            setIsLogIn={setIsLogIn}
           />
         ) : (
-          <div></div>
+    null
         )}
       </div>
     </header>

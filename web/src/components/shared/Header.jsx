@@ -22,7 +22,8 @@ function Header({
   setMessageLog, 
   setTitleLog, 
   setIsLogOut, 
-  setSmShow
+  setSmShow, 
+  isLogIn, setIsLogIn
 }) {
   const [dropMenu, setDropMenu] = useState(false);
   const [moveMenu, setMoveMenu] = useState('');
@@ -35,7 +36,7 @@ function Header({
 
   return (
     <header className="header dark">
-      <Link to={'/'}>
+      <Link to={'/'} hrefLang='top'>
         <img
           src={logo}
           alt="logo Vetfolio"
@@ -69,7 +70,8 @@ function Header({
             setTitleLog={setTitleLog}
             setIsLogOut={setIsLogOut}
             setSmShow={setSmShow}
-
+            isLogIn={isLogIn}
+            setIsLogIn={setIsLogIn}
           />
         ) : (
           <div></div>

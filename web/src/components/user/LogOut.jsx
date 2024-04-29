@@ -3,7 +3,6 @@ import ls from '../../services/localStorage';
 import PropTypes from 'prop-types';
 import '../../styles/createCase.scss';
 import ModalMessage from '../cases/ModalMessage';
-import { useState } from 'react';
 import apiUser from '../../services/api-user';
 import BtnLogOut from './BtnLogOut';
 
@@ -21,7 +20,9 @@ function LogOut({
   setMessageLog, 
   setTitleLog, 
   setIsLogOut, 
-  setSmShow
+  setSmShow,
+  isLogIn ,
+  setIsLogIn
 }) {
   const navigate = useNavigate();
 
@@ -41,6 +42,7 @@ function LogOut({
     setMessageLog('Tu sesión ha sido cerrada ✅');
     setTitleLog('Hasta pronto');
     setIsLogOut(true);
+    setIsLogIn(false);
     setSmShow(true);
   };
 
@@ -72,7 +74,7 @@ function LogOut({
 
   return (
     <>
-  <BtnLogOut handleLogOut={handleLogOut} />
+  {isLogIn ? <BtnLogOut handleLogOut={handleLogOut} /> : null}
 
       {isLogOut ? (
         <ModalMessage

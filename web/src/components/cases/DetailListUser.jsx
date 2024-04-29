@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import apiCase from '../../services/api-case';
 import UserCases from './UserCases';
 import CreateCase from './CreateCase';
-import LogOut from '../user/LogOut';
+
 import Welcome from '../shared/Welcome';
 import Filters from './Filters';
 import LoginBtn from '../user/LoginBtn';
@@ -43,17 +43,18 @@ function DetailListUser({
   isLoading,
   isDeleted,
   setIsDeleted,
-  smShow, 
-  messageLog, 
-  titleLog, 
-  isLogOut, 
-  setMessageLog, 
-  setTitleLog, 
-  setIsLogOut, 
-  setSmShow, 
-  setAnimal, 
-  dataAnimal
-
+  smShow,
+  messageLog,
+  titleLog,
+  isLogOut,
+  setMessageLog,
+  setTitleLog,
+  setIsLogOut,
+  setSmShow,
+  setAnimal,
+  dataAnimal,
+  isLogIn,
+  setIsLogIn,
 }) {
   useEffect(() => {
     const fetchData = async () => {
@@ -75,8 +76,8 @@ function DetailListUser({
         const userData = await response.json();
         if (userData.success) {
           setPrivateList(userData.patients);
-          setAnimal(...dataAnimal)
-          ls.set('private',userData.patients)
+          setAnimal(...dataAnimal);
+          ls.set('private', userData.patients);
         } else {
           console.error('Error al obtener los datos del usuario');
         }
@@ -111,14 +112,27 @@ function DetailListUser({
   if (!token || !username) {
     return (
       <>
-        <Welcome  isDark={isDark} setIsDark={setIsDark}  token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList}    smShow={smShow}
-        messageLog={messageLog}
-        titleLog={titleLog}
-        isLogOut={isLogOut}
-        setMessageLog={setMessageLog}
-        setTitleLog={setTitleLog}
-        setIsLogOut={setIsLogOut}
-        setSmShow={setSmShow}/>
+        <Welcome
+           username={username}
+          isDark={isDark}
+          setIsDark={setIsDark}
+          token={token}
+          setToken={setToken}
+          setUsername={setUsername}
+          setIdVet={setIdVet}
+          setList={setList}
+          setPrivateList={setPrivateList}
+          smShow={smShow}
+          messageLog={messageLog}
+          titleLog={titleLog}
+          isLogOut={isLogOut}
+          setMessageLog={setMessageLog}
+          setTitleLog={setTitleLog}
+          setIsLogOut={setIsLogOut}
+          setSmShow={setSmShow}
+          isLogIn={isLogIn}
+          setIsLogIn={setIsLogIn}
+        />
         <Scroll />
         <div className="sectionList loading">
           <p>Cargando...</p>
@@ -161,7 +175,13 @@ function DetailListUser({
     ) : (
       filteredData.map((data) => (
         <li key={data.idCase} className="sectionList__ul">
-          <UserCases isLoading={isLoading} setIsLoading={setIsLoading} data={data} idVet={idVet} setIsDeleted={setIsDeleted} />
+          <UserCases
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            data={data}
+            idVet={idVet}
+            setIsDeleted={setIsDeleted}
+          />
         </li>
       ))
     );
@@ -169,13 +189,34 @@ function DetailListUser({
 
   return (
     <>
-      <Welcome username={username}  isDark={isDark} setIsDark={setIsDark}   token={token} setToken={setToken} setUsername={setUsername} setIdVet={setIdVet} setList={setList} setPrivateList={setPrivateList} />
+      <Welcome
+        username={username}
+        isDark={isDark}
+        setIsDark={setIsDark}
+        token={token}
+        setToken={setToken}
+        setUsername={setUsername}
+        setIdVet={setIdVet}
+        setList={setList}
+        setPrivateList={setPrivateList}
+        smShow={smShow}
+        messageLog={messageLog}
+        titleLog={titleLog}
+        isLogOut={isLogOut}
+        setMessageLog={setMessageLog}
+        setTitleLog={setTitleLog}
+        setIsLogOut={setIsLogOut}
+        setSmShow={setSmShow}
+        isLogIn={isLogIn}
+        setIsLogIn={setIsLogIn}
+      />
 
       <div className="logout">
-     
         <Link to={'/newCase'} className="link">
-        <button className="create__btn btn hover" aria-label='Comenzar'>Crear caso</button>
-      </Link>
+          <button className="create__btn btn hover" aria-label="Comenzar">
+            Crear caso
+          </button>
+        </Link>
       </div>
 
       {isLoading ? (

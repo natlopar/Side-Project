@@ -32,7 +32,9 @@ function Login({
   setMessageLog, 
   setTitleLog, 
   setIsLogOut, 
-  setSmShow
+  setSmShow, 
+  isLogIn,
+  setIsLogIn
 }) {
   const [login, setLogin] = useState({ username: '', email: '', password: '' });
   const [message, setMessage] = useState('');
@@ -95,6 +97,8 @@ function Login({
         setTitleLog={setTitleLog}
         setIsLogOut={setIsLogOut}
         setSmShow={setSmShow}
+        isLogIn={isLogIn}
+        setIsLogin={setIsLogIn}
       />
 
       <div className="login ">

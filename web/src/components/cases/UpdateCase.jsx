@@ -66,7 +66,9 @@ function UpdateCase({
   setMessageLog, 
   setTitleLog, 
   setIsLogOut, 
-  setSmShow
+  setSmShow, 
+  isLogIn,
+  setIsLogIn
 }) {
   const navigate = useNavigate();
 
@@ -105,7 +107,7 @@ function UpdateCase({
   return (
     <>
       <Scroll />
-      <HeaderPages       smShow={smShow}
+      <HeaderPages   isLogIn={isLogIn} setIsLogin={setIsLogIn}   smShow={smShow}
         messageLog={messageLog}
         titleLog={titleLog}
         isLogOut={isLogOut}

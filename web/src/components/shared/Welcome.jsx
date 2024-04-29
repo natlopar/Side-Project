@@ -20,7 +20,9 @@ function Welcome({
   setMessageLog, 
   setTitleLog, 
   setIsLogOut, 
-  setSmShow
+  setSmShow, 
+  isLogIn, 
+  setIsLogIn
 }) {
   return (
     <>
@@ -41,6 +43,8 @@ function Welcome({
         setTitleLog={setTitleLog}
         setIsLogOut={setIsLogOut}
         setSmShow={setSmShow}
+        isLogIn={isLogIn}
+        setIsLogin={setIsLogIn}
       />
       <div className="user">
         <TitleWelcome username={username} />

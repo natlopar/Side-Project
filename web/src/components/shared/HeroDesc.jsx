@@ -17,14 +17,16 @@ function HeroDesc({
   setList,
   setPrivateList,
   setIsDeleted,
-  smShow, 
-  messageLog, 
-  titleLog, 
-  isLogOut, 
-  setMessageLog, 
-  setTitleLog, 
-  setIsLogOut, 
-  setSmShow
+  smShow,
+  messageLog,
+  titleLog,
+  isLogOut,
+  setMessageLog,
+  setTitleLog,
+  setIsLogOut,
+  setSmShow,
+  setIsLogIn,
+  isLogIn,
 }) {
   return (
     <section className="hero desc">
@@ -87,15 +89,7 @@ function HeroDesc({
             Regístrate
           </button>
         </Link>
-        <Link to={'/logIn'} className="link">
-          <button
-            className="aside__subtitles hover btn"
-            aria-label="Inicia sesión"
-          >
-            Inicia sesión
-          </button>
-        </Link>
-        <div className="aside__logout">
+        { isLogIn ? (  <div className="aside__logout">
           <LogOut
             setIsDeleted={setIsDeleted}
             token={token}
@@ -105,15 +99,25 @@ function HeroDesc({
             setList={setList}
             setPrivateList={setPrivateList}
             smShow={smShow}
-  messageLog= {messageLog}
-  titleLog= {titleLog}
-  isLogOut= {isLogOut} 
-  setMessageLog={setMessageLog}
-  setTitleLog={setTitleLog}
-  setIsLogOut={setIsLogOut}
-  setSmShow={setSmShow}
+            messageLog={messageLog}
+            titleLog={titleLog}
+            isLogOut={isLogOut}
+            setMessageLog={setMessageLog}
+            setTitleLog={setTitleLog}
+            setIsLogOut={setIsLogOut}
+            setSmShow={setSmShow}
+            setIsLogIn={setIsLogIn}
+            isLogIn={isLogIn}
           />
-        </div>
+        </div>) : <Link to={'/logIn'} className="link">
+          <button
+            className="aside__subtitles hover btn"
+            aria-label="Inicia sesión"
+          >
+            Inicia sesión
+          </button>
+        </Link>}
+      
       </div>
     </section>
   );

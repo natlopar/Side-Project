@@ -17,7 +17,9 @@ function MenuNav({
   setMessageLog, 
   setTitleLog, 
   setIsLogOut, 
-  setSmShow
+  setSmShow, 
+  isLogIn,
+  setIsLogIn
 
 }) {
   const navigate = useNavigate();
@@ -37,6 +39,7 @@ function MenuNav({
     setMessageLog('Tu sesión ha sido cerrada ✅');
     setTitleLog('Hasta pronto');
     setIsLogOut(true);
+    setIsLogIn(false);
     setSmShow(true);
   };
 
@@ -70,19 +73,17 @@ function MenuNav({
     <>
 
     <ul className="header__style--menu" role="navigation">
-      <Link to={'/logIn'} className="link">
-        <li>Inicia Sesión</li>
-      </Link>
       <Link to={'/signIn'} className="link">
         <li>Regístrate</li>
       </Link>
-      <Link to={'/publicList'} className="link">
-        <li>Casos públicos</li>
-      </Link>
-      <Link to={'/listUser'} className="link">
+      { isLogIn ? ( <Link to={'/listUser'} className="link">
         <li>Mi historial</li>
-      </Link>
-      <li onClick={handleLogOut}>Cerrar sesión</li>
+      </Link>) : (   <Link to={'/publicList'} className="link">
+        <li>Casos públicos</li>
+      </Link>)}
+
+      {isLogIn ? (<li onClick={handleLogOut}>Cerrar sesión</li>) : (<Link to={'/logIn'} className="link">
+        <li>Inicia Sesión</li>  </Link>)}
     </ul>
 
     {isLogOut ? (

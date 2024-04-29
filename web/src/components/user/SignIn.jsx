@@ -34,7 +34,9 @@ function SignIn({
   setIsLogOut, 
   setSmShow, 
   setMessage, 
-  setHiddenClassSign
+  setHiddenClassSign, 
+  isLogIn,
+  setIsLogIn
 }) {
   const [registry, setRegistry] = useState({
     userName: '',
@@ -94,7 +96,7 @@ function SignIn({
     <>
       <Scroll />
       <HeaderPages
-        
+        isLogIn={isLogIn}
         isDark={isDark}
         setIsDark={setIsDark}
         token={token}
@@ -111,6 +113,7 @@ function SignIn({
         setTitleLog={setTitleLog}
         setIsLogOut={setIsLogOut}
         setSmShow={setSmShow}
+        setIsLogin={setIsLogIn}
       />
       <div className="user">
         <h3 className="user__title">Regístrate</h3>

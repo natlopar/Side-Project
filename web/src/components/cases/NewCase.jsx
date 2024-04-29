@@ -47,6 +47,8 @@ function NewCase({
   setTitleLog,
   setIsLogOut,
   setSmShow,
+  isLogIn,
+  setIsLogIn
 }) {
   const navigate = useNavigate();
   const handleSubmitNew = async () => {
@@ -96,6 +98,8 @@ function NewCase({
         setTitleLog={setTitleLog}
         setIsLogOut={setIsLogOut}
         setSmShow={setSmShow}
+        isLogIn={isLogIn}
+        setIsLogin={setIsLogIn}
       />
       <div className="case">
         <h3 className="case__title">
