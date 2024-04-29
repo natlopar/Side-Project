@@ -37,7 +37,8 @@ function ListCases({
   setTitleLog, 
   setIsLogOut, 
   setSmShow, 
-  isLogIn, setIsLogIn
+  isLogIn,
+  setIsLogIn
 }) {
   // const [userData, setUserData] = useState(null);
   const [listCases, setListCases] = useState({ patients: [] });

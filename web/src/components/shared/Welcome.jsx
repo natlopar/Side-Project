@@ -44,7 +44,7 @@ function Welcome({
         setIsLogOut={setIsLogOut}
         setSmShow={setSmShow}
         isLogIn={isLogIn}
-        setIsLogin={setIsLogIn}
+        setIsLogIn={setIsLogIn}
       />
       <div className="user">
         <TitleWelcome username={username} />

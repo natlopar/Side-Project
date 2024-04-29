@@ -76,7 +76,7 @@ function App() {
   const [messageLog, setMessageLog] = useState('');
   const [titleLog, setTitleLog] = useState('');
   const [isLogOut, setIsLogOut] = useState(false);
-  const [isLogIn, setIsLogIn] = useState(false);
+  const [isLogIn, setIsLogIn] = useState(ls.get('isLogin', false));
 
   useEffect(() => {
     ls.set('animal', animal);
@@ -103,6 +103,7 @@ function App() {
     setUsername(name);
     setIdVet(id);
     setIsLogIn(true);
+    ls.set('isLogin', true);
   };
 
   const handleResetMessage = () => {
@@ -314,7 +315,7 @@ function App() {
                 setAnimal={setAnimal}
                 dataAnimal={dataAnimal}
                 isLogIn={isLogIn}
-               setIsLogin={setIsLogIn}
+               setIsLogIn={setIsLogIn}
               />
               <Footer />
             </Suspense>

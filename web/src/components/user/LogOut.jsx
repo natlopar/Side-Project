@@ -42,7 +42,8 @@ function LogOut({
     setMessageLog('Tu sesión ha sido cerrada ✅');
     setTitleLog('Hasta pronto');
     setIsLogOut(true);
-    setIsLogIn(false);
+    ls.set('isLogin', false)
+    setIsLogIn(false)
     setSmShow(true);
   };
 

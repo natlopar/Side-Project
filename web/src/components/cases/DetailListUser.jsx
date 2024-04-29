@@ -76,7 +76,7 @@ function DetailListUser({
         const userData = await response.json();
         if (userData.success) {
           setPrivateList(userData.patients);
-          setAnimal(...dataAnimal);
+          setAnimal(dataAnimal);
           ls.set('private', userData.patients);
         } else {
           console.error('Error al obtener los datos del usuario');

@@ -39,6 +39,7 @@ function MenuNav({
     setMessageLog('Tu sesión ha sido cerrada ✅');
     setTitleLog('Hasta pronto');
     setIsLogOut(true);
+    ls.set('isLogin', false);
     setIsLogIn(false);
     setSmShow(true);
   };
@@ -78,9 +79,10 @@ function MenuNav({
       </Link>
       { isLogIn ? ( <Link to={'/listUser'} className="link">
         <li>Mi historial</li>
-      </Link>) : (   <Link to={'/publicList'} className="link">
+      </Link>) : null }
+      <Link to={'/publicList'} className="link">
         <li>Casos públicos</li>
-      </Link>)}
+      </Link>
 
       {isLogIn ? (<li onClick={handleLogOut}>Cerrar sesión</li>) : (<Link to={'/logIn'} className="link">
         <li>Inicia Sesión</li>  </Link>)}
