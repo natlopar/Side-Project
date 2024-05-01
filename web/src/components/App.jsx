@@ -23,6 +23,7 @@ import BtnListPublic from './cases/BtnListPublic';
 import HeaderPages from './shared/HeaderPages';
 import Contact from './shared/Contact';
 import UpdateCase from './cases/UpdateCase';
+import NotFound from './shared/NotFound';
 
 
 const DetailListUser = React.lazy(() => import('./cases/DetailListUser'));
@@ -451,6 +452,7 @@ function App() {
                 setSmShow={setSmShow}
                 isLogIn={isLogIn}
                 setIsLogIn={setIsLogIn}
+                setIsDeleted={setIsDeleted}
             
               />
               <Footer />
@@ -565,6 +567,7 @@ function App() {
             </>
           }
         />
+           <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

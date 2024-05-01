@@ -38,7 +38,7 @@ function ListCases({
   setIsLogOut, 
   setSmShow, 
   isLogIn,
-  setIsLogIn
+  setIsLogIn, setIsDeleted
 }) {
   // const [userData, setUserData] = useState(null);
   const [listCases, setListCases] = useState({ patients: [] });
@@ -88,6 +88,7 @@ function ListCases({
         setSmShow={setSmShow}
         isLogIn={isLogIn}
         setIsLogIn={setIsLogIn}
+      
       />
       <Scroll />
       <h2 className="sectionList__title">
@@ -95,14 +96,23 @@ function ListCases({
       </h2>
      { isLogIn ? <div className="sectionList__logOut">
         <LogOut
-          token={token}
-          setToken={setToken}
-          setIdVet={setIdVet}
-          setUsername={setUsername}
-          setList={setList}
-          setPrivateList={setPrivateList}
-          setIsLogIn={setIsLogIn}
-          isLogIn={isLogIn}
+           setIsDeleted={setIsDeleted}
+           token={token}
+           setToken={setToken}
+           setIdVet={setIdVet}
+           setUsername={setUsername}
+           setList={setList}
+           setPrivateList={setPrivateList}
+           smShow={smShow}
+           messageLog={messageLog}
+           titleLog={titleLog}
+           isLogOut={isLogOut}
+           setMessageLog={setMessageLog}
+           setTitleLog={setTitleLog}
+           setIsLogOut={setIsLogOut}
+           setSmShow={setSmShow}
+           setIsLogIn={setIsLogIn}
+           isLogIn={isLogIn}
         />
       </div> :  (<div className="sectionList__logOut"><Link to={'/logIn'} className="link">
         <li className="create__btn btn hover desc__subtitles">Inicia Sesión</li>  </Link></div>)}

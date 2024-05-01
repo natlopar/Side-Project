@@ -118,6 +118,8 @@ MenuNav.propTypes = {
   setTitleLog: PropTypes.func,
   setIsLogOut: PropTypes.func,
   setSmShow: PropTypes.func,
+  isLogIn: PropTypes.bool, 
+  setIsLogIn: PropTypes.func
 
 };
 export default MenuNav;

@@ -54,7 +54,8 @@ function Header({
           <i className="fa-solid fa-bars"></i>
         </button>
 
-        {dropMenu ? (
+     
+      {dropMenu ? (
           <MenuNav
             token={token}
             setToken={setToken}
@@ -73,10 +74,8 @@ function Header({
             isLogIn={isLogIn}
             setIsLogIn={setIsLogIn}
           />
-        ) : (
-          <div></div>
-        )}
-      </div>
+        ) : null}
+         </div>
     </header>
   );
 }

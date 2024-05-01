@@ -61,9 +61,7 @@
   }
   &__style {
     display: flex;
-   
     font-family: $fontSecond;
-   
     &--menu {
       text-decoration: none;
       list-style: none;
@@ -73,7 +71,7 @@
       text-align: center;
       padding: 13px;
       background-color: $colorGreenBright;
-      transform: translateY(50%);
+      transform: translate(-20%,70%);
       border-radius: 15px;
       box-shadow: 0px 10px 10px rgb(73, 70, 92);
       cursor: pointer;
@@ -148,6 +146,7 @@
 .dropMenu {
  position: absolute;
  right: 30px;
+ 
 
 }
 
