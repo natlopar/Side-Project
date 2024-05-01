@@ -44,7 +44,7 @@ function App() {
     treatment: '',
     evolution: '',
     comments: '',
-    public: 0,
+    isPublic: 0,
     fk_Vet: idVet,
   };
   const [isDark, setIsDark] = useState(ls.get('isDark', true));

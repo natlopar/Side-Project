@@ -29,7 +29,7 @@ function FormNewCase({
     const { id, value, checked} = ev.target;
 
 
-    if (id === 'public') {
+    if (id === 'isPublic') {
       setPublicAnimal(checked);
       setUpdateData({ ...updateData, [id]: checked ? 1 : 0 });
       setAnimal({...animal, [id]: checked ? 1 : 0 })
@@ -318,12 +318,12 @@ function FormNewCase({
       <div className="case__form--check">
         <input
           type="checkbox"
-          name="public"
-          id="public"
+          name="isPublic"
+          id="isPublic"
           checked={publicAnimal}
           onChange={handleInput}
         />
-        <label htmlFor="public">
+        <label htmlFor="isPublic">
           Indica si quieres hacer público este caso.
         </label>
       </div>

@@ -67,8 +67,8 @@ function DetailListUser({
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: token,
-              id: idVet,
+              'Authorization': `Bearer ${token}`,
+              'X-Vet-ID': idVet,
             },
           }
         );

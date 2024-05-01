@@ -16,7 +16,7 @@ server.use(express.json({ limit: '25mb' }));
 
 const serverPort = process.env.PORT || 3000;
 server.listen(serverPort, () => {
-  console.log(`Server listening at ${serverPort}`);
+  // console.log(`Server listening at ${serverPort}`);
 });
 
 //conexion a MYSQL
@@ -73,7 +73,7 @@ const authenticateToken = (req, res, next) => {
 
 //----------------ENDPOINT PARA REGISTRARSE, ENCRIPTAR PASSWORD Y OBTENER UN TOKEN---------------------
 server.post('/signin', async (req, res) => {
-  const { userName, nameVet, email, password, city, country, public } = req.body;
+  const { userName, nameVet, email, password, city, country, isPublic } = req.body;
   const connection= await getConnection();
   const selectUser = 'select * from vet where email = ?  or userName = ? ';
   const [resultSelect] = await connection.query(selectUser, [email, userName]);
@@ -81,7 +81,7 @@ server.post('/signin', async (req, res) => {
   if (resultSelect.length === 0) {
     const passwordHashed = await bcrypt.hash(password, 10);
     const insertVet =
-      'INSERT INTO vet (userName,nameVet,email,hashed_password,city,country,public) VALUES (?,?,?,?,?,?,?)';
+      'INSERT INTO vet (userName,nameVet,email,hashed_password,city,country,isPublic) VALUES (?,?,?,?,?,?,?)';
 
     jwt.sign(password, 'secreto', async (err, token) => {
       if (err) {
@@ -94,7 +94,7 @@ server.post('/signin', async (req, res) => {
           passwordHashed,
           city,
           country,
-          public,
+          isPublic,
         ]);
         connection.end();
         //Si todo sale bien, se envía una respuesta JSON con un mensaje de éxito, el token JWT y el insertId,
@@ -144,7 +144,7 @@ server.post('/login', async (req, res) => {
         email: users[0].email,
       };
       const token = generateToken(infoToken);
-      res.json({
+      res.status(200).json({
         success: true,
         token: token,
         id: users[0].idVet,
@@ -152,9 +152,9 @@ server.post('/login', async (req, res) => {
         public: users[0].public
       });
     } else {
-      res.json({
+      res.status(401).json({
         success: false,
-        msj: 'contraseña incorrecta',
+        msj: 'Contraseña incorrecta',
       });
     }
   } else {
@@ -184,7 +184,7 @@ server.put('/logout', async (req, res) =>{
 
 server.get('/listUser', authenticateToken, async (req, res) => {
   try {
-    const idVet = req.headers['id'];
+    const idVet = req.headers['x-vet-id'];
     const numberId= parseInt(idVet);
     let sql = 'SELECT * FROM `case` WHERE fk_Vet = ?';
     const connection = await getConnection();
@@ -235,9 +235,9 @@ try {
 
 server.post('/newCase', async (req, res) => {
   const connection = await getConnection();
-  const {name, specie, breed, gender, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet} = req.body;
-  const insertCase = 'INSERT INTO `case` (`name`, specie, breed, gender, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-  const [resultCases] = await connection.query(insertCase, [ name, specie, breed, gender, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet]);
+  const {name, specie, breed, gender, birthday, clinical, exploration, tests, results, treatment, evolution, comments, isPublic, fk_Vet} = req.body;
+  const insertCase = 'INSERT INTO `case` (`name`, specie, breed, gender, birthday, clinical, exploration, tests, results, treatment, evolution, comments, isPublic, fk_Vet) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+  const [resultCases] = await connection.query(insertCase, [ name, specie, breed, gender, birthday, clinical, exploration, tests, results, treatment, evolution, comments, isPublic, fk_Vet]);
   connection.end(); 
   console.log(resultCases);
   res.json({
@@ -317,7 +317,7 @@ server.get('/getPublic', async (req, res) => {
     console.error("Error al obtener datos:", error);
     return res.status(404).json({
       success: false, 
-      message: 'Error al obtener datos'
+      message:`Database error: ${error.code}`,
     });
   }
 });
@@ -328,7 +328,7 @@ server.get('/case', authenticateToken, async (req, res) => {
   try {
     const connection = await getConnection();
     const { name, breed, clinical } = req.query;
-    const idVet = req.headers['id'];
+    const idVet = req.headers['x-vet-id'];
     const numberId = parseInt(idVet);
     let sql = `SELECT * FROM \`case\` WHERE fk_Vet = ?`;
 
@@ -376,9 +376,7 @@ server.post('/contact', async (req, res) => {
     const {name, comments} = req.body;
     const connection= await getConnection();
     const insert='INSERT INTO comments (name, comments) VALUES (?,?)';
-    const [result] = await connection.query(insert, [name, comments]);
-    console.log(result);
-   
+    const [result] = await connection.query(insert, [name, comments]);  
     res.json({success: true, message: 'mensaje enviado'})
     connection.end();
   } catch (error) {
@@ -392,3 +390,6 @@ server.post('/contact', async (req, res) => {
 
   const staticServer = './src/public-react';
   server.use(express.static(staticServer));
+
+
+  module.exports = server;

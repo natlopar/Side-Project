@@ -45,7 +45,7 @@ function SignIn({
     password: '',
     city: '',
     country: '',
-    public: 0,
+    isPublic: 0,
   });
   const [passwordError, setPasswordError] = useState('');
   const {
@@ -58,7 +58,7 @@ function SignIn({
   const handleInput = (ev) => {
     ev.preventDefault();
     const { id, value, checked } = ev.target;
-    if (id === 'public') {
+    if (id === 'isPublic') {
       setPublicSign(checked);
       setRegistry({ ...registry, [id]: checked ? 1 : 0 });
     } else {
@@ -266,13 +266,13 @@ function SignIn({
           <div className="user__form--check">
             <input
               type="checkbox"
-              name="public"
-              id="public"
+              name="isPublic"
+              id="isPublic"
               checked={publicSign}
               onChange={handleInput}
             />
 
-            <label className="user__form--label" htmlFor="public">
+            <label className="user__form--label" htmlFor="isPublic">
               Indica si quieres que tus casos sean públicos en esta web
             </label>
           </div>
