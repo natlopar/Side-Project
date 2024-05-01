@@ -1,12 +1,12 @@
 import React, { Suspense } from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
-import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router';
 import '../styles/App.scss';
 import apiUser from '../services/api-user';
 import ls from '../services/localStorage';
@@ -23,7 +23,7 @@ import BtnListPublic from './cases/BtnListPublic';
 import HeaderPages from './shared/HeaderPages';
 import Contact from './shared/Contact';
 import UpdateCase from './cases/UpdateCase';
-import LogOut from './user/LogOut';
+
 
 const DetailListUser = React.lazy(() => import('./cases/DetailListUser'));
 const ListCases = React.lazy(() => import('./cases/ListCases'));
@@ -77,6 +77,8 @@ function App() {
   const [titleLog, setTitleLog] = useState('');
   const [isLogOut, setIsLogOut] = useState(false);
   const [isLogIn, setIsLogIn] = useState(ls.get('isLogin', false));
+
+  const API_VERCEL = 'https://side-project-vetfolio-manager.vercel.app';
 
   useEffect(() => {
     ls.set('animal', animal);
@@ -133,7 +135,7 @@ function App() {
   };
 
   const handleContact = () => {
-    fetch('https://side-project-vetfolio-manager.vercel.app/contact', {
+    fetch(`${API_VERCEL}/contact`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(contact),

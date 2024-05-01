@@ -1,7 +1,11 @@
 
+
+const API_VERCEL = 'https://side-project-vetfolio-manager.vercel.app';
+
+
 const logInToApi = (login) => {
   return  fetch(
-    'https://side-project-vetfolio-manager.vercel.app/login',
+    `${API_VERCEL}/login`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -14,7 +18,7 @@ const logInToApi = (login) => {
 }
 
 const sendSignUpToApi = (registry) =>{
-    return  fetch("https://side-project-vetfolio-manager.vercel.app/signin", {
+    return  fetch(`${API_VERCEL}/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(registry),
@@ -27,7 +31,7 @@ const sendSignUpToApi = (registry) =>{
   }
 
   const sendLogOutToApi = (token) => {
-    return fetch('https://side-project-vetfolio-manager.vercel.app/logout', {
+    return fetch(`${API_VERCEL}/logout`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

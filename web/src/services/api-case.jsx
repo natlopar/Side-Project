@@ -1,14 +1,16 @@
 
+const API_RENDER = 'https://vetfolio-manager.onrender.com';
+const API_VERCEL = 'https://side-project-vetfolio-manager.vercel.app';
 
 const getPublicCases= () => {
-  return fetch ("https://side-project-vetfolio-manager.vercel.app/getPublic")
+  return fetch (`${API_VERCEL}/getPublic`)
     .then(response => response.json())
     .then(data=>
           data)
 }
 
 const getFilterCase = (params, token, idVet) => {
-  return fetch(`https://side-project-vetfolio-manager.vercel.app/case?name=${params.name}&breed=${params.breed}&clinical=${params.clinic}`, 
+  return fetch(`${API_VERCEL}/case?name=${params.name}&breed=${params.breed}&clinical=${params.clinic}`, 
   {
     method: 'GET',
     headers: {
@@ -24,7 +26,7 @@ const getFilterCase = (params, token, idVet) => {
 };
 
 const deleteCase = (idCase) => {
-  return fetch(`https://vetfolio-manager.onrender.com/listUser?id=${idCase}`, 
+  return fetch(`${API_VERCEL}/listUser?id=${idCase}`, 
   {method: 'DELETE'}
 )
 .then(response => response.json())
@@ -36,7 +38,7 @@ const deleteCase = (idCase) => {
 
 
 const createCase = (animal) => {
-  return fetch('https://side-project-vetfolio-manager.vercel.app/newCase', {
+  return fetch(`${API_VERCEL}/newCase`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(animal),
@@ -49,7 +51,7 @@ const createCase = (animal) => {
 
 
 const updateCase = (updateData, idCase) => {
-  return fetch(`https://vetfolio-manager.onrender.com/updateCase/${idCase}`, {
+  return fetch(`${API_RENDER}/updateCase/${idCase}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updateData)
