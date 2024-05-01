@@ -1,6 +1,4 @@
-// Fichero src/index.js
 
-//1. Importamos los dos módulos de NPM necesarios para trabajar
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
@@ -8,10 +6,10 @@ const bcrypt = require('bcrypt');
 
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-//2. Creamos el servidor
+
 const server = express();
 
-//3. Configuramos el servidor. aquí iremos agregando las configuraciones de nuestro servidor.
+
 server.use(cors());
 server.use(express.json({ limit: '25mb' }));
 
@@ -34,7 +32,7 @@ async function getConnection() {
   return connection;
 }
 
-// endpoints 
+
 
 //funciones token
 const generateToken = (payload) => {
@@ -70,7 +68,7 @@ const authenticateToken = (req, res, next) => {
   next();
 };
 
-//así creo contraseñas encriptadas
+
 // const passwordHash = await bcrypt.hash(body.password, saltRounds);
 
 //----------------ENDPOINT PARA REGISTRARSE, ENCRIPTAR PASSWORD Y OBTENER UN TOKEN---------------------
@@ -167,6 +165,19 @@ server.post('/login', async (req, res) => {
   }
 });
 
+
+//----ENDPOINT CIERRE SESION----------------
+
+server.put('/logout', async (req, res) =>{
+  const authHeader = req.headers["authorization"];
+  jwt.sign(authHeader, "", { expiresIn: 2 } , (logout, err) => {
+     if (logout) {
+      res.json({success: true, message: 'se ha cerrado tu sesión'});
+     } else {
+      res.json({success: false, message: 'no se ha podido cerrar la sesión', err});
+     }
+  });
+})
 
 
 //.----------------------cargar los casos del usuario autenticado.......................
@@ -288,19 +299,6 @@ server.patch('/updateCase/:id', async (req, res) => {
  
  
 
-//----ENDPOINT CIERRE SESION----------------
-
-server.put('/logout', async (req, res) =>{
-  const authHeader = req.headers["authorization"];
-  jwt.sign(authHeader, "", { expiresIn: 2 } , (logout, err) => {
-     if (logout) {
-      res.json({success: true, message: 'se ha cerrado tu sesión'});
-     } else {
-      res.json({success: false, message: 'no se ha podido cerrar la sesión', err});
-     }
-  });
-})
-
 
 //............CARGAR TODOS LOS CASOS PÚBLICOS-EXPLORA-----
 
@@ -322,6 +320,7 @@ server.get('/getPublic', async (req, res) => {
 
 });
 
+//................FILTROS...............
 
 server.get('/case', authenticateToken, async (req, res) => {
   try {
@@ -367,7 +366,7 @@ server.get('/case', authenticateToken, async (req, res) => {
   }
 });
 
-
+//...CONTACTO....
 
 
 server.post('/contact', async (req, res) => {
@@ -385,6 +384,9 @@ server.post('/contact', async (req, res) => {
   }
 
   });
+
+
+  //....servidor Estáticos.........
 
   const staticServer = './src/public-react';
   server.use(express.static(staticServer));
