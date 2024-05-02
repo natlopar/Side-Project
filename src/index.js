@@ -16,7 +16,7 @@ server.use(express.json({ limit: '25mb' }));
 
 const serverPort = process.env.PORT || 3000;
 server.listen(serverPort, () => {
-  // console.log(`Server listening at ${serverPort}`);
+  console.log(`Server listening at ${serverPort}`);
 });
 
 //conexion a MYSQL
@@ -72,46 +72,56 @@ const authenticateToken = (req, res, next) => {
 // const passwordHash = await bcrypt.hash(body.password, saltRounds);
 
 //----------------ENDPOINT PARA REGISTRARSE, ENCRIPTAR PASSWORD Y OBTENER UN TOKEN---------------------
+
 server.post('/signin', async (req, res) => {
-  const { userName, nameVet, email, password, city, country, isPublic } = req.body;
-  const connection= await getConnection();
-  const selectUser = 'select * from vet where email = ?  or userName = ? ';
-  const [resultSelect] = await connection.query(selectUser, [email, userName]);
+  try {
+    const { userName, nameVet, email, password, city, country, isPublic } = req.body;
+    const connection= await getConnection();
+    const selectUser = 'select * from vet where email = ?  or userName = ? ';
+    const [resultSelect] = await connection.query(selectUser, [email, userName]);
+  
+    if (resultSelect.length === 0) {
+      const passwordHashed = await bcrypt.hash(password, 10);
+      const insertVet =
+        'INSERT INTO vet (userName,nameVet,email,hashed_password,city,country,isPublic) VALUES (?,?,?,?,?,?,?)';
+  
+      jwt.sign(password, 'secreto', async (err, token) => {
+        if (err) {
+          res.json({success: false, msg: 'Error'});
+        } else {
+          const [resultInsertVet] = await connection.query(insertVet, [
+            userName,
+            nameVet,
+            email,
+            passwordHashed,
+            city,
+            country,
+            isPublic,
+          ]);
+          connection.end();
+          //Si todo sale bien, se envía una respuesta JSON con un mensaje de éxito, el token JWT y el insertId,
+          //que es el ID del usuario recién insertado en la base de datos.
+          res.json({
+            success: true,
+            data: resultInsertVet,
+            token: token,
+            id: resultInsertVet.insertId,
+            idVet: resultInsertVet.idVet,
+            nameVet: nameVet
+          });
+        }
+      });
+    } else {
+      res.json({success: false, msg: 'Usuario ya registrado'})
+    }
 
-  if (resultSelect.length === 0) {
-    const passwordHashed = await bcrypt.hash(password, 10);
-    const insertVet =
-      'INSERT INTO vet (userName,nameVet,email,hashed_password,city,country,isPublic) VALUES (?,?,?,?,?,?,?)';
-
-    jwt.sign(password, 'secreto', async (err, token) => {
-      if (err) {
-        res.json({success: false, msg: 'Error'});
-      } else {
-        const [resultInsertVet] = await connection.query(insertVet, [
-          userName,
-          nameVet,
-          email,
-          passwordHashed,
-          city,
-          country,
-          isPublic,
-        ]);
-        connection.end();
-        //Si todo sale bien, se envía una respuesta JSON con un mensaje de éxito, el token JWT y el insertId,
-        //que es el ID del usuario recién insertado en la base de datos.
-        res.json({
-          success: true,
-          data: resultInsertVet,
-          token: token,
-          id: resultInsertVet.insertId,
-          idVet: resultInsertVet.idVet,
-          nameVet: nameVet
-        });
-      }
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
     });
-  } else {
-    res.json({success: false, msg: 'Usuario ya registrado'})
   }
+
 });
 
 //respuesta de postman por ejemplo. el TOKEN  tiene sus 3 partes de encabezado,datos(id) y firma
