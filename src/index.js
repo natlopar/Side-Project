@@ -65,7 +65,7 @@ const authenticateToken = (req, res, next) => {
 };
 
 
-//............CARGAR TODOS LOS CASOS PÚBLICOS-EXPLORA-----
+//............CARGAR TODOS LOS CASOS PÚBLICOS------
 
 server.get('/getPublic', async (req, res) => {
   try {
@@ -77,7 +77,7 @@ server.get('/getPublic', async (req, res) => {
       success: true,
       patients: results,
     };
-    res.json(response);
+    res.status(200).json(response);
   } catch (error) {
     console.error('Error al obtener datos:', error);
     return res.status(404).json({
@@ -116,7 +116,7 @@ server.post('/signin', async (req, res) => {
         connection.end();
         //Si todo sale bien, se envía una respuesta JSON con un mensaje de éxito, el token JWT y el insertId,
         //que es el ID del usuario recién insertado en la base de datos.
-        res.json({
+        res.status(200).json({
           success: true,
           data: resultInsertVet,
           token: token,
@@ -127,7 +127,7 @@ server.post('/signin', async (req, res) => {
       }
     });
   } else {
-    res.json({ success: false, msg: 'Usuario ya registrado' });
+    res.status(200).json({ success: false, msg: 'Usuario ya registrado' });
   }
 });
 
@@ -157,7 +157,7 @@ server.post('/login', async (req, res) => {
         email: users[0].email,
       };
       const token = generateToken(infoToken);
-      res.json({
+      res.status(200).json({
         success: true,
         token: token,
         id: users[0].idVet,
@@ -193,6 +193,7 @@ server.put('/logout', async (req, res) => {
       });
     }
   });
+  connection.end();
 });
 
 //.----------------------cargar los casos del usuario autenticado.......................
@@ -209,9 +210,13 @@ server.get('/listUser', authenticateToken, async (req, res) => {
       success: true,
       patients: cases,
     };
-    res.json(response);
+    res.status(200).json(response);
   } catch (error) {
     console.error('Error al obtener datos:', error);
+    return res.status(404).json({
+      success: false,
+      message: 'Error al obtener datos',
+    });
   }
 });
 
@@ -224,12 +229,12 @@ server.delete('/listUser', async (req, res) => {
     const deleteSQL = 'DELETE from `case` WHERE idCase = ?';
     const [result] = await connection.query(deleteSQL, [idCase]);
     if (result.affectedRows > 0) {
-      res.json({
+      res.status(200).json({
         success: true,
         message: 'El caso seleccionado ha sido eliminado correctamente',
       });
     } else {
-      res.json({
+      res.status(200).json({
         success: false,
         message: 'No se ha podido eliminar el caso',
       });
@@ -240,52 +245,60 @@ server.delete('/listUser', async (req, res) => {
       message: error,
     });
   }
+  connection.end();
 });
 
 //.................ENDPOINT AÑADIR UN CASO.............
 
 server.post('/newCase', async (req, res) => {
-  const connection = await getConnection();
-  const {
-    name,
-    specie,
-    breed,
-    gender,
-    birthday,
-    clinical,
-    exploration,
-    tests,
-    results,
-    treatment,
-    evolution,
-    comments,
-    public,
-    fk_Vet,
-  } = req.body;
-  const insertCase =
-    'INSERT INTO `case` (`name`, specie, breed, gender, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-  const [resultCases] = await connection.query(insertCase, [
-    name,
-    specie,
-    breed,
-    gender,
-    birthday,
-    clinical,
-    exploration,
-    tests,
-    results,
-    treatment,
-    evolution,
-    comments,
-    public,
-    fk_Vet,
-  ]);
-  connection.end();
-  console.log(resultCases);
-  res.json({
-    success: true,
-    result: resultCases,
-  });
+  try {
+    const connection = await getConnection();
+    const {
+      name,
+      specie,
+      breed,
+      gender,
+      birthday,
+      clinical,
+      exploration,
+      tests,
+      results,
+      treatment,
+      evolution,
+      comments,
+      public,
+      fk_Vet,
+    } = req.body;
+    const insertCase =
+      'INSERT INTO `case` (`name`, specie, breed, gender, birthday, clinical, exploration, tests, results, treatment, evolution, comments, public, fk_Vet) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const [resultCases] = await connection.query(insertCase, [
+      name,
+      specie,
+      breed,
+      gender,
+      birthday,
+      clinical,
+      exploration,
+      tests,
+      results,
+      treatment,
+      evolution,
+      comments,
+      public,
+      fk_Vet,
+    ]);
+    connection.end();
+    res.status(200).json({
+      success: true,
+      result: resultCases,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+    });
+  }
+ 
 });
 //......ENDPOINT MODIFICAR UN CASO.................
 
@@ -328,7 +341,7 @@ server.patch('/updateCase/:id', async (req, res) => {
     // Ejecutar la consulta de actualización
     const [result] = await connection.query(updateQuery, updateValues);
     connection.end();
-    res.json({
+    res.status(200).json({
       success: true,
       message: 'Actualizado correctamente',
       casesChanged: result.affectedRows,
@@ -376,7 +389,11 @@ server.get('/case', authenticateToken, async (req, res) => {
         patients: resultQuery,
       });
     } else {
-      res.status(200).json({ success: true, patients: resultQuery });
+      res.status(200).json({ 
+        success: true, 
+        message: 'Estos son los casos filtrados', 
+        patients: resultQuery 
+      });
     }
     connection.end();
   } catch (error) {
@@ -396,8 +413,6 @@ server.post('/contact', async (req, res) => {
     const connection = await getConnection();
     const insert = 'INSERT INTO comments (name, comments) VALUES (?,?)';
     const [result] = await connection.query(insert, [name, comments]);
-    console.log(result);
-
     res.json({ success: true, message: 'mensaje enviado' });
     connection.end();
   } catch (error) {

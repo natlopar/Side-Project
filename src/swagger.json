@@ -58,45 +58,207 @@
           }
         }
       },
-      "/createproject": {
+      "/listUser": {
+        "get": {
+          "summary": "Lista todos los casos privados",
+          "responses": {
+            "200": {
+              "description": "Operación exitosa",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "patients": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Case"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+                "description": "Error al obtener datos",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+            }
+          }
+        },
+        "delete":  {
+            "summary": "Elimina el caso seleccionado",
+            "parameters": [
+                {
+                  "name": "idCase",
+                  "in": "query",
+                  "required": true,
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
+            "responses": {
+              "200": {
+                "description": "Operación exitosa",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "404": {
+                  "description": "Error al obtener datos",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "success": {
+                            "type": "boolean"
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+              }
+            }
+          }
+      },
+      "/newCase": {
         "post": {
-          "summary": "Crea un nuevo proyecto",
+          "summary": "Crea un nuevo caso en usuario registrado",
           "requestBody": {
             "required": true,
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NewProject"
+                  "$ref": "#/components/schemas/Case"
                 }
               }
             }
           },
           "responses": {
             "200": {
-              "description": "Proyecto creado exitosamente"
+              "description": "Caso creado exitosamente",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "patients": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
       },
-      "/project/{idproject}": {
+      "/case": {
         "get": {
-          "summary": "Obtiene detalles de un proyecto específico",
+          "summary": "Filtra los casos en función de distintos parámetros",
           "parameters": [
             {
-              "name": "idproject",
-              "in": "path",
-              "required": true,
+              "name": "name",
+              "in": "query",
               "schema": {
-                "type": "integer"
+                "type": "string"
               }
-            }
+            },
+            {
+                "name": "breed",
+                "in": "query",
+                "schema": 
+                {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "clinical",
+                "in": "query",
+                "schema": {
+                  "type": "string"
+                }
+              }
           ],
           "responses": {
             "200": {
-              "description": "Operación exitosa"
-            },
+                "description": "Operación exitosa",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "patients": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Case"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
             "404": {
-              "description": "Proyecto no encontrado"
+              "description": "Error al obtener datos",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -107,8 +269,6 @@
         "Case": {
           "type": "object",
           "properties": {
-            "idCase": {
-              "type": "integer",
               "name": "string", 
               "specie": "string", 
               "breed": "string", 
@@ -124,18 +284,6 @@
               "public": "integer", 
               "fk_Vet": "integer"
             }
-          }
-        },
-        "NewProject": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "slogan": {
-              "type": "string"
-            }
-          }
         }
       }
     }
