@@ -3,14 +3,14 @@ const API_RENDER = 'https://vetfolio-manager.onrender.com';
 const API_VERCEL = 'https://side-project-vetfolio-manager.vercel.app';
 
 const getPublicCases= () => {
-  return fetch (`${API_VERCEL}/getPublic`)
+  return fetch (`${API_RENDER}/getPublic`)
     .then(response => response.json())
     .then(data=>
           data)
 }
 
 const getFilterCase = (params, token, idVet) => {
-  return fetch(`${API_VERCEL}/case?name=${params.name}&breed=${params.breed}&clinical=${params.clinic}`, 
+  return fetch(`${API_RENDER}/case?name=${params.name}&breed=${params.breed}&clinical=${params.clinic}`, 
   {
     method: 'GET',
     headers: {
