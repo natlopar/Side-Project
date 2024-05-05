@@ -6,6 +6,8 @@ const bcrypt = require('bcrypt');
 // const swaggerConfig = require('./swagger.json');
 
 const jwt = require('jsonwebtoken');
+const swaggerUI = require('swagger-ui-express');
+const swaggerConfig = require('./swagger.json');
 require('dotenv').config();
 
 const server = express();
@@ -359,14 +361,47 @@ server.patch('/updateCase/:id', async (req, res) => {
 server.get('/getPublic', async (req, res) => {
   try {
     const connection = await getConnection();
-    const sql = 'SELECT * FROM `case` WHERE public = 1';
-    const [results] = await connection.query(sql);
+    const id = req.params.id;
+    const data = req.body;
+
+    // Consulta para obtener los valores actuales del registro
+    const selectQuery = 'SELECT * FROM `case` WHERE idCase = ?';
+    const [rows] = await connection.query(selectQuery, [id]);
+
+    if (rows.length === 0) {
+      return res.json({
+        success: false,
+        message: 'No se encontró el caso con el ID proporcionado.',
+      });
+    }
+
+    // Para cada campo recibido en la solicitud PATCH
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        // Si el campo tiene un valor no vacío, actualizarlo
+        if (data[key] !== '') {
+          rows[0][key] = data[key];
+        }
+      }
+    }
+
+    // Construir la consulta de actualización con los campos actualizados
+    const updateFields = Object.keys(rows[0])
+      .map((key) => `${key} = ?`)
+      .join(', ');
+    const updateValues = Object.values(rows[0]);
+    updateValues.push(id);
+
+    const updateQuery = `UPDATE \`case\` SET ${updateFields} WHERE idCase = ?`;
+
+    // Ejecutar la consulta de actualización
+    const [result] = await connection.query(updateQuery, updateValues);
     connection.end();
-    const response = {
+    res.status(200).json({
       success: true,
-      patients: results,
-    };
-    res.json(response);
+      message: 'Actualizado correctamente',
+      casesChanged: result.affectedRows,
+    });
   } catch (error) {
     return res.status(404).json({
       success: false,
@@ -374,6 +409,7 @@ server.get('/getPublic', async (req, res) => {
     });
   }
 });
+
 
 //................FILTROS...............
 
@@ -408,7 +444,11 @@ server.get('/case', authenticateToken, async (req, res) => {
         patients: resultQuery,
       });
     } else {
-      res.status(200).json({ success: true, patients: resultQuery });
+      res.status(200).json({ 
+        success: true, 
+        message: 'Estos son los casos filtrados', 
+        patients: resultQuery 
+      });
     }
     connection.end();
   } catch (error) {
