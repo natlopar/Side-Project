@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcrypt');
+// const swaggerUI = require('swagger-ui-express');
+// const swaggerConfig = require('./swagger.json');
 
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -10,6 +12,7 @@ const server = express();
 
 server.use(cors());
 server.use(express.json({ limit: '25mb' }));
+// server.use('/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerConfig));
 
 const serverPort = process.env.PORT || 3000;
 server.listen(serverPort, () => {
