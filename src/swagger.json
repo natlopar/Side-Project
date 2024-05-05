@@ -1,0 +1,142 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Vetfolio Manager API",
+      "version": "1.0.0",
+      "description": "API para la gestión de casos veterinarios"
+    },
+    "servers": [
+      {
+        "url": "https://side-project-vetfolio-manager.vercel.app",
+        "description": "Servidor de desarrollo"
+      }
+    ],
+    "paths": {
+      "/getPublic": {
+        "get": {
+          "summary": "Lista todos los casos públicos",
+          "responses": {
+            "200": {
+              "description": "Operación exitosa",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "patients": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Case"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+                "description": "Error al obtener datos",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+            }
+          }
+        }
+      },
+      "/createproject": {
+        "post": {
+          "summary": "Crea un nuevo proyecto",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewProject"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Proyecto creado exitosamente"
+            }
+          }
+        }
+      },
+      "/project/{idproject}": {
+        "get": {
+          "summary": "Obtiene detalles de un proyecto específico",
+          "parameters": [
+            {
+              "name": "idproject",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Operación exitosa"
+            },
+            "404": {
+              "description": "Proyecto no encontrado"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Case": {
+          "type": "object",
+          "properties": {
+            "idCase": {
+              "type": "integer",
+              "name": "string", 
+              "specie": "string", 
+              "breed": "string", 
+              "gender": "string", 
+              "birthday": "integer",
+              "clinical": "string", 
+              "exploration": "string", 
+              "tests": "string",
+              "results": "string", 
+              "treatment": "string", 
+              "evolution": "string", 
+              "comments": "string", 
+              "public": "integer", 
+              "fk_Vet": "integer"
+            }
+          }
+        },
+        "NewProject": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "slogan": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
