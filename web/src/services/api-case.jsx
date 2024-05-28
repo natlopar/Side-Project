@@ -3,7 +3,7 @@ const API_RENDER = 'https://vetfolio-manager.onrender.com';
 const API_VERCEL = 'https://side-project-vetfolio-manager.vercel.app';
 
 const getPublicCases= () => {
-  return fetch (`${API_RENDER}/getPublic`)
+  return fetch (`${API_VERCEL}/getPublic`)
     .then(response => response.json())
     .then(data=>
           data)

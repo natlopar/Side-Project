@@ -62,7 +62,7 @@ function DetailListUser({
       setIsDeleted(false);
       try {
         const response = await fetch(
-          'https://vetfolio-manager.onrender.com/listUser',
+          'https://side-project-vetfolio-manager.vercel.app/listUser',
           {
             method: 'GET',
             headers: {
