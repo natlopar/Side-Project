@@ -359,56 +359,24 @@ server.patch('/updateCase/:id', async (req, res) => {
 //............CARGAR TODOS LOS CASOS PÚBLICOS-EXPLORA-----
 
 server.get('/getPublic', async (req, res) => {
-  try {
+  try{
     const connection = await getConnection();
-    const id = req.params.id;
-    const data = req.body;
-
-    // Consulta para obtener los valores actuales del registro
-    const selectQuery = 'SELECT * FROM `case` WHERE idCase = ?';
-    const [rows] = await connection.query(selectQuery, [id]);
-
-    if (rows.length === 0) {
-      return res.json({
-        success: false,
-        message: 'No se encontró el caso con el ID proporcionado.',
-      });
-    }
-
-    // Para cada campo recibido en la solicitud PATCH
-    for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-        // Si el campo tiene un valor no vacío, actualizarlo
-        if (data[key] !== '') {
-          rows[0][key] = data[key];
-        }
-      }
-    }
-
-    // Construir la consulta de actualización con los campos actualizados
-    const updateFields = Object.keys(rows[0])
-      .map((key) => `${key} = ?`)
-      .join(', ');
-    const updateValues = Object.values(rows[0]);
-    updateValues.push(id);
-
-    const updateQuery = `UPDATE \`case\` SET ${updateFields} WHERE idCase = ?`;
-
-    // Ejecutar la consulta de actualización
-    const [result] = await connection.query(updateQuery, updateValues);
+    const sql = 'SELECT * FROM `case` WHERE public = 1';
+    const [results] = await connection.query(sql);
+   
     connection.end();
-    res.status(200).json({
+    const response = {
       success: true,
-      message: 'Actualizado correctamente',
-      casesChanged: result.affectedRows,
-    });
+      patients: results,
+    };
+    res.json(response);
   } catch (error) {
-    return res.status(404).json({
-      success: false,
-      message: 'Error al obtener datos',
-    });
+    console.error("Error al obtener datos:", error);
   }
+   
+
 });
+
 
 
 //................FILTROS...............
