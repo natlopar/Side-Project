@@ -196,32 +196,54 @@ server.put('/logout', async (req, res) => {
 
 //.----------------------cargar los casos del usuario autenticado.......................
 
+// server.get('/listUser', authenticateToken, async (req, res) => {
+//   try {
+//     const idVet = req.headers['id'];
+//     const numberId = parseInt(idVet);
+//     let sql = 'SELECT * FROM `case` WHERE fk_Vet = ?';
+//     const connection = await getConnection();
+//     const [cases] = await connection.query(sql, [numberId]);
+//     connection.end();
+//     if (res.ok) {
+//       const response = {
+//         success: true,
+//         patients: cases,
+//       };
+//       res.json(response);
+//     } else {
+//       res
+//         .status(404)
+//         .json({ success: false, message: 'Error al obtener datos' });
+//     }
+//   } catch (error) {
+//     res.json({
+//       success: false,
+//       message: error,
+//     });
+//   }
+// });
 server.get('/listUser', authenticateToken, async (req, res) => {
   try {
     const idVet = req.headers['id'];
-    const numberId = parseInt(idVet);
+    const numberId= parseInt(idVet);
     let sql = 'SELECT * FROM `case` WHERE fk_Vet = ?';
     const connection = await getConnection();
     const [cases] = await connection.query(sql, [numberId]);
     connection.end();
-    if (res.ok) {
-      const response = {
-        success: true,
-        patients: cases,
-      };
-      res.json(response);
-    } else {
-      res
-        .status(404)
-        .json({ success: false, message: 'Error al obtener datos' });
-    }
+    const response = {
+      success: true,
+      patients: cases,
+    };
+    res.json(response);
   } catch (error) {
+    console.error("Error al obtener datos:", error);
     res.json({
-      success: false,
-      message: error,
+      success: false, 
+      message: error
     });
-  }
+  };
 });
+
 
 //.........eliminar un caso...................
 

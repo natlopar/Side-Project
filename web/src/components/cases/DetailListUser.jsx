@@ -76,6 +76,7 @@ function DetailListUser({
         );
         setIsLoading(false);
         const userData = await response.json();
+        console.log(userData);
         if (userData.success) {
           setPrivateList(userData.patients);
           setAnimal(dataAnimal);
