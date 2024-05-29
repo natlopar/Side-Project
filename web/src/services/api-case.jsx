@@ -3,7 +3,7 @@ const API_RENDER = 'https://vetfolio-manager.onrender.com';
 const API_VERCEL = 'https://side-project-vetfolio-manager.vercel.app';
 
 const getPublicCases= () => {
-  return fetch (`${API_VERCEL}/getPublic`)
+  return fetch (`https://side-project-vetfolio-manager.vercel.app/getPublic`)
     .then(response => response.json())
     .then(data=>
           data)
@@ -26,7 +26,7 @@ const getFilterCase = (params, token, idVet) => {
 };
 
 const deleteCase = (idCase) => {
-  return fetch(`${API_VERCEL}/listUser?id=${idCase}`, 
+  return fetch(`${API_RENDER}/listUser?id=${idCase}`, 
   {method: 'DELETE'}
 )
 .then(response => response.json())
@@ -38,7 +38,7 @@ const deleteCase = (idCase) => {
 
 
 const createCase = (animal) => {
-  return fetch(`${API_VERCEL}/newCase`, {
+  return fetch(`${API_RENDER}/newCase`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(animal),

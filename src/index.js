@@ -6,8 +6,8 @@ const bcrypt = require('bcrypt');
 // const swaggerConfig = require('./swagger.json');
 
 const jwt = require('jsonwebtoken');
-const swaggerUI = require('swagger-ui-express');
-const swaggerConfig = require('./swagger.json');
+// const swaggerUI = require('swagger-ui-express');
+// const swaggerConfig = require('./swagger.json');
 require('dotenv').config();
 
 const server = express();

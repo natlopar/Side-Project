@@ -80,6 +80,7 @@ function App() {
   const [isLogIn, setIsLogIn] = useState(ls.get('isLogin', false));
 
   const API_VERCEL = 'https://side-project-vetfolio-manager.vercel.app';
+  const API_RENDER = 'https://vetfolio-manager.onrender.com';
 
   useEffect(() => {
     ls.set('animal', animal);
@@ -136,7 +137,7 @@ function App() {
   };
 
   const handleContact = () => {
-    fetch(`${API_VERCEL}/contact`, {
+    fetch(`${API_RENDER}/contact`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(contact),
