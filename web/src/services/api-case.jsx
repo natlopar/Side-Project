@@ -31,7 +31,6 @@ const deleteCase = (idCase) => {
 )
 .then(response => response.json())
 .then(data => {
-  console.log(data)
   return data;
 })
 }

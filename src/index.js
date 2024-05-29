@@ -236,7 +236,6 @@ server.get('/listUser', authenticateToken, async (req, res) => {
     };
     res.json(response);
   } catch (error) {
-    console.error("Error al obtener datos:", error);
     res.json({
       success: false, 
       message: error
@@ -312,7 +311,6 @@ server.post('/newCase', async (req, res) => {
       fk_Vet,
     ]);
     connection.end();
-    console.log(resultCases);
     res.json({
       success: true,
       result: resultCases,
@@ -457,7 +455,7 @@ server.post('/contact', async (req, res) => {
     const connection = await getConnection();
     const insert = 'INSERT INTO comments (name, comments) VALUES (?,?)';
     const [result] = await connection.query(insert, [name, comments]);
-    console.log(result);
+
 
     res.json({ success: true, message: 'Mensaje enviado' });
     connection.end();
