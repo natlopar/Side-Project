@@ -25,10 +25,10 @@ server.listen(serverPort, () => {
 
 async function getConnection() {
   const connection = await mysql.createConnection({
-    host: 'sql.freedb.tech',
-    user: process.env.USER_DB,
+    host: process.env.MYSQL_ADDON_HOST,
+    user: process.env.MYSQL_ADDON_USER,
     password: process.env.USER_PASS,
-    database: 'freedb_vetfolio',
+    database: process.env.USER_DB,
   });
   connection.connect();
   return connection;
